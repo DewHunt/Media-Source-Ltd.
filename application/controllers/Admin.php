@@ -18,7 +18,7 @@
 					'title' => 'Login - Media Source Ltd'
 				);
 				
-				$this->load->view('Admin/index',$data);
+				$this->load->view('admin/index',$data);
 			}
 			else
 			{
@@ -50,7 +50,33 @@
 			}
 		}
 
+		public function Logout()
+		{
+			$this->session->unset_userdata('adminUserName');
+			$this->session->unset_userdata('adminPassword');
+
+			return redirect('Admin/Index');
+		}
+
 		public function Dashboard()
+		{
+			$adminUserName = $this->session->userdata('adminUserName');
+			$adminPassword = $this->session->userdata('adminPassword');
+			if ($adminUserName == "" || $adminPassword == "")
+			{
+				return redirect('Admin/Index');
+			}
+			else
+			{
+				$data = array(
+					'title' => 'Admin Dashboard - Media Source Ltd.',
+					'result' => $this->am->GetAdminAllInfo($adminUserName,$adminPassword),
+				);
+				$this->load->view('admin/dashboard',$data);
+			}
+		}
+
+		public function Client()
 		{
 			if ($this->session->userdata('adminUserName') == "" || $this->session->userdata('adminPassword') == "")
 			{
@@ -59,9 +85,21 @@
 			else
 			{
 				$data = array(
-					'title' => 'Admin Dashboard - Media Source Ltd.'
+					'title' => 'Client - Media Source Ltd.'
 				);
-				$this->load->view('Admin/dashboard');
+				$this->load->view('admin/client',$data);
+			}
+		}
+
+		public function CreateClient()
+		{
+			if ($this->session->userdata('adminUserName') == "" || $this->session->userdata('adminPassword') == "")
+			{
+				return redirect('Admin/Index');
+			}
+			else
+			{
+				$this->load->view('admin/create-client.php');
 			}
 		}
 	}

@@ -24,33 +24,25 @@
 								<!-- /widget-header -->
 								<div class="widget-content">
 									<table class="table table-striped table-bordered">
-										<thead>
-											<tr>
-												<th colspan="2"><h1>Dew Hunt</h1></th>
-											</tr>
-										</thead>
+										<tr>
+											<th>Name</th>
+											<td><?= $result->Name; ?></td>
+										</tr>
 										
-										<tbody>
-											<tr>
-												<th>Name</th>
-												<td>Salman Sabbir</td>
-											</tr>
-											
-											<tr>
-												<th>Mobile</th>
-												<td>+88 017 66 328 322</td>
-											</tr>
-											
-											<tr>
-												<th>Email</th>
-												<td>dew@gmail.com</td>
-											</tr>
-											
-											<tr>
-												<th>User Name</th>
-												<td>Dew Hunt</td>
-											</tr>
-										</tbody>
+										<tr>
+											<th>Mobile</th>
+											<td><?= $result->Mobile; ?></td>
+										</tr>
+										
+										<tr>
+											<th>Email</th>
+											<td><?= $result->Email; ?></td>
+										</tr>
+										
+										<tr>
+											<th>User Name</th>
+											<td><?= $result->UserName; ?></td>
+										</tr>
 									</table>
 								</div>  <!-- /widget-content --> 
 							</div> <!-- /widget --> 

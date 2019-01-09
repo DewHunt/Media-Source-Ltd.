@@ -11,7 +11,7 @@
 						<ul class="nav pull-right">
 							<li class="dropdown">
 								<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-									<i class="icon-cog"></i> Account 
+									<i class="icon-cog"></i>&nbsp;<b>Account</b>
 									<b class="caret"></b>
 								</a>
 								<ul class="dropdown-menu">
@@ -21,12 +21,12 @@
 							</li>
 							<li class="dropdown">
 								<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-									<i class="icon-user"></i> Admin - Dew Hunt 
+									<i class="icon-user"></i>&nbsp;<b>Admin - Dew Hunt</b>
 									<b class="caret"></b>
 								</a>
 								<ul class="dropdown-menu">
 									<li><a href="javascript:;">Profile</a></li>
-									<li><a href="javascript:;">Logout</a></li>
+									<li><a href="<?= base_url('index.php/Admin/Logout'); ?>">Logout</a></li>
 								</ul>
 							</li>
 						</ul>

@@ -23,7 +23,7 @@
 		
 		<div class="account-container">			
 			<div class="content clearfix">
-					<?= form_open("Admin/Login"); ?>
+				<form method="POST" action="<?= base_url('index.php/Admin/Login'); ?>" accept_charset="utf-8">
 					<h1>Member Login</h1>
 
 					<div class="login-fields">						
@@ -48,7 +48,7 @@
 						
 						<button class="button btn btn-success btn-large">Sign In</button>
 					</div> <!-- .actions -->
-				<?= form_close(); ?>
+				</form>
 			</div> <!-- /content -->			
 		</div> <!-- /account-container -->		
 		
