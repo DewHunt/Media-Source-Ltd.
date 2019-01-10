@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-		<?php include("master/admin-header.php"); ?> 
+		<?php include("master/header.php"); ?> 
 	</head>
 	
 	<body>
-		<?php include("master/admin-navbar.php"); ?>
+		<?php include("master/navbar.php"); ?>
 
 		<?php include("master/admin-sub-navbar.php"); ?>
 		
@@ -52,7 +52,7 @@
 			</div> <!-- /main-inner --> 
 		</div>  <!-- /main -->
 
-		<?= include("master/admin-footer.php"); ?>
+		<?= include("master/footer.php"); ?>
 		
 		<!-- Custom JS File Start -->
 		<script type="text/javascript">

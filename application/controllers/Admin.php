@@ -7,7 +7,7 @@
 		public function __construct()
 		{
 			parent::__construct();
-			$this->load->model('Admin/AdminModel','am');
+			$this->load->model('AdminModel','am');
 		}
 
 		public function Index()
@@ -73,33 +73,6 @@
 					'result' => $this->am->GetAdminAllInfo($adminUserName,$adminPassword),
 				);
 				$this->load->view('admin/dashboard',$data);
-			}
-		}
-
-		public function Client()
-		{
-			if ($this->session->userdata('adminUserName') == "" || $this->session->userdata('adminPassword') == "")
-			{
-				return redirect('Admin/Index');
-			}
-			else
-			{
-				$data = array(
-					'title' => 'Client - Media Source Ltd.'
-				);
-				$this->load->view('admin/client',$data);
-			}
-		}
-
-		public function CreateClient()
-		{
-			if ($this->session->userdata('adminUserName') == "" || $this->session->userdata('adminPassword') == "")
-			{
-				return redirect('Admin/Index');
-			}
-			else
-			{
-				$this->load->view('admin/create-client.php');
 			}
 		}
 	}

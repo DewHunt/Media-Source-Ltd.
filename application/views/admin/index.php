@@ -2,7 +2,7 @@
 <html lang="en">
 	
 	<head>
-		<?php include("master/admin-header.php"); ?>		
+		<?php include("master/header.php"); ?>		
 	</head>
 	
 	<body>		
@@ -56,7 +56,7 @@
 			<a href="#">Reset Password</a>
 		</div> <!-- /login-extra -->
 
-		<?php include("master/admin-footer.php"); ?>
+		<?php include("master/footer.php"); ?>
 		
 	</body>
 	

@@ -21,7 +21,7 @@
 							</li>
 							<li class="dropdown">
 								<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-									<i class="icon-user"></i>&nbsp;<b>Admin - Dew Hunt</b>
+									<i class="icon-user"></i>&nbsp;<b>Admin - <?= $result->Name; ?></b>
 									<b class="caret"></b>
 								</a>
 								<ul class="dropdown-menu">

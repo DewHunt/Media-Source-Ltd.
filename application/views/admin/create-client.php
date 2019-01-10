@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-		<?php include('master/admin-header.php'); ?>
+		<?php include APPPATH.'views/admin/master/header.php'; ?>
 	</head>
 	
 	<body>
-		<?php include('master/admin-navbar.php'); ?>
-		<?php include('master/admin-sub-navbar.php'); ?>
+		<?php include APPPATH.'views/admin/master/navbar.php'; ?>
+		<?php include APPPATH.'views/admin/master/admin-sub-navbar.php'; ?>
 		
 		<div class="main">
 			<div class="main-inner">
@@ -260,7 +260,7 @@
 		</div>
 		<!-- /main -->
 
-		<?php include('master/admin-footer.php'); ?> 
+		<?php include APPPATH.'views/admin/master/footer.php'; ?> 
 		
 		<script>
 			$(function(){
