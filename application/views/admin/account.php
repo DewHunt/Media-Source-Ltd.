@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>		
-		<?php include APPPATH.'/views/admin/master/header.php'; ?>
+		<?php include APPPATH.'views/admin/master/header.php'; ?>
 	</head>
 	
 	<body>

@@ -8,7 +8,16 @@
 		public function __construct()
 		{
 			parent::__construct();
-			$this->load->model('AccountModel');
+			$this->load->model('AdminModel');
+			$this->load->model('AccountModel','am');
+		}
+
+		public function GetAdminAllInfo()
+		{
+			$adminUserName = $this->session->userdata('adminUserName');
+			$adminPassword = $this->session->userdata('adminPassword');
+
+			return $this->AdminModel->GetAdminAllInfo($adminUserName,$adminPassword);
 		}
 
 		public function Index()
@@ -20,7 +29,8 @@
 			else
 			{
 				$data = array(
-					'title' => 'All Account - Media Source Ltd.'
+					'title' => 'All Account - Media Source Ltd.',
+					'adminInfo' => $this->GetAdminAllInfo()
 				);
 
 				$this->load->view('admin/account',$data);
@@ -36,7 +46,8 @@
 			else
 			{
 				$data = array(
-					'title' => 'Create Account - Media Source Ltd.'
+					'title' => 'Create Account - Media Source Ltd.',
+					'adminInfo' => $this->GetAdminAllInfo()
 				);
 				$this->load->view('admin/create-account',$data);
 			}

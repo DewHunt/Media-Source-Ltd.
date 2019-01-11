@@ -70,7 +70,7 @@
 			{
 				$data = array(
 					'title' => 'Admin Dashboard - Media Source Ltd.',
-					'result' => $this->am->GetAdminAllInfo($adminUserName,$adminPassword),
+					'adminInfo' => $this->am->GetAdminAllInfo($adminUserName,$adminPassword),
 				);
 				$this->load->view('admin/dashboard',$data);
 			}

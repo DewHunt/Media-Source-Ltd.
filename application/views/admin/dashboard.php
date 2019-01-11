@@ -26,22 +26,22 @@
 									<table class="table table-striped table-bordered">
 										<tr>
 											<th>Name</th>
-											<td><?= $result->Name; ?></td>
+											<td><?= $adminInfo->Name; ?></td>
 										</tr>
 										
 										<tr>
 											<th>Mobile</th>
-											<td><?= $result->Mobile; ?></td>
+											<td><?= $adminInfo->Mobile; ?></td>
 										</tr>
 										
 										<tr>
 											<th>Email</th>
-											<td><?= $result->Email; ?></td>
+											<td><?= $adminInfo->Email; ?></td>
 										</tr>
 										
 										<tr>
 											<th>User Name</th>
-											<td><?= $result->UserName; ?></td>
+											<td><?= $adminInfo->UserName; ?></td>
 										</tr>
 									</table>
 								</div>  <!-- /widget-content --> 
