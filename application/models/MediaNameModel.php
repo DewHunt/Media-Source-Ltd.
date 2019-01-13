@@ -9,7 +9,10 @@
 			parent::__construct();
 		}
 
-		public function CreateMediaName()
-		{}
+		public function CreateMediaName($mediaName,$imageName)
+		{
+			echo "Media Name = ".$mediaName."<br>";
+			echo "Image Name = ".$imageName;
+		}
 	}
 ?>

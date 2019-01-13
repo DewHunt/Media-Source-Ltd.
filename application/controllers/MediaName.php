@@ -63,36 +63,36 @@
 			else
 			{
 				$mediaName = $this->input->post('media-name');
-				$imageName = array();
 
-				$config['upload_path'] = "images/media_logo";
+				// Copy Image and Get Image New Name
+				$config['upload_path'] = "images/media_logo/";
 				$config['allowed_types'] = "jpg|jpeg|png|gif";
-
 				$this->load->library('upload',$config);
 
-				if (!$this->upload->do_upload('media-mage'))
+				$mediaImage = $_FILES['media-image']['name'];
+
+				if ($mediaImage == "")
 				{
-					$error = $this->upload->display_errors();
+					return "Error! Image Uplod";
 				}
 				else
 				{
-					$imageData = $this->upload->data();
-					$data = $config['upload_path'].$imageData['file_name'];
-					$imageName = $image_data['file_name'];
-				}
+					$extention = pathinfo($mediaImage, PATHINFO_EXTENSION);
+					$slug = strtolower(preg_replace('/[^A-Za-z0-9-]+/', '_', $mediaName));
+					$imageName = $config['upload_path'].$slug.".".$extention;
 
-				print_r($data);
-				// echo $imageName;
-				exit();
-				$result = $this->MediaNameModel->CreateMediaName();
+					copy($_FILES['media-image']['tmp_name'],$imageName);
 
-				if ($result)
-				{
-					return true;
-				}
-				else
-				{
-					return false;
+					$result = $this->MediaNameModel->CreateMediaName($mediaName,$imageName);
+
+					if ($result)
+					{
+						return true;
+					}
+					else
+					{
+						return false;
+					}
 				}
 			}
 		}

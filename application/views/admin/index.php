@@ -24,7 +24,7 @@
 		<div class="account-container">			
 			<div class="content clearfix">
 				<form method="POST" action="<?= base_url('index.php/Admin/Login'); ?>" accept_charset="utf-8">
-					<h1>Member Login</h1>
+					<h1>Admin Login</h1>
 
 					<div class="login-fields">						
 						<p>Please provide your details</p>
