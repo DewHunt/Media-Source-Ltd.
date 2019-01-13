@@ -11,10 +11,9 @@
 		
 		<div class="main">
 			<div class="main-inner">
-				<div class="container">
-					
+				<div class="container">					
 					<div class="row">
-						<form id="edit-profile" class="form-horizontal">
+						<form class="form-horizontal" id="media-name-form" method="POST" action="<?= base_url('index.php/MediaName/CreateMediaName')?>" enctype="multipart/form-data">
 							<div class="span12">
 								<div class="widget">
 									<div class="widget-header">
@@ -25,51 +24,26 @@
 									
 									<div class="widget-content">
 										<fieldset>
-											<div class="control-group">											
-												<label class="control-label" for="name">Name</label>
+											<div class="control-group">
+												<label class="control-label" for="name"><sapn class="mendatory">*</sapn>&nbsp;Name</label>
 												<div class="controls">
-													<input type="text" class="span10" id="name" name="name" value="">
-												</div> <!-- /controls -->				
-											</div> <!-- /control-group -->
-											
-											<div class="control-group">											
-												<label class="control-label" for="owner">Owner</label>
-												<div class="controls">
-													<input type="text" class="span10" id="owner" name="owner" value="">
-												</div> <!-- /controls -->				
-											</div> <!-- /control-group -->
-											
-											<div class="control-group">											
-												<label class="control-label" for="phone">Mobile / Phone</label>
-												<div class="controls">
-													<input type="text" class="span10" id="mobilphone" name="phone" value="">
-												</div> <!-- /controls -->				
-											</div> <!-- /control-group -->
-											
-											<div class="control-group">											
-												<label class="control-label" for="email">Email</label>
-												<div class="controls">
-													<input type="text" class="span10" id="email" name="email" value="">
-												</div> <!-- /controls -->				
-											</div> <!-- /control-group -->
-											
-											<div class="control-group">											
-												<label class="control-label" for="address">Address</label>
-												<div class="controls">
-													<textarea class="span10" rows="3" id="address" name="address"></textarea>
+													<input type="text" class="span10" id="media-name" name="media-name" placeholder="Enter Media Name" value="">
 												</div> <!-- /controls -->				
 											</div> <!-- /control-group -->
 											
 											<div class="control-group">                   
 												<label class="control-label" for="image">Image</label>
 												<div class="controls">
-													<input type="file" name="image" id="image">
+													<input type="file" name="media-image" id="media-image">
 												</div> <!-- /controls -->       
 											</div> <!-- /control-group -->
 											
 											<div class="form-actions">
-												<a href="client.html" type="submit" class="btn btn-primary">Create Media Name</a> 
-												<button class="btn">Cancel</button>
+												<button type="submit" id="button-media-name" name="button-media-name" class="btn btn-primary" onclick="return validation()">Create Media Name</button>
+												<button type="reset" class="btn btn-danger">Cancel</button>
+
+												<!-- The actual message -->
+												<p id="message"></p>
 											</div> <!-- /form-actions -->
 										</fieldset>
 									</div> <!-- /widget-content -->
@@ -88,5 +62,22 @@
 		<!-- /main -->
 		<?php include APPPATH.'views/admin/master/footer.php'; ?>
 		
+		<!-- Custome JS File Include -->
+		<script type="text/javascript">
+			function validation(){
+				var mediaName = $('#media-name').val();
+
+				if (mediaName == "")
+				{
+					Message("Please Enter Media Name!");
+					$('#media-name').css({'border':'1px solid red'});
+					return false;
+				}
+				else
+				{
+					$('#media-name').css({'border':'1px solid gray'});						
+				}
+			}
+		</script>
 	</body>
 </html>

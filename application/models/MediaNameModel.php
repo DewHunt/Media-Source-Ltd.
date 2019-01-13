@@ -8,5 +8,8 @@
 		{
 			parent::__construct();
 		}
+
+		public function CreateMediaName()
+		{}
 	}
 ?>
