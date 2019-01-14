@@ -39,7 +39,8 @@
 				$data = array(
 					'title' => 'Media Name - Media Source Ltd.',
 					'adminInfo' => $this->GetAdminAllInfo(),
-					'mediaInfo' => $this->MediaNameModel->GetMediaNameAllInfo()
+					// 'mediaInfo' => $this->MediaNameModel->GetMediaNameAllInfo()
+					'mediaInfo' => ''
 				);
 
 				$this->load->view('admin/system_setup/media/media-name',$data);
@@ -101,7 +102,6 @@
 
 				if ($result)
 				{
-					$msg = "Media Name Created Succesfully";
 					return redirect('MediaName/MediaName/1');
 				}
 				else
@@ -109,6 +109,76 @@
 					return redirect('MediaName/MediaName/2');
 				}
 			}
+		}
+
+		function GetMediaNameAllInfo()
+		{
+			$output = '';
+			$searchText = '';
+			$sl = 1;
+
+			if ($this->input->post('searchText'))
+			{
+				$searchText = $this->input->post('searchText');
+			}
+
+			// echo 'Search Text = '.$searchText;
+			// exit();
+
+			$data = $this->MediaNameModel->GetMediaNameAllInfo($searchText);
+
+			$output .='
+				<table class="table table-striped table-bordered">
+					<thead>
+						<tr>
+							<th>Sl</th>
+							<th>Name</th>
+							<th>Image</th>
+							<th>Action</th>
+						</tr>
+					</thead>
+
+					<tbody>
+			';
+
+			if ($data == "")
+			{
+				$output .= '<tr>';
+				$output .= '<td colspan="4" class="error-message">';
+				$output .= 'Oops! Sorry, No Data Found...';
+				$output .= '</td>';
+				$output .= '</tr>';
+			}
+			else
+			{
+				foreach ($data as $value)
+				{
+					$output .= '<tr>';
+					$output .= '<td>'.$sl.'</td>';
+					$output .= '<td>'.$value->Name.'</td>';
+					$output .= '<td><img src="'.base_url().$value->Image.'" width="80px" height="80px"></td>';
+					$output .= '<td><a href="'.base_url('index.php/MediaName/Edit/').$value->Id.'" class="btn btn-info">Edit</a> <a href="'.base_url('index.php/MediaName/Delete/').$value->Id.'" class="btn btn-danger">Delete</a></td>';
+					$output .= '</tr>';
+					$sl++;
+				}
+			}
+
+			$output .= '
+					</tbody>
+				</table>
+			';
+
+			echo $output;
+		}
+
+		public function Edit($mediaNameId)
+		{
+			$this->MediaNameModel->Edit($mediaNameId);
+		}
+
+		public function Delete($mediaNameId)
+		{
+			$this->MediaNameModel->Delete($mediaNameId);
 		}
 	}
 ?>
