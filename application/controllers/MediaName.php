@@ -20,6 +20,14 @@
 			return $this->AdminModel->GetAdminAllInfo($adminUserName,$adminPassword);
 		}
 
+		public function GetAdminId()
+		{
+			$adminUserName = $this->session->userdata('adminUserName');
+			$adminPassword = $this->session->userdata('adminPassword');
+
+			return $this->AdminModel->GetAdminId($adminUserName,$adminPassword);
+		}
+
 		public function Index()
 		{
 			if ($this->session->userdata('adminUserName') == "" || $this->session->userdata('adminPassword') == "")
@@ -30,14 +38,15 @@
 			{
 				$data = array(
 					'title' => 'Media Name - Media Source Ltd.',
-					'adminInfo' => $this->GetAdminAllInfo()
+					'adminInfo' => $this->GetAdminAllInfo(),
+					'mediaInfo' => $this->MediaNameModel->GetMediaNameAllInfo()
 				);
 
 				$this->load->view('admin/system_setup/media/media-name',$data);
 			}
 		}
 
-		public function MediaName()
+		public function MediaName($msg = NULL)
 		{
 			if ($this->session->userdata('adminUserName') == "" || $this->session->userdata('adminPassword') == "")
 			{
@@ -47,7 +56,8 @@
 			{
 				$data = array(
 					'title' => 'Media Name - Media Source Ltd.',
-					'adminInfo' => $this->GetAdminAllInfo()
+					'adminInfo' => $this->GetAdminAllInfo(),
+					'message' => $msg
 				);
 
 				$this->load->view('admin/system_setup/media/create-media-name',$data);				
@@ -64,6 +74,8 @@
 			{
 				$mediaName = $this->input->post('media-name');
 
+				$entryId = $this->GetAdminAllInfo()->Id;
+
 				// Copy Image and Get Image New Name
 				$config['upload_path'] = "images/media_logo/";
 				$config['allowed_types'] = "jpg|jpeg|png|gif";
@@ -73,26 +85,28 @@
 
 				if ($mediaImage == "")
 				{
-					return "Error! Image Uplod";
+					$msg = "Error! Image Uplod";
+					return redirect('MediaName/MediaName',$msg);
 				}
 				else
 				{
 					$extention = pathinfo($mediaImage, PATHINFO_EXTENSION);
 					$slug = strtolower(preg_replace('/[^A-Za-z0-9-]+/', '_', $mediaName));
-					$imageName = $config['upload_path'].$slug.".".$extention;
+					$imageName = $config['upload_path'].$slug."_".date('ymds').".".$extention;
 
 					copy($_FILES['media-image']['tmp_name'],$imageName);
+				}
 
-					$result = $this->MediaNameModel->CreateMediaName($mediaName,$imageName);
+				$result = $this->MediaNameModel->CreateMediaName($mediaName,$imageName,$entryId);
 
-					if ($result)
-					{
-						return true;
-					}
-					else
-					{
-						return false;
-					}
+				if ($result)
+				{
+					$msg = "Media Name Created Succesfully";
+					return redirect('MediaName/MediaName/1');
+				}
+				else
+				{
+					return redirect('MediaName/MediaName/2');
 				}
 			}
 		}

@@ -11,3 +11,8 @@ function Message(msg)
 
 	$('#message').text(msg);
 }
+
+function Success()
+{
+	return "Greate! Your Media Name Created Successfully.";
+}

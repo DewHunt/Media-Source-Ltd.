@@ -41,7 +41,22 @@
 											<div class="form-actions">
 												<button type="submit" id="button-media-name" name="button-media-name" class="btn btn-primary" onclick="return validation()">Create Media Name</button>
 												<button type="reset" class="btn btn-danger">Cancel</button>
-
+												
+												<?php
+													if ($message == 1)
+													{
+												?>
+														<span class="success-message">Great! Your Media Name Created Successfully...</span>
+												<?php
+													}
+													
+													if ($message == 2)
+													{
+												?>
+														<span class="error-message">Oops! Sorry, Your Media Name Cannot Created...</span>
+												<?php
+													}
+												?>
 												<!-- The actual message -->
 												<p id="message"></p>
 											</div> <!-- /form-actions -->

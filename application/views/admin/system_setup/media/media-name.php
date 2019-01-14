@@ -28,79 +28,39 @@
 											<tr>
 												<th>Sl</th>
 												<th>Name</th>
-												<th>Owner</th>
-												<th>Phone / Mobile</th>
-												<th>Email</th>
 												<th>Image</th>
 												<th>Action</th>
 											</tr>
 										</thead>
 										
 										<tbody>
-											<tr>
-												<td>01</td>
-												<td>Amader Shomoy</td>
-												<td>New Vision Limited</td>
-												<td>8878213-18</td>
-												<td>mktshomoy@gmail.com</td>
-												<td><img src="<?= base_url('images/logo/das_logo.jpg'); ?>" width="150px" height="150px"></td>
-												<td>
-													<a href="" class="btn btn-info">Edit</a>                        
-													<a href="" class="btn btn-danger">Delete</a>                          
-												</td>
-											</tr>
-											
-											<tr>                        
-												<td>02</td>
-												<td>Jugantor</td>
-												<td>Jamuna Group</td>
-												<td>8419211-5</td>
-												<td>jugantor.mail@gmail.com</td>
-												<td><img src="<?= base_url('images/logo/dj_logo.jpg'); ?>" width="150px" height="150px"></td>
-												<td>
-													<a href="" class="btn btn-info">Edit</a>                        
-													<a href="" class="btn btn-danger">Delete</a>                          
-												</td>
-											</tr>
-											
-											<tr>                        
-												<td>03</td>
-												<td>Kaler Kantho</td>
-												<td>Green Media Limilted</td>
-												<td>09612120000</td>
-												<td>  info@kalerkantho.com</td>
-												<td><img src="<?= base_url('images/logo/dkk_logo.png'); ?>" width="150px" height="150px"></td>
-												<td>
-													<a href="" class="btn btn-info">Edit</a>                        
-													<a href="" class="btn btn-danger">Delete</a>                          
-												</td>
-											</tr>
-											
-											<tr>                        
-												<td>04</td>
-												<td>Bangladesh Pratidin</td>
-												<td>East West Media Group Limited</td>
-												<td>09612120000</td>
-												<td>bdpratidin@gmail.com</td>
-												<td><img src="<?= base_url('images/logo/dbp_logo.jpg'); ?>" width="150px" height="150px"></td>
-												<td>
-													<a href="" class="btn btn-info">Edit</a>                        
-													<a href="" class="btn btn-danger">Delete</a>                          
-												</td>
-											</tr>
-											
-											<tr>                        
-												<td>05</td>
-												<td>Prothom Alo</td>
-												<td>Transcom Group</td>
-												<td>01733991755</td>
-												<td>adprothomalo@gmail.com</td>
-												<td><img src="<?= base_url('images/logo/dpa_logo.jpg'); ?>" width="100px" height="100px"></td>
-												<td>
-													<a href="" class="btn btn-info">Edit</a>                        
-													<a href="" class="btn btn-danger">Delete</a>                          
-												</td>
-											</tr>
+											<?php
+												$sl = 1;
+												if ($mediaInfo == "")
+												{
+											?>
+													<tr><td colspan="4" class="error-message">Oops! Sorry, No Data Found...</td></tr>
+											<?php
+												}
+												else
+												{
+													foreach ($mediaInfo as $value)
+													{
+											?>
+														<tr>
+															<td><?= $sl; ?></td>
+															<td><?= $value->Name; ?></td>
+															<td><img src="<?= base_url().$value->Image; ?>" width="150px" height="150px"></td>
+															<td>
+																<a href="" class="btn btn-info">Edit</a>                        
+																<a href="" class="btn btn-danger">Delete</a>                          
+															</td>
+														</tr>
+											<?php
+														$sl++;		
+													}
+												}
+											?>
 										</tbody>
 									</table>
 								</div>  <!-- /widget-content --> 

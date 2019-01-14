@@ -62,6 +62,7 @@
 		{
 			$adminUserName = $this->session->userdata('adminUserName');
 			$adminPassword = $this->session->userdata('adminPassword');
+			
 			if ($adminUserName == "" || $adminPassword == "")
 			{
 				return redirect('Admin/Index');

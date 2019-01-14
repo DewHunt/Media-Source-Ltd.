@@ -39,5 +39,21 @@
 				return false;
 			}
 		}
+
+		public function GetAdminId($userName, $password)
+		{
+			$sql = "SELECT * FROM admins WHERE Username = '".$userName."' AND Password = '".$password."'";
+
+			$admin_check = $this->db->query($sql);
+
+			if ($admin_check->num_rows() > 0)
+			{
+				$admin_check->row();
+			}
+			else
+			{
+				return false;
+			}
+		}
 	}
 ?>
