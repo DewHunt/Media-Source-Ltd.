@@ -9,6 +9,10 @@
 			parent::__construct();
 		}
 
+		var $table = "media";
+		var $selectColumn = array("id","Name","Image");
+		var $orderColumn = array(null,"Name",null,null);
+
 		public function CreateMediaName($mediaName,$imageName,$entryId)
 		{
 			$entryDateTime = date('Y-m-d H:i:s');
@@ -27,6 +31,56 @@
 			}
 		}
 
+		public function MakeQuery()
+		{
+			$this->db->select($this->selectColumn);
+			$this->db->from($this->table);
+
+			if (isset($_POST["search"]["value"]))
+			{
+				$this->db->like("Name",$_POST["search"]["value"]);
+			}
+
+			if (isset($_POST["order"]))
+			{
+				$this->db->order_by($this->orderColumn[$_POST["order"]["0"]["column"]], $_POST["order"]["0"]["dir"]);
+			}
+			else
+			{
+				$this->db->order_by("id","DESC");
+			}
+		}
+
+		public function MakeDataTables()
+		{
+			$this->MakeQuery();
+
+			if ($_POST["length"] != -1)
+			{
+				$this->db->limit($_POST["length"],$_POST["start"]);
+			}
+
+			$query = $this->db->get();
+
+			return $query->result();
+		}
+
+		public function GetFilteredData()
+		{
+			$this->MakeQuery();
+			$query = $this->db->get();
+
+			return $query->num_rows();
+		}
+
+		public function GetAllData()
+		{
+			$this->db->select("*");
+			$this->db->from($this->table);
+
+			return $this->db->count_all_results();			
+		}
+
 		public function CountRows()
 		{
 			$sql = "SELECT * FROM media";
@@ -34,46 +88,6 @@
 			$mediaQuery = $this->db->query($sql);
 
 			return $mediaQuery->num_rows();
-		}
-
-		// public function GetMediaNameAllInfo($searchText)
-		// {
-		// 	// echo $searchText;
-		// 	if ($searchText == "")
-		// 	{
-		// 		$sql = "SELECT * FROM media ORDER BY ID DESC";
-		// 	}
-		// 	else
-		// 	{
-		// 		$sql = "SELECT * FROM media WHERE Name LIKE '%".$searchText."%' ORDER BY ID DESC";
-		// 	}
-
-		// 	$mediaQuery = $this->db->query($sql);
-
-		// 	if ($mediaQuery->num_rows() > 0)
-		// 	{
-		// 		return $mediaQuery->result();
-		// 	}
-		// 	else
-		// 	{
-		// 		return false;
-		// 	}
-		// }
-
-		public function GetMediaNameAllInfo($limit,$start)
-		{
-			$sql = "SELECT * FROM media ORDER BY ID ASC LIMIT ".$start.", ".$limit;
-
-			$mediaQuery = $this->db->query($sql);
-
-			if ($mediaQuery->num_rows() > 0)
-			{
-				return $mediaQuery->result();
-			}
-			else
-			{
-				return false;
-			}
 		}
 
 		public function Edit($mediaNameId)

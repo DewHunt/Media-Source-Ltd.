@@ -16,10 +16,8 @@
 		<meta name="apple-mobile-web-app-capable" content="yes">
             
 		<?= link_tag('assets/css/bootstrap.min.css'); ?>
-		<!-- <link href="css/bootstrap.min.css" rel="stylesheet"> -->
 
 		<?= link_tag('assets/css/bootstrap-responsive.min.css'); ?>
-		<!-- <link href="css/bootstrap-responsive.min.css" rel="stylesheet"> -->
 
 		<?= link_tag('assets/css/fonts-googleapis.css'); ?>
 		<!-- <link href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,400,600" rel="stylesheet"> -->
@@ -28,25 +26,22 @@
 		<!-- <link href="http://localhost/media_19/assets/css/font-awesome.css" rel="stylesheet"> -->
 
 		<?= link_tag('assets/css/style.css'); ?>
-		<!-- <link href="css/style.css" rel="stylesheet"> -->
 
 		<?= link_tag('assets/css/pages/dashboard.css'); ?>
-		<!-- <link href="css/pages/dashboard.css" rel="stylesheet"> -->
 
 		<?= link_tag('assets/css/pages/signin.css'); ?>
-		<!-- <link href="css/pages/signin.css" rel="stylesheet" type="text/css"> -->
+
+		<!-- Data Tables CSS File Include -->
+		<?= link_tag('assets/css/data_tables/dataTables.bootstrap.min.css'); ?>
 
 		<!-- Date Picker CSS File Include -->
 		<?= link_tag('assets/datepicker/css/datepicker.css'); ?>
-		<!-- <link href="datepicker/css/datepicker.css" rel="stylesheet"> -->
 
 		<!-- Chosen CSS File Include -->
 		<?= link_tag('assets/chosen/chosen.css'); ?>
-		<!-- <link href="chosen/chosen.css" rel="stylesheet"> -->
 
 		<!-- Left Menu CSS File Inlcude -->
 		<?= link_tag('assets/css/left-menu.css'); ?>
-		<!-- <link href="css/left-menu.css" rel="stylesheet"> -->
 
 		<!-- Toast Message CSS File Include -->
 		<?= link_tag('assets/css/toast-message.css'); ?>

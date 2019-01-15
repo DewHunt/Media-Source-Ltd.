@@ -24,20 +24,16 @@
 								</div>  <!-- /widget-header -->
 
 								<div class="widget-content">
-									<table class="table table-striped table-bordered">
+									<table id="media-data" class="table table-striped table-bordered">
 										<thead>
 											<tr>
-												<th colspan="4" style="text-align: center;">
-													<input type="text" name="search-text" id="search-text" placeholder="Search By Media Name" class="span8" value="">
-												</th>
-											</tr>
-
-											<tr>
-												<th colspan="4"><div id="pagination-link"></div></th>
+												<th>Sl</th>
+												<th>Name</th>
+												<th>Image</th>
+												<th>Action</th>
 											</tr>
 										</thead>
 									</table>
-									<div id="result"></div>
 								</div>  <!-- /widget-content --> 
 							</div>  <!-- /widget --> 
 						</div>   <!-- /span9 -->
@@ -55,54 +51,20 @@
 					$(this).toggleClass('tap');
 				});
 
-				// LoadData();
-
-				// function LoadData(searchText)
-				// {					
-				// 	$.ajax({
-				// 		type:'ajax',
-				// 		method:'POST',
-				// 		url:'GetMediaNameAllInfo',
-				// 		data:{searchText:searchText},
-				// 		success:function(data){
-				// 			$('#result').html(data);
-				// 		}
-				// 	});
-				// }
-
-				// $('#search-text').keyup(function(){
-				// 	var searchText = $('#search-text').val();
-
-				// 	if (searchText == "")
-				// 	{
-				// 		LoadData();
-
-				// 	}
-				// 	else
-				// 	{
-				// 		LoadData(searchText);
-				// 	}
-				// });
-
-				LoadData(1);
-
-				function LoadData(page)
-				{
-					$.ajax({
-						url:'GetMediaNameAllInfo/'+page,
-						method:'GET',
-						dataType:'json',
-						success:function(data){
-							$('#pagination-link').html(data.paginationLink);
-							$('#result').html(data.resultTable);
-						}
-					});
-				}
-
-				$(document).on('click', '.pagination li a', function(event){
-					event.preventDefault();
-					var page = $(this).data("ci-pagination-page");
-					LoadData(page);
+				var dataTable = $('#media-data').DataTable({
+					'processing':true,
+					'serverSide':true,
+					'order':[],
+					'ajax':{
+						url:'GetMediaNameAllInfo',
+						type:'POST'
+					},
+					'columnDefs':[
+						{
+							'targets':[0, 2, 3],
+							'orderable':false
+						},
+					],
 				});
 			});
 		</script>

@@ -22,7 +22,9 @@
 		<!-- Le javascript
 		================================================== --> 
 		<!-- Placed at the end of the document so the pages load faster --> 
+
 		<!-- <script type="text/javascript" src="<?= base_url('assets/js/jquery-1.7.2.min.js'); ?>"></script> -->
+
 		<script type="text/javascript" src="<?= base_url('assets/js/jquery-3.3.1.min.js'); ?>"></script> 
 		<script type="text/javascript" src="<?= base_url('assets/js/excanvas.min.js'); ?>"></script> 
 		<script type="text/javascript" src="<?= base_url('assets/js/chart.min.js'); ?>" type="text/javascript"></script> 
@@ -33,4 +35,9 @@
 		
 		<script src="<?= base_url('assets/chosen/chosen.jquery.js'); ?>"></script>
 
+		<!-- Toast Message JS File Include -->
 		<script type="text/javascript" src="<?= base_url('assets/js/toast-message.js'); ?>"></script>
+
+		<!-- Data Tables JS File Include -->
+		<script type="text/javascript" src="<?= base_url('assets/js/data_tables/jquery.dataTables.min.js'); ?>"></script>
+		<script type="text/javascript" src="<?= base_url('assets/js/data_tables/dataTables.bootstrap.min.js'); ?>"></script>
