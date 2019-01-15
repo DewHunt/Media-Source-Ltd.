@@ -27,9 +27,26 @@
 			}
 		}
 
-		// public function GetMediaNameAllInfo()
+		public function CountRows()
+		{
+			$sql = "SELECT * FROM media";
+
+			$mediaQuery = $this->db->query($sql);
+
+			return $mediaQuery->num_rows();
+		}
+
+		// public function GetMediaNameAllInfo($searchText)
 		// {
-		// 	$sql = "SELECT * FROM media";
+		// 	// echo $searchText;
+		// 	if ($searchText == "")
+		// 	{
+		// 		$sql = "SELECT * FROM media ORDER BY ID DESC";
+		// 	}
+		// 	else
+		// 	{
+		// 		$sql = "SELECT * FROM media WHERE Name LIKE '%".$searchText."%' ORDER BY ID DESC";
+		// 	}
 
 		// 	$mediaQuery = $this->db->query($sql);
 
@@ -43,17 +60,9 @@
 		// 	}
 		// }
 
-		public function GetMediaNameAllInfo($searchText)
+		public function GetMediaNameAllInfo($limit,$start)
 		{
-			// echo $searchText;
-			if ($searchText == "")
-			{
-				$sql = "SELECT * FROM media ORDER BY ID DESC";
-			}
-			else
-			{
-				$sql = "SELECT * FROM media WHERE Name LIKE '%".$searchText."%' ORDER BY ID DESC";
-			}
+			$sql = "SELECT * FROM media ORDER BY ID ASC LIMIT ".$start.", ".$limit;
 
 			$mediaQuery = $this->db->query($sql);
 
@@ -63,7 +72,7 @@
 			}
 			else
 			{
-				return $mediaQuery->result();
+				return false;
 			}
 		}
 

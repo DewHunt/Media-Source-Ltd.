@@ -62,4 +62,8 @@
 				color: red;
 				font-weight: bold;
 			}
+
+			.paginition{
+				margin: 0px;
+			}
 		</style>
