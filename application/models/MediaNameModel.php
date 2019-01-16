@@ -10,8 +10,8 @@
 		}
 
 		var $table = "media";
-		var $selectColumn = array("id","Name","Image");
-		var $orderColumn = array(null,"Name",null,null);
+		var $selectColumn = array("Id","Name","Image");
+		var $orderColumn = array("Id","Name",null,null);
 
 		public function CreateMediaName($mediaName,$imageName,$entryId)
 		{
@@ -39,6 +39,7 @@
 			if (isset($_POST["search"]["value"]))
 			{
 				$this->db->like("Name",$_POST["search"]["value"]);
+				$this->db->or_where("Id",$_POST["search"]["value"]);
 			}
 
 			if (isset($_POST["order"]))

@@ -16,7 +16,7 @@
 						<?php include APPPATH.'views/admin/master/system-left-menu.php'?>
 						
 						<div class="span9">
-							<div class="widget widget-table action-table">
+							<div class="widget">
 								<div class="widget-header">
 									<i class="icon-th-list"></i>
 									<h3>All Media Name Information</h3>
@@ -33,7 +33,18 @@
 												<th>Action</th>
 											</tr>
 										</thead>
+
+										<tfoot>
+											<tr>
+												<th>Sl</th>
+												<th>Name</th>
+												<th>Image</th>
+												<th>Action</th>
+											</tr>
+										</tfoot>
 									</table>
+									<a class="btn btn-info" id="editButton">Edit</a>
+									<a class="btn btn-danger" id="deleteButton" onclick="return confirm('Are you sure want to delete?')">Delete</a>
 								</div>  <!-- /widget-content --> 
 							</div>  <!-- /widget --> 
 						</div>   <!-- /span9 -->
@@ -56,9 +67,10 @@
 					'serverSide':true,
 					'order':[],
 					'ajax':{
-						url:'GetMediaNameAllInfo',
+						url:'<?php echo base_url("index.php/MediaName/GetMediaNameAllInfo"); ?>',
 						type:'POST'
 					},
+					'dataType':'json',
 					'columnDefs':[
 						{
 							'targets':[0, 2, 3],
@@ -66,6 +78,14 @@
 						},
 					],
 				});
+
+				$('#editButton').click(function(){
+					alert("This Edit Button");
+				});
+
+				// $('#deleteButton').click(function(){
+				// 	alert("This Delete Button");
+				// });
 			});
 		</script>
 	</body>

@@ -115,19 +115,21 @@
 		public function GetMediaNameAllInfo()
 		{
 			$mediaInfo = $this->MediaNameModel->MakeDataTables();
+			$sl = 1;
 			$data = array();
 
 			foreach ($mediaInfo as $value)
 			{
 				$media = array();
+				$media[] = $sl;
 				$media[] = $value->Name;
-				$media[] = '<img src="'.base_url().$value->Image.'">';
-				$media[] = '<a href="'.base_url('index.php/MediaName/Edit/').$value->Id.'">Edit</a>';
-				$media[] = '<a href="'.base_url('index.php/MediaName/Delete').$value->Id.'">Delete</a>';
+				$media[] = '<img src="'.base_url().$value->Image.'" width="80px" height="80px">';
+				$media[] = '<a href="'.base_url('index.php/MediaName/Edit/').$value->Id.'" class="btn btn-info" id="editButton">Edit</a> <a href="'.base_url('index.php/MediaName/Delete/').$value->Id.'" class="btn btn-danger" id="deleteButton">Delete</a>';
+				$sl++;
 				$data[] = $media;
 			}
 
-			$output =array(
+			$output = array(
 				'draw' => intval($_POST['draw']),
 				'recordsTotal' => $this->MediaNameModel->GetAllData(),
 				'recordsFiltered' => $this->MediaNameModel->GetFilteredData(),

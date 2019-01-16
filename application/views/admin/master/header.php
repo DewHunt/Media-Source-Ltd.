@@ -32,7 +32,8 @@
 		<?= link_tag('assets/css/pages/signin.css'); ?>
 
 		<!-- Data Tables CSS File Include -->
-		<?= link_tag('assets/css/data_tables/dataTables.bootstrap.min.css'); ?>
+		<?= link_tag('assets/css/data_tables/jquery.dataTables.min.css'); ?>
+		<!-- <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css"> -->
 
 		<!-- Date Picker CSS File Include -->
 		<?= link_tag('assets/datepicker/css/datepicker.css'); ?>
