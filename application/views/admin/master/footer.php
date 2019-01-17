@@ -21,11 +21,14 @@
 		
 		<!-- Le javascript
 		================================================== --> 
-		<!-- Placed at the end of the document so the pages load faster --> 
+		<!-- Placed at the end of the document so the pages load faster -->
 
-		<script type="text/javascript" src="<?= base_url('assets/js/jquery-1.7.2.min.js'); ?>"></script>
+		<!-- jquery-1.7.2 is not work well with ajax. -->
+		<!-- jquery-3.3.1 is not work well Sub-Navbar. -->
+		<!-- jqery-1.9.0 is woked well both jquery & Sub-Navbar -->
+		<script type="text/javascript" src="<?= base_url('assets/js/jquery-1.9.0.min.js'); ?>"></script>
 
-		<!-- <script type="text/javascript" src="<?= base_url('assets/js/jquery-3.3.1.min.js'); ?>"></script>  -->
+		<!-- <script type="text/javascript" src="<?= base_url('assets/ajax/ajax.js'); ?>"></script>  -->
 		<script type="text/javascript" src="<?= base_url('assets/js/excanvas.min.js'); ?>"></script> 
 		<script type="text/javascript" src="<?= base_url('assets/js/chart.min.js'); ?>" type="text/javascript"></script> 
 		<script type="text/javascript" src="<?= base_url('assets/js/bootstrap.min.js'); ?>"></script>

@@ -124,7 +124,7 @@
 				$media[] = $sl;
 				$media[] = $value->Name;
 				$media[] = '<img src="'.base_url().$value->Image.'" width="80px" height="80px">';
-				$media[] = '<a href="'.base_url('index.php/MediaName/Edit/').$value->Id.'" class="btn btn-info" id="editButton">Edit</a> <a href="'.base_url('index.php/MediaName/Delete/').$value->Id.'" class="btn btn-danger" id="deleteButton">Delete</a>';
+				$media[] = '<button type="button" name="update" id="'.$value->Id.'" class="btn btn-warning btn-xs update">Update</button> <button type="button" name="delete" id="'.$value->Id.'" class="btn btn-danger btn-xs delete">Delete</button>';
 				$sl++;
 				$data[] = $media;
 			}
@@ -139,7 +139,29 @@
 			echo json_encode($output);
 		}
 
-		public function Edit($mediaNameId)
+		public function GetMediaNameById()
+		{
+			$output = array();
+			$mediaId = $this->input->post('mediaId');
+
+			$data = $this->MediaNameModel->GetMediaNameById($mediaId);
+
+			$output['mediaId'] = $data->Id;
+			$output['mediaName'] = $data->Name;
+
+			if ($data->Image == "")
+			{
+				$output['mediaImage'] = '<input type="hidden" name="hidden-media-image" value="">';
+			}
+			else
+			{
+				$output['mediaImage'] = '<img src="'.base_url().$data->Image.'" class="img-thumbnail" width="80px" height="80px"> <input type="hidden" name="hidden-media-image" value="">';
+			}
+
+			echo json_encode($output);
+		}
+
+		public function Update($mediaNameId)
 		{
 			$this->MediaNameModel->Edit($mediaNameId);
 		}

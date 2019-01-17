@@ -91,6 +91,22 @@
 			return $mediaQuery->num_rows();
 		}
 
+		public function GetMediaNameById($mediaId)
+		{
+			$sql = "SELECT * FROM media WHERE Id = ".$mediaId;
+
+			$query = $this->db->query($sql);
+
+			if ($query->num_rows() > 0)
+			{
+				return $query->row();
+			}
+			else
+			{
+				return false;
+			}
+		}
+
 		public function Edit($mediaNameId)
 		{
 			echo "AdminModle->Edit = ".$mediaNameId;
