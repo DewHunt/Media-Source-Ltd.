@@ -56,14 +56,20 @@
 													<div class="modal-body">
 														<label>Media Name</label>
 														<input type="text" name="media-name" id="media-name" class="form-control" style="width: 100%;">
+
 														<label>Image</label>
 														<input type="file" name="media-image" id="media-image" class="form-control">
+
 														<label id="media-uploaded-image"></label>
 													</div>
 
 													<div class="modal-footer">
-														<input type="text" name="media-id" id="media-id" value="">
+														<input type="hidden" name="media-id" id="media-id" value="">
+
+														<input type="hidden" name="hidden-media-image" id="hidden-media-image" value="">
+
 														<button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+
 														<input type="submit" name="update-media" id="update-media" class="btn btn-success" value="Update">
 													</div>
 												</div>
@@ -108,7 +114,7 @@
 					var mediaId = $(this).attr('id');
 
 					$.ajax({
-						url:'<?php echo base_url('index.php/MediaName/GetMediaNameById'); ?>',
+						url:'<?php echo base_url("index.php/MediaName/GetMediaNameById"); ?>',
 						method:'POST',
 						data:{mediaId:mediaId},
 						dataType:'json',
@@ -116,9 +122,48 @@
 							$('#media-modal').modal('show');
 							$('#media-name').val(data.mediaName);
 							$('#media-uploaded-image').html(data.mediaImage);
+							$('#hidden-media-image').val(data.hiddenMediaImage);
 							$('#media-id').val(data.mediaId);
 						}
 					});
+				});
+
+				$(document).on('submit', '#media-form', function(event){
+					event.preventDefault();
+					var mediaName = $('#media-name').val();
+					var extention = $('#media-image').val().split('.').pop().toLowerCase();
+
+					if (extention != "")
+					{
+						if (jQuery.inArray(extention, ['gif', 'png', 'jpg', 'jpeg']) == -1)
+						{
+							alert('Oops! Invalid Image File.');
+							$('#media-image').val('');
+							return false;
+						}
+					}
+
+					if (mediaName == "")
+					{
+						alert('Oops! Media Name Must Be Filled');
+						return false;
+					}
+					else
+					{
+						$.ajax({
+							url:'<?php echo base_url("index.php/MediaName/UpdateMediaName"); ?>',
+							method:'POST',
+							data:new FormData(this),
+							contentType:false,
+							processData:false,
+							success:function(data){
+								alert(data);
+								$('#media-form')[0].reset();
+								$('#media-modal').modal('hide');
+								dataTable.ajax.reload();
+							}
+						});
+					}
 				});
 
 				$(document).on('click', '.delete', function(){
