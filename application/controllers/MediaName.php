@@ -21,14 +21,6 @@
 			return $this->AdminModel->GetAdminAllInfo($adminUserName,$adminPassword);
 		}
 
-		public function GetAdminId()
-		{
-			$adminUserName = $this->session->userdata('adminUserName');
-			$adminPassword = $this->session->userdata('adminPassword');
-
-			return $this->AdminModel->GetAdminId($adminUserName,$adminPassword);
-		}
-
 		public function Index()
 		{
 			if ($this->session->userdata('adminUserName') == "" || $this->session->userdata('adminPassword') == "")
@@ -78,25 +70,34 @@
 
 				$entryId = $this->GetAdminAllInfo()->Id;
 
-				// Copy Image and Get Image New Name
-				$config['upload_path'] = "images/media_logo/";
-				$config['allowed_types'] = "jpg|jpeg|png|gif";
-				$this->load->library('upload',$config);
+				$checkMediaName = $this->MediaNameModel->CheckMediaNameExsits($mediaName);
 
-				$mediaImage = $_FILES['media-image']['name'];
-
-				if ($mediaImage == "")
+				if ($checkMediaName)
 				{
 					return redirect('MediaName/MediaName/3');
 				}
 				else
 				{
-					$extention = pathinfo($mediaImage, PATHINFO_EXTENSION);
-					$slug = strtolower(preg_replace('/[^A-Za-z0-9-]+/', '_', $mediaName));
-					$dbImageName = $slug."_".date('ymds').".".$extention;
-					$copyImageName = $config['upload_path'].$dbImageName;
+					// Copy Image and Get Image New Name
+					$config['upload_path'] = "images/media_logo/";
+					$config['allowed_types'] = "jpg|jpeg|png|gif";
+					$this->load->library('upload',$config);
 
-					copy($_FILES['media-image']['tmp_name'],$copyImageName);
+					$mediaImage = $_FILES['media-image']['name'];
+
+					if ($mediaImage == "")
+					{
+						$dbImageName = "";
+					}
+					else
+					{
+						$extention = pathinfo($mediaImage, PATHINFO_EXTENSION);
+						$slug = strtolower(preg_replace('/[^A-Za-z0-9-]+/', '_', $mediaName));
+						$dbImageName = $slug."_".date('ymds').".".$extention;
+						$copyImageName = $config['upload_path'].$dbImageName;
+
+						copy($_FILES['media-image']['tmp_name'],$copyImageName);
+					}
 				}
 
 				$result = $this->MediaNameModel->CreateMediaName($mediaName,$dbImageName,$entryId);
@@ -148,7 +149,7 @@
 
 			$output['mediaId'] = $data->Id;
 			$output['mediaName'] = $data->Name;
-			$output['hiddenMediaImage'] = $data->Image;
+			$output['previousMediaImage'] = $data->Image;
 
 			if ($data->Image == "")
 			{
@@ -165,17 +166,18 @@
 		public function UpdateMediaName()
 		{
 			$mediaName = $this->input->post('media-name');
-			$mediaImage = "";
+			$mediaId = $this->input->post('media-id');
+			$updateId = $this->GetAdminAllInfo()->Id;
+			$newMediaImage = "";
 
-			if ($_FILES["media-image"]["name"] == "")
+			if ($_FILES["new-media-image"]["name"] == "")
 			{
-				$mediaImage = $this->input->post("hidden-media-image");
+				$dbImageName = $this->input->post("previous-media-image");
 			}
 			else
 			{
-				$mediaImage = $_FILES['media-image']['name'];
-				echo $previousImage = $this->input->post('hidden-media-image');
-				exit();
+				$mediaImage = $_FILES['new-media-image']['name'];
+				$previousImage = $this->input->post('previous-media-image');
 
 				// Copy Image and Get Image New Name
 				$config['upload_path'] = "images/media_logo/";
@@ -186,18 +188,44 @@
 				$slug = strtolower(preg_replace('/[^A-Za-z0-9-]+/', '_', $mediaName));
 				$dbImageName = $slug."_".date('ymds').".".$extention;
 				$copyImageName = $config['upload_path'].$dbImageName;
-				$deleteImage = $config['upload_path'].$previousImage;
 
-				unlink($deleteImage);
-				copy($_FILES['media-image']['tmp_name'],$copyImageName);
+				if ($previousImage != "")
+				{					
+					$deleteImage = $config['upload_path'].$previousImage;
 
-				echo "OK";
+					chown($deleteImage, 666);
+					unlink($deleteImage);
+				}
+
+				copy($_FILES['new-media-image']['tmp_name'],$copyImageName);
+			}
+
+			$result = $this->MediaNameModel->UpdateMediaName($mediaId, $mediaName, $dbImageName, $updateId);
+
+			if ($result)
+			{
+				echo "Greate! You Updated Your Media Name Successfully";
+			}
+			else
+			{
+				echo "Oops! Sorry, Your Media Name Can't Be Updated";
 			}
 		}
 
-		public function Delete($mediaNameId)
+		public function DeleteMediaName()
 		{
-			$this->MediaNameModel->Delete($mediaNameId);
+			$mediaId = $this->input->post('mediaId');
+
+			$result = $this->MediaNameModel->DeleteMediaName($mediaId);
+			
+			if ($result)
+			{
+				echo "Media Id Dleted From Data Base";
+			}
+			else
+			{
+				echo "Oops! Something Wrong With Deleting Media Name";
+			}
 		}
 	}
 ?>

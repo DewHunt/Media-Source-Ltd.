@@ -12,6 +12,7 @@
 												<ul>
 													<li><a href="<?= base_url('index.php/MediaName/Index'); ?>">Media Name</a></li>
 													<li><a href="<?= base_url('index.php/Publication/Index'); ?>">Publication</a></li>
+													<li><a href="<?= base_url('index.php/PublicationType/Index'); ?>">Publication Type</a></li>
 													<li><a href="<?= base_url('index.php/Page/Index'); ?>">Page</a></li>
 													<li><a href="<?= base_url('index.php/Parameter/Index'); ?>">Parameter</a></li>
 													<li><a href="<?= base_url('index.php/Product/Index'); ?>">Products</a></li>

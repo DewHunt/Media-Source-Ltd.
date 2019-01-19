@@ -58,15 +58,15 @@
 														<input type="text" name="media-name" id="media-name" class="form-control" style="width: 100%;">
 
 														<label>Image</label>
-														<input type="file" name="media-image" id="media-image" class="form-control">
+														<input type="file" name="new-media-image" id="new-media-image" class="form-control">
 
-														<label id="media-uploaded-image"></label>
+														<label id="uploaded-media-image"></label>
 													</div>
 
 													<div class="modal-footer">
 														<input type="hidden" name="media-id" id="media-id" value="">
 
-														<input type="hidden" name="hidden-media-image" id="hidden-media-image" value="">
+														<input type="hidden" name="previous-media-image" id="previous-media-image" value="">
 
 														<button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
 
@@ -121,8 +121,8 @@
 						success:function(data){
 							$('#media-modal').modal('show');
 							$('#media-name').val(data.mediaName);
-							$('#media-uploaded-image').html(data.mediaImage);
-							$('#hidden-media-image').val(data.hiddenMediaImage);
+							$('#uploaded-media-image').html(data.mediaImage);
+							$('#previous-media-image').val(data.previousMediaImage);
 							$('#media-id').val(data.mediaId);
 						}
 					});
@@ -131,14 +131,14 @@
 				$(document).on('submit', '#media-form', function(event){
 					event.preventDefault();
 					var mediaName = $('#media-name').val();
-					var extention = $('#media-image').val().split('.').pop().toLowerCase();
+					var extention = $('#new-media-image').val().split('.').pop().toLowerCase();
 
 					if (extention != "")
 					{
 						if (jQuery.inArray(extention, ['gif', 'png', 'jpg', 'jpeg']) == -1)
 						{
 							alert('Oops! Invalid Image File.');
-							$('#media-image').val('');
+							$('#new-media-image').val('');
 							return false;
 						}
 					}
@@ -169,7 +169,24 @@
 				$(document).on('click', '.delete', function(){
 					var mediaId = $(this).attr('id');
 
-					alert(mediaId);
+					if (confirm("Wait! Are You 100% Sure, You Want To Delete This?"))
+					{
+						$.ajax({
+							url:'<?php echo base_url("index.php/MediaName/DeleteMediaName"); ?>',
+							method:'POST',
+							data:{mediaId:mediaId},
+							success:function(data){
+								alert(data);
+								dataTable.ajax.reload();
+							}
+						});						
+					}
+					else
+					{
+						return false;
+					}
+
+
 				});
 			});
 		</script>

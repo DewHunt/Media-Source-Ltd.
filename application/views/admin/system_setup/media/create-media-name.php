@@ -58,7 +58,8 @@
 											<strong>Great!</strong> Your Media Name Created Successfully...
 										</div>
 								<?php
-								}
+									}
+
 									if ($message == 2)
 									{
 								?>
@@ -68,7 +69,17 @@
 										</div>
 								<?php
 									}
-								?> 
+
+									if ($message == 3)
+									{
+								?>
+										<div class="alert alert-info error-message">
+											<a type="button" class="btn btn-danger close" data-dismiss="alert" href="<?= base_url('index.php/MediaName/MediaName'); ?>">&times;</a>
+											<strong>Oops! Sorry,</strong> Your Meida Name Already Saved In Data Base...
+										</div>
+								<?php
+									}
+								?>
 							</div>
 							<!-- /span12 -->
 						</form> 

@@ -13,6 +13,22 @@
 		var $selectColumn = array("Id","Name","Image");
 		var $orderColumn = array("Id","Name",null,null);
 
+		public function CheckMediaNameExsits($mediaName)
+		{
+			$sql = "SELECT Name FROM media WHERE Name = '".$mediaName."'";
+
+			$query = $this->db->query($sql);
+
+			if ($query->num_rows() > 0)
+			{
+				return true;
+			}
+			else
+			{
+				return false;
+			}
+		}
+
 		public function CreateMediaName($mediaName,$imageName,$entryId)
 		{
 			$entryDateTime = date('Y-m-d H:i:s');
@@ -107,14 +123,38 @@
 			}
 		}
 
-		public function Edit($mediaNameId)
+		public function UpdateMediaName($mediaId, $mediaName, $dbImageName, $updateId)
 		{
-			echo "AdminModle->Edit = ".$mediaNameId;
+			$updateDateTime = date('Y-m-d H:i:s');
+
+			$sql = "UPDATE media SET Name = '".$mediaName."', Image = '".$dbImageName."', UpdateBy = '".$updateId."', UpdateDateTime = '".$updateDateTime."' WHERE Id = '".$mediaId."'";
+
+			$query = $this->db->query($sql);
+
+			if ($query)
+			{
+				return true;
+			}
+			else
+			{
+				return false;
+			}
 		}
 
-		public function Delete($mediaNameId)
+		public function DeleteMediaName($mediaId)
 		{
-			echo "AdminModle->Delete = ".$mediaNameId;
+			$sql = "DELETE FROM media WHERE Id = '".$mediaId."'";
+
+			$query = $this->db->query($sql);
+
+			if ($query)
+			{
+				return true;
+			}
+			else
+			{
+				return false;
+			}
 		}
 	}
 ?>
