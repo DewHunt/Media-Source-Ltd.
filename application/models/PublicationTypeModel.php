@@ -14,7 +14,7 @@
 		var $selectColumn = array("Id","Name","Description");
 		var $orderColumn = array("Id","Name",null,null);
 
-		public function CheckPublicationNameExists($publicationTypeName)
+		public function CheckPublicationTypeExists($publicationTypeName)
 		{
 			$sql = "SELECT * FROM publication_type WHERE Name = '$publicationTypeName'";
 
@@ -30,15 +30,15 @@
 			}
 		}
 
-		public function CreatePublicationTypeName($publicationTypeName,$publicationTypeDescription,$entryId)
+		public function CreatePublicationType($publicationTypeName,$publicationTypeDescription,$entryId)
 		{
 			$entryDateTime = date('Y-m-d H:i:s');
 
 			$sql = "INSERT INTO publication_type (Name, Description, EntryBy, EntryDateTime) VALUES ('$publicationTypeName','$publicationTypeDescription','$entryId','$entryDateTime')";
 
-			$publicationNameQuery = $this->db->query($sql);
+			$insertQuery = $this->db->query($sql);
 
-			if ($publicationNameQuery)
+			if ($insertQuery)
 			{
 				return true;
 			}
@@ -101,7 +101,7 @@
 		}
 		// Data Tables Query End
 
-		public function GetPublicationTypeId($publicationTypeId)
+		public function GetPublicationTypeById($publicationTypeId)
 		{
 			$sql = "SELECT * FROM publication_type WHERE Id = '$publicationTypeId'";
 

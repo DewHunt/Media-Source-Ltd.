@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.1
+-- version 4.7.4
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 20, 2019 at 12:16 PM
--- Server version: 10.1.33-MariaDB
--- PHP Version: 7.2.6
+-- Generation Time: Jan 20, 2019 at 08:11 PM
+-- Server version: 10.1.28-MariaDB
+-- PHP Version: 7.1.10
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -98,6 +98,20 @@ CREATE TABLE `publication_place` (
   `DeleteDateTime` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Dumping data for table `publication_place`
+--
+
+INSERT INTO `publication_place` (`Id`, `Name`, `Description`, `EntryBy`, `EntryDateTime`, `UpdateBy`, `UpdateDateTime`, `DeleteBy`, `DeleteDateTime`) VALUES
+(1, 'Dhaka', 'Dhaka', 1, '2019-01-20 18:37:24', 1, '2019-01-20 20:02:54', 0, '0000-00-00 00:00:00'),
+(2, 'Chittagong', 'Chittagong', 1, '2019-01-20 19:36:58', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00'),
+(3, 'Sylhet', 'Sylhet', 1, '2019-01-20 19:37:42', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00'),
+(4, 'Barisal', 'Barisal', 1, '2019-01-20 19:38:06', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00'),
+(5, 'Khulna', 'Khulna', 1, '2019-01-20 19:38:23', 1, '2019-01-20 20:03:17', 0, '0000-00-00 00:00:00'),
+(6, 'Rajshahi', 'Rajshahi', 1, '2019-01-20 19:38:41', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00'),
+(7, 'Rangpur', 'Rangpur', 1, '2019-01-20 19:38:55', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00'),
+(8, 'Comilla', 'Comilla', 1, '2019-01-20 19:39:10', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00');
+
 -- --------------------------------------------------------
 
 --
@@ -124,7 +138,7 @@ INSERT INTO `publication_type` (`Id`, `Name`, `Description`, `EntryBy`, `EntryDa
 (1, 'Newspaper', 'Newspaper', 1, '2019-01-20 07:27:34', 1, '2019-01-20 11:15:31', 0, '0000-00-00 00:00:00'),
 (2, 'Supplementary', 'Supplementary', 1, '2019-01-20 08:58:55', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00'),
 (3, 'Magazine', 'Magazine', 1, '2019-01-20 09:00:01', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00'),
-(4, 'Online News', 'Online News', 1, '2019-01-20 09:00:44', 1, '2019-01-20 11:14:50', 0, '0000-00-00 00:00:00');
+(4, 'Online News', 'Online News', 1, '2019-01-20 09:00:44', 1, '2019-01-20 19:58:28', 0, '0000-00-00 00:00:00');
 
 --
 -- Indexes for dumped tables
@@ -174,7 +188,7 @@ ALTER TABLE `media`
 -- AUTO_INCREMENT for table `publication_place`
 --
 ALTER TABLE `publication_place`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `publication_type`

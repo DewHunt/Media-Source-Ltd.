@@ -62,15 +62,15 @@
 
 			$entryId = $this->GetAdminAllInfo()->Id;
 
-			$checkPublicationName = $this->PublicationTypeModel->CheckPublicationNameExists($publicationTypeName);
+			$checkPublicationTypeName = $this->PublicationTypeModel->CheckPublicationTypeExists($publicationTypeName);
 
-			if ($checkPublicationName)
+			if ($checkPublicationTypeName)
 			{
 				return redirect('PublicationType/PublicationType/3');
 			}
 			else
 			{
-				$result = $this->PublicationTypeModel->CreatePublicationTypeName($publicationTypeName,$publicationTypeDescription,$entryId);
+				$result = $this->PublicationTypeModel->CreatePublicationType($publicationTypeName,$publicationTypeDescription,$entryId);
 
 				if ($result)
 				{
@@ -115,7 +115,7 @@
 			$output = array();
 			$publicationTypeId = $this->input->post('publicationTypeId');
 
-			$data = $this->PublicationTypeModel->GetPublicationTypeId($publicationTypeId);
+			$data = $this->PublicationTypeModel->GetPublicationTypeById($publicationTypeId);
 
 			$output['publicationTypeId'] = $data->Id;
 			$output['publicationTypeName'] = $data->Name;

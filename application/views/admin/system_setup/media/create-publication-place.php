@@ -13,7 +13,7 @@
 			<div class="main-inner">
 				<div class="container">					
 					<div class="row">
-						<form id="edit-profile" class="form-horizontal">
+						<form class="form-horizontal" id="publication-place-form" method="POST" action="<?= base_url('index.php/PublicationPlace/CreatePublicationPlace'); ?>">
 							<div class="span12">
 								<div class="widget">
 									<div class="widget-header">
@@ -49,7 +49,39 @@
 										</fieldset>
 									</div> <!-- /widget-content -->
 								</div> <!-- /widget -->
-								<!-- /widget --> 
+								<!-- /widget -->
+
+								<?php
+									if ($message == 1)
+									{
+								?>
+										<div class="alert alert-success success-message">
+											<a type="button" class="btn btn-danger close" data-dismiss="alert" href="<?=  base_url('index.php/PublicationPlace/PublicationPlace');?>">&times;</a>
+											<strong>Great!</strong> Your Publication Place Name Created Successfully...
+										</div>
+								<?php
+									}
+
+									if ($message == 2)
+									{
+								?>
+										<div class="alert alert-info error-message">
+											<a type="button" class="btn btn-danger close" data-dismiss="alert" href="<?= base_url('index.php/PublicationPlace/PublicationPlace'); ?>">&times;</a>
+											<strong>Oops! Sorry,</strong> Your Publication Place Name Can't Be Created...
+										</div>
+								<?php
+									}
+
+									if ($message == 3)
+									{
+								?>
+										<div class="alert alert-info error-message">
+											<a type="button" class="btn btn-danger close" data-dismiss="alert" href="<?= base_url('index.php/PublicationPlace/PublicationPlace'); ?>">&times;</a>
+											<strong>Oops! Sorry,</strong> Your Publication Place Name Already Saved In Data Base...
+										</div>
+								<?php
+									}
+								?> 
 							</div>
 							<!-- /span12 -->
 						</form> 
@@ -63,6 +95,23 @@
 		<!-- /main -->
 
 		<?php include APPPATH.'views/admin/master/footer.php'; ?>
-		
+
+		<script type="text/javascript">
+			function Validation()
+			{
+				var publicationPlaceName = $('#publication-place-name').val();
+
+				if (publicationPlaceName == "")
+				{
+					Message("Oops! Publication Place Name Can't Be Empty. Please Enter Publication Place Name.");
+					$('#publication-place-name').css({'border':'1px solid red'});
+					return false;
+				}
+				else
+				{
+					$('#publication-place-name').css({'border':'1px solid gray'});
+				}
+			}
+		</script>		
 	</body>
 </html>
