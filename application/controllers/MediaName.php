@@ -98,17 +98,17 @@
 
 						copy($_FILES['media-image']['tmp_name'],$copyImageName);
 					}
-				}
 
-				$result = $this->MediaNameModel->CreateMediaName($mediaName,$dbImageName,$entryId);
+					$result = $this->MediaNameModel->CreateMediaName($mediaName,$dbImageName,$entryId);
 
-				if ($result)
-				{
-					return redirect('MediaName/MediaName/1');
-				}
-				else
-				{
-					return redirect('MediaName/MediaName/2');
+					if ($result)
+					{
+						return redirect('MediaName/MediaName/1');
+					}
+					else
+					{
+						return redirect('MediaName/MediaName/2');
+					}
 				}
 			}
 		}
@@ -153,11 +153,11 @@
 
 			if ($data->Image == "")
 			{
-				$output['mediaImage'] = '<input type="hidden" name="hidden-media-image" value="">';
+				$output['mediaImage'] = '<input type="hidden" name="previous-media-image" id="previous-media-image" value="">';
 			}
 			else
 			{
-				$output['mediaImage'] = '<img src="'.base_url("images/media_logo/").$data->Image.'" class="img-thumbnail" width="80px" height="80px"> <input type="hidden" name="hidden-media-image" value="'.$data->Image.'">';
+				$output['mediaImage'] = '<img src="'.base_url("images/media_logo/").$data->Image.'" class="img-thumbnail" width="80px" height="80px"> <input type="hidden" name="previous-media-image" id="previous-media-image" value="'.$data->Image.'">';
 			}
 
 			echo json_encode($output);
@@ -220,7 +220,7 @@
 			
 			if ($result)
 			{
-				echo "Media Id Dleted From Data Base";
+				echo "Media Id Dleted From Database!";
 			}
 			else
 			{

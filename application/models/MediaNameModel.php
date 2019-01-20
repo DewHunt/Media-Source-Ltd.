@@ -33,7 +33,7 @@
 		{
 			$entryDateTime = date('Y-m-d H:i:s');
 
-			$sql = "INSERT INTO media (Name,Image,EntryBy,EntryDateTime) VALUES ('$mediaName', '$imageName', '$entryId', '$entryDateTime')";
+			$sql = "INSERT INTO media (Name, Image, EntryBy, EntryDateTime) VALUES ('$mediaName', '$imageName', '$entryId', '$entryDateTime')";
 
 			$mediaQuery = $this->db->query($sql);
 
@@ -47,6 +47,7 @@
 			}
 		}
 
+		// Data Tables Query Start
 		public function MakeQuery()
 		{
 			$this->db->select($this->selectColumn);
@@ -64,7 +65,7 @@
 			}
 			else
 			{
-				$this->db->order_by("id","DESC");
+				$this->db->order_by("Id","DESC");
 			}
 		}
 
@@ -97,15 +98,7 @@
 
 			return $this->db->count_all_results();			
 		}
-
-		public function CountRows()
-		{
-			$sql = "SELECT * FROM media";
-
-			$mediaQuery = $this->db->query($sql);
-
-			return $mediaQuery->num_rows();
-		}
+		// Data Tables Query End
 
 		public function GetMediaNameById($mediaId)
 		{

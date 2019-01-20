@@ -54,7 +54,7 @@
 													</div>
 
 													<div class="modal-body">
-														<label>Media Name</label>
+														<label>Media Name&nbsp;<span class="mendatory">*</span></label>
 														<input type="text" name="media-name" id="media-name" class="form-control" style="width: 100%;">
 
 														<label>Image</label>
@@ -65,8 +65,6 @@
 
 													<div class="modal-footer">
 														<input type="hidden" name="media-id" id="media-id" value="">
-
-														<input type="hidden" name="previous-media-image" id="previous-media-image" value="">
 
 														<button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
 
@@ -122,7 +120,6 @@
 							$('#media-modal').modal('show');
 							$('#media-name').val(data.mediaName);
 							$('#uploaded-media-image').html(data.mediaImage);
-							$('#previous-media-image').val(data.previousMediaImage);
 							$('#media-id').val(data.mediaId);
 						}
 					});
@@ -130,6 +127,7 @@
 
 				$(document).on('submit', '#media-form', function(event){
 					event.preventDefault();
+
 					var mediaName = $('#media-name').val();
 					var extention = $('#new-media-image').val().split('.').pop().toLowerCase();
 
@@ -146,6 +144,7 @@
 					if (mediaName == "")
 					{
 						alert('Oops! Media Name Must Be Filled');
+						$('#media-name').css({'border':'1px solid red'});
 						return false;
 					}
 					else
@@ -169,7 +168,7 @@
 				$(document).on('click', '.delete', function(){
 					var mediaId = $(this).attr('id');
 
-					if (confirm("Wait! Are You 100% Sure, You Want To Delete This?"))
+					if (confirm("Wait! Are You 100% Sure, Really You Want To Delete This?"))
 					{
 						$.ajax({
 							url:'<?php echo base_url("index.php/MediaName/DeleteMediaName"); ?>',
@@ -185,8 +184,6 @@
 					{
 						return false;
 					}
-
-
 				});
 			});
 		</script>

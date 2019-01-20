@@ -34,6 +34,10 @@
 													<i class="shortcut-icon icon-file"></i> 
 													<span class="shortcut-label">Publication</span> 
 												</a>
+												<a href="<?= base_url('index.php/PublicationPlace/Index'); ?>" class="shortcut">
+													<i class="shortcut-icon icon-file"></i> 
+													<span class="shortcut-label">Publication Place</span> 
+												</a>
 												<a href="<?= base_url('index.php/PublicationType/Index'); ?>" class="shortcut">
 													<i class="shortcut-icon icon-file"></i> 
 													<span class="shortcut-label">Publication Type</span> 

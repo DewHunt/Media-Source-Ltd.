@@ -13,7 +13,7 @@
 			<div class="main-inner">
 				<div class="container">					
 					<div class="row">
-						<form class="form-horizontal" id="media-name-form" method="POST" action="<?= base_url('index.php/MediaName/CreateMediaName')?>" enctype="multipart/form-data">
+						<form class="form-horizontal" id="media-name-form" method="POST" action="<?= base_url('index.php/MediaName/CreateMediaName'); ?>" enctype="multipart/form-data">
 							<div class="span12">
 								<div class="widget">
 									<div class="widget-header">
@@ -39,9 +39,10 @@
 											</div> <!-- /control-group -->
 											
 											<div class="form-actions">
-												<button type="submit" id="button-media-name" name="button-media-name" class="btn btn-primary" onclick="return validation()">Create Media Name</button>
+												<button type="submit" id="button-media-name" name="button-media-name" class="btn btn-primary" onclick="return Validation()">Create Media Name</button>
 												<button type="reset" class="btn btn-danger">Cancel</button>
-												<!-- The actual message -->
+
+												<!-- The Toast Message ID -->
 												<p id="message"></p>
 											</div> <!-- /form-actions -->
 										</fieldset>
@@ -65,7 +66,7 @@
 								?>
 										<div class="alert alert-info error-message">
 											<a type="button" class="btn btn-danger close" data-dismiss="alert" href="<?= base_url('index.php/MediaName/MediaName'); ?>">&times;</a>
-											<strong>Oops! Sorry,</strong> Your Media Name Cannot Created...
+											<strong>Oops! Sorry,</strong> Your Media Name Can't Be Created...
 										</div>
 								<?php
 									}
@@ -95,12 +96,12 @@
 		
 		<!-- Custome JS File Include -->
 		<script type="text/javascript">
-			function validation(){
+			function Validation(){
 				var mediaName = $('#media-name').val();
 
 				if (mediaName == "")
 				{
-					Message("Please Enter Media Name!");
+					Message("Oops! Media Name Can't Be Empty. Please Enter Media Name.");
 					$('#media-name').css({'border':'1px solid red'});
 					return false;
 				}
