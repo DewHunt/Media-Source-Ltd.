@@ -9,8 +9,8 @@
 		{
 			parent::__construct();
 			$this->load->model('AdminModel');
+			$this->load->model('DataTableModel');
 			$this->load->model('MediaNameModel');
-			$this->load->library('pagination');
 		}
 
 		public function GetAdminAllInfo()
@@ -115,116 +115,149 @@
 
 		public function GetMediaNameAllInfo()
 		{
-			$mediaInfo = $this->MediaNameModel->MakeDataTables();
-			$sl = 1;
-			$data = array();
-
-			foreach ($mediaInfo as $value)
+			if ($this->session->userdata('adminUserName') == "" || $this->session->userdata('adminPassword') == "")
 			{
-				$media = array();
-				$media[] = $sl;
-				$media[] = $value->Name;
-				$media[] = '<img src="'.base_url("images/media_logo/").$value->Image.'" width="80px" height="80px">';
-				$media[] = '<button type="button" name="update" id="'.$value->Id.'" class="btn btn-warning btn-xs update">Update</button> <button type="button" name="delete" id="'.$value->Id.'" class="btn btn-danger btn-xs delete">Delete</button>';
-				$sl++;
-				$data[] = $media;
+				return redirect('Admin/Index');
 			}
+			else
+			{
+				$option = "dt-01";
+				$table = "media";
+				$selectColumn = array("Id","Name","Image");
+				$orderColumn = array("Id","Name",null,null);
 
-			$output = array(
-				'draw' => intval($_POST['draw']),
-				'recordsTotal' => $this->MediaNameModel->GetAllData(),
-				'recordsFiltered' => $this->MediaNameModel->GetFilteredData(),
-				'data' => $data
-			);
+				$mediaInfo = $this->DataTableModel->MakeDataTables($option,$table,$selectColumn,$orderColumn);
+				$sl = 1;
+				$data = array();
 
-			echo json_encode($output);
+				foreach ($mediaInfo as $value)
+				{
+					$media = array();
+					$media[] = $sl;
+					$media[] = $value->Name;
+					$media[] = '<img src="'.base_url("images/media_logo/").$value->Image.'" width="80px" height="80px">';
+					$media[] = '<button type="button" name="update" id="'.$value->Id.'" class="btn btn-warning btn-xs update">Update</button> <button type="button" name="delete" id="'.$value->Id.'" class="btn btn-danger btn-xs delete">Delete</button>';
+					$sl++;
+					$data[] = $media;
+				}
+
+				$output = array(
+					'draw' => intval($_POST['draw']),
+					'recordsTotal' => $this->DataTableModel->GetAllData($table),
+					'recordsFiltered' => $this->DataTableModel->GetFilteredData($option,$table,$selectColumn,$orderColumn),
+					'data' => $data
+				);
+
+				echo json_encode($output);
+			}
 		}
 
 		public function GetMediaNameById()
 		{
-			$output = array();
-			$mediaId = $this->input->post('mediaId');
-
-			$data = $this->MediaNameModel->GetMediaNameById($mediaId);
-
-			$output['mediaId'] = $data->Id;
-			$output['mediaName'] = $data->Name;
-			$output['previousMediaImage'] = $data->Image;
-
-			if ($data->Image == "")
+			if ($this->session->userdata('adminUserName') == "" || $this->session->userdata('adminPassword') == "")
 			{
-				$output['mediaImage'] = '<input type="hidden" name="previous-media-image" id="previous-media-image" value="">';
+				return redirect('Admin/Index');
 			}
 			else
 			{
-				$output['mediaImage'] = '<img src="'.base_url("images/media_logo/").$data->Image.'" class="img-thumbnail" width="80px" height="80px"> <input type="hidden" name="previous-media-image" id="previous-media-image" value="'.$data->Image.'">';
-			}
+				$output = array();
+				$mediaId = $this->input->post('mediaId');
 
-			echo json_encode($output);
+				$data = $this->MediaNameModel->GetMediaNameById($mediaId);
+
+				$output['mediaId'] = $data->Id;
+				$output['mediaName'] = $data->Name;
+				$output['previousMediaImage'] = $data->Image;
+
+				if ($data->Image == "")
+				{
+					$output['mediaImage'] = '<input type="hidden" name="previous-media-image" id="previous-media-image" value="">';
+				}
+				else
+				{
+					$output['mediaImage'] = '<img src="'.base_url("images/media_logo/").$data->Image.'" class="img-thumbnail" width="80px" height="80px"> <input type="hidden" name="previous-media-image" id="previous-media-image" value="'.$data->Image.'">';
+				}
+
+				echo json_encode($output);
+			}
 		}
 
 		public function UpdateMediaName()
 		{
-			$mediaName = $this->input->post('media-name');
-			$mediaId = $this->input->post('media-id');
-			$updateId = $this->GetAdminAllInfo()->Id;
-			$newMediaImage = "";
-
-			if ($_FILES["new-media-image"]["name"] == "")
+			if ($this->session->userdata('adminUserName') == "" || $this->session->userdata('adminPassword') == "")
 			{
-				$dbImageName = $this->input->post("previous-media-image");
+				return redirect('Admin/Index');
 			}
 			else
 			{
-				$mediaImage = $_FILES['new-media-image']['name'];
-				$previousImage = $this->input->post('previous-media-image');
+				$mediaName = $this->input->post('media-name');
+				$mediaId = $this->input->post('media-id');
+				$updateId = $this->GetAdminAllInfo()->Id;
+				$newMediaImage = "";
+
+				if ($_FILES["new-media-image"]["name"] == "")
+				{
+					$dbImageName = $this->input->post("previous-media-image");
+				}
+				else
+				{
+					$mediaImage = $_FILES['new-media-image']['name'];
+					$previousImage = $this->input->post('previous-media-image');
 
 				// Copy Image and Get Image New Name
-				$config['upload_path'] = "images/media_logo/";
-				$config['allowed_types'] = "jpg|jpeg|png|gif";
-				$this->load->library('upload',$config);
+					$config['upload_path'] = "images/media_logo/";
+					$config['allowed_types'] = "jpg|jpeg|png|gif";
+					$this->load->library('upload',$config);
 
-				$extention = pathinfo($mediaImage, PATHINFO_EXTENSION);
-				$slug = strtolower(preg_replace('/[^A-Za-z0-9-]+/', '_', $mediaName));
-				$dbImageName = $slug."_".date('ymds').".".$extention;
-				$copyImageName = $config['upload_path'].$dbImageName;
+					$extention = pathinfo($mediaImage, PATHINFO_EXTENSION);
+					$slug = strtolower(preg_replace('/[^A-Za-z0-9-]+/', '_', $mediaName));
+					$dbImageName = $slug."_".date('ymds').".".$extention;
+					$copyImageName = $config['upload_path'].$dbImageName;
 
-				if ($previousImage != "")
-				{					
-					$deleteImage = $config['upload_path'].$previousImage;
+					if ($previousImage != "")
+					{					
+						$deleteImage = $config['upload_path'].$previousImage;
 
-					chown($deleteImage, 666);
-					unlink($deleteImage);
+						chown($deleteImage, 666);
+						unlink($deleteImage);
+					}
+
+					copy($_FILES['new-media-image']['tmp_name'],$copyImageName);
 				}
 
-				copy($_FILES['new-media-image']['tmp_name'],$copyImageName);
-			}
+				$result = $this->MediaNameModel->UpdateMediaName($mediaId, $mediaName, $dbImageName, $updateId);
 
-			$result = $this->MediaNameModel->UpdateMediaName($mediaId, $mediaName, $dbImageName, $updateId);
-
-			if ($result)
-			{
-				echo "Greate! You Updated Your Media Name Successfully";
-			}
-			else
-			{
-				echo "Oops! Sorry, Your Media Name Can't Be Updated";
+				if ($result)
+				{
+					echo "Greate! You Updated Your Media Name Successfully";
+				}
+				else
+				{
+					echo "Oops! Sorry, Your Media Name Can't Be Updated";
+				}
 			}
 		}
 
 		public function DeleteMediaName()
 		{
-			$mediaId = $this->input->post('mediaId');
-
-			$result = $this->MediaNameModel->DeleteMediaName($mediaId);
-			
-			if ($result)
+			if ($this->session->userdata('adminUserName') == "" || $this->session->userdata('adminPassword') == "")
 			{
-				echo "Media Id Dleted From Database!";
+				return redirect('Admin/Index');
 			}
 			else
 			{
-				echo "Oops! Something Wrong With Deleting Media Name";
+				$mediaId = $this->input->post('mediaId');
+
+				$result = $this->MediaNameModel->DeleteMediaName($mediaId);
+				
+				if ($result)
+				{
+					echo "Media Id Dleted From Database!";
+				}
+				else
+				{
+					echo "Oops! Something Wrong With Deleting Media Name";
+				}
 			}
 		}
 	}

@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.4
+-- version 4.8.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 20, 2019 at 08:11 PM
--- Server version: 10.1.28-MariaDB
--- PHP Version: 7.1.10
+-- Generation Time: Jan 21, 2019 at 12:46 PM
+-- Server version: 10.1.33-MariaDB
+-- PHP Version: 7.2.6
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -69,16 +69,45 @@ CREATE TABLE `media` (
 INSERT INTO `media` (`Id`, `Name`, `Image`, `EntryBy`, `EntryDateTime`, `UpdateBy`, `UpdateDateTime`, `DeleteBy`, `DeleteDateTime`) VALUES
 (18, 'Amader Somoy', 'amader_somoy_19011427.jpg', 1, '2019-01-14 10:24:27', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00'),
 (19, 'Bangladesh Pratidin', 'bangladesh_pratidin_19011430.jpg', 1, '2019-01-14 10:37:30', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00'),
-(20, 'Jugantor', 'jugantor_19011401.jpg', 1, '2019-01-14 10:38:01', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00'),
+(20, 'Jugantor', 'jugantor_19012146.jpg', 1, '2019-01-14 10:38:01', 1, '2019-01-21 09:09:46', 0, '0000-00-00 00:00:00'),
 (21, 'Kaler Kantho', 'kaler_kantho_19011420.png', 1, '2019-01-14 10:38:20', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00'),
-(22, 'Prothom Alo', 'prothom_alo_19011435.jpg', 1, '2019-01-14 10:38:35', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00'),
+(22, 'Prothom Alo', 'prothom_alo_19012154.jpg', 1, '2019-01-14 10:38:35', 1, '2019-01-21 10:49:54', 0, '0000-00-00 00:00:00'),
 (23, 'The Financial Express', 'the_financial_express_19011923.png', 1, '2019-01-16 10:56:34', 1, '2019-01-19 08:27:23', 0, '0000-00-00 00:00:00'),
 (24, 'Janakantha', 'janakantha_19011906.png', 1, '2019-01-16 13:06:42', 1, '2019-01-19 08:25:06', 0, '0000-00-00 00:00:00'),
 (27, 'Daily Star', 'daily_star_19011905.png', 1, '2019-01-17 19:24:50', 1, '2019-01-19 08:24:05', 0, '0000-00-00 00:00:00'),
 (28, 'The Asian Age', 'the_asian_age_19011907.png', 1, '2019-01-18 18:54:34', 1, '2019-01-19 08:28:07', 0, '0000-00-00 00:00:00'),
 (29, 'Inqilab', 'inqilab_19011903.png', 1, '2019-01-19 09:33:37', 1, '2019-01-19 09:40:03', 0, '0000-00-00 00:00:00'),
 (30, 'Naya Diganto', 'naya_diganto_19011918.png', 1, '2019-01-19 09:41:18', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00'),
-(31, 'Amar Desh', 'amar_desh_19012046.png', 1, '2019-01-19 09:43:02', 1, '2019-01-20 09:36:46', 0, '0000-00-00 00:00:00');
+(31, 'Amar Desh', 'amar_desh_19012046.png', 1, '2019-01-19 09:43:02', 1, '2019-01-21 10:47:36', 0, '0000-00-00 00:00:00');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `publication_frequency`
+--
+
+CREATE TABLE `publication_frequency` (
+  `Id` int(11) NOT NULL,
+  `Name` varchar(255) NOT NULL,
+  `Description` varchar(255) NOT NULL,
+  `EntryBy` int(11) NOT NULL,
+  `EntryDateTime` datetime NOT NULL,
+  `UpdateBy` int(11) NOT NULL,
+  `UpdateDateTime` datetime NOT NULL,
+  `DeleteBy` int(11) NOT NULL,
+  `DeleteDateTime` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `publication_frequency`
+--
+
+INSERT INTO `publication_frequency` (`Id`, `Name`, `Description`, `EntryBy`, `EntryDateTime`, `UpdateBy`, `UpdateDateTime`, `DeleteBy`, `DeleteDateTime`) VALUES
+(1, 'Daily', 'Daily', 1, '2019-01-21 07:30:26', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00'),
+(2, 'Weekly', 'Weekly', 1, '2019-01-21 07:31:28', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00'),
+(3, 'Fortnightly', 'Fortnightly', 1, '2019-01-21 07:33:05', 1, '2019-01-21 08:33:06', 0, '0000-00-00 00:00:00'),
+(4, 'Monthly', 'Monthly', 1, '2019-01-21 07:33:20', 1, '2019-01-21 09:02:36', 0, '0000-00-00 00:00:00'),
+(5, 'Yearly', 'Yearly', 1, '2019-01-21 07:33:37', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -103,7 +132,7 @@ CREATE TABLE `publication_place` (
 --
 
 INSERT INTO `publication_place` (`Id`, `Name`, `Description`, `EntryBy`, `EntryDateTime`, `UpdateBy`, `UpdateDateTime`, `DeleteBy`, `DeleteDateTime`) VALUES
-(1, 'Dhaka', 'Dhaka', 1, '2019-01-20 18:37:24', 1, '2019-01-20 20:02:54', 0, '0000-00-00 00:00:00'),
+(1, 'Dhaka', 'Dhaka', 1, '2019-01-20 18:37:24', 1, '2019-01-21 09:21:17', 0, '0000-00-00 00:00:00'),
 (2, 'Chittagong', 'Chittagong', 1, '2019-01-20 19:36:58', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00'),
 (3, 'Sylhet', 'Sylhet', 1, '2019-01-20 19:37:42', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00'),
 (4, 'Barisal', 'Barisal', 1, '2019-01-20 19:38:06', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00'),
@@ -138,7 +167,7 @@ INSERT INTO `publication_type` (`Id`, `Name`, `Description`, `EntryBy`, `EntryDa
 (1, 'Newspaper', 'Newspaper', 1, '2019-01-20 07:27:34', 1, '2019-01-20 11:15:31', 0, '0000-00-00 00:00:00'),
 (2, 'Supplementary', 'Supplementary', 1, '2019-01-20 08:58:55', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00'),
 (3, 'Magazine', 'Magazine', 1, '2019-01-20 09:00:01', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00'),
-(4, 'Online News', 'Online News', 1, '2019-01-20 09:00:44', 1, '2019-01-20 19:58:28', 0, '0000-00-00 00:00:00');
+(4, 'Online News', 'Online News', 1, '2019-01-20 09:00:44', 1, '2019-01-21 09:16:16', 0, '0000-00-00 00:00:00');
 
 --
 -- Indexes for dumped tables
@@ -154,6 +183,12 @@ ALTER TABLE `admins`
 -- Indexes for table `media`
 --
 ALTER TABLE `media`
+  ADD PRIMARY KEY (`Id`);
+
+--
+-- Indexes for table `publication_frequency`
+--
+ALTER TABLE `publication_frequency`
   ADD PRIMARY KEY (`Id`);
 
 --
@@ -185,6 +220,12 @@ ALTER TABLE `media`
   MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
+-- AUTO_INCREMENT for table `publication_frequency`
+--
+ALTER TABLE `publication_frequency`
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
 -- AUTO_INCREMENT for table `publication_place`
 --
 ALTER TABLE `publication_place`
@@ -194,7 +235,7 @@ ALTER TABLE `publication_place`
 -- AUTO_INCREMENT for table `publication_type`
 --
 ALTER TABLE `publication_type`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

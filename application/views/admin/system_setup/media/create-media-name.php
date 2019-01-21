@@ -15,6 +15,39 @@
 					<div class="row">
 						<form class="form-horizontal" id="media-name-form" method="POST" action="<?= base_url('index.php/MediaName/CreateMediaName'); ?>" enctype="multipart/form-data">
 							<div class="span12">
+
+								<?php
+									if ($message == 1)
+									{
+								?>
+										<div class="alert alert-success success-message">
+											<a type="button" class="btn btn-danger close" data-dismiss="alert" href="<?=  base_url('index.php/MediaName/MediaName');?>">&times;</a>
+											<strong>Great!</strong> Your Media Name Created Successfully...
+										</div>
+								<?php
+									}
+
+									if ($message == 2)
+									{
+								?>
+										<div class="alert alert-info error-message">
+											<a type="button" class="btn btn-danger close" data-dismiss="alert" href="<?= base_url('index.php/MediaName/MediaName'); ?>">&times;</a>
+											<strong>Oops! Sorry,</strong> Your Media Name Can't Be Created...
+										</div>
+								<?php
+									}
+
+									if ($message == 3)
+									{
+								?>
+										<div class="alert alert-info error-message">
+											<a type="button" class="btn btn-danger close" data-dismiss="alert" href="<?= base_url('index.php/MediaName/MediaName'); ?>">&times;</a>
+											<strong>Oops! Sorry,</strong> Your Meida Name Already Saved In Data Base...
+										</div>
+								<?php
+									}
+								?>
+								
 								<div class="widget">
 									<div class="widget-header">
 										<i class="icon-tag"></i>
@@ -49,38 +82,6 @@
 									</div> <!-- /widget-content -->
 								</div> <!-- /widget -->
 								<!-- /widget -->
-
-								<?php
-									if ($message == 1)
-									{
-								?>
-										<div class="alert alert-success success-message">
-											<a type="button" class="btn btn-danger close" data-dismiss="alert" href="<?=  base_url('index.php/MediaName/MediaName');?>">&times;</a>
-											<strong>Great!</strong> Your Media Name Created Successfully...
-										</div>
-								<?php
-									}
-
-									if ($message == 2)
-									{
-								?>
-										<div class="alert alert-info error-message">
-											<a type="button" class="btn btn-danger close" data-dismiss="alert" href="<?= base_url('index.php/MediaName/MediaName'); ?>">&times;</a>
-											<strong>Oops! Sorry,</strong> Your Media Name Can't Be Created...
-										</div>
-								<?php
-									}
-
-									if ($message == 3)
-									{
-								?>
-										<div class="alert alert-info error-message">
-											<a type="button" class="btn btn-danger close" data-dismiss="alert" href="<?= base_url('index.php/MediaName/MediaName'); ?>">&times;</a>
-											<strong>Oops! Sorry,</strong> Your Meida Name Already Saved In Data Base...
-										</div>
-								<?php
-									}
-								?>
 							</div>
 							<!-- /span12 -->
 						</form> 

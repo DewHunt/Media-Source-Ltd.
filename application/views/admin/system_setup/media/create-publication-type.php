@@ -15,6 +15,38 @@
 					<div class="row">
 						<form class="form-horizontal" id="publication-type-form" method="POST" action="<?= base_url('index.php/PublicationType/CreatePublicationType'); ?>">
 							<div class="span12">
+
+								<?php
+									if ($message == 1)
+									{
+								?>
+										<div class="alert alert-success success-message">
+											<a type="button" class="btn btn-danger close" data-dismiss="alert" href="<?=  base_url('index.php/PublicationType/PublicationType');?>">&times;</a>
+											<strong>Great!</strong> Your Publication Type Created Successfully...
+										</div>
+								<?php
+									}
+
+									if ($message == 2)
+									{
+								?>
+										<div class="alert alert-info error-message">
+											<a type="button" class="btn btn-danger close" data-dismiss="alert" href="<?= base_url('index.php/PublicationType/PublicationType'); ?>">&times;</a>
+											<strong>Oops! Sorry,</strong> Your Publication Type Can't Be Created...
+										</div>
+								<?php
+									}
+
+									if ($message == 3)
+									{
+								?>
+										<div class="alert alert-info error-message">
+											<a type="button" class="btn btn-danger close" data-dismiss="alert" href="<?= base_url('index.php/PublicationType/PublicationType'); ?>">&times;</a>
+											<strong>Oops! Sorry,</strong> Your Publication Type Already Saved In Data Base...
+										</div>
+								<?php
+									}
+								?>
 								<div class="widget">
 									<div class="widget-header">
 										<i class="icon-tag"></i>
@@ -49,39 +81,7 @@
 										</fieldset>
 									</div> <!-- /widget-content -->
 								</div> <!-- /widget -->
-								<!-- /widget -->
-
-								<?php
-									if ($message == 1)
-									{
-								?>
-										<div class="alert alert-success success-message">
-											<a type="button" class="btn btn-danger close" data-dismiss="alert" href="<?=  base_url('index.php/PublicationType/PublicationType');?>">&times;</a>
-											<strong>Great!</strong> Your Publication Type Name Created Successfully...
-										</div>
-								<?php
-									}
-
-									if ($message == 2)
-									{
-								?>
-										<div class="alert alert-info error-message">
-											<a type="button" class="btn btn-danger close" data-dismiss="alert" href="<?= base_url('index.php/PublicationType/PublicationType'); ?>">&times;</a>
-											<strong>Oops! Sorry,</strong> Your Publication Type Name Can't Be Created...
-										</div>
-								<?php
-									}
-
-									if ($message == 3)
-									{
-								?>
-										<div class="alert alert-info error-message">
-											<a type="button" class="btn btn-danger close" data-dismiss="alert" href="<?= base_url('index.php/PublicationType/PublicationType'); ?>">&times;</a>
-											<strong>Oops! Sorry,</strong> Your Publication Type Name Already Saved In Data Base...
-										</div>
-								<?php
-									}
-								?> 
+								<!-- /widget --> 
 							</div>
 							<!-- /span12 -->
 						</form> 

@@ -30,18 +30,6 @@
 													<i class="shortcut-icon icon-file"></i> 
 													<span class="shortcut-label">Media Name</span>
 												</a>
-												<a href="<?= base_url('index.php/Publication/Index'); ?>" class="shortcut">
-													<i class="shortcut-icon icon-file"></i> 
-													<span class="shortcut-label">Publication</span> 
-												</a>
-												<a href="<?= base_url('index.php/PublicationPlace/Index'); ?>" class="shortcut">
-													<i class="shortcut-icon icon-file"></i> 
-													<span class="shortcut-label">Publication Place</span> 
-												</a>
-												<a href="<?= base_url('index.php/PublicationType/Index'); ?>" class="shortcut">
-													<i class="shortcut-icon icon-file"></i> 
-													<span class="shortcut-label">Publication Type</span> 
-												</a>
 												<a href="<?= base_url('index.php/Page/Index'); ?>" class="shortcut"> 
 													<i class="shortcut-icon icon-file"></i>
 													<span class="shortcut-label">Page</span> 
@@ -53,6 +41,22 @@
 												<a href="<?= base_url('index.php/Product/Index'); ?>" class="shortcut">
 													<i class="shortcut-icon icon-file"></i>
 													<span class="shortcut-label">Products</span> 
+												</a>
+												<a href="<?= base_url('index.php/Publication/Index'); ?>" class="shortcut">
+													<i class="shortcut-icon icon-file"></i> 
+													<span class="shortcut-label">Publication</span> 
+												</a>
+												<a href="<?= base_url('index.php/PublicationFrequency/Index'); ?>" class="shortcut">
+													<i class="shortcut-icon icon-file"></i> 
+													<span class="shortcut-label">Publication Frequency</span> 
+												</a>
+												<a href="<?= base_url('index.php/PublicationPlace/Index'); ?>" class="shortcut">
+													<i class="shortcut-icon icon-file"></i> 
+													<span class="shortcut-label">Publication Place</span> 
+												</a>
+												<a href="<?= base_url('index.php/PublicationType/Index'); ?>" class="shortcut">
+													<i class="shortcut-icon icon-file"></i> 
+													<span class="shortcut-label">Publication Type</span> 
 												</a>
 											</div>
 											<!-- /shortcuts --> 

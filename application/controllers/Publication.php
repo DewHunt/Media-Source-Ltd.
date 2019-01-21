@@ -9,6 +9,8 @@
 		{
 			parent::__construct();
 			$this->load->model('AdminModel');
+			$this->load->model('MediaNameModel');
+			$this->load->model('PublicationTypeModel');
 			$this->load->model('PublicationModel');
 		}
 
@@ -51,6 +53,41 @@
 				);
 
 				$this->load->view('admin/system_setup/media/create-publication',$data);				
+			}
+		}
+
+		public function GetDataForSelectMenu()
+		{
+			if ($this->session->userdata('adminUserName') == "" || $this->session->userdata('adminPassword') == "")
+			{
+				return redirect('Admin/Index');
+			}
+			else
+			{
+				$output = '';
+				$modelName = $this->input->post('modelName');
+				$methodName = $this->input->post('methodName');
+
+				$result = $this->$modelName->$methodName();
+
+				if ($result)
+				{
+					$output .= '<select class="dropdown span10" name="media-name-id" id="media-name-id">';
+					$output .= '<option value="">Select Media Name</option>';
+					foreach ($result as $value)
+					{
+						$output .= '<option value="'.$value->Id.'">'.$value->Name.'</option>';
+					}
+					$output .= '</select>';
+				}
+				else
+				{
+					$output .= '<select class="dropdown span10" name="media-name-id" id="media-name-id" disable>';
+					$output .= '<option value="">Media Name Not Found</option>';
+					$output .= '</select>';				
+				}
+
+				echo $output;
 			}
 		}
 	}
