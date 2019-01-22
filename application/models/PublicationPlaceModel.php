@@ -92,5 +92,21 @@
 				return false;
 			}
 		}
+
+		public function GetAllPublicationPlace()
+		{
+			$sql = "SELECT * FROM publication_place ORDER BY Name ASC";
+
+			$query = $this->db->query($sql);
+
+			if ($query->num_rows() > 0)
+			{
+				return $query->result();
+			}
+			else
+			{
+				return false;
+			}
+		}
 	}
 ?>

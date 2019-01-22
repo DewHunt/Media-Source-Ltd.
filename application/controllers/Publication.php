@@ -11,6 +11,9 @@
 			$this->load->model('AdminModel');
 			$this->load->model('MediaNameModel');
 			$this->load->model('PublicationTypeModel');
+			$this->load->model('PublicationPlaceModel');
+			$this->load->model('PublicationFrequencyModel');
+			$this->load->model('DataTableModel');
 			$this->load->model('PublicationModel');
 		}
 
@@ -39,7 +42,7 @@
 			}
 		}
 
-		public function Publication()
+		public function Publication($msg = null)
 		{
 			if ($this->session->userdata('adminUserName') == "" || $this->session->userdata('adminPassword') == "")
 			{
@@ -49,7 +52,8 @@
 			{
 				$data = array(
 					'title' => 'Create Publication - Media Source Ltd.',
-					'adminInfo' => $this->GetAdminAllInfo()
+					'adminInfo' => $this->GetAdminAllInfo(),
+					'message' => $msg
 				);
 
 				$this->load->view('admin/system_setup/media/create-publication',$data);				
@@ -67,13 +71,15 @@
 				$output = '';
 				$modelName = $this->input->post('modelName');
 				$methodName = $this->input->post('methodName');
+				$idNameAttr = $this->input->post('idNameAttr');
+				$selectHeader = $this->input->post('selectHeader');
 
 				$result = $this->$modelName->$methodName();
 
 				if ($result)
 				{
-					$output .= '<select class="dropdown span10" name="media-name-id" id="media-name-id">';
-					$output .= '<option value="">Select Media Name</option>';
+					$output .= '<select class="dropdown span10" name="'.$idNameAttr.'" id="'.$idNameAttr.'">';
+					$output .= '<option value="">'.$selectHeader.'</option>';
 					foreach ($result as $value)
 					{
 						$output .= '<option value="'.$value->Id.'">'.$value->Name.'</option>';
@@ -88,6 +94,114 @@
 				}
 
 				echo $output;
+			}
+		}
+
+		public function CreatePublication()
+		{
+			if ($this->session->userdata('adminUserName') == "" || $this->session->userdata('adminPassword') == "")
+			{
+				return redirect('Admin/Index');
+			}
+			else
+			{
+				$publicationName = $this->input->post('publication-name');
+
+				$checkPublicationName = $this->PublicationModel->checkPublicationNameExists($publicationName);
+
+				if ($checkPublicationName)
+				{
+					return redirect('Publication/Publication/3');
+				}
+				else
+				{
+					$mediaNameId = $this->input->post('media-name-id');
+					$publicationTypeId = $this->input->post('publication-type-id');
+					$publicationPlaceId = $this->input->post('publication-place-id');
+					$publicationFrequencyId = $this->input->post('publication-frequency-id');
+					$publicationLanguage = $this->input->post('publication-language');
+					$publicationDescription = $this->input->post('publication-description');
+
+					$entryId = $this->GetAdminAllInfo()->Id;
+
+					// Copy Image and Get Image New Name
+					$config['upload_path'] = "images/publication_logo/";
+					$config['allowed_types'] = "jpg|jpeg|png|gif";
+					$this->load->library('upload',$config);
+
+					$publicationImage = $_FILES['publication-image']['name'];
+
+					if ($publicationImage == "")
+					{
+						$dbImageName = "";
+					}
+					else
+					{
+						$extention = pathinfo($publicationImage, PATHINFO_EXTENSION);
+						$slug = strtolower(preg_replace('/[^A-Za-z0-9-]+/', '_', $publicationName));
+						$dbImageName = $slug."_".$mediaNameId."_".date('ymds').".".$extention;
+						$copyImageName = $config['upload_path'].$dbImageName;
+
+						copy($_FILES['publication-image']['tmp_name'],$copyImageName);
+					}
+
+					$result = $this->PublicationModel->CreatePublication($publicationName,$mediaNameId,$publicationTypeId,$publicationPlaceId,$publicationFrequencyId,$publicationLanguage,$publicationDescription,$dbImageName,$entryId);
+
+					if ($result)
+					{
+						return redirect('Publication/Publication/1');
+					}
+					else
+					{
+						return redirect('Publication/Publication/2');
+					}
+				}
+			}
+
+		}
+
+		public function GetPublicationAllInfo()
+		{
+			if ($this->session->userdata('adminUserName') == "" || $this->session->userdata('adminPassword') == "")
+			{
+				return redirect('Admin/Index');
+			}
+			else
+			{
+				$option = "dt-05";
+				$table = "publication";
+				$selectColumn = array("Id","Name","MediaId","PublicationTypeId","PublicationPlaceId","PublicationFrequencyId","Language","Description","Image");
+				$orderColumn = array("Id","Name","MediaNameId",null,null,null,null,null,null,null,null);
+
+				$publicationInfo = $this->DataTableModel->MakeDataTables($option,$table,$selectColumn,$orderColumn);
+				$sl = 1;
+				$data = array();
+
+				foreach ($publicationInfo as $value)
+				{
+					$publication = array();
+					$publication[] = $sl;
+					$publication[] = $value->Name;
+					$publication[] = $this->MediaNameModel->GetMediaNameById($value->MediaId)->Name;
+					$publication[] = $this->PublicationTypeModel->GetPublicationTypeById($value->PublicationTypeId)->Name;
+					$publication[] = $this->PublicationFrequencyModel->GetPublicationFrequencyById($value->PublicationFrequencyId)->Name;
+					// $publication[] = $this->PublicationPlaceModel->GetPublicationPlaceById($value->PublicationPlaceId)->Name;
+					// $publication[] = $value->Language;
+					$publication[] = $value->Description;
+					$publication[] = '<img src="'.base_url("images/publication_logo/").$value->Image.'" width="80px" height="80px">';
+					$publication[] = '<button type="button" name="update" id="'.$value->Id.'" class="btn btn-warning btn-xs update">Update</button> <button type="button" name="delete" id="'.$value->Id.'" class="btn btn-danger btn-xs delete">Delete</button>';
+					$sl++;
+					$data[] = $publication;
+				}
+
+				$output = array(
+					'draw' => intval($_POST['draw']),
+					'recordsTotal' => $this->DataTableModel->GetAllData($table),
+					'recordsFiltered' => $this->DataTableModel->GetFilteredData($option,$table,$selectColumn,$orderColumn),
+					'data' => $data
+				);
+
+				echo json_encode($output);
 			}
 		}
 	}

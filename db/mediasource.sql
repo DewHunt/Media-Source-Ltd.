@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 21, 2019 at 12:46 PM
+-- Generation Time: Jan 22, 2019 at 12:52 PM
 -- Server version: 10.1.33-MariaDB
 -- PHP Version: 7.2.6
 
@@ -79,6 +79,42 @@ INSERT INTO `media` (`Id`, `Name`, `Image`, `EntryBy`, `EntryDateTime`, `UpdateB
 (29, 'Inqilab', 'inqilab_19011903.png', 1, '2019-01-19 09:33:37', 1, '2019-01-19 09:40:03', 0, '0000-00-00 00:00:00'),
 (30, 'Naya Diganto', 'naya_diganto_19011918.png', 1, '2019-01-19 09:41:18', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00'),
 (31, 'Amar Desh', 'amar_desh_19012046.png', 1, '2019-01-19 09:43:02', 1, '2019-01-21 10:47:36', 0, '0000-00-00 00:00:00');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `publication`
+--
+
+CREATE TABLE `publication` (
+  `Id` int(11) NOT NULL,
+  `Name` varchar(255) NOT NULL,
+  `MediaId` int(11) NOT NULL,
+  `PublicationTypeId` int(11) NOT NULL,
+  `PublicationPlaceId` int(11) NOT NULL,
+  `PublicationFrequencyId` int(11) NOT NULL,
+  `Language` varchar(255) NOT NULL,
+  `Description` text NOT NULL,
+  `Image` varchar(255) NOT NULL,
+  `EntryBy` int(11) NOT NULL,
+  `EntryDateTime` datetime NOT NULL,
+  `UpdateBy` int(11) NOT NULL,
+  `UpdateDateTime` datetime NOT NULL,
+  `DeleteBy` int(11) NOT NULL,
+  `DeleteDateTime` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `publication`
+--
+
+INSERT INTO `publication` (`Id`, `Name`, `MediaId`, `PublicationTypeId`, `PublicationPlaceId`, `PublicationFrequencyId`, `Language`, `Description`, `Image`, `EntryBy`, `EntryDateTime`, `UpdateBy`, `UpdateDateTime`, `DeleteBy`, `DeleteDateTime`) VALUES
+(2, 'General', 22, 1, 1, 1, 'Bangla', 'daily Newspaper', 'general_22_19012224.png', 1, '2019-01-22 10:19:24', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00'),
+(3, 'Rosh Alo', 22, 2, 1, 2, 'Bangla', 'Tabulate Paper Size. Published on Monday. ', 'rosh_alo_22_19012209.png', 1, '2019-01-22 10:28:09', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00'),
+(4, 'Chutir Dine', 22, 2, 1, 2, 'Bangla', 'Tabulate Paper Size. Published On Saturday', 'chutir_dine_22_19012231.png', 1, '2019-01-22 10:29:31', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00'),
+(5, 'Naksha', 22, 2, 1, 2, 'Bangla', 'Tabulate Paper Size. Published on Tuesday.', 'naksha_22_19012249.png', 1, '2019-01-22 10:30:49', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00'),
+(6, 'Projonmo', 22, 2, 1, 2, 'Bangla', 'Tabulate Paper Size. Published on Friday', 'projonmo_22_19012246.png', 1, '2019-01-22 10:31:46', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00'),
+(7, 'Adhuna', 22, 2, 1, 2, 'Bangla', 'Paper Size Supplementary. Published on Wednesday.', '', 1, '2019-01-22 10:33:04', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -186,6 +222,12 @@ ALTER TABLE `media`
   ADD PRIMARY KEY (`Id`);
 
 --
+-- Indexes for table `publication`
+--
+ALTER TABLE `publication`
+  ADD PRIMARY KEY (`Id`);
+
+--
 -- Indexes for table `publication_frequency`
 --
 ALTER TABLE `publication_frequency`
@@ -220,22 +262,28 @@ ALTER TABLE `media`
   MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
+-- AUTO_INCREMENT for table `publication`
+--
+ALTER TABLE `publication`
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
 -- AUTO_INCREMENT for table `publication_frequency`
 --
 ALTER TABLE `publication_frequency`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `publication_place`
 --
 ALTER TABLE `publication_place`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `publication_type`
 --
 ALTER TABLE `publication_type`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
