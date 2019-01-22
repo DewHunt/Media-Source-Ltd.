@@ -204,5 +204,40 @@
 				echo json_encode($output);
 			}
 		}
+
+		public function GetPublicationById()
+		{
+			if ($this->session->userdata('adminUserName') == "" || $this->session->userdata('adminPassword') == "")
+			{
+				return redirect('Admin/Index');
+			}
+			else
+			{
+				$output = array();
+				$publicationId = $this->input->post('publicationId');
+
+				$data = $this->PublicationModel->GetPublicationById($publicationId);
+
+				$output['publicationId'] = $data->Id;
+				$output['publicationName'] = $data->Name;
+				$output['publicationDescription'] = $data->Description;
+				$output['previousPublicationImage'] = $data->Image;
+				$output['mediaId'] = $data->MediaId;
+				$output['publicationTypeId'] = $data->PublicationTypeId;
+				$output['publicationPlaceId'] = $data->PublicationPlaceId;
+				$output['publicationFrequencyId'] = $data->PublicationFrequencyId;
+
+				if ($data->Image == "")
+				{
+					$output['publicationImage'] = '<input type="hidden" name="previous-publication-image" id="previous-publication-image" value="">';
+				}
+				else
+				{
+					$output['publicationImage'] = '<img src="'.base_url("images/publication_logo/").$data->Image.'" class="img-thumbnail" width="80px" height="80px"> <input type="hidden" name="previous-publication-image" id="previous-publication-image" value="'.$data->Image.'">';
+				}
+
+				echo json_encode($output);
+			}
+		}
 	}
 ?>

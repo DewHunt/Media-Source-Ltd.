@@ -42,5 +42,21 @@
 				return false;
 			}
 		}
+
+		public function GetPublicationById($publicationId)
+		{
+			$sql = "SELECT * FROM publication WHERE Id = ".$publicationId;
+
+			$query = $this->db->query($sql);
+
+			if ($query->num_rows() > 0)
+			{
+				return $query->row();
+			}
+			else
+			{
+				return false;
+			}
+		}
 	}
 ?>

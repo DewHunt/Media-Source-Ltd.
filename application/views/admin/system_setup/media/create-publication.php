@@ -56,7 +56,7 @@
 									
 									<div class="widget-content">
 										<fieldset>
-											<div class="control-group">											
+											<div class="control-group">
 												<label class="control-label" for="name"><span class="mendatory">*</span>&nbsp;Name</label>
 												<div class="controls">
 													<input type="text" class="span10" id="publication-name" name="publication-name" placeholder="Enter Publication Name" value="">
