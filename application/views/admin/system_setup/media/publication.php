@@ -54,7 +54,7 @@
 
 									<div id="publication-modal" class="modal fade">
 										<div class="modal-dialog">
-											<form method="POST" id="publication-form">
+											<form method="POST" id="publication-form" enctype="multipart/form-data">
 												<div class="modal-content">
 													<div class="modal-header">
 														<button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -77,10 +77,10 @@
 														<div id="publication-frequency-select-menu"></div>						
 														<label class="control-label" for="publication-language" id="language-label"><span class="mendatory">*</span>&nbsp;Language</label>
 														<label class="radio inline" for="bangla">
-															<input type="radio" name="publication-language" value="Bangla">&nbsp;&nbsp;Bangla
+															<input type="radio" name="publication-language" id="publication-language" value="Bangla">&nbsp;&nbsp;Bangla
 														</label>
 														<label class="radio inline" for="english">
-															<input type="radio" name="publication-language" value="English">&nbsp;&nbsp;English
+															<input type="radio" name="publication-language" id="publication-language" value="English">&nbsp;&nbsp;English
 														</label>
 
 														<label class="control-label" for="description">Description</label>
@@ -170,11 +170,136 @@
 							$('#publication-name').val(data.publicationName);
 							$('#publication-description').val(data.publicationDescription);
 							$('#uploaded-publication-image').html(data.publicationImage);
-							$('#media-name-id option[value="'+mediaId+'"]').prop('selected', true);
+							$('#media-name-id option[value="'+data.mediaId+'"]').prop('selected', true);
+							$('#publication-type-id option[value="'+data.publicationTypeId+'"]').prop('selected', true);
+							$('#publication-place-id option[value="'+data.publicationPlaceId+'"]').prop('selected', true);
+							$('#publication-frequency-id option[value="'+data.publicationFrequencyId+'"]').prop('selected', true);
+							$('input[name=publication-language][value="'+data.publicationLanguage+'"]').prop('checked', true);
 							$('#publication-id').val(data.publicationId);
 						}
 					});
 
+				});
+
+				$(document).on('submit', '#publication-form', function(){
+					var publicationName = $('#publication-name').val();
+					var mediaNameId = $('#media-name-id').val();
+					var publicationTypeId = $('#publication-type-id').val();
+					var publicationPlaceId = $('#publication-place-id').val();
+					var publicationFrequencyId = $('#publication-frequency-id').val();
+					var publicationLanguage = $('input[name=publication-language]:checked').val();
+					var publicationDescription = $('#publication-description').val();
+					var extention = $('#new-publication-image').val().split('.').pop().toLowerCase();
+
+					if (extention != "")
+					{
+						if (jQuery.inArray(extention, ['gif', 'png', 'jpg', 'jpeg']) == -1)
+						{
+							alert('Oops! Invalid Image File.');
+							$('#new-media-image').val('');
+							return false;
+						}
+					}
+					else if (publicationName == "")
+					{
+						alert("Oops! Publication Name Can't Be Empty. Please Enter Publication Name");
+						$('#publication-name').css({'border':'1px solid red'});
+
+						$('#media-name-id').css({'border':'1px solid gray'});
+						$('#publication-type-id').css({'border':'1px solid gray'});
+						$('#publication-place-id').css({'border':'1px solid gray'});
+						$('#publication-frequency-id').css({'border':'1px solid gray'});
+						$('#language-label').css({'color':'black'});
+						$('#language-label').css({'color':'black'});
+						return false;
+					}
+					else if (mediaNameId == "")
+					{
+						$('#publication-name').css({'border':'1px solid gray'});
+
+						alert("Oops! Media Name Can't Be Empty. Please Select Media Name");
+						$('#media-name-id').css({'border':'1px solid red'});
+						
+						$('#publication-name').css({'border':'1px solid gray'});
+						$('#publication-type-id').css({'border':'1px solid gray'});
+						$('#publication-place-id').css({'border':'1px solid gray'});
+						$('#publication-frequency-id').css({'border':'1px solid gray'});
+						$('#language-label').css({'color':'black'});
+						return false;
+					}
+					else if (publicationTypeId == "")
+					{
+						$('#media-name-id').css({'border':'1px solid gray'});
+
+						alert("Oops! Publication Type Can't Be Empty. Please Select Publication Type");
+						$('#publication-type-id').css({'border':'1px solid red'});
+						
+						$('#publication-name').css({'border':'1px solid gray'});
+						$('#media-name-id').css({'border':'1px solid gray'});
+						$('#publication-place-id').css({'border':'1px solid gray'});
+						$('#publication-frequency-id').css({'border':'1px solid gray'});
+						$('#language-label').css({'color':'black'});
+						return false;						
+					}
+					else if (publicationPlaceId == "")
+					{
+						$('#publication-type-id').css({'border':'1px solid gray'});
+
+						alert("Oops! Publication Place Can't Be Empty. Please Select Publication Place");
+						$('#publication-place-id').css({'border':'1px solid red'});
+						
+						$('#publication-name').css({'border':'1px solid gray'});
+						$('#media-name-id').css({'border':'1px solid gray'});
+						$('#publication-type-id').css({'border':'1px solid gray'});
+						$('#publication-frequency-id').css({'border':'1px solid gray'});
+						$('#language-label').css({'color':'black'});
+						return false;
+					}
+					else if (publicationFrequencyId == "")
+					{
+						$('#publication-place-id').css({'border':'1px solid gray'});
+						alert("Oops! Publication Frequency Can't Be Empty. Please Select Publication Frequency");
+						$('#publication-frequency-id').css({'border':'1px solid red'});
+						
+						$('#publication-name').css({'border':'1px solid gray'});
+						$('#media-name-id').css({'border':'1px solid gray'});
+						$('#publication-type-id').css({'border':'1px solid gray'});
+						$('#publication-place-id').css({'border':'1px solid gray'});
+						$('#language-label').css({'color':'black'});
+						return false;
+					}
+					else if (publicationLanguage == null)
+					{
+						$('#publication-frequency-id').css({'border':'1px solid gray'});
+
+						alert("Oops! Publication Language Can't Be Empty. Please Select Publication Language");
+						$('#language-label').css({'color':'red'});
+						
+						$('#publication-name').css({'border':'1px solid gray'});
+						$('#media-name-id').css({'border':'1px solid gray'});
+						$('#publication-type-id').css({'border':'1px solid gray'});
+						$('#publication-place-id').css({'border':'1px solid gray'});
+						$('#publication-frequency-id').css({'border':'1px solid gray'});
+						return false;
+					}
+					else
+					{
+						$('#language-label').css({'color':'black'});
+
+						$.ajax({
+							url:'<?php echo base_url("index.php/Publication/UpdatePublication"); ?>',
+							method:'POST',
+							data:new FormData(this),
+							contentType:false,
+							processData:false,
+							success:function(data){
+								alert(data);
+								$('#publication-form')[0].reset();
+								$('#publication-modal').modal('hide');
+								dataTable.ajax.reload();
+							}
+						});
+					}
 				});
 
 				$(document).on('click', '.delete', function(){

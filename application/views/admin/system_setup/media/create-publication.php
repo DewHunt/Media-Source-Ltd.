@@ -184,7 +184,6 @@
 					$('#publication-place-id').css({'border':'1px solid gray'});
 					$('#publication-frequency-id').css({'border':'1px solid gray'});
 					$('#language-label').css({'color':'black'});
-					$('#language-label').css({'color':'black'});
 					return false;
 				}
 				else

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 22, 2019 at 12:52 PM
+-- Generation Time: Jan 23, 2019 at 12:25 PM
 -- Server version: 10.1.33-MariaDB
 -- PHP Version: 7.2.6
 
@@ -114,7 +114,9 @@ INSERT INTO `publication` (`Id`, `Name`, `MediaId`, `PublicationTypeId`, `Public
 (4, 'Chutir Dine', 22, 2, 1, 2, 'Bangla', 'Tabulate Paper Size. Published On Saturday', 'chutir_dine_22_19012231.png', 1, '2019-01-22 10:29:31', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00'),
 (5, 'Naksha', 22, 2, 1, 2, 'Bangla', 'Tabulate Paper Size. Published on Tuesday.', 'naksha_22_19012249.png', 1, '2019-01-22 10:30:49', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00'),
 (6, 'Projonmo', 22, 2, 1, 2, 'Bangla', 'Tabulate Paper Size. Published on Friday', 'projonmo_22_19012246.png', 1, '2019-01-22 10:31:46', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00'),
-(7, 'Adhuna', 22, 2, 1, 2, 'Bangla', 'Paper Size Supplementary. Published on Wednesday.', '', 1, '2019-01-22 10:33:04', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00');
+(7, 'Adhuna', 22, 2, 1, 2, 'Bangla', 'Paper Size Supplementary. Published on Wednesday.', '', 1, '2019-01-22 10:33:04', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00'),
+(8, 'Dew', 18, 3, 4, 1, '', 'kjgjhg', '', 1, '2019-01-23 12:07:32', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00'),
+(9, 'asd', 18, 3, 4, 1, '', '', '', 1, '2019-01-23 12:09:13', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -265,7 +267,7 @@ ALTER TABLE `media`
 -- AUTO_INCREMENT for table `publication`
 --
 ALTER TABLE `publication`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `publication_frequency`

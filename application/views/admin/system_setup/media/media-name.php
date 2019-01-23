@@ -46,7 +46,7 @@
 
 									<div id="media-modal" class="modal fade">
 										<div class="modal-dialog">
-											<form method="POST" id="media-form">
+											<form method="POST" id="media-form" enctype="multipart/form-data">
 												<div class="modal-content">
 													<div class="modal-header">
 														<button type="button" class="close" data-dismiss="modal">&times;</button>

@@ -220,6 +220,7 @@
 
 				$output['publicationId'] = $data->Id;
 				$output['publicationName'] = $data->Name;
+				$output['publicationLanguage'] = $data->Language;
 				$output['publicationDescription'] = $data->Description;
 				$output['previousPublicationImage'] = $data->Image;
 				$output['mediaId'] = $data->MediaId;
@@ -238,6 +239,11 @@
 
 				echo json_encode($output);
 			}
+		}
+
+		public function UpdatePublication()
+		{
+			echo "Working";
 		}
 	}
 ?>
