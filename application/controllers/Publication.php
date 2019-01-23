@@ -243,7 +243,68 @@
 
 		public function UpdatePublication()
 		{
-			echo "Working";
+			if ($this->session->userdata('adminUserName') == "" || $this->session->userdata('adminPassword') == "")
+			{
+				return redirect('Admin/Index');
+			}
+			else
+			{
+				// $image = $_FILES["new-publication-image"]["name"];
+				echo "ERROR";
+				exit();
+				$publicationName = $this->input->post('publication-name');
+				$mediaNameId = $this->input->post('media-name-id');
+				$publicationTypeId = $this->input->post('publication-type-id');
+				$publicationPlaceId = $this->input->post('publication-place-id');
+				$publicationFrequencyId = $this->input->post('publication-frequency-id');
+				$publicationLanguage = $this->input->post('publication-language');
+				$publicationDescription = $this->input->post('publication-description');
+
+				$publicationId = $this->input->post('publication-id');
+				$updateId = $this->GetAdminAllInfo()->Id;
+				$newPublicationImage = "";
+
+				if ($_FILES["new-publication-image"]["name"] == "")
+				{
+					$dbImageName = $this->input->post("previous-publication-image");
+				}
+				else
+				{
+					$publicationImage = $_FILES['new-publication-image']['name'];
+					$previousImage = $this->input->post('previous-publication-image');
+
+					// Copy Image and Get Image New Name
+					$config['upload_path'] = "images/publication_logo/";
+					$config['allowed_types'] = "jpg|jpeg|png|gif";
+					$this->load->library('upload',$config);
+
+					$extention = pathinfo($publicationImage, PATHINFO_EXTENSION);
+					$slug = strtolower(preg_replace('/[^A-Za-z0-9-]+/', '_', $publicationName));
+					$dbImageName = $slug."_".$mediaNameId."_".date('ymds').".".$extention;
+					$copyImageName = $config['upload_path'].$dbImageName;
+
+					if ($previousImage != "")
+					{					
+						$deleteImage = $config['upload_path'].$previousImage;
+
+						chown($deleteImage, 666);
+						unlink($deleteImage);
+					}
+
+					copy($_FILES['new-publication-image']['tmp_name'],$copyImageName);
+				}
+
+				$result = $this->PublicationModel->UpdatePublication($publicationId,$publicationName,$mediaNameId,$publicationTypeId,$publicationPlaceId,$publicationFrequencyId,$publicationLanguage,$publicationDescription,$dbImageName,$updateId);
+
+				if ($result)
+				{
+					echo "Greate! You Updated Your Publication Successfully";
+				}
+				else
+				{
+					echo "Oops! Sorry, Your Publication Can't Be Updated";
+				}				
+			}
 		}
 	}
 ?>
