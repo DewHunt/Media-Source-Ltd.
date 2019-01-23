@@ -78,7 +78,7 @@
 
 				if ($result)
 				{
-					$output .= '<select class="dropdown span10" name="'.$idNameAttr.'" id="'.$idNameAttr.'">';
+					$output .= '<select class="dropdown" name="'.$idNameAttr.'" id="'.$idNameAttr.'" style="width: 100%;">';
 					$output .= '<option value="">'.$selectHeader.'</option>';
 					foreach ($result as $value)
 					{

@@ -63,7 +63,7 @@
 
 													<div class="modal-body">
 														<label class="control-label" for="name"><span class="mendatory">*</span>&nbsp;Name</label>
-														<input type="text" class="span10" id="publication-name" name="publication-name" placeholder="Enter Publication Name" value="">
+														<input type="text" id="publication-name" name="publication-name" placeholder="Enter Publication Name" style="width: 100%" value="">
 														                     
 														<label class="control-label" for="media"><span class="mendatory">*</span>&nbsp;Media</label>
 														<div id="media-select-menu"></div>
@@ -84,7 +84,7 @@
 														</label>
 
 														<label class="control-label" for="description">Description</label>
-														<textarea class="span10" rows="3" id="publication-description" name="publication-description"></textarea>
+														<textarea rows="3" id="publication-description" name="publication-description" style="width: 100%;"></textarea>
 
 														<label class="control-label" for="logo">Logo</label>
 														<input type="file" name="new-publication-image" id="new-publication-image" class="form-control">
