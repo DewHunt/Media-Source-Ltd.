@@ -54,7 +54,7 @@
 
 									<div id="publication-modal" class="modal fade">
 										<div class="modal-dialog">
-											<form method="POST" id="publication-form" enctype="multipart/form-data">
+											<form method="POST" id="publication-form">
 												<div class="modal-content">
 													<div class="modal-header">
 														<button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -200,7 +200,8 @@
 							return false;
 						}
 					}
-					else if (publicationName == "")
+					
+					if (publicationName == "")
 					{
 						alert("Oops! Publication Name Can't Be Empty. Please Enter Publication Name");
 						$('#publication-name').css({'border':'1px solid red'});
