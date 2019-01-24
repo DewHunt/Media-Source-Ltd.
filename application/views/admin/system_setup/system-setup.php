@@ -34,9 +34,9 @@
 													<i class="shortcut-icon icon-file"></i>
 													<span class="shortcut-label">Page</span> 
 												</a>
-												<a href="<?= base_url('index.php/Parameter/Index'); ?>" class="shortcut">
+												<a href="<?= base_url('index.php/ProductCategory/Index'); ?>" class="shortcut">
 													<i class="shortcut-icon icon-file"></i>
-													<span class="shortcut-label">Parameter</span> 
+													<span class="shortcut-label">Product Category</span> 
 												</a>
 												<a href="<?= base_url('index.php/Product/Index'); ?>" class="shortcut">
 													<i class="shortcut-icon icon-file"></i>

@@ -66,9 +66,9 @@
 													<div class="modal-footer">
 														<input type="hidden" name="media-id" id="media-id" value="">
 
-														<button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-
 														<input type="submit" name="update-media" id="update-media" class="btn btn-success" value="Update">
+
+														<button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
 													</div>
 												</div>
 											</form>

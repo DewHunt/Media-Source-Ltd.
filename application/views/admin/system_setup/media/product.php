@@ -16,14 +16,14 @@
 						<?php include APPPATH.'views/admin/master/system-left-menu.php'?>
 						
 						<div class="span9">
-							<div class="widget widget-table action-table">
+							<div class="widget">
 								<div class="widget-header">
 									<i class="icon-th-list"></i>
 									<h3>All Product Information</h3>
 									<a href="<?= base_url('index.php/Product/Product'); ?>" type="submit" class="btn btn-primary" target="_blank">Create Product</a> 
 								</div>  <!-- /widget-header -->
 								<div class="widget-content">
-									<table class="table table-striped table-bordered">
+									<table id="product-data" class="table table-striped table-bordered">
 										<thead>
 											<tr>
 												<th>Sl</th>
@@ -33,73 +33,16 @@
 												<th>Action</th>
 											</tr>
 										</thead>
-										
-										<tbody>
+
+										<tfoot>
 											<tr>
-												<td>01</td>
-												<td>Mobile Phone Operator</td>
-												<td>Telecommunication</td>
-												<td>
-													Lorem ipsum dolor sit amet.
-												</td>
-												<td>
-													<a href="" class="btn btn-info">Edit</a>                        
-													<a href="" class="btn btn-danger">Delete</a>                          
-												</td>
+												<th>Sl</th>
+												<th>Product</th>
+												<th>Category Name</th>
+												<th>Description</th>
+												<th>Action</th>
 											</tr>
-											
-											<tr>
-												<td>02</td>
-												<td>Land Phone Operator</td>
-												<td>Telecommunication</td>
-												<td>
-													Lorem ipsum dolor sit amet.
-												</td>
-												<td>
-													<a href="" class="btn btn-info">Edit</a>                        
-													<a href="" class="btn btn-danger">Delete</a>                          
-												</td>
-											</tr>
-											
-											<tr>
-												<td>03</td>
-												<td>Handset</td>
-												<td>Mobile Phone & Accessories</td>
-												<td>
-													Lorem ipsum dolor sit amet.
-												</td>
-												<td>
-													<a href="" class="btn btn-info">Edit</a>                        
-													<a href="" class="btn btn-danger">Delete</a>                          
-												</td>
-											</tr>
-											
-											<tr>
-												<td>04</td>
-												<td>Energy Drinks</td>
-												<td>Beverage</td>
-												<td>
-													Lorem ipsum dolor sit amet.
-												</td>
-												<td>
-													<a href="" class="btn btn-info">Edit</a>                        
-													<a href="" class="btn btn-danger">Delete</a>                          
-												</td>
-											</tr>
-											
-											<tr>
-												<td>05</td>
-												<td>Juice</td>
-												<td>Beverage</td>
-												<td>
-													Lorem ipsum dolor sit amet.
-												</td>
-												<td>
-													<a href="" class="btn btn-info">Edit</a>                        
-													<a href="" class="btn btn-danger">Delete</a>                          
-												</td>
-											</tr>
-										</tbody>
+										</tfoot>
 									</table>
 								</div>  <!-- /widget-content --> 
 							</div>  <!-- /widget --> 
@@ -116,6 +59,23 @@
 			$(document).ready(function(){
 				$('.has-sub').click(function(){
 					$(this).toggleClass('tap');
+				});
+
+				var dataTable = $('#product-data').DataTable({
+					'processing':true,
+					'serverSide':true,
+					'order':[],
+					'ajax':{
+						url:'<?php echo base_url("index.php/Product/GetProductAllInfo"); ?>',
+						type:'POST'
+					},
+					'dataType':'json',
+					'columnDefs':[
+						{
+							'targets':[0, 2, 3, 4],
+							'orderable':false
+						},
+					],
 				});
 			});
 		</script>

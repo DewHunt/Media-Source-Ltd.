@@ -64,9 +64,9 @@
 													<div class="modal-footer">
 														<input type="hidden" name="publication-type-id" id="publication-type-id" value="">
 
-														<button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-
 														<input type="submit" name="update-publication-type" id="update-publication-type" class="btn btn-success" value="Update">
+
+														<button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
 													</div>
 												</div>
 											</form>

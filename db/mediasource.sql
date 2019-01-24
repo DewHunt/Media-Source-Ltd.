@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.1
+-- version 4.7.4
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 24, 2019 at 12:15 PM
--- Server version: 10.1.33-MariaDB
--- PHP Version: 7.2.6
+-- Generation Time: Jan 24, 2019 at 09:53 PM
+-- Server version: 10.1.28-MariaDB
+-- PHP Version: 7.1.10
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -83,10 +83,41 @@ INSERT INTO `media` (`Id`, `Name`, `Image`, `EntryBy`, `EntryDateTime`, `UpdateB
 -- --------------------------------------------------------
 
 --
--- Table structure for table `parameter`
+-- Table structure for table `product`
 --
 
-CREATE TABLE `parameter` (
+CREATE TABLE `product` (
+  `Id` int(11) NOT NULL,
+  `Name` varchar(255) NOT NULL,
+  `ProductCategoryId` int(11) NOT NULL,
+  `Description` text NOT NULL,
+  `EntryBy` int(11) NOT NULL,
+  `EntryDateTime` datetime NOT NULL,
+  `UpdateBy` int(11) NOT NULL,
+  `UpdateDatetime` datetime NOT NULL,
+  `DeleteBy` int(11) NOT NULL,
+  `DeleteDateTime` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `product`
+--
+
+INSERT INTO `product` (`Id`, `Name`, `ProductCategoryId`, `Description`, `EntryBy`, `EntryDateTime`, `UpdateBy`, `UpdateDatetime`, `DeleteBy`, `DeleteDateTime`) VALUES
+(1, 'Pran Milk', 3, 'Pran Milk is the product of Pran Grop.', 1, '2019-01-24 19:21:23', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00'),
+(2, 'Biscuit', 3, 'Biscuits are dry food.', 1, '2019-01-24 19:32:44', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00'),
+(3, 'Cake', 3, 'Cakes are very delicious food.', 1, '2019-01-24 19:35:10', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00'),
+(4, 'Smart Phones', 2, 'Smart Phone.', 1, '2019-01-24 19:36:43', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00'),
+(5, 'Charger.', 2, 'Mobile Phone Charger.', 1, '2019-01-24 19:37:10', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00'),
+(6, 'USB Cable', 2, 'USB Cable for smart phones.', 1, '2019-01-24 21:49:48', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `product_category`
+--
+
+CREATE TABLE `product_category` (
   `Id` int(11) NOT NULL,
   `Name` varchar(255) NOT NULL,
   `Description` text NOT NULL,
@@ -99,11 +130,13 @@ CREATE TABLE `parameter` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `parameter`
+-- Dumping data for table `product_category`
 --
 
-INSERT INTO `parameter` (`Id`, `Name`, `Description`, `EntryBy`, `EntryDateTime`, `UpdateBy`, `UpdateDateTime`, `DeleteBy`, `DeleteDateTime`) VALUES
-(1, 'Telecommunication', 'This is telecommunication.', 1, '2019-01-24 12:13:54', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00');
+INSERT INTO `product_category` (`Id`, `Name`, `Description`, `EntryBy`, `EntryDateTime`, `UpdateBy`, `UpdateDateTime`, `DeleteBy`, `DeleteDateTime`) VALUES
+(1, 'Telecommunication', 'This is the telecommunication category.', 1, '2019-01-24 12:13:54', 1, '2019-01-24 18:11:26', 0, '0000-00-00 00:00:00'),
+(2, 'Mobile Phone And Accessories', 'This is a mobile phone and accessories category.', 1, '2019-01-24 17:22:10', 1, '2019-01-24 18:10:28', 0, '0000-00-00 00:00:00'),
+(3, 'Foods', 'This is the food category.', 1, '2019-01-24 17:23:25', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -266,9 +299,15 @@ ALTER TABLE `media`
   ADD PRIMARY KEY (`Id`);
 
 --
--- Indexes for table `parameter`
+-- Indexes for table `product`
 --
-ALTER TABLE `parameter`
+ALTER TABLE `product`
+  ADD PRIMARY KEY (`Id`);
+
+--
+-- Indexes for table `product_category`
+--
+ALTER TABLE `product_category`
   ADD PRIMARY KEY (`Id`);
 
 --
@@ -312,10 +351,16 @@ ALTER TABLE `media`
   MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
--- AUTO_INCREMENT for table `parameter`
+-- AUTO_INCREMENT for table `product`
 --
-ALTER TABLE `parameter`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+ALTER TABLE `product`
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT for table `product_category`
+--
+ALTER TABLE `product_category`
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `publication`

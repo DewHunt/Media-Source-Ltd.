@@ -6,7 +6,6 @@
 	
 	<body>
 		<?php include APPPATH.'views/admin/master/navbar.php'; ?>
-
 		<?php include APPPATH.'views/admin/master/system-sub-navbar.php'; ?>
 		
 		<div class="main">
@@ -19,11 +18,11 @@
 							<div class="widget">
 								<div class="widget-header">
 									<i class="icon-th-list"></i>
-									<h3>All Publication Place Information</h3>
-									<a href="<?= base_url('index.php/PublicationPlace/PublicationPlace'); ?>" type="submit" class="btn btn-primary" target="_blank">Create Publication Place</a> 
+									<h3>All Product Category Information</h3>
+									<a href="<?= base_url('index.php/ProductCategory/ProductCategory'); ?>" type="submit" class="btn btn-primary" target="_blank">Create Product Category</a> 
 								</div>  <!-- /widget-header -->
 								<div class="widget-content">
-									<table id="publication-place-data" class="table table-striped table-bordered">
+									<table id="product-category-data" class="table table-striped table-bordered">
 										<thead>
 											<tr>
 												<th>Sl</th>
@@ -43,27 +42,27 @@
 										</tfoot>
 									</table>
 
-									<div id="publication-place-modal" class="modal fade">
+									<div id="product-category-modal" class="modal fade">
 										<div class="modal-dialog">
-											<form method="POST" id="publication-place-form">
+											<form method="POST" id="product-category-form">
 												<div class="modal-content">
 													<div class="modal-header">
 														<button type="button" class="close" data-dismiss="modal">&times;</button>
-														<h3 class="modal-title">Update Publication Place</h3>
+														<h3 class="modal-title">Update Product Category</h3>
 													</div>
 
 													<div class="modal-body">
-														<label>Publication Place Name&nbsp;<span class="mendatory">*</span></label>
-														<input type="text" name="publication-place-name" id="publication-place-name" class="form-control" style="width: 100%;">
+														<label>Product Category Name&nbsp;<span class="mendatory">*</span></label>
+														<input type="text" name="product-category-name" id="product-category-name" class="form-control" style="width: 100%;">
 
 														<label>Description</label>
-														<textarea rows="3" name="publication-place-description" id="publication-place-description" class="form-control" style="width: 100%;"></textarea>
+														<textarea rows="3" name="product-category-description" id="product-category-description" class="form-control" style="width: 100%;"></textarea>
 													</div>
 
 													<div class="modal-footer">
-														<input type="hidden" name="publication-place-id" id="publication-place-id" value="">
+														<input type="hidden" name="product-category-id" id="product-category-id" value="">
 
-														<input type="submit" name="update-publication-place" id="update-publication-place" class="btn btn-success" value="Update">
+														<input type="submit" name="update-product-category" id="update-product-category" class="btn btn-success" value="Update">
 
 														<button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
 													</div>
@@ -88,12 +87,12 @@
 					$(this).toggleClass('tap');
 				});
 
-				var dataTable = $('#publication-place-data').DataTable({
+				var dataTable = $('#product-category-data').DataTable({
 					'processing':true,
 					'serverSide':true,
 					'order':[],
 					'ajax':{
-						url:'<?php echo base_url('index.php/PublicationPlace/GetPublicationPlaceAllInfo'); ?>',
+						url:'<?php echo base_url('index.php/ProductCategory/GetProductCategoryAllInfo'); ?>',
 						type:'POST'
 					},
 					'dataType':'json',
@@ -106,46 +105,46 @@
 				});
 
 				$(document).on('click', '.update', function(){
-					var publicationPlaceId = $(this).attr('id');
+					var productCategoryId = $(this).attr('id');
 
 					$.ajax({
-						url:'<?php echo base_url("index.php/PublicationPlace/GetPublicationPlaceById"); ?>',
+						url:'<?php echo base_url("index.php/ProductCategory/GetProductCategoryById"); ?>',
 						method:'POST',
-						data:{publicationPlaceId:publicationPlaceId},
+						data:{productCategoryId:productCategoryId},
 						dataType:'json',
 						success:function(data){
-							$('#publication-place-modal').modal('show');
-							$('#publication-place-name').val(data.publicationPlaceName);
-							$('#publication-place-description').val(data.publicationPlaceDescription);
-							$('#publication-place-id').val(data.publicationPlaceId);
+							$('#product-category-modal').modal('show');
+							$('#product-category-name').val(data.productCategoryName);
+							$('#product-category-description').val(data.productCategoryDescription);
+							$('#product-category-id').val(data.productCategoryId);
 						}
 					});
 				});
 
-				$(document).on('submit', '#publication-place-form', function(event){
+				$(document).on('submit', '#product-category-form', function(event){
 					event.preventDefault();
 
-					var publicationPlaceName = $('#publication-place-name').val();
-					var publicationPlaceDescription = $('#publication-place-description').val();
+					var productCategoryName = $('#product-category-name').val();
+					var productCategoryDescription = $('#product-category-description').val();
 
-					if (publicationPlaceName == "")
+					if (productCategoryName == "")
 					{
-						alert("Oops! Publication Place Name Must Be Filled");
-						$('#publication-place-name').css({'border':'1px solid red'});
+						alert("Oops! product Category Name Must Be Filled");
+						$('#product-category-name').css({'border':'1px solid red'});
 						return false;
 					}
 					else
 					{
 						$.ajax({
-							url:'<?php echo base_url("index.php/PublicationPlace/UpdatePublicationPlace"); ?>',
+							url:'<?php echo base_url("index.php/ProductCategory/UpdateProductCategory"); ?>',
 							method:'POST',
 							data:new FormData(this),
 							contentType:false,
 							processData:false,
 							success:function(data){
 								alert(data);
-								$('#publication-place-form')[0].reset();
-								$('#publication-place-modal').modal('hide');
+								$('#product-category-form')[0].reset();
+								$('#product-category-modal').modal('hide');
 								dataTable.ajax.reload();
 							}
 						});
@@ -153,14 +152,14 @@
 				});
 
 				$(document).on('click', '.delete', function(){
-					var publicationPlaceId = $(this).attr('id');
+					var productCategoryId = $(this).attr('id');
 
 					if (confirm("Wait!, Are Your 100% Sure, You Really Want to Delete This?"))
 					{
 						$.ajax({
-							url:'<?php echo base_url('index.php/PublicationPlace/DeletePublicationPlace'); ?>',
+							url:'<?php echo base_url('index.php/ProductCategory/DeleteProductCategory'); ?>',
 							method:'POST',
-							data:{publicationPlaceId:publicationPlaceId},
+							data:{productCategoryId:productCategoryId},
 							success:function(data){
 								alert(data);
 								dataTable.ajax.reload();

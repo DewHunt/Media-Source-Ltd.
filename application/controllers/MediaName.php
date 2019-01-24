@@ -121,7 +121,7 @@
 			}
 			else
 			{
-				$option = "dt-01";
+				$option = "dt-common";
 				$table = "media";
 				$selectColumn = array("Id","Name","Image");
 				$orderColumn = array("Id","Name",null,null);

@@ -88,8 +88,8 @@
 				}
 				else
 				{
-					$output .= '<select class="dropdown span10" name="media-name-id" id="media-name-id" disable>';
-					$output .= '<option value="">Media Name Not Found</option>';
+					$output .= '<select class="dropdown span10" name="'.$idNameAttr.'" id="'.$idNameAttr.'" disable>';
+					$output .= '<option value="">Data Option Not Found</option>';
 					$output .= '</select>';				
 				}
 
@@ -168,7 +168,7 @@
 			}
 			else
 			{
-				$option = "dt-05";
+				$option = "dt-publication";
 				$table = "publication";
 				$selectColumn = array("Id","Name","MediaId","PublicationTypeId","PublicationPlaceId","PublicationFrequencyId","Language","Description","Image");
 				$orderColumn = array("Id","Name","MediaId",null,null,null,null,null,null,null,null);

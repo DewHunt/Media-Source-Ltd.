@@ -99,7 +99,7 @@
 			}
 			else
 			{
-				$option = "dt-03";			
+				$option = "dt-common";			
 				$table = "publication_place";
 				$selectColumn = array("Id","Name","Description");
 				$orderColumn = array("Id","Name",null,null);
