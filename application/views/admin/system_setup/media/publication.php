@@ -93,7 +93,7 @@
 													</div>
 
 													<div class="modal-footer">
-														<input type="text" name="publication-id" id="publication-id" value="">
+														<input type="hidden" name="publication-id" id="publication-id" value="">
 
 														<button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
 
@@ -181,7 +181,9 @@
 
 				});
 
-				$(document).on('submit', '#publication-form', function(){
+				$(document).on('submit', '#publication-form', function(event){
+					event.preventDefault();
+
 					var publicationName = $('#publication-name').val();
 					var mediaNameId = $('#media-name-id').val();
 					var publicationTypeId = $('#publication-type-id').val();
@@ -306,7 +308,22 @@
 				$(document).on('click', '.delete', function(){
 					var publicationId = $(this).attr('id');
 
-					alert(publicationId);
+					if (confirm("Wait! Are You 100% Sure, Really You Want To Delete This?"))
+					{
+						$.ajax({
+							url:'<?php echo base_url("index.php/Publication/DeletePublication"); ?>',
+							method:'POST',
+							data:{publicationId:publicationId},
+							success:function(data){
+								alert(data);
+								dataTable.ajax.reload();
+							}
+						});						
+					}
+					else
+					{
+						return false;
+					}
 				});
 			});
 		</script>

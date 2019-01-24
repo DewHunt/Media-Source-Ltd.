@@ -106,8 +106,9 @@
 			else
 			{
 				$publicationName = $this->input->post('publication-name');
+				$mediaNameId = $this->input->post('media-name-id');
 
-				$checkPublicationName = $this->PublicationModel->checkPublicationNameExists($publicationName);
+				$checkPublicationName = $this->PublicationModel->checkPublicationNameExists($publicationName,$mediaNameId);
 
 				if ($checkPublicationName)
 				{
@@ -115,7 +116,6 @@
 				}
 				else
 				{
-					$mediaNameId = $this->input->post('media-name-id');
 					$publicationTypeId = $this->input->post('publication-type-id');
 					$publicationPlaceId = $this->input->post('publication-place-id');
 					$publicationFrequencyId = $this->input->post('publication-frequency-id');
@@ -171,7 +171,7 @@
 				$option = "dt-05";
 				$table = "publication";
 				$selectColumn = array("Id","Name","MediaId","PublicationTypeId","PublicationPlaceId","PublicationFrequencyId","Language","Description","Image");
-				$orderColumn = array("Id","Name","MediaNameId",null,null,null,null,null,null,null,null);
+				$orderColumn = array("Id","Name","MediaId",null,null,null,null,null,null,null,null);
 
 				$publicationInfo = $this->DataTableModel->MakeDataTables($option,$table,$selectColumn,$orderColumn);
 				$sl = 1;
@@ -249,9 +249,6 @@
 			}
 			else
 			{
-				// $image = $_FILES["new-publication-image"]["name"];
-				echo "ERROR";
-				exit();
 				$publicationName = $this->input->post('publication-name');
 				$mediaNameId = $this->input->post('media-name-id');
 				$publicationTypeId = $this->input->post('publication-type-id');
@@ -304,6 +301,29 @@
 				{
 					echo "Oops! Sorry, Your Publication Can't Be Updated";
 				}				
+			}
+		}
+
+		public function DeletePublication()
+		{
+			if ($this->session->userdata('adminUserName') == "" || $this->session->userdata('adminPassword') == "")
+			{
+				return redirect('Admin/Index');
+			}
+			else
+			{
+				$publicationId = $this->input->post('publicationId');
+
+				$result = $this->PublicationModel->DeletePublication($publicationId);
+				
+				if ($result)
+				{
+					echo "Publication Dleted From Database!";
+				}
+				else
+				{
+					echo "Oops! Something Wrong With Deleting Publication";
+				}
 			}
 		}
 	}

@@ -252,7 +252,7 @@
 				
 				if ($result)
 				{
-					echo "Media Id Dleted From Database!";
+					echo "Media Dleted From Database!";
 				}
 				else
 				{

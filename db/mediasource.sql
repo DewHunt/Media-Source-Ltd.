@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 23, 2019 at 12:25 PM
+-- Generation Time: Jan 24, 2019 at 12:15 PM
 -- Server version: 10.1.33-MariaDB
 -- PHP Version: 7.2.6
 
@@ -78,7 +78,32 @@ INSERT INTO `media` (`Id`, `Name`, `Image`, `EntryBy`, `EntryDateTime`, `UpdateB
 (28, 'The Asian Age', 'the_asian_age_19011907.png', 1, '2019-01-18 18:54:34', 1, '2019-01-19 08:28:07', 0, '0000-00-00 00:00:00'),
 (29, 'Inqilab', 'inqilab_19011903.png', 1, '2019-01-19 09:33:37', 1, '2019-01-19 09:40:03', 0, '0000-00-00 00:00:00'),
 (30, 'Naya Diganto', 'naya_diganto_19011918.png', 1, '2019-01-19 09:41:18', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00'),
-(31, 'Amar Desh', 'amar_desh_19012046.png', 1, '2019-01-19 09:43:02', 1, '2019-01-21 10:47:36', 0, '0000-00-00 00:00:00');
+(31, 'Amar Desh', 'amar_desh_19012046.png', 1, '2019-01-19 09:43:02', 1, '2019-01-24 09:03:17', 0, '0000-00-00 00:00:00');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `parameter`
+--
+
+CREATE TABLE `parameter` (
+  `Id` int(11) NOT NULL,
+  `Name` varchar(255) NOT NULL,
+  `Description` text NOT NULL,
+  `EntryBy` int(11) NOT NULL,
+  `EntryDateTime` datetime NOT NULL,
+  `UpdateBy` int(11) NOT NULL,
+  `UpdateDateTime` datetime NOT NULL,
+  `DeleteBy` int(11) NOT NULL,
+  `DeleteDateTime` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `parameter`
+--
+
+INSERT INTO `parameter` (`Id`, `Name`, `Description`, `EntryBy`, `EntryDateTime`, `UpdateBy`, `UpdateDateTime`, `DeleteBy`, `DeleteDateTime`) VALUES
+(1, 'Telecommunication', 'This is telecommunication.', 1, '2019-01-24 12:13:54', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -113,10 +138,27 @@ INSERT INTO `publication` (`Id`, `Name`, `MediaId`, `PublicationTypeId`, `Public
 (3, 'Rosh Alo', 22, 2, 1, 2, 'Bangla', 'Tabulate Paper Size. Published on Monday. ', 'rosh_alo_22_19012209.png', 1, '2019-01-22 10:28:09', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00'),
 (4, 'Chutir Dine', 22, 2, 1, 2, 'Bangla', 'Tabulate Paper Size. Published On Saturday', 'chutir_dine_22_19012231.png', 1, '2019-01-22 10:29:31', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00'),
 (5, 'Naksha', 22, 2, 1, 2, 'Bangla', 'Tabulate Paper Size. Published on Tuesday.', 'naksha_22_19012249.png', 1, '2019-01-22 10:30:49', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00'),
-(6, 'Projonmo', 22, 2, 1, 2, 'Bangla', 'Tabulate Paper Size. Published on Friday', 'projonmo_22_19012246.png', 1, '2019-01-22 10:31:46', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00'),
-(7, 'Adhuna', 22, 2, 1, 2, 'Bangla', 'Paper Size Supplementary. Published on Wednesday.', '', 1, '2019-01-22 10:33:04', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00'),
-(8, 'Dew', 18, 3, 4, 1, '', 'kjgjhg', '', 1, '2019-01-23 12:07:32', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00'),
-(9, 'asd', 18, 3, 4, 1, '', '', '', 1, '2019-01-23 12:09:13', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00');
+(6, 'Projonmo', 22, 2, 1, 2, 'Bangla', 'Tabulate Paper Size. Published on Friday', 'projonmo_22_19012452.png', 1, '2019-01-22 10:31:46', 1, '2019-01-24 07:22:52', 0, '0000-00-00 00:00:00'),
+(7, 'Adhuna', 22, 2, 1, 2, 'Bangla', 'Paper Size Supplementary. Published on Wednesday.', 'adhuna_22_19012455.png', 1, '2019-01-22 10:33:04', 1, '2019-01-24 07:36:55', 0, '0000-00-00 00:00:00'),
+(10, 'Bondhu Shova', 22, 2, 1, 2, 'Bangla', 'Paper Size Supplementary. Published On Sunday.', 'bondhu_shova_22_19012425.jpg', 1, '2019-01-24 08:55:25', 1, '2019-01-24 09:04:48', 0, '0000-00-00 00:00:00'),
+(11, 'Shopno Niye', 22, 2, 1, 2, 'Bangla', 'Paper Size Supplementary. Published On Sunday.', 'shopno_niye_22_19012402.jpg', 1, '2019-01-24 08:58:02', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00'),
+(12, 'Anondo', 22, 2, 1, 2, 'Bangla', 'Paper Size Supplementary. Published On Thursday.', 'anondo_22_19012427.png', 1, '2019-01-24 08:59:27', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00'),
+(13, 'Gollachut', 22, 2, 1, 2, 'Bangla', 'Paper Size Supplementary. Published On Friday.', 'gollachut_22_19012407.png', 1, '2019-01-24 09:00:07', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00'),
+(14, 'General', 19, 1, 1, 1, 'Bangla', 'This is daily newspaper.', 'general_19_19012411.png', 1, '2019-01-24 09:09:11', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00'),
+(15, 'Friday', 19, 2, 1, 2, 'Bangla', 'Tabulate Paper Size. Published On Friday.', 'friday_19_19012402.png', 1, '2019-01-24 09:11:02', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00'),
+(16, 'Sonibarer Shokal', 19, 2, 1, 2, 'Bangla', 'Tabulate Paper Size. Published On Saturday.', 'sonibarer_shokal_19_19012420.png', 1, '2019-01-24 09:12:20', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00'),
+(17, 'Special Supplementary', 19, 2, 1, 5, 'Bangla', 'This is Supplementary Specially published Yearly.', '', 1, '2019-01-24 09:13:49', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00'),
+(18, 'General', 27, 1, 1, 1, 'English', 'This is daily newspaper.', 'general_27_19012438.png', 1, '2019-01-24 09:15:38', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00'),
+(19, 'Showbiz', 27, 2, 1, 2, 'English', 'Tabulate paper Size. Published On Saturday.', 'showbiz_27_19012447.jpg', 1, '2019-01-24 09:16:47', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00'),
+(20, 'Shout', 27, 2, 1, 2, 'English', 'Tabulate Paper Size. Published on Thursday.', 'shout_27_19012450.png', 1, '2019-01-24 09:17:50', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00'),
+(21, 'Star Weekend', 27, 2, 1, 2, 'English', 'Tabulate Paper Size. Published on Friday.', 'star_weekend_27_19012413.png', 1, '2019-01-24 09:19:13', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00'),
+(22, 'Friday', 27, 2, 1, 2, 'English', 'Tabulate Paper Size. Published On Friday.', 'friday_27_19012455.png', 1, '2019-01-24 09:20:55', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00'),
+(23, 'Special Supplementary', 27, 2, 1, 5, 'English', 'This Supplementary published on yearly.', '', 1, '2019-01-24 09:23:54', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00'),
+(24, 'Life Style', 27, 2, 1, 2, 'English', 'Tabulate paper Size. Published on Tuesday.', 'life_style_27_19012451.png', 1, '2019-01-24 09:31:51', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00'),
+(25, 'General', 23, 1, 1, 1, 'English', 'This is daily newspaper.', 'general_23_19012434.png', 1, '2019-01-24 09:33:34', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00'),
+(26, 'Special Supplementary', 23, 2, 1, 5, 'English', 'This supplementary specially published yearly.', '', 1, '2019-01-24 09:34:39', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00'),
+(27, 'General', 28, 1, 1, 1, 'English', 'This is daily newspaper.', 'general_28_19012453.png', 1, '2019-01-24 09:35:53', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00'),
+(28, 'Special Supplementary', 28, 2, 1, 5, 'English', 'This supplementary specially published yearly.', '', 1, '2019-01-24 09:36:49', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -127,7 +169,7 @@ INSERT INTO `publication` (`Id`, `Name`, `MediaId`, `PublicationTypeId`, `Public
 CREATE TABLE `publication_frequency` (
   `Id` int(11) NOT NULL,
   `Name` varchar(255) NOT NULL,
-  `Description` varchar(255) NOT NULL,
+  `Description` text NOT NULL,
   `EntryBy` int(11) NOT NULL,
   `EntryDateTime` datetime NOT NULL,
   `UpdateBy` int(11) NOT NULL,
@@ -156,7 +198,7 @@ INSERT INTO `publication_frequency` (`Id`, `Name`, `Description`, `EntryBy`, `En
 CREATE TABLE `publication_place` (
   `Id` int(11) NOT NULL,
   `Name` varchar(255) NOT NULL,
-  `Description` varchar(255) NOT NULL,
+  `Description` text NOT NULL,
   `EntryBy` int(11) NOT NULL,
   `EntryDateTime` datetime NOT NULL,
   `UpdateBy` int(11) NOT NULL,
@@ -188,7 +230,7 @@ INSERT INTO `publication_place` (`Id`, `Name`, `Description`, `EntryBy`, `EntryD
 CREATE TABLE `publication_type` (
   `Id` int(11) NOT NULL,
   `Name` varchar(255) NOT NULL,
-  `Description` varchar(255) NOT NULL,
+  `Description` text NOT NULL,
   `EntryBy` int(11) NOT NULL,
   `EntryDateTime` datetime NOT NULL,
   `UpdateBy` int(11) NOT NULL,
@@ -221,6 +263,12 @@ ALTER TABLE `admins`
 -- Indexes for table `media`
 --
 ALTER TABLE `media`
+  ADD PRIMARY KEY (`Id`);
+
+--
+-- Indexes for table `parameter`
+--
+ALTER TABLE `parameter`
   ADD PRIMARY KEY (`Id`);
 
 --
@@ -264,10 +312,16 @@ ALTER TABLE `media`
   MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
+-- AUTO_INCREMENT for table `parameter`
+--
+ALTER TABLE `parameter`
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT for table `publication`
 --
 ALTER TABLE `publication`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT for table `publication_frequency`

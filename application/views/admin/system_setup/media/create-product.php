@@ -12,19 +12,36 @@
 		<div class="main">
 			<div class="main-inner">
 				<div class="container">
-					
 					<div class="row">
 						<form id="edit-profile" class="form-horizontal">
 							<div class="span12">
 								<div class="widget">
 									<div class="widget-header">
 										<i class="icon-tag"></i>
-										<h3>Media Setup<i class="icon-long-arrow-right"></i>&nbsp;&nbsp;Product<i class="icon-long-arrow-right"></i>&nbsp;&nbsp;Create Product</h3>
+										<h3>Media Setup<i class="icon-long-arrow-right"></i>&nbsp;&nbsp;Products<i class="icon-long-arrow-right"></i>&nbsp;&nbsp;Create Products</h3>
 									</div>
 									<!-- /widget-header -->
 									
 									<div class="widget-content">
 										<fieldset>
+											<div class="control-group">                     
+												<label class="control-label" >Product Category</label>
+												<div class="controls">
+													<select class="dropdown span10">
+														<option value="">Select Product Category</option>
+														<option value="">Agro Product</option>
+														<option value="">Antiseptic</option>
+														<option value="">Banking Service</option>
+														<option value="">Beverage</option>
+														<option value="">Business and Economic</option>
+														<option value="">Construction Materials</option>
+														<option value="">Consumer Products</option>
+														<option value="">Cosmetic and Toiletries</option>
+														<option value="">Decorative Paints</option>
+													</select>
+												</div> <!-- /controls -->       
+											</div> <!-- /control-group -->
+											
 											<div class="control-group">											
 												<label class="control-label" for="name">Name</label>
 												<div class="controls">
@@ -32,84 +49,11 @@
 												</div> <!-- /controls -->				
 											</div> <!-- /control-group -->
 											
-											<div class="control-group">                     
-												<label class="control-label" for="media">Media</label>
-												<div class="controls">
-													<select class="dropdown span10">
-														<option value=""></option>
-														<option value=""></option>
-														<option value=""></option>
-														<option value=""></option>
-														<option value=""></option>
-													</select>
-												</div> <!-- /controls -->       
-											</div> <!-- /control-group -->
-											
-											<div class="control-group">                     
-												<label class="control-label" for="publication-type">Publication Type</label>
-												<div class="controls">
-													<select class="dropdown span10">
-														<option value=""></option>
-														<option value=""></option>
-														<option value=""></option>
-														<option value=""></option>
-														<option value=""></option>
-													</select>
-												</div> <!-- /controls -->       
-											</div> <!-- /control-group -->
-											
-											<div class="control-group">                     
-												<label class="control-label" for="publication-place">Publication Place</label>
-												<div class="controls">
-													<select class="dropdown span10">
-														<option value=""></option>
-														<option value=""></option>
-														<option value=""></option>
-														<option value=""></option>
-														<option value=""></option>
-													</select>
-												</div> <!-- /controls -->       
-											</div> <!-- /control-group -->
-											
-											<div class="control-group">                     
-												<label class="control-label" for="publication-frequency">Publication Frequency</label>
-												<div class="controls">
-													<select class="dropdown span10">
-														<option value=""></option>
-														<option value=""></option>
-														<option value=""></option>
-														<option value=""></option>
-														<option value=""></option>
-													</select>
-												</div> <!-- /controls -->       
-											</div> <!-- /control-group -->
-											
-											<div class="control-group">									
-												<label class="control-label" for="publication-language">Publication Language</label>
-												
-												<div class="controls">
-													<label class="checkbox inline" for="bangla">
-														<input type="checkbox" name="bangla">&nbsp;&nbsp;Bangla
-													</label>
-													
-													<label class="checkbox inline" for="english">
-														<input type="checkbox" name="English">&nbsp;&nbsp;English
-													</label>
-												</div>		<!-- /controls -->		
-											</div> <!-- /control-group -->
-											
 											<div class="control-group">										
 												<label class="control-label" for="description">Description</label>
 												<div class="controls">
 													<textarea class="span10" rows="3" id="description" name="description"></textarea>
 												</div> <!-- /controls -->				
-											</div> <!-- /control-group -->
-											
-											<div class="control-group">                   
-												<label class="control-label" for="logo">Logo</label>
-												<div class="controls">
-													<input type="file" name="image" id="image">
-												</div> <!-- /controls -->       
 											</div> <!-- /control-group -->
 											
 											<div class="form-actions">
@@ -131,7 +75,7 @@
 			<!-- /main-inner --> 
 		</div>
 		<!-- /main -->
-		
+
 		<?php include APPPATH.'views/admin/master/footer.php'; ?>
 	</body>
 </html>
