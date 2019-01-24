@@ -191,9 +191,6 @@
 					var publicationDescription = $('#publication-description').val();
 					var extention = $('#new-publication-image').val().split('.').pop().toLowerCase();
 
-					// var image = $('#new-publication-image').val(); 
-					// alert(image);
-
 					if (extention != "")
 					{
 						if (jQuery.inArray(extention, ['gif', 'png', 'jpg', 'jpeg']) == -1)
