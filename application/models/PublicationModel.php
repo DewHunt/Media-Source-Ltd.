@@ -58,5 +58,23 @@
 				return false;
 			}
 		}
+
+		public function UpdatePublication($publicationId,$publicationName,$mediaNameId,$publicationTypeId,$publicationPlaceId,$publicationFrequencyId,$publicationLanguage,$publicationDescription,$dbImageName,$updateId)
+		{
+			$updateDateTime = date('Y-m-d H:i:s');
+
+			$sql = "UPDATE publication SET Name = '".$publicationName."', MediaId = '".$mediaNameId."', PublicationTypeId = '".$publicationTypeId."', PublicationPlaceId = '".$publicationPlaceId."', PublicationFrequencyId = '".$publicationFrequencyId."', Language = '".$publicationLanguage."', Description = '".$publicationDescription."', Image = '".$dbImageName."', UpdateBy = '".$updateId."', UpdateDateTime = '".$updateDateTime."' WHERE Id = '".$publicationId."'";
+
+			$query = $this->db->query($sql);
+
+			if ($query)
+			{
+				return true;
+			}
+			else
+			{
+				return false;
+			}
+		}
 	}
 ?>

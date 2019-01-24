@@ -93,7 +93,7 @@
 													</div>
 
 													<div class="modal-footer">
-														<input type="hidden" name="publication-id" id="publication-id" value="">
+														<input type="text" name="publication-id" id="publication-id" value="">
 
 														<button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
 
@@ -191,12 +191,15 @@
 					var publicationDescription = $('#publication-description').val();
 					var extention = $('#new-publication-image').val().split('.').pop().toLowerCase();
 
+					// var image = $('#new-publication-image').val(); 
+					// alert(image);
+
 					if (extention != "")
 					{
 						if (jQuery.inArray(extention, ['gif', 'png', 'jpg', 'jpeg']) == -1)
 						{
 							alert('Oops! Invalid Image File.');
-							$('#new-media-image').val('');
+							$('#new-publication-image').val('');
 							return false;
 						}
 					}
