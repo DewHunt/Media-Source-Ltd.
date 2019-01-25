@@ -42,5 +42,54 @@
 				return false;
 			}
 		}
+
+		public function GetProductById($productId)
+		{
+			$sql = "SELECT * FROM product WHERE Id = ".$productId;
+
+			$query = $this->db->query($sql);
+
+			if ($query->num_rows() > 0)
+			{
+				return $query->row();
+			}
+			else
+			{
+				return false;
+			}
+		}
+
+		public function UpdateProduct($productId,$productName,$productCategoryId,$productDescription,$updateId)
+		{
+			$updateDateTime = date('Y-m-d H:i:s');
+			$sql = "UPDATE product SET Name = '$productName', ProductCategoryId = '$productCategoryId', Description = '$productDescription', UpdateBy = '$updateId', UpdateDateTime = '$updateDateTime' WHERE Id = '$productId'";
+
+			$updateQuery = $this->db->query($sql);
+
+			if ($updateQuery)
+			{
+				return true;
+			}
+			else
+			{
+				return false;
+			}
+		}
+
+		public function DeleteProduct($productId)
+		{
+			$sql = "DELETE FROM product WHERE Id = '".$productId."'";
+
+			$query = $this->db->query($sql);
+
+			if ($query)
+			{
+				return true;
+			}
+			else
+			{
+				return false;
+			}
+		}
 	}
 ?>

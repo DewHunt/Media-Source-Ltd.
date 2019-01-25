@@ -59,7 +59,7 @@
 											<div class="control-group">                    
 												<label class="control-label"><span class="mendatory">*</span>&nbsp;Product Category</label>
 												<div class="controls">
-													<div id="product-select-menu"></div>
+													<div id="product-category-select-menu"></div>
 												</div> <!-- /controls -->       
 											</div> <!-- /control-group -->
 											
@@ -112,7 +112,7 @@
 					type:'ajax',
 					url:'<?php echo base_url('index.php/Product/GetDataForSelectMenu'); ?>',
 					success:function(data){
-						$('#product-select-menu').html(data);
+						$('#product-category-select-menu').html(data);
 					}
 				});
 			} 

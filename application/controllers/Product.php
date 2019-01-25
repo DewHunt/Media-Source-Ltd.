@@ -167,5 +167,78 @@
 				echo json_encode($output);
 			}
 		}
+
+		public function GetProductById()
+		{
+			if ($this->session->userdata('adminUserName') == "" || $this->session->userdata('adminPassword') == "")
+			{
+				return redirect('Admin/Index');
+			}
+			else
+			{
+				$output = array();
+				$productId = $this->input->post('productId');
+
+				$data = $this->ProductModel->GetProductById($productId);
+
+				$output['productId'] = $data->Id;
+				$output['productName'] = $data->Name;
+				$output['productDescription'] = $data->Description;
+				$output['productCategoryId'] = $data->ProductCategoryId;
+
+				echo json_encode($output);
+			}
+		}
+
+		public function UpdateProduct()
+		{
+			if ($this->session->userdata('adminUserName') == "" || $this->session->userdata('adminPassword') == "")
+			{
+				return redirect('Admin/Index');
+			}
+			else
+			{
+				$productName = $this->input->post('product-name');
+				$productCategoryId = $this->input->post('product-category-id');
+				$productDescription = $this->input->post('product-description');
+
+				$productId = $this->input->post('product-id');
+				$updateId = $this->GetAdminAllInfo()->Id;
+
+				$result = $this->ProductModel->UpdateProduct($productId,$productName,$productCategoryId,$productDescription,$updateId);
+
+				if ($result)
+				{
+					echo "Greate! You Updated Your Product Successfully";
+				}
+				else
+				{
+					echo "Oops! Sorry, Your Product Can't Be Updated";
+				}				
+			}
+		}
+
+		public function DeleteProduct()
+		{
+			if ($this->session->userdata('adminUserName') == "" || $this->session->userdata('adminPassword') == "")
+			{
+				return redirect('Admin/Index');
+			}
+			else
+			{
+				$productId = $this->input->post('productId');
+
+				$result = $this->ProductModel->DeleteProduct($productId);
+				
+				if ($result)
+				{
+					echo "Product Dleted From Database!";
+				}
+				else
+				{
+					echo "Oops! Something Wrong With Deleting Product";
+				}
+			}
+		}
 	}
 ?>

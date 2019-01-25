@@ -178,7 +178,6 @@
 							$('#publication-id').val(data.publicationId);
 						}
 					});
-
 				});
 
 				$(document).on('submit', '#publication-form', function(event){

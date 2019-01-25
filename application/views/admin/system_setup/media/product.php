@@ -44,6 +44,38 @@
 											</tr>
 										</tfoot>
 									</table>
+
+									<div id="product-modal" class="modal fade">
+										<div class="modal-dialog">
+											<form method="POST" id="product-form">
+												<div class="modal-content">
+													<div class="modal-header">
+														<button type="button" class="close" data-dismiss="modal">&times;</button>
+														<h3 class="modal-title">Update Product</h3>
+													</div>
+
+													<div class="modal-body">
+														<label class="control-label" for="media"><span class="mendatory">*</span>&nbsp;Product Category</label>
+														<div id="product-category-select-menu"></div>
+
+														<label class="control-label" for="name"><span class="mendatory">*</span>&nbsp;Name</label>
+														<input type="text" id="product-name" name="product-name" placeholder="Enter Product Name" style="width: 100%" value="">
+
+														<label class="control-label" for="description">Description</label>
+														<textarea rows="3" id="product-description" name="product-description" style="width: 100%;"></textarea>
+													</div>
+
+													<div class="modal-footer">
+														<input type="hidden" name="product-id" id="product-id" value="">
+
+														<input type="submit" name="update-product" id="update-product" class="btn btn-success" value="Update">
+
+														<button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+													</div>
+												</div>
+											</form>
+										</div>
+									</div>
 								</div>  <!-- /widget-content --> 
 							</div>  <!-- /widget --> 
 						</div>  <!-- /span12 -->
@@ -76,6 +108,96 @@
 							'orderable':false
 						},
 					],
+				});
+
+				GetDataForSelectMenu();
+
+				// Get Media Name Data Script Start
+				function GetDataForSelectMenu()
+				{
+					$.ajax({
+						type:'ajax',
+						url:'<?php echo base_url('index.php/Product/GetDataForSelectMenu'); ?>',
+						success:function(data){
+							$('#product-category-select-menu').html(data);
+						}
+					});
+				} 
+				// Get Media Name Data Script End
+
+				$(document).on('click', '.update', function(){
+					var productId = $(this).attr('id');
+
+					$.ajax({
+						url:'<?php echo base_url("index.php/Product/GetProductById"); ?>',
+						method:'POST',
+						data:{productId:productId},
+						dataType:'json',
+						success:function(data){
+							$('#product-modal').modal('show');
+							$('#product-category-id option[value="'+data.productCategoryId+'"]').prop('selected', true);
+							$('#product-name').val(data.productName);
+							$('#product-description').val(data.productDescription);
+							$('#product-id').val(data.productId);
+						}
+					});
+				});
+
+				$(document).on('submit', '#product-form', function(event){
+					event.preventDefault();
+
+					var productCategoryId = $('#product-category-id').val();
+					var productName = $('#product-name').val();
+
+					if (productCategoryId == "")
+					{
+						alert("Oops! Product Category Can't Be Empty. Please Select Product Category");
+						return false;
+					}
+					else if (productName == "")
+					{
+						alert("Oops! Product Name Can't Be Empty. Please Enter Product Name");
+						return false;
+					}
+					else
+					{
+						$('#product-name').css({'border':'1px solid gray'});
+
+						$.ajax({
+							url:'<?php echo base_url("index.php/Product/UpdateProduct"); ?>',
+							method:'POST',
+							data:new FormData(this),
+							contentType:false,
+							processData:false,
+							success:function(data){
+								alert(data);
+								$('#product-form')[0].reset();
+								$('#product-modal').modal('hide');
+								dataTable.ajax.reload();
+							}
+						});
+					}
+				});
+
+				$(document).on('click', '.delete', function(){
+					var productId = $(this).attr('id');
+
+					if (confirm("Wait! Are You 100% Sure, Really You Want To Delete This?"))
+					{
+						$.ajax({
+							url:'<?php echo base_url("index.php/Product/DeleteProduct"); ?>',
+							method:'POST',
+							data:{productId:productId},
+							success:function(data){
+								alert(data);
+								dataTable.ajax.reload();
+							}
+						});						
+					}
+					else
+					{
+						return false;
+					}
 				});
 			});
 		</script>
