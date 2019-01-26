@@ -18,19 +18,12 @@
 								<div class="widget">
 									<div class="widget-header">
 										<i class="icon-tag"></i>
-										<h3>Media Setup<i class="icon-long-arrow-right"></i>&nbsp;&nbsp;Page<i class="icon-long-arrow-right"></i>&nbsp;&nbsp;Create Page</h3>
+										<h3>Media Setup<i class="icon-long-arrow-right"></i>&nbsp;&nbsp;Price<i class="icon-long-arrow-right"></i>&nbsp;&nbsp;Create Price</h3>
 									</div>
 									<!-- /widget-header -->
 									
 									<div class="widget-content">
 										<fieldset>
-											<div class="control-group">											
-												<label class="control-label" for="name">Name</label>
-												<div class="controls">
-													<input type="text" class="span10" id="name" name="name" value="">
-												</div> <!-- /controls -->				
-											</div> <!-- /control-group -->
-											
 											<div class="control-group">                     
 												<label class="control-label" for="media">Media</label>
 												<div class="controls">

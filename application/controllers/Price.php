@@ -2,15 +2,14 @@
 	/**
 	 * 
 	 */
-	class Page extends CI_Controller
+	class Price extends CI_Controller
 	{
 		
 		public function __construct()
 		{
 			parent::__construct();
 			$this->load->model('AdminModel');
-			$this->load->model('DataTableModel');
-			$this->load->model('PageModel');
+			$this->load->model('PriceModel');
 		}
 
 		public function GetAdminAllInfo()
@@ -30,15 +29,15 @@
 			else
 			{
 				$data = array(
-					'title' => 'Page - Media Source Ltd.',
+					'title' => 'Price - Media Source Ltd.',
 					'adminInfo' => $this->GetAdminAllInfo()
 				);
 
-				$this->load->view('admin/system_setup/page/page',$data);
+				$this->load->view('admin/system_setup/page/Price',$data);
 			}
 		}
 
-		public function PublicationType($msg = null)
+		public function Price()
 		{
 			if ($this->session->userdata('adminUserName') == "" || $this->session->userdata('adminPassword') == "")
 			{
@@ -47,12 +46,11 @@
 			else
 			{
 				$data = array(
-					'title' => 'Create Publication Type - Media Source Ltd.',
-					'adminInfo' => $this->GetAdminAllInfo(),
-					'message' => $msg
+					'title' => 'Create Price - Media Source Ltd.',
+					'adminInfo' => $this->GetAdminAllInfo()
 				);
 
-				$this->load->view('admin/system_setup/media/create-publication-type',$data);
+				$this->load->view('admin/system_setup/page/create-price',$data);				
 			}
 		}
 	}

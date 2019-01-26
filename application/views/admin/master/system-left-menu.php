@@ -15,9 +15,17 @@
 													<li><a href="<?= base_url('index.php/PublicationFrequency/Index'); ?>">Publication Frequency</a></li>
 													<li><a href="<?= base_url('index.php/PublicationPlace/Index'); ?>">Publication Place</a></li>
 													<li><a href="<?= base_url('index.php/PublicationType/Index'); ?>">Publication Type</a></li>
-													<li><a href="<?= base_url('index.php/Page/Index'); ?>">Page</a></li>
 													<li><a href="<?= base_url('index.php/ProductCategory/Index'); ?>">Product Category</a></li>
 													<li><a href="<?= base_url('index.php/Product/Index'); ?>">Products</a></li>
+												</ul>
+											</li>
+
+											<li class="has-sub">
+												<a href="#">Page Setup<span class="sub-arrow"></span></a>
+												<ul>
+													<li><a href="<?= base_url('index.php/Page/Index'); ?>">Page</a></li>
+													<li><a href="<?= base_url('index.php/Hue/Index'); ?>">Hue</a></li>
+													<li><a href="<?= base_url('index.php/Price/Index'); ?>">Price</a></li>
 												</ul>
 											</li>
 											

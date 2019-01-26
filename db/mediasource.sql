@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.4
+-- version 4.8.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 24, 2019 at 09:53 PM
--- Server version: 10.1.28-MariaDB
--- PHP Version: 7.1.10
+-- Generation Time: Jan 26, 2019 at 12:25 PM
+-- Server version: 10.1.33-MariaDB
+-- PHP Version: 7.2.6
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -47,6 +47,59 @@ INSERT INTO `admins` (`Id`, `Name`, `UserName`, `Email`, `Mobile`, `Password`) V
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `days`
+--
+
+CREATE TABLE `days` (
+  `Id` int(11) NOT NULL,
+  `Name` varchar(255) NOT NULL,
+  `Description` text NOT NULL,
+  `EntryBy` int(11) NOT NULL,
+  `EntryDateTime` datetime NOT NULL,
+  `UpdateBy` int(11) NOT NULL,
+  `UpdateDateTime` datetime NOT NULL,
+  `DeleteBy` int(11) NOT NULL,
+  `DeleteDateTime` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `days`
+--
+
+INSERT INTO `days` (`Id`, `Name`, `Description`, `EntryBy`, `EntryDateTime`, `UpdateBy`, `UpdateDateTime`, `DeleteBy`, `DeleteDateTime`) VALUES
+(1, 'All Days', '', 1, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00'),
+(2, 'Saturday', '', 1, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00'),
+(3, 'Sunday', '', 1, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00'),
+(4, 'Monday', '', 1, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00'),
+(5, 'Tuesday', '', 1, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00'),
+(6, 'Wednesday', '', 1, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00'),
+(7, 'Thrusday', '', 1, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00'),
+(8, 'Friday', '', 1, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00'),
+(9, 'Weekly', '', 1, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00'),
+(10, 'Monthly', '', 1, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00'),
+(11, 'Yearly', '', 1, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `hue`
+--
+
+CREATE TABLE `hue` (
+  `Id` int(11) NOT NULL,
+  `Name` varchar(255) NOT NULL,
+  `Description` text NOT NULL,
+  `EntryBy` int(11) NOT NULL,
+  `EntryDateTime` datetime NOT NULL,
+  `UpdateBy` int(11) NOT NULL,
+  `UpdateDateTime` datetime NOT NULL,
+  `DeleteBy` int(11) NOT NULL,
+  `DeleteDateTime` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `media`
 --
 
@@ -79,6 +132,49 @@ INSERT INTO `media` (`Id`, `Name`, `Image`, `EntryBy`, `EntryDateTime`, `UpdateB
 (29, 'Inqilab', 'inqilab_19011903.png', 1, '2019-01-19 09:33:37', 1, '2019-01-19 09:40:03', 0, '0000-00-00 00:00:00'),
 (30, 'Naya Diganto', 'naya_diganto_19011918.png', 1, '2019-01-19 09:41:18', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00'),
 (31, 'Amar Desh', 'amar_desh_19012046.png', 1, '2019-01-19 09:43:02', 1, '2019-01-24 09:03:17', 0, '0000-00-00 00:00:00');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `page`
+--
+
+CREATE TABLE `page` (
+  `Id` int(11) NOT NULL,
+  `Name` varchar(255) NOT NULL,
+  `Description` text NOT NULL,
+  `EntryBy` int(11) NOT NULL,
+  `EntryDateTime` datetime NOT NULL,
+  `UpdateBy` int(11) NOT NULL,
+  `UpdateDateTime` datetime NOT NULL,
+  `DeleteBy` int(11) NOT NULL,
+  `DeleteDateTime` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `price`
+--
+
+CREATE TABLE `price` (
+  `Id` int(11) NOT NULL,
+  `Name` varchar(255) NOT NULL,
+  `MediaId` int(11) NOT NULL,
+  `PublicationId` int(11) NOT NULL,
+  `DayId` int(11) NOT NULL,
+  `PageId` int(11) NOT NULL,
+  `HueId` int(11) NOT NULL,
+  `Col` int(11) NOT NULL,
+  `Inch` int(11) NOT NULL,
+  `Price` decimal(20,2) NOT NULL,
+  `EntryBy` int(11) NOT NULL,
+  `EntryDateTime` datetime NOT NULL,
+  `UpdateBY` int(11) NOT NULL,
+  `UpdateDateTime` datetime NOT NULL,
+  `DeleteBy` int(11) NOT NULL,
+  `DeleteDateTime` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -293,9 +389,33 @@ ALTER TABLE `admins`
   ADD PRIMARY KEY (`Id`);
 
 --
+-- Indexes for table `days`
+--
+ALTER TABLE `days`
+  ADD PRIMARY KEY (`Id`);
+
+--
+-- Indexes for table `hue`
+--
+ALTER TABLE `hue`
+  ADD PRIMARY KEY (`Id`);
+
+--
 -- Indexes for table `media`
 --
 ALTER TABLE `media`
+  ADD PRIMARY KEY (`Id`);
+
+--
+-- Indexes for table `page`
+--
+ALTER TABLE `page`
+  ADD PRIMARY KEY (`Id`);
+
+--
+-- Indexes for table `price`
+--
+ALTER TABLE `price`
   ADD PRIMARY KEY (`Id`);
 
 --
@@ -345,10 +465,34 @@ ALTER TABLE `admins`
   MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
+-- AUTO_INCREMENT for table `days`
+--
+ALTER TABLE `days`
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+
+--
+-- AUTO_INCREMENT for table `hue`
+--
+ALTER TABLE `hue`
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `media`
 --
 ALTER TABLE `media`
   MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+
+--
+-- AUTO_INCREMENT for table `page`
+--
+ALTER TABLE `page`
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `price`
+--
+ALTER TABLE `price`
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `product`

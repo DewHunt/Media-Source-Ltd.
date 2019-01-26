@@ -26,22 +26,6 @@
 										<!-- /widget-header -->
 										<div class="widget-content">
 											<div class="shortcuts">
-												<a href="<?= base_url('index.php/MediaName/Index'); ?>" class="shortcut">
-													<i class="shortcut-icon icon-file"></i> 
-													<span class="shortcut-label">Media Name</span>
-												</a>
-												<a href="<?= base_url('index.php/Page/Index'); ?>" class="shortcut"> 
-													<i class="shortcut-icon icon-file"></i>
-													<span class="shortcut-label">Page</span> 
-												</a>
-												<a href="<?= base_url('index.php/ProductCategory/Index'); ?>" class="shortcut">
-													<i class="shortcut-icon icon-file"></i>
-													<span class="shortcut-label">Product Category</span> 
-												</a>
-												<a href="<?= base_url('index.php/Product/Index'); ?>" class="shortcut">
-													<i class="shortcut-icon icon-file"></i>
-													<span class="shortcut-label">Products</span> 
-												</a>
 												<a href="<?= base_url('index.php/Publication/Index'); ?>" class="shortcut">
 													<i class="shortcut-icon icon-file"></i> 
 													<span class="shortcut-label">Publication</span> 
@@ -57,6 +41,47 @@
 												<a href="<?= base_url('index.php/PublicationType/Index'); ?>" class="shortcut">
 													<i class="shortcut-icon icon-file"></i> 
 													<span class="shortcut-label">Publication Type</span> 
+												</a>
+												<a href="<?= base_url('index.php/MediaName/Index'); ?>" class="shortcut">
+													<i class="shortcut-icon icon-file"></i> 
+													<span class="shortcut-label">Media Name</span>
+												</a>
+												<a href="<?= base_url('index.php/ProductCategory/Index'); ?>" class="shortcut">
+													<i class="shortcut-icon icon-file"></i>
+													<span class="shortcut-label">Product Category</span> 
+												</a>
+												<a href="<?= base_url('index.php/Product/Index'); ?>" class="shortcut">
+													<i class="shortcut-icon icon-file"></i>
+													<span class="shortcut-label">Products</span> 
+												</a>
+											</div>
+											<!-- /shortcuts --> 
+										</div>
+										<!-- /widget-content --> 
+									</div>
+									<!-- /widget -->
+								</div>	<!-- /span9 -->
+
+								<div class="span9">
+									<div class="widget">
+										<div class="widget-header">
+											<i class="icon-list-alt"></i>
+											<h3>Page Setup Menu</h3>
+										</div>
+										<!-- /widget-header -->
+										<div class="widget-content">
+											<div class="shortcuts">
+												<a href="<?= base_url('index.php/Page/Index'); ?>" class="shortcut"> 
+													<i class="shortcut-icon icon-file"></i>
+													<span class="shortcut-label">Page</span> 
+												</a>
+												<a href="<?= base_url('index.php/Hue/Index'); ?>" class="shortcut"> 
+													<i class="shortcut-icon icon-file"></i>
+													<span class="shortcut-label">Hue</span> 
+												</a>
+												<a href="<?= base_url('index.php/Price/Index'); ?>" class="shortcut"> 
+													<i class="shortcut-icon icon-file"></i>
+													<span class="shortcut-label">Price</span> 
 												</a>
 											</div>
 											<!-- /shortcuts --> 
