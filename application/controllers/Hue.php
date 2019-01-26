@@ -2,7 +2,7 @@
 	/**
 	 * 
 	 */
-	class Page extends CI_Controller
+	class Hue extends CI_Controller
 	{
 		
 		public function __construct()
@@ -10,7 +10,7 @@
 			parent::__construct();
 			$this->load->model('AdminModel');
 			$this->load->model('DataTableModel');
-			$this->load->model('PageModel');
+			$this->load->model('HueModel');
 		}
 
 		public function GetAdminAllInfo()
@@ -30,15 +30,15 @@
 			else
 			{
 				$data = array(
-					'title' => 'Page - Media Source Ltd.',
+					'title' => 'Hue - Media Source Ltd.',
 					'adminInfo' => $this->GetAdminAllInfo()
 				);
 
-				$this->load->view('admin/system_setup/page/page',$data);
+				$this->load->view('admin/system_setup/page/hue',$data);
 			}
 		}
 
-		public function Page($msg = null)
+		public function Hue($msg = null)
 		{
 			if ($this->session->userdata('adminUserName') == "" || $this->session->userdata('adminPassword') == "")
 			{
@@ -47,16 +47,16 @@
 			else
 			{
 				$data = array(
-					'title' => 'Create Page - Media Source Ltd.',
+					'title' => 'Create Hue - Media Source Ltd.',
 					'adminInfo' => $this->GetAdminAllInfo(),
 					'message' => $msg
 				);
 
-				$this->load->view('admin/system_setup/page/create-page',$data);
+				$this->load->view('admin/system_setup/page/create-hue',$data);
 			}
 		}
 
-		public function CreatePage()
+		public function CreateHue()
 		{
 			if ($this->session->userdata('adminUserName') == "" || $this->session->userdata('adminPassword') == "")
 			{
@@ -64,35 +64,35 @@
 			}
 			else
 			{
-				$pageName = $this->input->post('page-name');
+				$hueName = $this->input->post('hue-name');
 
-				$checkPageName = $this->PageModel->CheckPageExists($pageName);
+				$checkHueName = $this->HueModel->CheckHueExists($hueName);
 
-				if ($checkPageName)
+				if ($checkHueName)
 				{
-					return redirect('Page/Page/3');
+					return redirect('Hue/Hue/3');
 				}
 				else
 				{
-					$pageDescription = $this->input->post('page-description');
+					$hueDescription = $this->input->post('hue-description');
 
 					$entryId = $this->GetAdminAllInfo()->Id;
 
-					$result = $this->PageModel->CreatePage($pageName,$pageDescription,$entryId);
+					$result = $this->HueModel->CreateHue($hueName,$hueDescription,$entryId);
 
 					if ($result)
 					{
-						return redirect('Page/Page/1');
+						return redirect('Hue/Hue/1');
 					}
 					else
 					{
-						return redirect('Page/Page/2');
+						return redirect('Hue/Hue/2');
 					}
 				}
 			}
 		}
 
-		public function GetPageAllInfo()
+		public function GetHueAllInfo()
 		{
 			if ($this->session->userdata('adminUserName') == "" || $this->session->userdata('adminPassword') == "")
 			{
@@ -101,23 +101,23 @@
 			else
 			{
 				$option = "dt-common";
-				$table = "page";
+				$table = "hue";
 				$selectColumn = array("Id","Name","Description");
 				$orderColumn = array("Id","Name",null,null);
 
-				$pageInfo = $this->DataTableModel->MakeDataTables($option,$table,$selectColumn,$orderColumn);
+				$hueInfo = $this->DataTableModel->MakeDataTables($option,$table,$selectColumn,$orderColumn);
 				$sl = 1;
 				$data = array();
 
-				foreach ($pageInfo as $value)
+				foreach ($hueInfo as $value)
 				{
-					$page = array();
-					$page[] = $sl;
-					$page[] = $value->Name;
-					$page[] = $value->Description;
-					$page[] = '<button type="button" name="update" id="'.$value->Id.'" class="btn btn-warning btn-xs update">Update</button> <button type="button" name="delete" id="'.$value->Id.'" class="btn btn-danger delete">Delete</button>';
+					$hue = array();
+					$hue[] = $sl;
+					$hue[] = $value->Name;
+					$hue[] = $value->Description;
+					$hue[] = '<button type="button" name="update" id="'.$value->Id.'" class="btn btn-warning btn-xs update">Update</button> <button type="button" name="delete" id="'.$value->Id.'" class="btn btn-danger delete">Delete</button>';
 					$sl++;
-					$data[] = $page;
+					$data[] = $hue;
 				}
 
 				$output = array(
@@ -131,7 +131,7 @@
 			}
 		}
 
-		public function GetPageById()
+		public function GetHueById()
 		{
 			if ($this->session->userdata('adminUserName') == "" || $this->session->userdata('adminPassword') == "")
 			{
@@ -140,19 +140,19 @@
 			else
 			{
 				$output = array();
-				$pageId = $this->input->post('pageId');
+				$hueId = $this->input->post('hueId');
 
-				$data = $this->PageModel->GetPageById($pageId);
+				$data = $this->HueModel->GetHueById($hueId);
 
-				$output['pageId'] = $data->Id;
-				$output['pageName'] = $data->Name;
-				$output['pageDescription'] = $data->Description;
+				$output['hueId'] = $data->Id;
+				$output['hueName'] = $data->Name;
+				$output['hueDescription'] = $data->Description;
 
 				echo json_encode($output);
 			}
 		}
 
-		public function UpdatePage()
+		public function UpdateHue()
 		{
 			if ($this->session->userdata('adminUserName') == "" || $this->session->userdata('adminPassword') == "")
 			{
@@ -160,25 +160,25 @@
 			}
 			else
 			{
-				$pageId = $this->input->post('page-id');
-				$pageName = $this->input->post('page-name');
-				$pageDescription = $this->input->post('page-description');
+				$hueId = $this->input->post('hue-id');
+				$hueName = $this->input->post('hue-name');
+				$hueDescription = $this->input->post('hue-description');
 				$updateId = $this->GetAdminAllInfo()->Id;
 
-				$result = $this->PageModel->UpdatePage($pageId,$pageName,$pageDescription,$updateId);
+				$result = $this->HueModel->UpdateHue($hueId,$hueName,$hueDescription,$updateId);
 
 				if ($result)
 				{
-					echo "Great! You Updated Your Page Successfully";
+					echo "Great! You Updated Your Hue Successfully";
 				}
 				else
 				{
-					echo "Oops! Sorry, Your Page Can't Be Updated";
+					echo "Oops! Sorry, Your Hue Can't Be Updated";
 				}
 			}
 		}
 
-		public function DeletePage()
+		public function DeleteHue()
 		{
 			if ($this->session->userdata('adminUserName') == "" || $this->session->userdata('adminPassword') == "")
 			{
@@ -186,17 +186,17 @@
 			}
 			else
 			{
-				$pageId = $this->input->post('pageId');
+				$hueId = $this->input->post('hueId');
 
-				$result = $this->PageModel->DeletePage($pageId);
+				$result = $this->HueModel->DeleteHue($hueId);
 
 				if ($result)
 				{
-					echo "Page Deleted From Database!";
+					echo "Hue Deleted From Database!";
 				}
 				else
 				{
-					echo "Oops, Something Wrong With Deleting Page";
+					echo "Oops, Something Wrong With Deleting Hue";
 				}
 			}
 		}

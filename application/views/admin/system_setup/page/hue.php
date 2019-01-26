@@ -19,12 +19,12 @@
 							<div class="widget">
 								<div class="widget-header">
 									<i class="icon-th-list"></i>
-									<h3>All Page Information</h3>
-									<a href="<?= base_url('index.php/Page/Page'); ?>" type="submit" class="btn btn-primary" target="_blank">Create Page</a> 
+									<h3>All Hue Information</h3>
+									<a href="<?= base_url('index.php/Hue/Hue'); ?>" type="submit" class="btn btn-primary" target="_blank">Create Hue</a> 
 								</div>  <!-- /widget-header -->
 
 								<div class="widget-content">
-									<table id="page-data" class="table table-striped table-bordered">
+									<table id="hue-data" class="table table-striped table-bordered">
 										<thead>
 											<tr>
 												<th>Sl</th>
@@ -44,27 +44,27 @@
 										</tfoot>
 									</table>
 
-									<div id="page-modal" class="modal fade">
+									<div id="hue-modal" class="modal fade">
 										<div class="modal-dialog">
-											<form method="POST" id="page-form">
+											<form method="POST" id="hue-form">
 												<div class="modal-content">
 													<div class="modal-header">
 														<button type="button" class="close" data-dismiss="modal">&times;</button>
-														<h3 class="modal-title">Update Page</h3>
+														<h3 class="modal-title">Update Hue</h3>
 													</div>
 
 													<div class="modal-body">
-														<label>Page Name&nbsp;<span class="mendatory">*</span></label>
-														<input type="text" name="page-name" id="page-name" class="form-control" style="width: 100%;">
+														<label>Hue Name&nbsp;<span class="mendatory">*</span></label>
+														<input type="text" name="hue-name" id="hue-name" class="form-control" style="width: 100%;">
 
 														<label>Description</label>
-														<textarea rows="3" name="page-description" id="page-description" class="form-control" style="width: 100%;"></textarea>
+														<textarea rows="3" name="hue-description" id="hue-description" class="form-control" style="width: 100%;"></textarea>
 													</div>
 
 													<div class="modal-footer">
-														<input type="hidden" name="page-id" id="page-id" value="">
+														<input type="hidden" name="hue-id" id="hue-id" value="">
 
-														<input type="submit" name="update-page" id="update-page" class="btn btn-success" value="Update">
+														<input type="submit" name="update-hue" id="update-hue" class="btn btn-success" value="Update">
 
 														<button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
 													</div>
@@ -89,12 +89,12 @@
 					$(this).toggleClass('tap');
 				});
 
-				var dataTable = $('#page-data').DataTable({
+				var dataTable = $('#hue-data').DataTable({
 					'processing':true,
 					'serverSide':true,
 					'order':[],
 					'ajax':{
-						url:'<?php echo base_url('index.php/Page/GetPageAllInfo'); ?>',
+						url:'<?php echo base_url('index.php/Hue/GetHueAllInfo'); ?>',
 						type:'POST'
 					},
 					'dataType':'json',
@@ -108,46 +108,45 @@
 
 
 				$(document).on('click', '.update', function(){
-					var pageId = $(this).attr('id');
+					var hueId = $(this).attr('id');
 
 					$.ajax({
-						url:'<?php echo base_url("index.php/Page/GetPageById"); ?>',
+						url:'<?php echo base_url("index.php/Hue/GetHueById"); ?>',
 						method:'POST',
-						data:{pageId:pageId},
+						data:{hueId:hueId},
 						dataType:'json',
 						success:function(data){
-							$('#page-modal').modal('show');
-							$('#page-name').val(data.pageName);
-							$('#page-description').val(data.pageDescription);
-							$('#page-id').val(data.pageId);
+							$('#hue-modal').modal('show');
+							$('#hue-name').val(data.hueName);
+							$('#hue-description').val(data.hueDescription);
+							$('#hue-id').val(data.hueId);
 						}
 					});
 				});
 
-				$(document).on('submit', '#page-form', function(event){
+				$(document).on('submit', '#hue-form', function(event){
 					event.preventDefault();
 
-					var pageName = $('#page-name').val();
-					var pageDescription = $('#page-description').val();
+					var hueName = $('#hue-name').val();
 
-					if (pageName == "")
+					if (hueName == "")
 					{
-						alert("Oops! Page Name Must Be Filled");
-						$('#page-name').css({'border':'1px solid red'});
+						alert("Oops! hue Name Must Be Filled");
+						$('#hue-name').css({'border':'1px solid red'});
 						return false;
 					}
 					else
 					{
 						$.ajax({
-							url:'<?php echo base_url("index.php/Page/UpdatePage"); ?>',
+							url:'<?php echo base_url("index.php/Hue/UpdateHue"); ?>',
 							method:'POST',
 							data:new FormData(this),
 							contentType:false,
 							processData:false,
 							success:function(data){
 								alert(data);
-								$('#page-form')[0].reset();
-								$('#page-modal').modal('hide');
+								$('#hue-form')[0].reset();
+								$('#hue-modal').modal('hide');
 								dataTable.ajax.reload();
 							}
 						});
@@ -155,14 +154,14 @@
 				});
 
 				$(document).on('click', '.delete', function(){
-					var pageId = $(this).attr('id');
+					var hueId = $(this).attr('id');
 
 					if (confirm("Wait!, Are Your 100% Sure, You Really Want to Delete This?"))
 					{
 						$.ajax({
-							url:'<?php echo base_url('index.php/Page/DeletePage'); ?>',
+							url:'<?php echo base_url('index.php/Hue/DeleteHue'); ?>',
 							method:'POST',
-							data:{pageId:pageId},
+							data:{hueId:hueId},
 							success:function(data){
 								alert(data);
 								dataTable.ajax.reload();

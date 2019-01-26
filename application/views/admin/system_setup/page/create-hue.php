@@ -13,7 +13,7 @@
 			<div class="main-inner">
 				<div class="container">					
 					<div class="row">
-						<form class="form-horizontal" id="page-form" method="POST" action="<?= base_url('index.php/Page/CreatePage'); ?>">
+						<form class="form-horizontal" id="hue-form" method="POST" action="<?= base_url('index.php/Hue/CreateHue'); ?>">
 							<div class="span12">
 
 								<?php
@@ -21,8 +21,8 @@
 									{
 								?>
 										<div class="alert alert-success success-message">
-											<a type="button" class="btn btn-danger close" data-dismiss="alert" href="<?=  base_url('index.php/Page/Page');?>">&times;</a>
-											<strong>Great!</strong> Your Page Created Successfully...
+											<a type="button" class="btn btn-danger close" data-dismiss="alert" href="<?=  base_url('index.php/Hue/Hue');?>">&times;</a>
+											<strong>Great!</strong> Your Hue Created Successfully...
 										</div>
 								<?php
 									}
@@ -31,8 +31,8 @@
 									{
 								?>
 										<div class="alert alert-info error-message">
-											<a type="button" class="btn btn-danger close" data-dismiss="alert" href="<?= base_url('index.php/Page/Page'); ?>">&times;</a>
-											<strong>Oops! Sorry,</strong> Your Page Can't Be Created...
+											<a type="button" class="btn btn-danger close" data-dismiss="alert" href="<?= base_url('index.php/Hue/Hue'); ?>">&times;</a>
+											<strong>Oops! Sorry,</strong> Your Hue Can't Be Created...
 										</div>
 								<?php
 									}
@@ -41,8 +41,8 @@
 									{
 								?>
 										<div class="alert alert-info error-message">
-											<a type="button" class="btn btn-danger close" data-dismiss="alert" href="<?= base_url('index.php/Page/Page'); ?>">&times;</a>
-											<strong>Oops! Sorry,</strong> Your Page Already Saved In Data Base...
+											<a type="button" class="btn btn-danger close" data-dismiss="alert" href="<?= base_url('index.php/Hue/Hue'); ?>">&times;</a>
+											<strong>Oops! Sorry,</strong> Your Hue Already Saved In Data Base...
 										</div>
 								<?php
 									}
@@ -50,7 +50,7 @@
 								<div class="widget">
 									<div class="widget-header">
 										<i class="icon-tag"></i>
-										<h3>Page Setup<i class="icon-long-arrow-right"></i>&nbsp;&nbsp;Page<i class="icon-long-arrow-right"></i>&nbsp;&nbsp;Create Page</h3>
+										<h3>Hue Setup<i class="icon-long-arrow-right"></i>&nbsp;&nbsp;Hue<i class="icon-long-arrow-right"></i>&nbsp;&nbsp;Create Hue</h3>
 									</div>
 									<!-- /widget-header -->
 									
@@ -59,19 +59,19 @@
 											<div class="control-group">
 												<label class="control-label" for="name"><span class="mendatory">*</span>&nbsp;Name</label>
 												<div class="controls">
-													<input type="text" class="span10" id="page-name" name="page-name" value="">
+													<input type="text" class="span10" id="hue-name" name="hue-name" value="">
 												</div> <!-- /controls -->				
 											</div> <!-- /control-group -->
 											
 											<div class="control-group">
 												<label class="control-label" for="description">Description</label>
 												<div class="controls">
-													<textarea class="span10" rows="3" id="page-description" name="page-description"></textarea>
+													<textarea class="span10" rows="3" id="hue-description" name="hue-description"></textarea>
 												</div> <!-- /controls -->				
 											</div> <!-- /control-group -->
 											
 											<div class="form-actions">
-												<button type="submit" id="button-page" name="button-page" class="btn btn-primary" onclick="return Validation()">Create Page</button>
+												<button type="submit" id="button-hue" name="button-hue" class="btn btn-primary" onclick="return Validation()">Create Hue</button>
 
 												<button type="reset" class="btn btn-danger">Cancel</button>
 
@@ -99,17 +99,17 @@
 		<!-- Custome JS File Include -->
 		<script type="text/javascript">
 			function Validation(){
-				var pageName = $('#page-name').val();
+				var hueName = $('#hue-name').val();
 
-				if (pageName == "")
+				if (hueName == "")
 				{
-					Message("Oops! Page Name Can't Be Empty. Please Enter Page Name.");
-					$('#page-name').css({'border':'1px solid red'});
+					Message("Oops! Hue Name Can't Be Empty. Please Enter Hue Name.");
+					$('#hue-name').css({'border':'1px solid red'});
 					return false;
 				}
 				else
 				{
-					$('#page-description').css({'border':'1px solid gray'});
+					$('#hue-description').css({'border':'1px solid gray'});
 				}
 			}
 		</script>

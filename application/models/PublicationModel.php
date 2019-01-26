@@ -9,7 +9,7 @@
 			parent::__construct();
 		}
 
-		public function checkPublicationNameExists($publicationName,$mediaNameId)
+		public function checkPublicationExists($publicationName,$mediaNameId)
 		{
 			$sql = "SELECT * FROM publication WHERE Name = '".$publicationName."' AND MediaId = '".$mediaNameId."'";
 

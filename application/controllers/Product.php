@@ -101,7 +101,7 @@
 				$productName = $this->input->post('product-name');
 				$productCategoryId = $this->input->post('product-category-id');
 
-				$checkProductName = $this->ProductModel->checkProductNameExists($productName,$productCategoryId);
+				$checkProductName = $this->ProductModel->checkProductExists($productName,$productCategoryId);
 
 				if ($checkProductName)
 				{

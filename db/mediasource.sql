@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.1
+-- version 4.7.4
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 26, 2019 at 12:25 PM
--- Server version: 10.1.33-MariaDB
--- PHP Version: 7.2.6
+-- Generation Time: Jan 26, 2019 at 08:24 PM
+-- Server version: 10.1.28-MariaDB
+-- PHP Version: 7.1.10
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -97,6 +97,15 @@ CREATE TABLE `hue` (
   `DeleteDateTime` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Dumping data for table `hue`
+--
+
+INSERT INTO `hue` (`Id`, `Name`, `Description`, `EntryBy`, `EntryDateTime`, `UpdateBy`, `UpdateDateTime`, `DeleteBy`, `DeleteDateTime`) VALUES
+(2, 'Black and White', 'Black and White', 1, '2019-01-26 19:49:33', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00'),
+(3, 'Black and White', '', 1, '2019-01-26 19:55:36', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00'),
+(4, 'Black and White', '', 1, '2019-01-26 19:59:17', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00');
+
 -- --------------------------------------------------------
 
 --
@@ -150,6 +159,15 @@ CREATE TABLE `page` (
   `DeleteBy` int(11) NOT NULL,
   `DeleteDateTime` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `page`
+--
+
+INSERT INTO `page` (`Id`, `Name`, `Description`, `EntryBy`, `EntryDateTime`, `UpdateBy`, `UpdateDateTime`, `DeleteBy`, `DeleteDateTime`) VALUES
+(1, 'First Page', 'First Page', 1, '2019-01-26 18:14:38', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00'),
+(2, 'Back Page', 'Back Page', 1, '2019-01-26 18:15:13', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00'),
+(3, 'Back Before', 'Back Before', 1, '2019-01-26 18:15:27', 1, '2019-01-26 18:31:51', 0, '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -474,7 +492,7 @@ ALTER TABLE `days`
 -- AUTO_INCREMENT for table `hue`
 --
 ALTER TABLE `hue`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `media`
@@ -486,7 +504,7 @@ ALTER TABLE `media`
 -- AUTO_INCREMENT for table `page`
 --
 ALTER TABLE `page`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `price`

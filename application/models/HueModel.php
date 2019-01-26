@@ -1,8 +1,8 @@
-<?php
+HueModel.php<?php
 	/**
 	 * 
 	 */
-	class PageModel extends CI_Model
+	class HueModel extends CI_Model
 	{
 		
 		public function __construct()
@@ -10,9 +10,9 @@
 			parent::__construct();
 		}
 
-		public function CheckPageExists($pageName)
+		public function CheckHueExists($hueName)
 		{
-			$sql = "SELECT * FROM page WHERE Name = '$pageName'";
+			$sql = "SELECT * FROM hue WHERE Name = '$hueName'";
 
 			$checkQuery = $this->db->query($sql);
 
@@ -26,11 +26,11 @@
 			}
 		}
 
-		public function CreatePage($pageName,$pageDescription,$entryId)
+		public function CreateHue($hueName,$hueDescription,$entryId)
 		{
 			$entryDateTime = date('Y-m-d H:i:s');
 
-			$sql = "INSERT INTO page (Name, Description, EntryBy, EntryDateTime) VALUES ('$pageName','$pageDescription','$entryId','$entryDateTime')";
+			$sql = "INSERT INTO hue (Name, Description, EntryBy, EntryDateTime) VALUES ('$hueName','$hueDescription','$entryId','$entryDateTime')";
 
 			$insertQuery = $this->db->query($sql);
 
@@ -44,9 +44,9 @@
 			}
 		}
 
-		public function GetPageById($pageId)
+		public function GetHueById($hueId)
 		{
-			$sql = "SELECT * FROM page WHERE Id = '$pageId'";
+			$sql = "SELECT * FROM hue WHERE Id = '$hueId'";
 
 			$query = $this->db->query($sql);
 
@@ -60,10 +60,10 @@
 			}
 		}
 
-		public function UpdatePage($pageId,$pageName,$pageDescription,$updateId)
+		public function UpdateHue($hueId,$hueName,$hueDescription,$updateId)
 		{
 			$updateDateTime = date('Y-m-d H:i:s');
-			$sql = "UPDATE page SET Name = '$pageName', Description = '$pageDescription', UpdateBy = '$updateId', UpdateDateTime = '$updateDateTime' WHERE Id = '$pageId'";
+			$sql = "UPDATE hue SET Name = '$hueName', Description = '$hueDescription', UpdateBy = '$updateId', UpdateDateTime = '$updateDateTime' WHERE Id = '$hueId'";
 
 			$updateQuery = $this->db->query($sql);
 
@@ -77,9 +77,9 @@
 			}
 		}
 
-		public function DeletePage($pageId)
+		public function DeletePage($hueId)
 		{
-			$sql = "DELETE FROM page WHERE Id = '$pageId'";
+			$sql = "DELETE FROM hue WHERE Id = '$hueId'";
 
 			$deleteQuery = $this->db->query($sql);
 
@@ -93,9 +93,9 @@
 			}
 		}
 
-		public function GetAllPage()
+		public function GetAllHue()
 		{
-			$sql = "SELECT * FROM page ORDER BY Name ASC";
+			$sql = "SELECT * FROM hue ORDER BY Name ASC";
 
 			$query = $this->db->query($sql);
 

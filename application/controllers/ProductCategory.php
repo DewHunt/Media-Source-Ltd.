@@ -68,7 +68,7 @@
 
 				$entryId = $this->GetAdminAllInfo()->Id;
 
-				$checkProductCategoryName = $this->ProductCategoryModel->CheckProductCategoryNameExists($productCategoryName);
+				$checkProductCategoryName = $this->ProductCategoryModel->CheckProductCategoryExists($productCategoryName);
 
 				if($checkProductCategoryName)
 				{

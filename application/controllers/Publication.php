@@ -108,7 +108,7 @@
 				$publicationName = $this->input->post('publication-name');
 				$mediaNameId = $this->input->post('media-name-id');
 
-				$checkPublicationName = $this->PublicationModel->checkPublicationNameExists($publicationName,$mediaNameId);
+				$checkPublicationName = $this->PublicationModel->checkPublicationExists($publicationName,$mediaNameId);
 
 				if ($checkPublicationName)
 				{

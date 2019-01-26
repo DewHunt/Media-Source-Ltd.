@@ -9,7 +9,7 @@
 			parent::__construct();
 		}
 
-		public function CheckProductCategoryNameExists($productCategoryName)
+		public function CheckProductCategoryExists($productCategoryName)
 		{
 			$sql = "SELECT * FROM product_category WHERE Name = '$productCategoryName'";
 

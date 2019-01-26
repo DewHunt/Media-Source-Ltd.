@@ -65,9 +65,6 @@
 			else
 			{
 				$publicationTypeName = $this->input->post('publication-type-name');
-				$publicationTypeDescription = $this->input->post('publication-type-description');
-
-				$entryId = $this->GetAdminAllInfo()->Id;
 
 				$checkPublicationTypeName = $this->PublicationTypeModel->CheckPublicationTypeExists($publicationTypeName);
 
@@ -77,6 +74,10 @@
 				}
 				else
 				{
+					$publicationTypeDescription = $this->input->post('publication-type-description');
+
+					$entryId = $this->GetAdminAllInfo()->Id;
+					
 					$result = $this->PublicationTypeModel->CreatePublicationType($publicationTypeName,$publicationTypeDescription,$entryId);
 
 					if ($result)
