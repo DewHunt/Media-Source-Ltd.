@@ -78,7 +78,7 @@
 
 				if ($result)
 				{
-					$output .= '<select class="dropdown" name="'.$idNameAttr.'" id="'.$idNameAttr.'" style="width: 100%;">';
+					$output .= '<select class="dropdown" name="'.$idNameAttr.'" id="'.$idNameAttr.'" style="width: 99%;">';
 					$output .= '<option value="">'.$selectHeader.'</option>';
 					foreach ($result as $value)
 					{
@@ -88,7 +88,7 @@
 				}
 				else
 				{
-					$output .= '<select class="dropdown span10" name="'.$idNameAttr.'" id="'.$idNameAttr.'" disable>';
+					$output .= '<select class="dropdown" name="'.$idNameAttr.'" id="'.$idNameAttr.'" disable>';
 					$output .= '<option value="">Data Option Not Found</option>';
 					$output .= '</select>';				
 				}

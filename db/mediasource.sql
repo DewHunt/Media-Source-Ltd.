@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.4
+-- version 4.8.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 26, 2019 at 08:24 PM
--- Server version: 10.1.28-MariaDB
--- PHP Version: 7.1.10
+-- Generation Time: Jan 27, 2019 at 11:53 AM
+-- Server version: 10.1.33-MariaDB
+-- PHP Version: 7.2.6
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -102,9 +102,8 @@ CREATE TABLE `hue` (
 --
 
 INSERT INTO `hue` (`Id`, `Name`, `Description`, `EntryBy`, `EntryDateTime`, `UpdateBy`, `UpdateDateTime`, `DeleteBy`, `DeleteDateTime`) VALUES
-(2, 'Black and White', 'Black and White', 1, '2019-01-26 19:49:33', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00'),
-(3, 'Black and White', '', 1, '2019-01-26 19:55:36', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00'),
-(4, 'Black and White', '', 1, '2019-01-26 19:59:17', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00');
+(1, 'Color', 'Color', 1, '2019-01-27 07:03:54', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00'),
+(2, 'Black and White', 'Black and White', 1, '2019-01-27 07:05:23', 1, '2019-01-27 07:05:56', 0, '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -281,7 +280,7 @@ CREATE TABLE `publication` (
 --
 
 INSERT INTO `publication` (`Id`, `Name`, `MediaId`, `PublicationTypeId`, `PublicationPlaceId`, `PublicationFrequencyId`, `Language`, `Description`, `Image`, `EntryBy`, `EntryDateTime`, `UpdateBy`, `UpdateDateTime`, `DeleteBy`, `DeleteDateTime`) VALUES
-(2, 'General', 22, 1, 1, 1, 'Bangla', 'daily Newspaper', 'general_22_19012224.png', 1, '2019-01-22 10:19:24', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00'),
+(2, 'General - Prothom Alo', 22, 1, 1, 1, 'Bangla', 'daily Newspaper', 'general_22_19012224.png', 1, '2019-01-22 10:19:24', 1, '2019-01-27 09:20:03', 0, '0000-00-00 00:00:00'),
 (3, 'Rosh Alo', 22, 2, 1, 2, 'Bangla', 'Tabulate Paper Size. Published on Monday. ', 'rosh_alo_22_19012209.png', 1, '2019-01-22 10:28:09', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00'),
 (4, 'Chutir Dine', 22, 2, 1, 2, 'Bangla', 'Tabulate Paper Size. Published On Saturday', 'chutir_dine_22_19012231.png', 1, '2019-01-22 10:29:31', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00'),
 (5, 'Naksha', 22, 2, 1, 2, 'Bangla', 'Tabulate Paper Size. Published on Tuesday.', 'naksha_22_19012249.png', 1, '2019-01-22 10:30:49', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00'),
@@ -291,20 +290,20 @@ INSERT INTO `publication` (`Id`, `Name`, `MediaId`, `PublicationTypeId`, `Public
 (11, 'Shopno Niye', 22, 2, 1, 2, 'Bangla', 'Paper Size Supplementary. Published On Sunday.', 'shopno_niye_22_19012402.jpg', 1, '2019-01-24 08:58:02', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00'),
 (12, 'Anondo', 22, 2, 1, 2, 'Bangla', 'Paper Size Supplementary. Published On Thursday.', 'anondo_22_19012427.png', 1, '2019-01-24 08:59:27', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00'),
 (13, 'Gollachut', 22, 2, 1, 2, 'Bangla', 'Paper Size Supplementary. Published On Friday.', 'gollachut_22_19012407.png', 1, '2019-01-24 09:00:07', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00'),
-(14, 'General', 19, 1, 1, 1, 'Bangla', 'This is daily newspaper.', 'general_19_19012411.png', 1, '2019-01-24 09:09:11', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00'),
+(14, 'General - Bangladesh Pratidin', 19, 1, 1, 1, 'Bangla', 'This is daily newspaper.', 'general_19_19012411.png', 1, '2019-01-24 09:09:11', 1, '2019-01-27 09:19:52', 0, '0000-00-00 00:00:00'),
 (15, 'Friday', 19, 2, 1, 2, 'Bangla', 'Tabulate Paper Size. Published On Friday.', 'friday_19_19012402.png', 1, '2019-01-24 09:11:02', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00'),
 (16, 'Sonibarer Shokal', 19, 2, 1, 2, 'Bangla', 'Tabulate Paper Size. Published On Saturday.', 'sonibarer_shokal_19_19012420.png', 1, '2019-01-24 09:12:20', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00'),
 (17, 'Special Supplementary', 19, 2, 1, 5, 'Bangla', 'This is Supplementary Specially published Yearly.', '', 1, '2019-01-24 09:13:49', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00'),
-(18, 'General', 27, 1, 1, 1, 'English', 'This is daily newspaper.', 'general_27_19012438.png', 1, '2019-01-24 09:15:38', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00'),
+(18, 'General - Daily Star', 27, 1, 1, 1, 'English', 'This is daily newspaper.', 'general_27_19012438.png', 1, '2019-01-24 09:15:38', 1, '2019-01-27 09:19:35', 0, '0000-00-00 00:00:00'),
 (19, 'Showbiz', 27, 2, 1, 2, 'English', 'Tabulate paper Size. Published On Saturday.', 'showbiz_27_19012447.jpg', 1, '2019-01-24 09:16:47', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00'),
 (20, 'Shout', 27, 2, 1, 2, 'English', 'Tabulate Paper Size. Published on Thursday.', 'shout_27_19012450.png', 1, '2019-01-24 09:17:50', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00'),
 (21, 'Star Weekend', 27, 2, 1, 2, 'English', 'Tabulate Paper Size. Published on Friday.', 'star_weekend_27_19012413.png', 1, '2019-01-24 09:19:13', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00'),
 (22, 'Friday', 27, 2, 1, 2, 'English', 'Tabulate Paper Size. Published On Friday.', 'friday_27_19012455.png', 1, '2019-01-24 09:20:55', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00'),
 (23, 'Special Supplementary', 27, 2, 1, 5, 'English', 'This Supplementary published on yearly.', '', 1, '2019-01-24 09:23:54', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00'),
 (24, 'Life Style', 27, 2, 1, 2, 'English', 'Tabulate paper Size. Published on Tuesday.', 'life_style_27_19012451.png', 1, '2019-01-24 09:31:51', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00'),
-(25, 'General', 23, 1, 1, 1, 'English', 'This is daily newspaper.', 'general_23_19012434.png', 1, '2019-01-24 09:33:34', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00'),
+(25, 'General - The Financial Express', 23, 1, 1, 1, 'English', 'This is daily newspaper.', 'general_23_19012434.png', 1, '2019-01-24 09:33:34', 1, '2019-01-27 09:19:23', 0, '0000-00-00 00:00:00'),
 (26, 'Special Supplementary', 23, 2, 1, 5, 'English', 'This supplementary specially published yearly.', '', 1, '2019-01-24 09:34:39', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00'),
-(27, 'General', 28, 1, 1, 1, 'English', 'This is daily newspaper.', 'general_28_19012453.png', 1, '2019-01-24 09:35:53', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00'),
+(27, 'General - The Asian Age', 28, 1, 1, 1, 'English', 'This is daily newspaper.', 'general_28_19012453.png', 1, '2019-01-24 09:35:53', 1, '2019-01-27 09:19:01', 0, '0000-00-00 00:00:00'),
 (28, 'Special Supplementary', 28, 2, 1, 5, 'English', 'This supplementary specially published yearly.', '', 1, '2019-01-24 09:36:49', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
@@ -492,7 +491,7 @@ ALTER TABLE `days`
 -- AUTO_INCREMENT for table `hue`
 --
 ALTER TABLE `hue`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `media`

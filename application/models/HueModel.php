@@ -1,4 +1,4 @@
-HueModel.php<?php
+<?php
 	/**
 	 * 
 	 */
@@ -77,7 +77,7 @@ HueModel.php<?php
 			}
 		}
 
-		public function DeletePage($hueId)
+		public function DeleteHue($hueId)
 		{
 			$sql = "DELETE FROM hue WHERE Id = '$hueId'";
 

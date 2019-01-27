@@ -145,25 +145,25 @@
 		<?php include APPPATH.'views/admin/master/footer.php'; ?>
 
 		<script type="text/javascript">
-			GetDataForSelectMenu("MediaNameModel","GetAllMediaName","#media-select-menu","dropdown span10","media-name-id","Select Media");
-			GetDataForSelectMenu("PublicationTypeModel","GetAllPublicationType","#publication-type-select-menu","dropdown span10","publication-type-id","Select Publication Type");
-			GetDataForSelectMenu("PublicationPlaceModel","GetAllPublicationPlace","#publication-place-select-menu","dropdown span10","publication-place-id","Select Publication Place");
-			GetDataForSelectMenu("PublicationFrequencyModel","GetAllPublicationFrequency","#publication-frequency-select-menu","dropdown span10","publication-frequency-id","Select Publication Frequency");
+			GetDataForSelectMenu("MediaNameModel","GetAllMediaName","#media-select-menu","media-name-id","Select Media");
+			GetDataForSelectMenu("PublicationTypeModel","GetAllPublicationType","#publication-type-select-menu","publication-type-id","Select Publication Type");
+			GetDataForSelectMenu("PublicationPlaceModel","GetAllPublicationPlace","#publication-place-select-menu","publication-place-id","Select Publication Place");
+			GetDataForSelectMenu("PublicationFrequencyModel","GetAllPublicationFrequency","#publication-frequency-select-menu","publication-frequency-id","Select Publication Frequency");
 
-			// Get Media Name Data Script Start
-			function GetDataForSelectMenu(modelName,methodName,divId,classAttr,idNameAttr,selectHeader)
+			// Get All Data For Select Menu Script Start
+			function GetDataForSelectMenu(modelName,methodName,divId,idNameAttr,selectHeader)
 			{
 				$.ajax({
 					type:'ajax',
 					url:'<?php echo base_url('index.php/Publication/GetDataForSelectMenu'); ?>',
 					method:'POST',
-					data:{modelName:modelName,methodName:methodName,classAttr:classAttr,idNameAttr:idNameAttr,selectHeader:selectHeader},
+					data:{modelName:modelName,methodName:methodName,idNameAttr:idNameAttr,selectHeader:selectHeader},
 					success:function(data){
 						$(divId).html(data);
 					}
 				});
 			} 
-			// Get Media Name Data Script End 
+			// Get All Data For Select Menu Script End 
 
 			function Validation()
 			{
