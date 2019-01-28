@@ -66,7 +66,11 @@
 											<div class="control-group">                     
 												<label class="control-label" for="publication">Publication</label>
 												<div class="controls">
-													<div id="publication-select-menu"></div>
+													<div id="publication-select-menu">
+														<select class="dropdown" name="publication-select-menu" id="publication-id" style="width: 99%;">
+															<option value="">Select Publication</option>
+														</select>
+													</div>
 												</div> <!-- /controls -->       
 											</div> <!-- /control-group -->
 											
@@ -208,12 +212,16 @@
 			}
 
 			GetDataForSelectMenu("MediaNameModel","GetAllMediaName","#media-select-menu","media-name-id","Select Media");
-			GetDataForSelectMenu("PublicationModel","GetAllPublication","#publication-select-menu","publication-id","Select Publication");
 			GetDataForSelectMenu("DayModel","GetAllDay","#day-select-menu","day-id","Select Day");
 			GetDataForSelectMenu("PageModel","GetAllPage","#page-select-menu-1","page-id-1","Select Page Name");
 			GetDataForSelectMenu("HueModel","GetAllHue","#hue-select-menu-1","hue-id-1","Select Hue");
 
 			// Get All Data For Select Menu Script Start
+			$(document).on('change', '#media-name-id', function(){
+				var id = $('#media-name-id').val();
+				GetDataForDependantSelectMenu("PublicationModel","GetPublicationByForignKey","MediaId",id,"#publication-select-menu","publication-id","Select Publication");
+			});
+
 			function GetDataForSelectMenu(modelName,methodName,divId,idNameAttr,selectHeader)
 			{
 				$.ajax({
@@ -221,6 +229,19 @@
 					url:'<?php echo base_url('index.php/Price/GetDataForSelectMenu'); ?>',
 					method:'POST',
 					data:{modelName:modelName,methodName:methodName,idNameAttr:idNameAttr,selectHeader:selectHeader},
+					success:function(data){
+						$(divId).html(data);
+					}
+				});
+			} 
+
+			function GetDataForDependantSelectMenu(modelName,methodName,fieldName,id,divId,idNameAttr,selectHeader)
+			{
+				$.ajax({
+					type:'ajax',
+					url:'<?php echo base_url('index.php/Price/GetDataForDependantSelectMenu'); ?>',
+					method:'POST',
+					data:{modelName:modelName,methodName:methodName,fieldName:fieldName,id:id,idNameAttr:idNameAttr,selectHeader:selectHeader},
 					success:function(data){
 						$(divId).html(data);
 					}
@@ -256,44 +277,44 @@
 
 				for (var i = 1; i <= totalRow; i++)
 				{
-					var priceTitle = "#price-title-"+i;
-					var pageId = "#page-id-"+i;
-					var hueId = "#hue-id-"+i;
-					var col = "#col-"+i;
-					var inch = "#inch-"+i;
-					var price = "#price-"+i;
+					var priceTitleIdAttr = "#price-title-"+i;
+					var pageIdAttr = "#page-id-"+i;
+					var hueIdAttr = "#hue-id-"+i;
+					var colIdAttr = "#col-"+i;
+					var inchIdAttr = "#inch-"+i;
+					var priceIdAttr = "#price-"+i;
 
-					if ($(priceTitle).val() == "")
+					if ($(priceTitleIdAttr).val() == "")
 					{
 						alert("In Row "+i+", Price Title Can't be Empty");
 						return false;
 					}
 
-					if ($(pageId).val() == "")
+					if ($(pageIdAttr).val() == "")
 					{
 						alert("In Row "+i+", Page Name Can't Be Empty.");
 						return false;
 					}
 
-					if ($(hueId).val() == "")
+					if ($(hueIdAttr).val() == "")
 					{
 						alert("In Row "+i+", Hue Can't Be Empty");
 						return false;
 					}
 
-					if ($(col).val() == "")
+					if ($(colIdAttr).val() == "")
 					{
 						alert("In Row "+i+", Column Can't be Empty");
 						return false;
 					}
 
-					if ($(inch).val() == "")
+					if ($(inchIdAttr).val() == "")
 					{
 						alert("In Row "+i+", Inch Can't be Empty");
 						return false;
 					}
 
-					if ($(price).val() == "")
+					if ($(priceIdAttr).val() == "")
 					{
 						alert("In Row "+i+", Price Can't be Enpty");
 						return false;

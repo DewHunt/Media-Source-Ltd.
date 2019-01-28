@@ -108,5 +108,21 @@
 				return false;
 			}
 		}
+
+		public function GetPublicationByForignKey($fieldName,$id)
+		{
+			$sql = "SELECT * FROM publication WHERE $fieldName = $id ORDER BY Name ASC";
+
+			$query = $this->db->query($sql);
+
+			if ($query->num_rows() > 0)
+			{
+				return $query->result();
+			}
+			else
+			{
+				return false;
+			}
+		}
 	}
 ?>
