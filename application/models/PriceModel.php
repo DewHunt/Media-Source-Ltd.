@@ -26,5 +26,21 @@
 				return false;
 			}
 		}
+
+		public function GetPriceById($priceId)
+		{
+			$sql = "SELECT * FROM price WHERE Id = $priceId";
+
+			$query = $this->db->query($sql);
+
+			if ($query->num_rows() > 0)
+			{
+				return $query->row();
+			}
+			else
+			{
+				return false;
+			}
+		}
 	}
 ?>

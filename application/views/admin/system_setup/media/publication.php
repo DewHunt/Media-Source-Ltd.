@@ -205,89 +205,35 @@
 					if (publicationName == "")
 					{
 						alert("Oops! Publication Name Can't Be Empty. Please Enter Publication Name");
-						$('#publication-name').css({'border':'1px solid red'});
-
-						$('#media-name-id').css({'border':'1px solid gray'});
-						$('#publication-type-id').css({'border':'1px solid gray'});
-						$('#publication-place-id').css({'border':'1px solid gray'});
-						$('#publication-frequency-id').css({'border':'1px solid gray'});
-						$('#language-label').css({'color':'black'});
-						$('#language-label').css({'color':'black'});
 						return false;
 					}
 					else if (mediaNameId == "")
 					{
-						$('#publication-name').css({'border':'1px solid gray'});
-
 						alert("Oops! Media Name Can't Be Empty. Please Select Media Name");
-						$('#media-name-id').css({'border':'1px solid red'});
-						
-						$('#publication-name').css({'border':'1px solid gray'});
-						$('#publication-type-id').css({'border':'1px solid gray'});
-						$('#publication-place-id').css({'border':'1px solid gray'});
-						$('#publication-frequency-id').css({'border':'1px solid gray'});
-						$('#language-label').css({'color':'black'});
 						return false;
 					}
 					else if (publicationTypeId == "")
 					{
-						$('#media-name-id').css({'border':'1px solid gray'});
-
 						alert("Oops! Publication Type Can't Be Empty. Please Select Publication Type");
-						$('#publication-type-id').css({'border':'1px solid red'});
-						
-						$('#publication-name').css({'border':'1px solid gray'});
-						$('#media-name-id').css({'border':'1px solid gray'});
-						$('#publication-place-id').css({'border':'1px solid gray'});
-						$('#publication-frequency-id').css({'border':'1px solid gray'});
-						$('#language-label').css({'color':'black'});
 						return false;						
 					}
 					else if (publicationPlaceId == "")
 					{
-						$('#publication-type-id').css({'border':'1px solid gray'});
-
 						alert("Oops! Publication Place Can't Be Empty. Please Select Publication Place");
-						$('#publication-place-id').css({'border':'1px solid red'});
-						
-						$('#publication-name').css({'border':'1px solid gray'});
-						$('#media-name-id').css({'border':'1px solid gray'});
-						$('#publication-type-id').css({'border':'1px solid gray'});
-						$('#publication-frequency-id').css({'border':'1px solid gray'});
-						$('#language-label').css({'color':'black'});
 						return false;
 					}
 					else if (publicationFrequencyId == "")
 					{
-						$('#publication-place-id').css({'border':'1px solid gray'});
 						alert("Oops! Publication Frequency Can't Be Empty. Please Select Publication Frequency");
-						$('#publication-frequency-id').css({'border':'1px solid red'});
-						
-						$('#publication-name').css({'border':'1px solid gray'});
-						$('#media-name-id').css({'border':'1px solid gray'});
-						$('#publication-type-id').css({'border':'1px solid gray'});
-						$('#publication-place-id').css({'border':'1px solid gray'});
-						$('#language-label').css({'color':'black'});
 						return false;
 					}
 					else if (publicationLanguage == null)
 					{
-						$('#publication-frequency-id').css({'border':'1px solid gray'});
-
 						alert("Oops! Publication Language Can't Be Empty. Please Select Publication Language");
-						$('#language-label').css({'color':'red'});
-						
-						$('#publication-name').css({'border':'1px solid gray'});
-						$('#media-name-id').css({'border':'1px solid gray'});
-						$('#publication-type-id').css({'border':'1px solid gray'});
-						$('#publication-place-id').css({'border':'1px solid gray'});
-						$('#publication-frequency-id').css({'border':'1px solid gray'});
 						return false;
 					}
 					else
 					{
-						$('#language-label').css({'color':'black'});
-
 						$.ajax({
 							url:'<?php echo base_url("index.php/Publication/UpdatePublication"); ?>',
 							method:'POST',
