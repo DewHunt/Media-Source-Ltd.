@@ -11,7 +11,7 @@
 
 		public function checkProductExists($productName,$productCategoryId)
 		{
-			$sql = "SELECT * FROM product WHERE Name = '".$productName."' AND ProductCategoryId = '".$productCategoryId."'";
+			$sql = "SELECT * FROM product_cat WHERE Name = '".$productName."' AND ProductId = '".$productCategoryId."'";
 
 			$checkQuery = $this->db->query($sql);
 
@@ -25,11 +25,11 @@
 			}
 		}
 
-		public function CreateProduct($productName,$productCategoryId,$productDescription,$entryId)
+		public function CreateProduct($productCategoryId,$productName,$productDescription,$entryId)
 		{
 			$entryDateTime = date('Y-m-d H:i:s');
 
-			$sql = "INSERT INTO product (Name, ProductCategoryID, Description, EntryBy, EntryDateTime) VALUES ('$productName','$productCategoryId','$productDescription','$entryId','$entryDateTime')";
+			$sql = "INSERT INTO product_cat (ProductId, Name, Description, EntryBy, EntryDateTime) VALUES ('$productCategoryId','$productName','$productDescription','$entryId','$entryDateTime')";
 
 			$productQuery = $this->db->query($sql);
 
@@ -45,7 +45,7 @@
 
 		public function GetProductById($productId)
 		{
-			$sql = "SELECT * FROM product WHERE Id = ".$productId;
+			$sql = "SELECT * FROM product_cat WHERE Id = ".$productId;
 
 			$query = $this->db->query($sql);
 
@@ -59,10 +59,10 @@
 			}
 		}
 
-		public function UpdateProduct($productId,$productName,$productCategoryId,$productDescription,$updateId)
+		public function UpdateProduct($productId,$productCategoryId,$productName,$productDescription,$updateId)
 		{
-			$updateDateTime = date('Y-m-d H:i:s');
-			$sql = "UPDATE product SET Name = '$productName', ProductCategoryId = '$productCategoryId', Description = '$productDescription', UpdateBy = '$updateId', UpdateDateTime = '$updateDateTime' WHERE Id = '$productId'";
+			$updateTime = date('Y-m-d H:i:s');
+			$sql = "UPDATE product_cat SET ProductId = '$productCategoryId', Name = '$productName', Description = '$productDescription', UpdateBy = '$updateId', UpdateTime = '$updateTime' WHERE Id = '$productId'";
 
 			$updateQuery = $this->db->query($sql);
 
@@ -78,7 +78,7 @@
 
 		public function DeleteProduct($productId)
 		{
-			$sql = "DELETE FROM product WHERE Id = '".$productId."'";
+			$sql = "DELETE FROM product_cat WHERE Id = '".$productId."'";
 
 			$query = $this->db->query($sql);
 

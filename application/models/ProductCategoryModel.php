@@ -11,7 +11,7 @@
 
 		public function CheckProductCategoryExists($productCategoryName)
 		{
-			$sql = "SELECT * FROM product_category WHERE Name = '$productCategoryName'";
+			$sql = "SELECT * FROM product WHERE Name = '$productCategoryName'";
 
 			$checkQuery = $this->db->query($sql);
 
@@ -29,7 +29,7 @@
 		{
 			$entryDateTime = date('Y-m-d H:i:s');
 
-			$sql = "INSERT INTO product_category (Name, Description, EntryBy, EntryDateTime) VALUES ('$productCategoryName', '$productCategoryDescription', '$entryId', '$entryDateTime')";
+			$sql = "INSERT INTO product (Name, Description, EntryBy, EntryDateTime) VALUES ('$productCategoryName', '$productCategoryDescription', '$entryId', '$entryDateTime')";
 
 			$insertQuery = $this->db->query($sql);
 
@@ -45,7 +45,7 @@
 
 		public function GetProductCategoryById($productCategoryId)
 		{
-			$sql = "SELECT * FROM product_category WHERE Id = '$productCategoryId'";
+			$sql = "SELECT * FROM product WHERE Id = '$productCategoryId'";
 
 			$query = $this->db->query($sql);
 
@@ -62,7 +62,7 @@
 		public function UpdateProductCategory($productCategoryId,$productCategoryName,$productCategoryDescription,$updateId)
 		{
 			$updateDateTime = date('Y-m-d H:i:s');
-			$sql = "UPDATE product_category SET Name = '$productCategoryName', Description = '$productCategoryDescription', UpdateBy = '$updateId', UpdateDateTime = '$updateDateTime' WHERE Id = '$productCategoryId'";
+			$sql = "UPDATE product SET Name = '$productCategoryName', Description = '$productCategoryDescription', UpdateBy = '$updateId', UpdateDateTime = '$updateDateTime' WHERE Id = '$productCategoryId'";
 
 			$updateQuery = $this->db->query($sql);
 
@@ -78,7 +78,7 @@
 
 		public function DeleteProductCategory($productCategoryId)
 		{
-			$sql = "DELETE FROM product_category WHERE Id = '$productCategoryId'";
+			$sql = "DELETE FROM product WHERE Id = '$productCategoryId'";
 
 			$deleteQuery = $this->db->query($sql);
 
@@ -94,7 +94,7 @@
 
 		public function GetAllProductCategory()
 		{
-			$sql = "SELECT * FROM product_category ORDER BY Name ASC";
+			$sql = "SELECT * FROM product ORDER BY Name ASC";
 
 			$query = $this->db->query($sql);
 

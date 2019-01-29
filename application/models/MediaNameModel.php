@@ -25,11 +25,11 @@
 			}
 		}
 
-		public function CreateMediaName($mediaName,$imageName,$entryId)
+		public function CreateMediaName($mediaName,$mediaOwner,$mediaPhone,$mediaEmail,$mediaAddress,$dbImageName,$entryId)
 		{
 			$entryDateTime = date('Y-m-d H:i:s');
 
-			$sql = "INSERT INTO media (Name, Image, EntryBy, EntryDateTime) VALUES ('$mediaName', '$imageName', '$entryId', '$entryDateTime')";
+			$sql = "INSERT INTO media (Name, Owner, Phone, Email, Address, Image, EntryBy, EntryDateTime) VALUES ('$mediaName', '$mediaOwner', '$mediaPhone', '$mediaEmail', '$mediaAddress', '$dbImageName', '$entryId', '$entryDateTime')";
 
 			$mediaQuery = $this->db->query($sql);
 
@@ -59,11 +59,11 @@
 			}
 		}
 
-		public function UpdateMediaName($mediaId, $mediaName, $dbImageName, $updateId)
+		public function UpdateMediaName($mediaId,$mediaName,$mediaOwner,$mediaPhone,$mediaEmail,$mediaAddress,$dbImageName,$updateId)
 		{
-			$updateDateTime = date('Y-m-d H:i:s');
+			$updateTime = date('Y-m-d H:i:s');
 
-			$sql = "UPDATE media SET Name = '".$mediaName."', Image = '".$dbImageName."', UpdateBy = '".$updateId."', UpdateDateTime = '".$updateDateTime."' WHERE Id = '".$mediaId."'";
+			$sql = "UPDATE media SET Name = '".$mediaName."', Owner = '".$mediaOwner."', Phone = '".$mediaPhone."', Email = '".$mediaEmail."', Address = '".$mediaAddress."', Image = '".$dbImageName."', UpdateBy = '".$updateId."', UpdateTime = '".$updateTime."' WHERE Id = '".$mediaId."'";
 
 			$query = $this->db->query($sql);
 

@@ -29,6 +29,9 @@
 											<tr>
 												<th>Sl</th>
 												<th>Name</th>
+												<th>Owner</th>
+												<th>Phone</th>
+												<th>Email</th>
 												<th>Image</th>
 												<th>Action</th>
 											</tr>
@@ -38,6 +41,9 @@
 											<tr>
 												<th>Sl</th>
 												<th>Name</th>
+												<th>Owner</th>
+												<th>Phone</th>
+												<th>Email</th>
 												<th>Image</th>
 												<th>Action</th>
 											</tr>
@@ -56,6 +62,18 @@
 													<div class="modal-body">
 														<label>Media Name&nbsp;<span class="mendatory">*</span></label>
 														<input type="text" name="media-name" id="media-name" class="form-control" style="width: 100%;">
+
+														<label>Owner</label>
+														<input type="text" id="media-owner" name="media-owner" value="" style="width: 100%;">
+
+														<label>Phone</label>
+														<input type="text" id="media-phone" name="media-phone" value="" style="width: 100%;">
+
+														<label>Email</label>
+														<input type="text" id="media-email" name="media-email" value="" style="width: 100%;">
+
+														<label>Address</label>
+														<textarea style="width: 100%;" rows="3" id="media-address" name="media-address"></textarea>
 
 														<label>Image</label>
 														<input type="file" name="new-media-image" id="new-media-image" class="form-control">
@@ -119,6 +137,10 @@
 						success:function(data){
 							$('#media-modal').modal('show');
 							$('#media-name').val(data.mediaName);
+							$('#media-owner').val(data.mediaOwner);
+							$('#media-phone').val(data.mediaPhone);
+							$('#media-email').val(data.mediaEmail);
+							$('#media-address').val(data.mediaAddress);
 							$('#uploaded-media-image').html(data.mediaImage);
 							$('#media-id').val(data.mediaId);
 						}

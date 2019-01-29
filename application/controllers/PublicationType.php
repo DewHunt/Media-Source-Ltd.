@@ -101,7 +101,7 @@
 			else
 			{
 				$option = "dt-common";
-				$table = "publication_type";
+				$table = "pubtype";
 				$selectColumn = array("Id","Name","Description");
 				$orderColumn = array("Id","Name",null,null);
 

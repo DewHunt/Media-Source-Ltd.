@@ -12,7 +12,7 @@
 
 		public function CheckPublicationTypeExists($publicationTypeName)
 		{
-			$sql = "SELECT * FROM publication_type WHERE Name = '$publicationTypeName'";
+			$sql = "SELECT * FROM pubtype WHERE Name = '$publicationTypeName'";
 
 			$checkQuery = $this->db->query($sql);
 
@@ -30,7 +30,7 @@
 		{
 			$entryDateTime = date('Y-m-d H:i:s');
 
-			$sql = "INSERT INTO publication_type (Name, Description, EntryBy, EntryDateTime) VALUES ('$publicationTypeName','$publicationTypeDescription','$entryId','$entryDateTime')";
+			$sql = "INSERT INTO pubtype (Name, Description, EntryBy, EntryDateTime) VALUES ('$publicationTypeName','$publicationTypeDescription','$entryId','$entryDateTime')";
 
 			$insertQuery = $this->db->query($sql);
 
@@ -46,7 +46,7 @@
 
 		public function GetPublicationTypeById($publicationTypeId)
 		{
-			$sql = "SELECT * FROM publication_type WHERE Id = '$publicationTypeId'";
+			$sql = "SELECT * FROM pubtype WHERE Id = '$publicationTypeId'";
 
 			$query = $this->db->query($sql);
 
@@ -62,8 +62,8 @@
 
 		public function UpdatePublicationType($publicationTypeId,$publicationTypeName,$publicationTypeDescription,$updateId)
 		{
-			$updateDateTime = date('Y-m-d H:i:s');
-			$sql = "UPDATE publication_type SET Name = '$publicationTypeName', Description = '$publicationTypeDescription', UpdateBy = '$updateId', UpdateDateTime = '$updateDateTime' WHERE Id = '$publicationTypeId'";
+			$updateTime = date('Y-m-d H:i:s');
+			$sql = "UPDATE pubtype SET Name = '$publicationTypeName', Description = '$publicationTypeDescription', UpdateBy = '$updateId', UpdateTime = '$updateTime' WHERE Id = '$publicationTypeId'";
 
 			$updateQuery = $this->db->query($sql);
 
@@ -79,7 +79,7 @@
 
 		public function DeletePublicationType($publicationTypeId)
 		{
-			$sql = "DELETE FROM publication_type WHERE Id = '$publicationTypeId'";
+			$sql = "DELETE FROM pubtype WHERE Id = '$publicationTypeId'";
 
 			$deleteQuery = $this->db->query($sql);
 
@@ -95,7 +95,7 @@
 
 		public function GetAllPublicationType()
 		{
-			$sql = "SELECT * FROM publication_type ORDER BY Name ASC";
+			$sql = "SELECT * FROM pubtype ORDER BY Name ASC";
 
 			$query = $this->db->query($sql);
 

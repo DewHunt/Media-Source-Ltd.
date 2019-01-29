@@ -31,7 +31,7 @@
 										
 										<tr>
 											<th>Mobile</th>
-											<td><?= $adminInfo->Mobile; ?></td>
+											<td><?= $adminInfo->Phone; ?></td>
 										</tr>
 										
 										<tr>
@@ -41,7 +41,7 @@
 										
 										<tr>
 											<th>User Name</th>
-											<td><?= $adminInfo->UserName; ?></td>
+											<td><?= $adminInfo->UserId; ?></td>
 										</tr>
 									</table>
 								</div>  <!-- /widget-content --> 

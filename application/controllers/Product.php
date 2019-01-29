@@ -113,7 +113,7 @@
 
 					$entryId = $this->GetAdminAllInfo()->Id;
 
-					$result = $this->ProductModel->CreateProduct($productName,$productCategoryId,$productDescription,$entryId);
+					$result = $this->ProductModel->CreateProduct($productCategoryId,$productName,$productDescription,$entryId);
 
 					if ($result)
 					{
@@ -136,9 +136,9 @@
 			else
 			{
 				$option = "dt-product";
-				$table = "product";
-				$selectColumn = array("Id","Name","ProductCategoryId","Description");
-				$orderColumn = array("Id","Name","ProductCategoryId",null,null);
+				$table = "product_cat";
+				$selectColumn = array("Id","ProductId","Name","Description");
+				$orderColumn = array("Id","ProductId","Name",null,null);
 
 				$productInfo = $this->DataTableModel->MakeDataTables($option,$table,$selectColumn,$orderColumn);
 				$sl = 1;
@@ -149,7 +149,7 @@
 					$product = array();
 					$product[] = $sl;
 					$product[] = $value->Name;
-					$product[] = $this->ProductCategoryModel->GetProductCategoryById($value->ProductCategoryId)->Name;
+					$product[] = $this->ProductCategoryModel->GetProductCategoryById($value->ProductId)->Name;
 					// $product[] = $value->ProductCategoryId;
 					$product[] = $value->Description;
 					$product[] = '<button type="button" name="update" id="'.$value->Id.'" class="btn btn-warning btn-xs update">Update</button> <button type="button" name="delete" id="'.$value->Id.'" class="btn btn-danger btn-xs delete">Delete</button>';
@@ -184,7 +184,7 @@
 				$output['productId'] = $data->Id;
 				$output['productName'] = $data->Name;
 				$output['productDescription'] = $data->Description;
-				$output['productCategoryId'] = $data->ProductCategoryId;
+				$output['productCategoryId'] = $data->ProductId;
 
 				echo json_encode($output);
 			}
@@ -205,7 +205,7 @@
 				$productId = $this->input->post('product-id');
 				$updateId = $this->GetAdminAllInfo()->Id;
 
-				$result = $this->ProductModel->UpdateProduct($productId,$productName,$productCategoryId,$productDescription,$updateId);
+				$result = $this->ProductModel->UpdateProduct($productId,$productCategoryId,$productName,$productDescription,$updateId);
 
 				if ($result)
 				{

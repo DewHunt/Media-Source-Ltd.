@@ -64,6 +64,34 @@
 												</div> <!-- /controls -->				
 											</div> <!-- /control-group -->
 											
+											<div class="control-group">											
+												<label class="control-label" for="owner">Owner</label>
+												<div class="controls">
+													<input type="text" class="span10" id="media-owner" name="media-owner" value="">
+												</div> <!-- /controls -->				
+											</div> <!-- /control-group -->
+											
+											<div class="control-group">											
+												<label class="control-label" for="phone">Mobile / Phone</label>
+												<div class="controls">
+													<input type="text" class="span10" id="media-phone" name="media-phone" value="">
+												</div> <!-- /controls -->				
+											</div> <!-- /control-group -->
+											
+											<div class="control-group">											
+												<label class="control-label" for="email">Email</label>
+												<div class="controls">
+													<input type="text" class="span10" id="media-email" name="media-email" value="">
+												</div> <!-- /controls -->				
+											</div> <!-- /control-group -->
+											
+											<div class="control-group">											
+												<label class="control-label" for="address">Address</label>
+												<div class="controls">
+													<textarea class="span10" rows="3" id="media-address" name="media-address"></textarea>
+												</div> <!-- /controls -->				
+											</div> <!-- /control-group -->
+											
 											<div class="control-group">                   
 												<label class="control-label" for="image">Image</label>
 												<div class="controls">

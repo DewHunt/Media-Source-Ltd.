@@ -66,7 +66,7 @@
 				if (isset($_POST["search"]["value"]))
 				{
 					$this->db->like("Name",$_POST["search"]["value"]);
-					$this->db->or_where("ProductCategoryId",$_POST["search"]["value"]);
+					$this->db->or_where("ProductId",$_POST["search"]["value"]);
 				}
 
 				if (isset($_POST["order"]))

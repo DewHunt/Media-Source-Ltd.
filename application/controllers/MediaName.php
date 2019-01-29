@@ -78,6 +78,11 @@
 				}
 				else
 				{
+					$mediaOwner = $this->input->post('media-owner');
+					$mediaPhone = $this->input->post('media-phone');
+					$mediaEmail = $this->input->post('media-email');
+					$mediaAddress = $this->input->post('media-address');
+
 					// Copy Image and Get Image New Name
 					$config['upload_path'] = "images/media_logo/";
 					$config['allowed_types'] = "jpg|jpeg|png|gif";
@@ -99,7 +104,7 @@
 						copy($_FILES['media-image']['tmp_name'],$copyImageName);
 					}
 
-					$result = $this->MediaNameModel->CreateMediaName($mediaName,$dbImageName,$entryId);
+					$result = $this->MediaNameModel->CreateMediaName($mediaName,$mediaOwner,$mediaPhone,$mediaEmail,$mediaAddress,$dbImageName,$entryId);
 
 					if ($result)
 					{
@@ -123,7 +128,7 @@
 			{
 				$option = "dt-common";
 				$table = "media";
-				$selectColumn = array("Id","Name","Image");
+				$selectColumn = array("Id","Name","Owner","Phone","Email","Address","Image");
 				$orderColumn = array("Id","Name",null,null);
 
 				$mediaInfo = $this->DataTableModel->MakeDataTables($option,$table,$selectColumn,$orderColumn);
@@ -135,6 +140,9 @@
 					$media = array();
 					$media[] = $sl;
 					$media[] = $value->Name;
+					$media[] = $value->Owner;
+					$media[] = $value->Phone;
+					$media[] = $value->Email;
 					$media[] = '<img src="'.base_url("images/media_logo/").$value->Image.'" width="80px" height="80px">';
 					$media[] = '<button type="button" name="update" id="'.$value->Id.'" class="btn btn-warning btn-xs update">Update</button> <button type="button" name="delete" id="'.$value->Id.'" class="btn btn-danger btn-xs delete">Delete</button>';
 					$sl++;
@@ -167,6 +175,10 @@
 
 				$output['mediaId'] = $data->Id;
 				$output['mediaName'] = $data->Name;
+				$output['mediaOwner'] = $data->Owner;
+				$output['mediaPhone'] = $data->Phone;
+				$output['mediaEmail'] = $data->Email;
+				$output['mediaAddress'] = $data->Address;
 				$output['previousMediaImage'] = $data->Image;
 
 				if ($data->Image == "")
@@ -191,6 +203,10 @@
 			else
 			{
 				$mediaName = $this->input->post('media-name');
+				$mediaOwner = $this->input->post('media-owner');
+				$mediaPhone = $this->input->post('media-phone');
+				$mediaEmail = $this->input->post('media-email');
+				$mediaAddress = $this->input->post('media-address');
 				$mediaId = $this->input->post('media-id');
 				$updateId = $this->GetAdminAllInfo()->Id;
 				$newMediaImage = "";
@@ -218,14 +234,17 @@
 					{					
 						$deleteImage = $config['upload_path'].$previousImage;
 
-						chown($deleteImage, 666);
-						unlink($deleteImage);
+						if (file_exists($deleteImage))
+						{
+							chown($deleteImage, 666);
+							unlink($deleteImage);
+						}
 					}
 
 					copy($_FILES['new-media-image']['tmp_name'],$copyImageName);
 				}
 
-				$result = $this->MediaNameModel->UpdateMediaName($mediaId, $mediaName, $dbImageName, $updateId);
+				$result = $this->MediaNameModel->UpdateMediaName($mediaId,$mediaName,$mediaOwner,$mediaPhone,$mediaEmail,$mediaAddress,$dbImageName,$updateId);
 
 				if ($result)
 				{

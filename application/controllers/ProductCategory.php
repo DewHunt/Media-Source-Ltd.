@@ -101,7 +101,7 @@
 			else
 			{
 				$option = "dt-common";			
-				$table = "product_category";
+				$table = "product";
 				$selectColumn = array("Id","Name","Description");
 				$orderColumn = array("Id","Name",null,null);
 

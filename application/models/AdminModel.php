@@ -26,7 +26,7 @@
 
 		public function GetAdminAllInfo($userName, $password)
 		{
-			$sql = "SELECT * FROM admins WHERE Username = '".$userName."' AND Password = '".$password."'";
+			$sql = "SELECT * FROM users WHERE UserId = '".$userName."' AND Password = '".$password."'";
 
 			$admin_check = $this->db->query($sql);
 
@@ -42,7 +42,7 @@
 
 		public function GetAdminId($userName, $password)
 		{
-			$sql = "SELECT * FROM admins WHERE Username = '".$userName."' AND Password = '".$password."'";
+			$sql = "SELECT * FROM admins WHERE UserId = '".$userName."' AND Password = '".$password."'";
 
 			$admin_check = $this->db->query($sql);
 
