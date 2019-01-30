@@ -145,11 +145,14 @@
 			}
 			else
 			{
+				$priceMediaName = $this->input->post('price-media-name');
 				$mediaId = $this->input->post('media-name-id');
 				$publicationId = $this->input->post('publication-id');
-				$dayId = $this->input->post('day-id');
+				$day = $this->input->post('day');
 				$entryId = $this->GetAdminAllInfo()->Id;
 				$totalRow = $this->input->post('sl');
+
+				$priceId = $this->PriceModel->CreatePrice($priceMediaName,$mediaId,$publicationId,$day,$entryId);
 
 				for ($i=1; $i <= $totalRow; $i++)
 				{ 
@@ -159,6 +162,7 @@
 					$colNameAttr = "col-".$i;
 					$inchNameAttr = "inch-".$i;
 					$priceNameAttr = "price-".$i;
+					$priceDescriptionNameAttr = "price-description-".$i;
 
 					$priceTitle = $this->input->post($priceTitleNameAttr);
 					$pageId = $this->input->post($pageIdNameAttr);
@@ -166,8 +170,9 @@
 					$col = $this->input->post($colNameAttr);
 					$inch = $this->input->post($inchNameAttr);
 					$price = $this->input->post($priceNameAttr);
+					$priceDescription = $this->input->post($priceDescriptionNameAttr);
 
-					$result = $this->PriceModel->CreatePrice($priceTitle,$mediaId,$publicationId,$dayId,$pageId,$hueId,$col,$inch,$price,$entryId);
+					$result = $this->PriceModel->CreatePriceDetails($priceId,$priceTitle,$hueId,$pageId,$price,$col,$inch,$priceDescription,$entryId);
 				}
 
 				if ($result)
@@ -229,7 +234,7 @@
 			}
 		}
 
-		public function GetPriceById()
+		public function GetPriceDetailsById()
 		{
 			if ($this->session->userdata('adminUserName') == "" || $this->session->userdata('adminPassword') == "")
 			{
@@ -238,20 +243,25 @@
 			else
 			{
 				$output = array();
-				$priceId = $this->input->post('priceId');
+				$priceDetailsId = $this->input->post('priceDetailsId');
 
-				$data = $this->PriceModel->GetPriceById($priceId);
+				$data = $this->PriceModel->GetPriceDetailsById($priceDetailsId);
 
-				$output['priceId'] = $data->Id;
+				$output['priceDetailsId'] = $data->Id;
+				$output['priceId'] = $data->PriceId;
 				$output['priceTitle'] = $data->Name;
-				$output['mediaId'] = $data->MediaId;
-				$output['publicationId'] = $data->PublicationId;
-				$output['dayId'] = $data->DayId;
-				$output['pageId'] = $data->PageId;
-				$output['hueId'] = $data->HueId;
+				$output['hueId'] = $data->Hue;
+				$output['pageId'] = $data->PageNoId;
+				$output['price'] = $data->Price;
 				$output['col'] = $data->Col;
 				$output['inch'] = $data->Inch;
-				$output['price'] = $data->Price;
+				$output['priceDescription'] = $data->Description;
+
+				// $priceDetailsInfo = $this->PriceModel->GetPriceDetailsById($data->PriceId);
+
+				// $output['mediaId'] = $priceDetailsInfo->MediaId;
+				// $output['publicationId'] = $data->PublicationId;
+				// $output['dayId'] = $data->DayId;
 
 				echo json_encode($output);
 			}

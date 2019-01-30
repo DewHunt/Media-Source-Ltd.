@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.0.1
+-- version 4.7.4
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 30, 2019 at 12:40 PM
--- Server version: 10.1.32-MariaDB
--- PHP Version: 5.6.36
+-- Generation Time: Jan 30, 2019 at 08:06 PM
+-- Server version: 10.1.28-MariaDB
+-- PHP Version: 7.1.10
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -956,7 +956,8 @@ INSERT INTO `price` (`Id`, `Name`, `MediaId`, `PublicationId`, `Day`, `EntryBy`,
 (95, 'Daily Star Pricing(Shout)', 50, 51, '0', 1, '2016-11-14 09:30:23', NULL, NULL, NULL, NULL, 1),
 (96, 'Daily Star Pricing(Star Weekend)', 50, 52, 'Friday', 1, '2016-11-14 09:39:53', 1, '2017-09-09 06:59:02', NULL, NULL, 1),
 (130, 'Sonibarer Shokal (B.Pratidin)', 51, 58, 'Saturday', 1, '2017-04-18 05:15:08', 1, '2017-09-17 10:35:15', NULL, NULL, 1),
-(152, 'Asian Age General Price', 52, 60, 'AllDays', 1, '2017-08-09 07:42:29', 1, '2017-09-12 08:04:23', NULL, NULL, 1);
+(152, 'Asian Age General Price', 52, 60, 'AllDays', 1, '2017-08-09 07:42:29', 1, '2017-09-12 08:04:23', NULL, NULL, 1),
+(160, 'Dew Hunt', 52, 60, 'Saturday', 1, '2019-01-30 18:59:41', NULL, NULL, NULL, NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -1139,7 +1140,10 @@ INSERT INTO `pricedetails` (`Id`, `PriceId`, `Name`, `Hue`, `PageNoId`, `Price`,
 (4432, 38, 'BP-Jacket 2nd Page', 1, 57, '15000.00', 1, 1, '', 1, '2017-10-23 11:56:26', NULL, NULL, NULL, NULL, 1),
 (4433, 38, 'BP-Jacket 3rdd Page', 1, 58, '9500.00', 1, 1, '', 1, '2017-10-23 11:56:26', NULL, NULL, NULL, NULL, 1),
 (4434, 38, 'BP-Jacket 4th Page', 1, 59, '10000.00', 1, 1, '', 1, '2017-10-23 11:56:26', NULL, NULL, NULL, NULL, 1),
-(4435, 38, 'BP- Sports b/w', 2, 23, '4500.00', 1, 1, '', 1, '2017-10-23 11:56:27', NULL, NULL, NULL, NULL, 1);
+(4435, 38, 'BP- Sports b/w', 2, 23, '4500.00', 1, 1, '', 1, '2017-10-23 11:56:27', NULL, NULL, NULL, NULL, 1),
+(4439, 160, 'Salman', 1, 47, '10.00', 1, 1, 'Ten', 1, '2019-01-30 18:59:41', NULL, NULL, NULL, NULL, 1),
+(4440, 160, 'Sabbir', 2, 48, '15.00', 1, 1, 'Fifteen', 1, '2019-01-30 18:59:41', NULL, NULL, NULL, NULL, 1),
+(4441, 160, 'Shishir', 1, 34, '20.00', 1, 1, 'Twenty', 1, '2019-01-30 18:59:41', NULL, NULL, NULL, NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -1941,7 +1945,7 @@ ALTER TABLE `dataentryreport`
 -- AUTO_INCREMENT for table `hue`
 --
 ALTER TABLE `hue`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `keyword`
@@ -1953,7 +1957,7 @@ ALTER TABLE `keyword`
 -- AUTO_INCREMENT for table `media`
 --
 ALTER TABLE `media`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
 
 --
 -- AUTO_INCREMENT for table `newscategory`
@@ -1983,7 +1987,7 @@ ALTER TABLE `outlook`
 -- AUTO_INCREMENT for table `page`
 --
 ALTER TABLE `page`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=64;
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=63;
 
 --
 -- AUTO_INCREMENT for table `pageposition`
@@ -2013,13 +2017,13 @@ ALTER TABLE `position`
 -- AUTO_INCREMENT for table `price`
 --
 ALTER TABLE `price`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=158;
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=161;
 
 --
 -- AUTO_INCREMENT for table `pricedetails`
 --
 ALTER TABLE `pricedetails`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4637;
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4442;
 
 --
 -- AUTO_INCREMENT for table `product`
@@ -2037,19 +2041,19 @@ ALTER TABLE `product_cat`
 -- AUTO_INCREMENT for table `pubfrequency`
 --
 ALTER TABLE `pubfrequency`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `publication`
 --
 ALTER TABLE `publication`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=65;
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=62;
 
 --
 -- AUTO_INCREMENT for table `pubplace`
 --
 ALTER TABLE `pubplace`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `pubtype`

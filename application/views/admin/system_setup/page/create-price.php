@@ -84,7 +84,7 @@
 											<div class="control-group">                     
 												<label class="control-label" for="day">Day</label>
 												<div class="controls">
-													<select class="dropdown" name="day-id", id="day-id" style="width: 99%;">
+													<select class="dropdown" name="day", id="day" style="width: 99%;">
 														<option value="">Select Day</option>
 														<option value="All Days">All Days</option>
 														<option value="Saturday">Saturday</option>
@@ -115,6 +115,7 @@
 																<th>×</th>
 																<th>Inch</th>
 																<th>Price</th>
+																<th>Remarks</th>
 															</tr>
 														</thead>
 														<tbody>
@@ -138,6 +139,9 @@
 																</td>
 																<td>
 																	<input type="text" class="span1" id="price-1" name="price-1" value="">
+																</td>
+																<td>
+																	<input type="text" class="span1" id="price-description-1" name="price-description-1" value="">
 																</td>
 															</tr>
 														</tbody>
@@ -199,6 +203,7 @@
 				var cell6 = newRow.insertCell(5);
 				var cell7 = newRow.insertCell(6);
 				var cell8 = newRow.insertCell(7);
+				var cell9 = newRow.insertCell(8);
 
 				cell1.innerHTML = sl;
 				cell2.innerHTML = '<input type="text" class="span2" id="price-title-'+sl+'" name="price-title-'+sl+'" value="">';
@@ -208,6 +213,7 @@
 				cell6.innerHTML = '×';
 				cell7.innerHTML = '<input type="text" class="span1" id="inch-'+sl+'" name="inch-'+sl+'" value="1">';
 				cell8.innerHTML = '<input type="text" class="span1" id="price-'+sl+'" name="price-'+sl+'" value="">';
+				cell9.innerHTML = '<input type="text" class="span1" id="price-description-'+sl+'" name="price-description-'+sl+'" value="">';
 
 				return false;
 			}
@@ -270,9 +276,10 @@
 
 			function Validation()
 			{
+				var priceMediaName = $('#price-media-name').val();
 				var mediaId = $('#media-name-id').val();
 				var publicationId = $('#publication-id').val();
-				var dayId = $('#day-id').val();
+				var day = $('#day').val();
 
 				var totalRow = $('#sl').val();
 
@@ -288,7 +295,7 @@
 					return false;
 				}
 
-				if (dayId == "")
+				if (day == "")
 				{
 					alert("Day Can't Be Empty");
 					return false;

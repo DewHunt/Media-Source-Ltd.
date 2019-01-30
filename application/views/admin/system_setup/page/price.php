@@ -201,19 +201,21 @@
 				// Get All Data For Select Menu Script End
 
 				$(document).on('click', '.update', function(){
-					var priceId = $(this).attr('id');
+					var priceDetailsId = $(this).attr('id');
 
 					$.ajax({
-						url:'<?php echo base_url("index.php/Price/GetPriceById"); ?>',
+						url:'<?php echo base_url("index.php/Price/GetPriceDetailsById"); ?>',
 						method:'POST',
-						data:{priceId:priceId},
+						data:{priceDetailsId:priceDetailsId},
 						dataType:'json',
 						success:function(data){
 							$('#price-modal').modal('show');
 							$('#media-name-id option[value="'+data.mediaId+'"]').prop('selected', true);
+
 							GetDataForDependantSelectMenu("PublicationModel","GetPublicationByForignKey","MediaId",data.mediaId,"#publication-select-menu","publication-id","Select Publication");
 							$('#publication-id option[value="'+data.publicationId+'"]').prop('selected', true);
 							// $('#publication-select-menu').html(data.publicationId);
+
 							$('#day-id option[value="'+data.dayId+'"]').prop('selected', true);
 							$('#price-title').val(data.priceTitle);
 							$('#page-id option[value="'+data.pageId+'"]').prop('selected', true);
