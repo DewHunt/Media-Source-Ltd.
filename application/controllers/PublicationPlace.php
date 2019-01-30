@@ -100,7 +100,7 @@
 			else
 			{
 				$option = "dt-common";			
-				$table = "publication_place";
+				$table = "pubplace";
 				$selectColumn = array("Id","Name","Description");
 				$orderColumn = array("Id","Name",null,null);
 

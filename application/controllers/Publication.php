@@ -170,7 +170,7 @@
 			{
 				$option = "dt-publication";
 				$table = "publication";
-				$selectColumn = array("Id","Name","MediaId","PublicationTypeId","PublicationPlaceId","PublicationFrequencyId","Language","Description","Image");
+				$selectColumn = array("Id","Name","MediaId","PublicationType","PubPlaceId","PubFreQuencyId","PublicationLan","Description","Logo");
 				$orderColumn = array("Id","Name","MediaId",null,null,null,null,null,null,null,null);
 
 				$publicationInfo = $this->DataTableModel->MakeDataTables($option,$table,$selectColumn,$orderColumn);
@@ -183,12 +183,10 @@
 					$publication[] = $sl;
 					$publication[] = $value->Name;
 					$publication[] = $this->MediaNameModel->GetMediaNameById($value->MediaId)->Name;
-					$publication[] = $this->PublicationTypeModel->GetPublicationTypeById($value->PublicationTypeId)->Name;
-					$publication[] = $this->PublicationFrequencyModel->GetPublicationFrequencyById($value->PublicationFrequencyId)->Name;
-					// $publication[] = $this->PublicationPlaceModel->GetPublicationPlaceById($value->PublicationPlaceId)->Name;
-					// $publication[] = $value->Language;
+					$publication[] = $this->PublicationTypeModel->GetPublicationTypeById($value->PublicationType)->Name;
+					$publication[] = $this->PublicationFrequencyModel->GetPublicationFrequencyById($value->PubFreQuencyId)->Name;
 					$publication[] = $value->Description;
-					$publication[] = '<img src="'.base_url("images/publication_logo/").$value->Image.'" width="80px" height="80px">';
+					$publication[] = '<img src="'.base_url("images/publication_logo/").$value->Logo.'" width="80px" height="80px">';
 					$publication[] = '<button type="button" name="update" id="'.$value->Id.'" class="btn btn-warning btn-xs update">Update</button> <button type="button" name="delete" id="'.$value->Id.'" class="btn btn-danger btn-xs delete">Delete</button>';
 					$sl++;
 					$data[] = $publication;
@@ -220,21 +218,21 @@
 
 				$output['publicationId'] = $data->Id;
 				$output['publicationName'] = $data->Name;
-				$output['publicationLanguage'] = $data->Language;
+				$output['publicationLanguage'] = $data->PublicationLan;
 				$output['publicationDescription'] = $data->Description;
-				$output['previousPublicationImage'] = $data->Image;
+				$output['previousPublicationImage'] = $data->Logo;
 				$output['mediaId'] = $data->MediaId;
-				$output['publicationTypeId'] = $data->PublicationTypeId;
-				$output['publicationPlaceId'] = $data->PublicationPlaceId;
-				$output['publicationFrequencyId'] = $data->PublicationFrequencyId;
+				$output['publicationTypeId'] = $data->PublicationType;
+				$output['publicationPlaceId'] = $data->PubPlaceId;
+				$output['publicationFrequencyId'] = $data->PubFreQuencyId;
 
-				if ($data->Image == "")
+				if ($data->Logo == "")
 				{
 					$output['publicationImage'] = '<input type="hidden" name="previous-publication-image" id="previous-publication-image" value="">';
 				}
 				else
 				{
-					$output['publicationImage'] = '<img src="'.base_url("images/publication_logo/").$data->Image.'" class="img-thumbnail" width="80px" height="80px"> <input type="hidden" name="previous-publication-image" id="previous-publication-image" value="'.$data->Image.'">';
+					$output['publicationImage'] = '<img src="'.base_url("images/publication_logo/").$data->Logo.'" class="img-thumbnail" width="80px" height="80px"> <input type="hidden" name="previous-publication-image" id="previous-publication-image" value="'.$data->Logo.'">';
 				}
 
 				echo json_encode($output);
@@ -284,8 +282,11 @@
 					{					
 						$deleteImage = $config['upload_path'].$previousImage;
 
-						chown($deleteImage, 666);
-						unlink($deleteImage);
+						if (file_exists($deleteImage))
+						{
+							chown($deleteImage, 666);
+							unlink($deleteImage);
+						}
 					}
 
 					copy($_FILES['new-publication-image']['tmp_name'],$copyImageName);
@@ -313,6 +314,25 @@
 			else
 			{
 				$publicationId = $this->input->post('publicationId');
+
+				$publicationImageName = $this->PublicationModel->GetPublicationById($publicationId)->Logo;
+
+				// Delete Image and Get Image New Name Start
+				$config['upload_path'] = "images/publication_logo/";
+				$config['allowed_types'] = "jpg|jpeg|png|gif";
+				$this->load->library('upload',$config);
+
+				if ($publicationImageName != "")
+				{					
+					$deleteImage = $config['upload_path'].$publicationImageName;
+
+					if (file_exists($deleteImage))
+					{
+						chown($deleteImage, 666);
+						unlink($deleteImage);
+					}
+				}
+				// Delete Image and Get Image New Name End
 
 				$result = $this->PublicationModel->DeletePublication($publicationId);
 				

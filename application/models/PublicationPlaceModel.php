@@ -12,7 +12,7 @@
 
 		public function CheckPublicationPlaceExists($publicationPlaceName)
 		{
-			$sql = "SELECT * FROM publication_place WHERE Name = '$publicationPlaceName'";
+			$sql = "SELECT * FROM pubplace WHERE Name = '$publicationPlaceName'";
 
 			$checkQuery = $this->db->query($sql);
 
@@ -30,7 +30,7 @@
 		{
 			$entryDateTime = date('Y-m-d H:i:s');
 
-			$sql = "INSERT INTO publication_place (Name, Description, EntryBy, EntryDateTime) VALUES ('$publicationPlaceName', '$publicationPlaceDescription', '$entryId', '$entryDateTime')";
+			$sql = "INSERT INTO pubplace (Name, Description, EntryBy, EntryDateTime) VALUES ('$publicationPlaceName', '$publicationPlaceDescription', '$entryId', '$entryDateTime')";
 
 			$insertQuery = $this->db->query($sql);
 
@@ -46,7 +46,7 @@
 
 		public function GetPublicationPlaceById($publicationPlaceId)
 		{
-			$sql = "SELECT * FROM publication_place WHERE Id = '$publicationPlaceId'";
+			$sql = "SELECT * FROM pubplace WHERE Id = '$publicationPlaceId'";
 
 			$query = $this->db->query($sql);
 
@@ -62,8 +62,8 @@
 
 		public function UpdatePublicationPlace($publicationPlaceId,$publicationPlaceName,$publicationPlaceDescription,$updateId)
 		{
-			$updateDateTime = date('Y-m-d H:i:s');
-			$sql = "UPDATE publication_place SET Name = '$publicationPlaceName', Description = '$publicationPlaceDescription', UpdateBy = '$updateId', UpdateDateTime = '$updateDateTime' WHERE Id = '$publicationPlaceId'";
+			$updateTime = date('Y-m-d H:i:s');
+			$sql = "UPDATE pubplace SET Name = '$publicationPlaceName', Description = '$publicationPlaceDescription', UpdateBy = '$updateId', UpdateTime = '$updateTime' WHERE Id = '$publicationPlaceId'";
 
 			$updateQuery = $this->db->query($sql);
 
@@ -79,7 +79,7 @@
 
 		public function DeletePublicationPlace($publicationPlaceId)
 		{
-			$sql = "DELETE FROM publication_place WHERE Id = '$publicationPlaceId'";
+			$sql = "DELETE FROM pubplace WHERE Id = '$publicationPlaceId'";
 
 			$deleteQuery = $this->db->query($sql);
 
@@ -95,7 +95,7 @@
 
 		public function GetAllPublicationPlace()
 		{
-			$sql = "SELECT * FROM publication_place ORDER BY Name ASC";
+			$sql = "SELECT * FROM pubplace ORDER BY Name ASC";
 
 			$query = $this->db->query($sql);
 

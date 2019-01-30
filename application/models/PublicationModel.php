@@ -29,7 +29,7 @@
 		{
 			$entryDateTime = date('Y-m-d H:i:s');
 
-			$sql = "INSERT INTO publication (Name, MediaId, PublicationTypeID, PublicationPlaceId, PublicationFrequencyId, Language, Description, Image, EntryBy, EntryDateTime) VALUES ('$publicationName','$mediaNameId','$publicationTypeId','$publicationPlaceId','$publicationFrequencyId','$publicationLanguage','$publicationDescription','$dbImageName','$entryId','$entryDateTime')";
+			$sql = "INSERT INTO publication (Name, MediaId, PublicationType, PubPlaceId, PubFreQuencyId, PublicationLan, Description, Logo, EntryBy, EntryDateTime) VALUES ('$publicationName','$mediaNameId','$publicationTypeId','$publicationPlaceId','$publicationFrequencyId','$publicationLanguage','$publicationDescription','$dbImageName','$entryId','$entryDateTime')";
 
 			$publicationQuery = $this->db->query($sql);
 
@@ -61,9 +61,9 @@
 
 		public function UpdatePublication($publicationId,$publicationName,$mediaNameId,$publicationTypeId,$publicationPlaceId,$publicationFrequencyId,$publicationLanguage,$publicationDescription,$dbImageName,$updateId)
 		{
-			$updateDateTime = date('Y-m-d H:i:s');
+			$updateTime = date('Y-m-d H:i:s');
 
-			$sql = "UPDATE publication SET Name = '".$publicationName."', MediaId = '".$mediaNameId."', PublicationTypeId = '".$publicationTypeId."', PublicationPlaceId = '".$publicationPlaceId."', PublicationFrequencyId = '".$publicationFrequencyId."', Language = '".$publicationLanguage."', Description = '".$publicationDescription."', Image = '".$dbImageName."', UpdateBy = '".$updateId."', UpdateDateTime = '".$updateDateTime."' WHERE Id = '".$publicationId."'";
+			$sql = "UPDATE publication SET Name = '".$publicationName."', MediaId = '".$mediaNameId."', PublicationType = '".$publicationTypeId."', PubPlaceId = '".$publicationPlaceId."', PubFreQuencyId = '".$publicationFrequencyId."', PublicationLan = '".$publicationLanguage."', Description = '".$publicationDescription."', Logo = '".$dbImageName."', UpdateBy = '".$updateId."', UpdateTime = '".$updateTime."' WHERE Id = '".$publicationId."'";
 
 			$query = $this->db->query($sql);
 

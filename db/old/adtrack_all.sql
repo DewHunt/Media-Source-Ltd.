@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 30, 2019 at 12:40 PM
+-- Generation Time: Jan 30, 2019 at 08:30 AM
 -- Server version: 10.1.32-MariaDB
 -- PHP Version: 5.6.36
 
@@ -519,8 +519,8 @@ CREATE TABLE `hue` (
 --
 
 INSERT INTO `hue` (`Id`, `Name`, `Description`, `EntryBy`, `EntryDateTime`, `UpdateBy`, `UpdateTime`, `DeleteBy`, `DeleteDateTime`, `State`) VALUES
-(1, 'Color', 'Color', 1, '2015-02-20 16:38:14', 1, '2019-01-30 10:58:11', NULL, NULL, 1),
-(2, 'Black & White', 'Black & White', 1, '2015-02-20 16:38:28', 1, '2019-01-30 10:58:02', NULL, NULL, 1);
+(1, 'Color', '', 1, '2015-02-20 16:38:14', NULL, NULL, NULL, NULL, 1),
+(2, 'Black & White', '', 1, '2015-02-20 16:38:28', NULL, NULL, NULL, NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -790,8 +790,8 @@ INSERT INTO `page` (`Id`, `Name`, `Description`, `EntryBy`, `EntryDateTime`, `Up
 (58, 'Jacket 3rd Page', '', 1, '2017-05-15 07:03:59', NULL, NULL, NULL, NULL, 1, NULL, NULL, NULL),
 (59, 'Jacket 4th Page', '', 1, '2017-05-15 07:04:11', NULL, NULL, NULL, NULL, 1, NULL, NULL, NULL),
 (60, 'Youth Express', '', 1, '2017-05-17 08:18:16', NULL, NULL, NULL, NULL, 1, NULL, NULL, NULL),
-(61, 'Back Inside', 'Back Inside', 1, '2017-07-05 06:46:33', 1, '2019-01-30 10:56:25', NULL, NULL, 1, NULL, NULL, NULL),
-(62, 'Education And Carrer', 'Education And Carrer', 1, '2017-07-27 11:10:28', 1, '2019-01-30 10:56:11', NULL, NULL, 1, NULL, NULL, NULL);
+(61, 'Back Inside', '', 1, '2017-07-05 06:46:33', NULL, NULL, NULL, NULL, 1, NULL, NULL, NULL),
+(62, 'Education And Carrer', '', 1, '2017-07-27 11:10:28', NULL, NULL, NULL, NULL, 1, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -949,14 +949,22 @@ INSERT INTO `price` (`Id`, `Name`, `MediaId`, `PublicationId`, `Day`, `EntryBy`,
 (36, 'Prothom Alo Pricing (Anando)', 48, 38, 'Thursday', 1, '2016-11-10 09:09:00', 1, '2017-04-05 04:37:39', NULL, NULL, 1),
 (37, 'Prothom Alo Pricing (Projonmo.Com)', 48, 34, 'Friday', 1, '2016-11-10 09:12:45', 1, '2017-04-05 04:37:49', NULL, NULL, 1),
 (38, 'Bangladesh Pratidin Pricing(General)', 51, 56, 'AllDays', 1, '2016-11-10 09:36:07', 1, '2017-10-23 11:56:26', NULL, NULL, 1),
+(40, 'Bangladesh Pratidin Pricing(Friday)', 51, 193, 'Friday', 1, '2016-11-10 10:00:51', 1, '2017-07-24 08:11:25', NULL, NULL, 1),
 (69, 'Financial Express Pricing(General)', 49, 47, 'AllDays', 1, '2016-11-13 10:41:26', 1, '2017-07-27 11:13:07', NULL, NULL, 1),
 (92, 'Daily Star Pricing(General)', 50, 54, 'AllDays', 1, '2016-11-14 09:09:21', 1, '2017-10-17 11:38:52', NULL, NULL, 1),
 (93, 'Daily Star Pricing(Lifestyle)', 50, 49, 'Sunday', 1, '2016-11-14 09:20:38', 1, '2017-05-17 04:59:38', NULL, NULL, 1),
 (94, 'Daily Star Pricing(Showbiz)', 50, 50, 'AllDays', 1, '2016-11-14 09:26:52', 1, '2017-06-04 07:46:40', NULL, NULL, 1),
 (95, 'Daily Star Pricing(Shout)', 50, 51, '0', 1, '2016-11-14 09:30:23', NULL, NULL, NULL, NULL, 1),
 (96, 'Daily Star Pricing(Star Weekend)', 50, 52, 'Friday', 1, '2016-11-14 09:39:53', 1, '2017-09-09 06:59:02', NULL, NULL, 1),
+(128, 'Prothom-Alo.com', 48, 122, 'AllDays', 1, '2017-03-22 04:12:57', NULL, NULL, NULL, NULL, 1),
 (130, 'Sonibarer Shokal (B.Pratidin)', 51, 58, 'Saturday', 1, '2017-04-18 05:15:08', 1, '2017-09-17 10:35:15', NULL, NULL, 1),
-(152, 'Asian Age General Price', 52, 60, 'AllDays', 1, '2017-08-09 07:42:29', 1, '2017-09-12 08:04:23', NULL, NULL, 1);
+(135, 'Prothom Alo Pricing (Ma ke nia)', 48, 211, 'Yearly', 1, '2017-05-18 11:48:54', NULL, NULL, NULL, NULL, 1),
+(148, 'Eid Upohar', 48, 216, 'Yearly', 1, '2017-07-04 11:16:00', NULL, NULL, NULL, NULL, 1),
+(149, 'Eid Binodon (Prothom Alo)', 48, 217, 'Yearly', 1, '2017-07-05 08:09:48', NULL, NULL, NULL, NULL, 1),
+(152, 'Asian Age General Price', 52, 60, 'AllDays', 1, '2017-08-09 07:42:29', 1, '2017-09-12 08:04:23', NULL, NULL, 1),
+(153, 'Naksha Eid Festival 1', 48, 220, 'Yearly', 1, '2017-08-29 10:43:19', NULL, NULL, NULL, NULL, 1),
+(154, 'Naksha Eid Festival 2', 48, 221, 'Yearly', 1, '2017-08-29 10:45:53', NULL, NULL, NULL, NULL, 1),
+(157, 'Special Supplementary', 48, 222, 'Yearly', 1, '2017-09-25 07:58:01', 1, '2017-11-05 06:52:00', NULL, NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -993,6 +1001,8 @@ INSERT INTO `pricedetails` (`Id`, `PriceId`, `Name`, `Hue`, `PageNoId`, `Price`,
 (584, 95, 'DS-ST Back', 1, 46, '3000.00', 1, 1, '', 1, '2016-11-14 09:30:24', NULL, NULL, NULL, NULL, 1),
 (585, 95, 'DS-ST Back Inner', 1, 27, '2500.00', 1, 1, '', 1, '2016-11-14 09:30:24', NULL, NULL, NULL, NULL, 1),
 (586, 95, 'DS-ST Inner', 1, 24, '2000.00', 1, 1, '', 1, '2016-11-14 09:30:24', NULL, NULL, NULL, NULL, 1),
+(1506, 128, 'PA-online-1st page color', 1, 15, '1050.00', 1, 1, '', 1, '2017-03-22 04:12:57', NULL, NULL, NULL, NULL, 1),
+(1507, 128, 'PA-online-2nd page color', 1, 39, '750.00', 1, 1, '', 1, '2017-03-22 04:12:57', NULL, NULL, NULL, NULL, 1),
 (1537, 34, 'PA-BS Inner', 1, 24, '3500.00', 1, 1, '', 1, '2017-04-05 04:37:25', NULL, NULL, NULL, NULL, 1),
 (1538, 35, 'PA-SN Front', 1, 18, '6500.00', 1, 1, '', 1, '2017-04-05 04:37:31', NULL, NULL, NULL, NULL, 1),
 (1539, 35, 'PA-SN Back', 1, 46, '5000.00', 1, 1, '', 1, '2017-04-05 04:37:31', NULL, NULL, NULL, NULL, 1),
@@ -1031,6 +1041,11 @@ INSERT INTO `pricedetails` (`Id`, `PriceId`, `Name`, `Hue`, `PageNoId`, `Price`,
 (2398, 93, 'DS-LS 3rd page', 1, 40, '3500.00', 1, 1, '', 1, '2017-05-17 04:59:38', NULL, NULL, NULL, NULL, 1),
 (2399, 93, 'DS-LS Inner', 1, 24, '2500.00', 1, 1, '', 1, '2017-05-17 04:59:38', NULL, NULL, NULL, NULL, 1),
 (2400, 93, 'DS-LS Front inside cover', 1, 28, '4500.00', 1, 1, '', 1, '2017-05-17 04:59:38', NULL, NULL, NULL, NULL, 1),
+(2455, 135, 'PA-Ma Front cover', 1, 18, '6500.00', 1, 1, '', 1, '2017-05-18 11:48:54', NULL, NULL, NULL, NULL, 1),
+(2456, 135, 'PA-Ma Back cover', 1, 46, '5000.00', 1, 1, '', 1, '2017-05-18 11:48:54', NULL, NULL, NULL, NULL, 1),
+(2457, 135, 'PA-Ma Inner', 1, 24, '3500.00', 1, 1, '', 1, '2017-05-18 11:48:54', NULL, NULL, NULL, NULL, 1),
+(2458, 135, 'PA-Ma Back insider cover', 1, 27, '3500.00', 1, 1, '', 1, '2017-05-18 11:48:54', NULL, NULL, NULL, NULL, 1),
+(2459, 135, 'PA-Ma Front inside cover', 1, 28, '3500.00', 1, 1, '', 1, '2017-05-18 11:48:54', NULL, NULL, NULL, NULL, 1),
 (2817, 94, 'DS-SB Front', 1, 18, '5000.00', 1, 1, '', 1, '2017-06-04 07:46:40', NULL, NULL, NULL, NULL, 1),
 (2818, 94, 'DS-SB Front Inner', 1, 33, '3000.00', 1, 1, '', 1, '2017-06-04 07:46:40', NULL, NULL, NULL, NULL, 1),
 (2819, 94, 'DS-SB Back', 1, 46, '4000.00', 1, 1, '', 1, '2017-06-04 07:46:40', NULL, NULL, NULL, NULL, 1),
@@ -1051,6 +1066,22 @@ INSERT INTO `pricedetails` (`Id`, `PriceId`, `Name`, `Hue`, `PageNoId`, `Price`,
 (3109, 33, 'PA-AD Front', 1, 18, '6500.00', 1, 1, '', 1, '2017-06-12 08:11:04', NULL, NULL, NULL, NULL, 1),
 (3110, 33, 'PA-AD Back', 1, 46, '5000.00', 1, 1, '', 1, '2017-06-12 08:11:04', NULL, NULL, NULL, NULL, 1),
 (3111, 33, 'PA-AD Inner', 1, 24, '3500.00', 1, 1, '', 1, '2017-06-12 08:11:04', NULL, NULL, NULL, NULL, 1),
+(3210, 148, 'PA-EU Front Cover', 1, 18, '6500.00', 1, 1, '', 1, '2017-07-04 11:16:00', NULL, NULL, NULL, NULL, 1),
+(3211, 148, 'PA-EU Back Cover', 1, 46, '5000.00', 1, 1, '', 1, '2017-07-04 11:16:00', NULL, NULL, NULL, NULL, 1),
+(3212, 148, 'PA-EU Front Inside Cover', 1, 28, '3500.00', 1, 1, '', 1, '2017-07-04 11:16:00', NULL, NULL, NULL, NULL, 1),
+(3213, 148, 'PA-EU Back inside Cover', 1, 27, '3500.00', 1, 1, '', 1, '2017-07-04 11:16:00', NULL, NULL, NULL, NULL, 1),
+(3214, 148, 'PA-EU Inner', 1, 24, '3500.00', 1, 1, '', 1, '2017-07-04 11:16:00', NULL, NULL, NULL, NULL, 1),
+(3249, 149, 'PA-EB Front cover', 1, 18, '6500.00', 1, 1, '', 1, '2017-07-05 08:09:48', NULL, NULL, NULL, NULL, 1),
+(3250, 149, 'PA-EB Back cover', 1, 46, '5000.00', 1, 1, '', 1, '2017-07-05 08:09:48', NULL, NULL, NULL, NULL, 1),
+(3251, 149, 'PA-EB Inner', 1, 24, '3500.00', 1, 1, '', 1, '2017-07-05 08:09:48', NULL, NULL, NULL, NULL, 1),
+(3252, 149, 'PA-EB Front Inside cover', 0, 28, '3500.00', 1, 1, '', 1, '2017-07-05 08:09:48', NULL, NULL, NULL, NULL, 1),
+(3253, 149, 'PA-EB Back Inside cover', 0, 27, '3500.00', 1, 1, '', 1, '2017-07-05 08:09:48', NULL, NULL, NULL, NULL, 1),
+(3475, 40, 'BP-FD Front', 1, 18, '8500.00', 1, 1, '', 1, '2017-07-24 08:11:25', NULL, NULL, NULL, NULL, 1),
+(3476, 40, 'BP-FD Back', 1, 46, '6500.00', 1, 1, '', 1, '2017-07-24 08:11:25', NULL, NULL, NULL, NULL, 1),
+(3477, 40, 'BP-FD 3rd', 1, 40, '4500.00', 1, 1, '', 1, '2017-07-24 08:11:25', NULL, NULL, NULL, NULL, 1),
+(3478, 40, 'BP-FD Inner', 1, 24, '4500.00', 1, 1, '', 1, '2017-07-24 08:11:25', NULL, NULL, NULL, NULL, 1),
+(3479, 40, 'BP-FD Front Inside Cover', 1, 28, '4500.00', 1, 1, '', 1, '2017-07-24 08:11:25', NULL, NULL, NULL, NULL, 1),
+(3480, 40, 'BP-FD Back Inside Cover', 1, 27, '4500.00', 1, 1, '', 1, '2017-07-24 08:11:25', NULL, NULL, NULL, NULL, 1),
 (3603, 69, 'FE- 1st Page', 1, 15, '10000.00', 1, 1, '', 1, '2017-07-27 11:13:07', NULL, NULL, NULL, NULL, 1),
 (3604, 69, 'FE- 1st Page b/w', 2, 15, '7000.00', 1, 1, '', 1, '2017-07-27 11:13:07', NULL, NULL, NULL, NULL, 1),
 (3605, 69, 'FE- Back Page', 1, 16, '8000.00', 1, 1, '', 1, '2017-07-27 11:13:07', NULL, NULL, NULL, NULL, 1),
@@ -1070,6 +1101,16 @@ INSERT INTO `pricedetails` (`Id`, `PriceId`, `Name`, `Hue`, `PageNoId`, `Price`,
 (3619, 69, 'FE-Youth Express color', 1, 60, '3500.00', 1, 1, '', 1, '2017-07-27 11:13:07', NULL, NULL, NULL, NULL, 1),
 (3620, 69, 'FE-Youth Express b/w', 2, 60, '2500.00', 1, 1, '', 1, '2017-07-27 11:13:07', NULL, NULL, NULL, NULL, 1),
 (3621, 69, 'FE-EDU-Carrer', 1, 62, '3500.00', 1, 1, '', 1, '2017-07-27 11:13:07', NULL, NULL, NULL, NULL, 1),
+(3845, 153, 'Naksha Eid Festival 1 FIn', 1, 18, '12000.00', 1, 1, '', 1, '2017-08-29 10:43:19', NULL, NULL, NULL, NULL, 1),
+(3846, 153, 'Naksha Eid Festival 1 FInC', 1, 28, '8000.00', 1, 1, '', 1, '2017-08-29 10:43:19', NULL, NULL, NULL, NULL, 1),
+(3847, 153, 'Naksha Eid Festival 1 BC', 1, 46, '11000.00', 1, 1, '', 1, '2017-08-29 10:43:19', NULL, NULL, NULL, NULL, 1),
+(3848, 153, 'Naksha Eid Festival 1 BInC', 1, 27, '8000.00', 1, 1, '', 1, '2017-08-29 10:43:19', NULL, NULL, NULL, NULL, 1),
+(3849, 153, 'Naksha Eid Festival 1 In', 1, 24, '8000.00', 1, 1, '', 1, '2017-08-29 10:43:19', NULL, NULL, NULL, NULL, 1),
+(3850, 154, 'Naksha Eid Festival 2 FC', 1, 18, '12000.00', 1, 1, '', 1, '2017-08-29 10:45:53', NULL, NULL, NULL, NULL, 1),
+(3851, 154, 'Naksha Eid Festival 2 FInC', 1, 28, '8000.00', 1, 1, '', 1, '2017-08-29 10:45:53', NULL, NULL, NULL, NULL, 1),
+(3852, 154, 'Naksha Eid Festival 2 BC', 1, 46, '11000.00', 1, 1, '', 1, '2017-08-29 10:45:53', NULL, NULL, NULL, NULL, 1),
+(3853, 154, 'Naksha Eid Festival 2 BInC', 1, 27, '8000.00', 1, 1, '', 1, '2017-08-29 10:45:53', NULL, NULL, NULL, NULL, 1),
+(3854, 154, 'Naksha Eid Festival 2 Inn', 1, 24, '8000.00', 1, 1, '', 1, '2017-08-29 10:45:53', NULL, NULL, NULL, NULL, 1),
 (4042, 96, 'DS-SW Front', 1, 18, '4500.00', 1, 1, '', 1, '2017-09-09 06:59:02', NULL, NULL, NULL, NULL, 1),
 (4043, 96, 'DS-SW Front Inner', 1, 33, '2500.00', 1, 1, '', 1, '2017-09-09 06:59:02', NULL, NULL, NULL, NULL, 1),
 (4044, 96, 'DS-SW Back', 1, 46, '3000.00', 1, 1, '', 1, '2017-09-09 06:59:02', NULL, NULL, NULL, NULL, 1),
@@ -1139,7 +1180,13 @@ INSERT INTO `pricedetails` (`Id`, `PriceId`, `Name`, `Hue`, `PageNoId`, `Price`,
 (4432, 38, 'BP-Jacket 2nd Page', 1, 57, '15000.00', 1, 1, '', 1, '2017-10-23 11:56:26', NULL, NULL, NULL, NULL, 1),
 (4433, 38, 'BP-Jacket 3rdd Page', 1, 58, '9500.00', 1, 1, '', 1, '2017-10-23 11:56:26', NULL, NULL, NULL, NULL, 1),
 (4434, 38, 'BP-Jacket 4th Page', 1, 59, '10000.00', 1, 1, '', 1, '2017-10-23 11:56:26', NULL, NULL, NULL, NULL, 1),
-(4435, 38, 'BP- Sports b/w', 2, 23, '4500.00', 1, 1, '', 1, '2017-10-23 11:56:27', NULL, NULL, NULL, NULL, 1);
+(4435, 38, 'BP- Sports b/w', 2, 23, '4500.00', 1, 1, '', 1, '2017-10-23 11:56:27', NULL, NULL, NULL, NULL, 1),
+(4631, 157, 'SS-FC', 1, 18, '6500.00', 1, 1, '', 1, '2017-11-05 06:52:00', NULL, NULL, NULL, NULL, 1),
+(4632, 157, 'SS-BC', 1, 46, '6000.00', 1, 1, '', 1, '2017-11-05 06:52:00', NULL, NULL, NULL, NULL, 1),
+(4633, 157, 'SS-FIC', 1, 28, '5500.00', 1, 1, '', 1, '2017-11-05 06:52:00', NULL, NULL, NULL, NULL, 1),
+(4634, 157, 'SS-BIC', 1, 27, '5000.00', 1, 1, '', 1, '2017-11-05 06:52:00', NULL, NULL, NULL, NULL, 1),
+(4635, 157, 'SS-I', 1, 24, '4000.00', 1, 1, '', 1, '2017-11-05 06:52:00', NULL, NULL, NULL, NULL, 1),
+(4636, 157, 'SS-Back Page', 1, 16, '6000.00', 1, 1, '', 1, '2017-11-05 06:52:00', NULL, NULL, NULL, NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -1259,7 +1306,7 @@ INSERT INTO `pubfrequency` (`Id`, `Name`, `Description`, `EntryBy`, `EntryDateTi
 (2, 'Weekly', 'Weekly', 1, '2016-11-08 07:00:29', NULL, NULL, NULL, NULL, 1),
 (3, 'Fortnightly', 'Fortnightly', 1, '2016-11-08 07:00:42', NULL, NULL, NULL, NULL, 1),
 (4, 'Monthly', 'Monthly', 1, '2016-11-08 07:00:55', NULL, NULL, NULL, NULL, 1),
-(5, 'Yearly', 'Yearly', 1, '2016-11-08 07:01:13', 1, '2019-01-30 08:53:27', NULL, NULL, 1);
+(5, 'Yearly', 'Yearly', 1, '2016-11-08 07:01:13', NULL, NULL, NULL, NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -1348,7 +1395,7 @@ INSERT INTO `pubplace` (`Id`, `Name`, `Description`, `EntryBy`, `EntryDateTime`,
 (5, 'Khulna', 'Khulna', 1, '2016-11-08 07:10:24', NULL, NULL, NULL, NULL, 1),
 (6, 'Rajshahi', 'Rajshahi', 1, '2016-11-08 07:10:36', NULL, NULL, NULL, NULL, 1),
 (7, 'Rangpur', 'Rangpur', 1, '2016-11-08 07:10:48', NULL, NULL, NULL, NULL, 1),
-(8, 'Comilla', 'Comilla', 1, '2016-11-08 07:11:02', 1, '2019-01-30 08:49:20', NULL, NULL, 1);
+(8, 'Comilla', 'Comilla', 1, '2016-11-08 07:11:02', NULL, NULL, NULL, NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -1625,7 +1672,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`Id`, `UserId`, `Password`, `Name`, `DesignationId`, `UserGroupId`, `Location`, `Phone`, `Email`, `Picture`, `Signature`, `PasswordChangeStatus`, `AdminStatus`, `CreateBy`, `State`) VALUES
-(1, 'dew', '12345', 'Dew Hunt', NULL, 1, NULL, '01766328322', 'dew@gmail.com', NULL, NULL, 0, 0, NULL, 1);
+(1, 'a', 'a', NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, 0, 0, NULL, 1);
 
 --
 -- Indexes for dumped tables
@@ -1941,7 +1988,7 @@ ALTER TABLE `dataentryreport`
 -- AUTO_INCREMENT for table `hue`
 --
 ALTER TABLE `hue`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `keyword`
@@ -1953,7 +2000,7 @@ ALTER TABLE `keyword`
 -- AUTO_INCREMENT for table `media`
 --
 ALTER TABLE `media`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
 
 --
 -- AUTO_INCREMENT for table `newscategory`
@@ -1983,7 +2030,7 @@ ALTER TABLE `outlook`
 -- AUTO_INCREMENT for table `page`
 --
 ALTER TABLE `page`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=64;
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=63;
 
 --
 -- AUTO_INCREMENT for table `pageposition`
@@ -2037,19 +2084,19 @@ ALTER TABLE `product_cat`
 -- AUTO_INCREMENT for table `pubfrequency`
 --
 ALTER TABLE `pubfrequency`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `publication`
 --
 ALTER TABLE `publication`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=65;
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=62;
 
 --
 -- AUTO_INCREMENT for table `pubplace`
 --
 ALTER TABLE `pubplace`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `pubtype`

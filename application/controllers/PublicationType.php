@@ -103,7 +103,7 @@
 				$option = "dt-common";
 				$table = "pubtype";
 				$selectColumn = array("Id","Name","Description");
-				$orderColumn = array("Id","Name",null,null);
+				$orderColumn = array("Id",null,null,null);
 
 				$publicationTypeInfo = $this->DataTableModel->MakeDataTables($option,$table,$selectColumn,$orderColumn);
 				$sl = 1;

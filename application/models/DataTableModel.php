@@ -87,7 +87,7 @@
 				if (isset($_POST["search"]["value"]))
 				{
 					$this->db->like("Name",$_POST["search"]["value"]);
-					$this->db->or_where("MediaId",$_POST["search"]["value"]);
+					$this->db->or_where("PriceId",$_POST["search"]["value"]);
 				}
 
 				if (isset($_POST["order"]))

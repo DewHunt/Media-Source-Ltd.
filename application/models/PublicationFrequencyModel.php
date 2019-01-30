@@ -12,7 +12,7 @@
 
 		public function CheckPublicationFrequencyExists($publicationFrequencyName)
 		{
-			$sql = "SELECT * FROM publication_frequency WHERE Name = '$publicationFrequencyName'";
+			$sql = "SELECT * FROM pubfrequency WHERE Name = '$publicationFrequencyName'";
 
 			$checkQuery = $this->db->query($sql);
 
@@ -30,7 +30,7 @@
 		{
 			$entryDateTime = date('Y-m-d H:i:s');
 
-			$sql = "INSERT INTO publication_frequency (Name, Description, EntryBy, EntryDateTime) VALUES ('$publicationFrequencyName', '$publicationFrequencyDescription', '$entryId', '$entryDateTime')";
+			$sql = "INSERT INTO pubfrequency (Name, Description, EntryBy, EntryDateTime) VALUES ('$publicationFrequencyName', '$publicationFrequencyDescription', '$entryId', '$entryDateTime')";
 
 			$insertQuery = $this->db->query($sql);
 
@@ -46,7 +46,7 @@
 
 		public function GetPublicationFrequencyById($publicationFrequencyId)
 		{
-			$sql = "SELECT * FROM publication_frequency WHERE Id = '$publicationFrequencyId'";
+			$sql = "SELECT * FROM pubfrequency WHERE Id = '$publicationFrequencyId'";
 
 			$query = $this->db->query($sql);
 
@@ -62,8 +62,8 @@
 
 		public function UpdatePublicationFrequency($publicationFrequencyId,$publicationFrequencyName,$publicationFrequencyDescription,$updateId)
 		{
-			$updateDateTime = date('Y-m-d H:i:s');
-			$sql = "UPDATE publication_frequency SET Name = '$publicationFrequencyName', Description = '$publicationFrequencyDescription', UpdateBy = '$updateId', UpdateDateTime = '$updateDateTime' WHERE Id = '$publicationFrequencyId'";
+			$updateTime = date('Y-m-d H:i:s');
+			$sql = "UPDATE pubfrequency SET Name = '$publicationFrequencyName', Description = '$publicationFrequencyDescription', UpdateBy = '$updateId', UpdateTime = '$updateTime' WHERE Id = '$publicationFrequencyId'";
 
 			$updateQuery = $this->db->query($sql);
 
@@ -79,7 +79,7 @@
 
 		public function DeletePublicationFrequency($publicationFrequencyId)
 		{
-			$sql = "DELETE FROM publication_frequency WHERE Id = '$publicationFrequencyId'";
+			$sql = "DELETE FROM pubfrequency WHERE Id = '$publicationFrequencyId'";
 
 			$deleteQuery = $this->db->query($sql);
 
@@ -95,7 +95,7 @@
 
 		public function GetAllPublicationFrequency()
 		{
-			$sql = "SELECT * FROM publication_frequency ORDER BY Name ASC";
+			$sql = "SELECT * FROM pubfrequency ORDER BY Name ASC";
 
 			$query = $this->db->query($sql);
 

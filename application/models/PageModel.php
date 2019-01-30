@@ -62,8 +62,8 @@
 
 		public function UpdatePage($pageId,$pageName,$pageDescription,$updateId)
 		{
-			$updateDateTime = date('Y-m-d H:i:s');
-			$sql = "UPDATE page SET Name = '$pageName', Description = '$pageDescription', UpdateBy = '$updateId', UpdateDateTime = '$updateDateTime' WHERE Id = '$pageId'";
+			$updateTime = date('Y-m-d H:i:s');
+			$sql = "UPDATE page SET Name = '$pageName', Description = '$pageDescription', UpdateBy = '$updateId', UpdateTime = '$updateTime' WHERE Id = '$pageId'";
 
 			$updateQuery = $this->db->query($sql);
 

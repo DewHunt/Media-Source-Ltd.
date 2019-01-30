@@ -267,6 +267,25 @@
 			{
 				$mediaId = $this->input->post('mediaId');
 
+				$mediaImageName = $this->MediaNameModel->GetMediaNameById($mediaId)->Image;
+
+				// Delete Image and Get Image New Name Start
+				$config['upload_path'] = "images/media_logo/";
+				$config['allowed_types'] = "jpg|jpeg|png|gif";
+				$this->load->library('upload',$config);
+
+				if ($mediaImageName != "")
+				{					
+					$deleteImage = $config['upload_path'].$mediaImageName;
+
+					if (file_exists($deleteImage))
+					{
+						chown($deleteImage, 666);
+						unlink($deleteImage);
+					}
+				}
+				// Delete Image and Get Image New Name End
+
 				$result = $this->MediaNameModel->DeleteMediaName($mediaId);
 				
 				if ($result)

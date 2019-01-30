@@ -56,6 +56,13 @@
 									
 									<div class="widget-content">
 										<fieldset>
+											<div class="control-group">											
+												<label class="control-label" for="name">Name</label>
+												<div class="controls">
+													<input type="text" class="span10" id="price-media-name" name="price-media-name" value="">
+												</div> <!-- /controls -->				
+											</div> <!-- /control-group -->
+
 											<div class="control-group">                     
 												<label class="control-label" for="media">Media</label>
 												<div class="controls">
@@ -77,7 +84,20 @@
 											<div class="control-group">                     
 												<label class="control-label" for="day">Day</label>
 												<div class="controls">
-													<div id="day-select-menu"></div>
+													<select class="dropdown" name="day-id", id="day-id" style="width: 99%;">
+														<option value="">Select Day</option>
+														<option value="All Days">All Days</option>
+														<option value="Saturday">Saturday</option>
+														<option value="Sunday">Sunday</option>
+														<option value="Monday">Monday</option>
+														<option value="Tuesday">Tuesday</option>
+														<option value="Wednesday">Wednesday</option>
+														<option value="Thursday">Thursday</option>
+														<option value="Friday">Friday</option>
+														<option value="Weekly">Weekly</option>
+														<option value="Monthly">Monthly</option>
+														<option value="Yearly">Yearly</option>
+													</select>
 												</div> <!-- /controls -->       
 											</div> <!-- /control-group -->
 											
@@ -212,7 +232,6 @@
 			}
 
 			GetDataForSelectMenu("MediaNameModel","GetAllMediaName","#media-select-menu","media-name-id","Select Media");
-			GetDataForSelectMenu("DayModel","GetAllDay","#day-select-menu","day-id","Select Day");
 			GetDataForSelectMenu("PageModel","GetAllPage","#page-select-menu-1","page-id-1","Select Page Name");
 			GetDataForSelectMenu("HueModel","GetAllHue","#hue-select-menu-1","hue-id-1","Select Hue");
 

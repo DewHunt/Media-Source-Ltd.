@@ -164,7 +164,6 @@
 				});
 
 				GetDataForSelectMenu("MediaNameModel","GetAllMediaName","#media-select-menu","media-name-id","Select Media");
-				GetDataForSelectMenu("DayModel","GetAllDay","#day-select-menu","day-id","Select Day");
 				GetDataForSelectMenu("PageModel","GetAllPage","#page-select-menu","page-id","Select Page Name");
 				GetDataForSelectMenu("HueModel","GetAllHue","#hue-select-menu","hue-id","Select Hue");
 

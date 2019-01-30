@@ -190,9 +190,9 @@
 			else
 			{
 				$option = "dt-price";
-				$table = "price";
-				$selectColumn = array("Id","Name","MediaId","PublicationId","PageId","HueId","Price");
-				$orderColumn = array("Id","Name","MediaId",null,null,null,null,null,null,null,null);
+				$table = "pricedetails";
+				$selectColumn = array("Id","PriceId","Name","Hue","PageNoId","Price","Col","Inch","Description");
+				$orderColumn = array("Id","Name","PriceId",null,null,null,null,null,null,null,null);
 
 				$priceInfo = $this->DataTableModel->MakeDataTables($option,$table,$selectColumn,$orderColumn);
 				$sl = 1;
@@ -203,10 +203,15 @@
 					$price = array();
 					$price[] = $sl;
 					$price[] = $value->Name;
-					$price[] = $this->MediaNameModel->GetMediaNameById($value->MediaId)->Name;
-					$price[] = $this->PublicationModel->GetPublicationById($value->PublicationId)->Name;
-					$price[] = $this->PageModel->GetPageById($value->PageId)->Name;
-					$price[] = $this->HueModel->GetHueById($value->HueId)->Name;
+
+					$priceInfo = $this->PriceModel->GetPriceById($value->PriceId);
+
+					$price[] = $this->MediaNameModel->GetMediaNameById($priceInfo->MediaId)->Name;
+					$price[] = $this->PublicationModel->GetPublicationById($priceInfo->PublicationId)->Name;
+					// $price[] = $priceInfo->PublicationId;
+
+					$price[] = $this->PageModel->GetPageById($value->PageNoId)->Name;
+					$price[] = $this->HueModel->GetHueById($value->Hue)->Name;
 					$price[] = $value->Price;
 					$price[] = '<button type="button" name="update" id="'.$value->Id.'" class="btn btn-warning btn-xs update">Update</button> <button type="button" name="delete" id="'.$value->Id.'" class="btn btn-danger btn-xs delete">Delete</button>';
 					$sl++;

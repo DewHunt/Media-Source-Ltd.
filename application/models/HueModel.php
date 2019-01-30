@@ -62,8 +62,8 @@
 
 		public function UpdateHue($hueId,$hueName,$hueDescription,$updateId)
 		{
-			$updateDateTime = date('Y-m-d H:i:s');
-			$sql = "UPDATE hue SET Name = '$hueName', Description = '$hueDescription', UpdateBy = '$updateId', UpdateDateTime = '$updateDateTime' WHERE Id = '$hueId'";
+			$updateTime = date('Y-m-d H:i:s');
+			$sql = "UPDATE hue SET Name = '$hueName', Description = '$hueDescription', UpdateBy = '$updateId', UpdateTime = '$updateTime' WHERE Id = '$hueId'";
 
 			$updateQuery = $this->db->query($sql);
 
