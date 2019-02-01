@@ -11,9 +11,9 @@
 		
 		<div class="main">
 			<div class="main-inner">
-				<div class="container">					
+				<div class="container">
 					<div class="row">
-						<form class="form-horizontal" id="hue-form" method="POST" action="<?= base_url('index.php/Hue/CreateHue'); ?>">
+						<form class="form-horizontal" id="placing-form" method="POST" action="<?= base_url('index.php/Placing/CreatePlacing'); ?>">
 							<div class="span12">
 
 								<?php
@@ -21,8 +21,8 @@
 									{
 								?>
 										<div class="alert alert-success success-message">
-											<a type="button" class="btn btn-danger close" data-dismiss="alert" href="<?=  base_url('index.php/Hue/Hue');?>">&times;</a>
-											<strong>Great!</strong> Your Hue Created Successfully...
+											<a type="button" class="btn btn-danger close" data-dismiss="alert" href="<?=  base_url('index.php/Placing/Placing');?>">&times;</a>
+											<strong>Great!</strong> Your Placing Created Successfully...
 										</div>
 								<?php
 									}
@@ -31,8 +31,8 @@
 									{
 								?>
 										<div class="alert alert-info error-message">
-											<a type="button" class="btn btn-danger close" data-dismiss="alert" href="<?= base_url('index.php/Hue/Hue'); ?>">&times;</a>
-											<strong>Oops! Sorry,</strong> Your Hue Can't Be Created...
+											<a type="button" class="btn btn-danger close" data-dismiss="alert" href="<?= base_url('index.php/Placing/Placing'); ?>">&times;</a>
+											<strong>Oops! Sorry,</strong> Your Placing Can't Be Created...
 										</div>
 								<?php
 									}
@@ -41,8 +41,8 @@
 									{
 								?>
 										<div class="alert alert-info error-message">
-											<a type="button" class="btn btn-danger close" data-dismiss="alert" href="<?= base_url('index.php/Hue/Hue'); ?>">&times;</a>
-											<strong>Oops! Sorry,</strong> Your Hue Already Saved In Data Base...
+											<a type="button" class="btn btn-danger close" data-dismiss="alert" href="<?= base_url('index.php/Placing/Placing'); ?>">&times;</a>
+											<strong>Oops! Sorry,</strong> Your Placing Already Saved In Data Base...
 										</div>
 								<?php
 									}
@@ -50,28 +50,28 @@
 								<div class="widget">
 									<div class="widget-header">
 										<i class="icon-tag"></i>
-										<h3>Page Setup<i class="icon-long-arrow-right"></i>&nbsp;&nbsp;Hue<i class="icon-long-arrow-right"></i>&nbsp;&nbsp;Create Hue</h3>
+										<h3>Page Setup<i class="icon-long-arrow-right"></i>&nbsp;&nbsp;Placing<i class="icon-long-arrow-right"></i>&nbsp;&nbsp;Create Placing</h3>
 									</div>
 									<!-- /widget-header -->
 									
 									<div class="widget-content">
 										<fieldset>
-											<div class="control-group">
-												<label class="control-label" for="name"><span class="mendatory">*</span>&nbsp;Name</label>
+											<div class="control-group">											
+												<label class="control-label" for="name">Name</label>
 												<div class="controls">
-													<input type="text" class="span10" id="hue-name" name="hue-name" value="">
+													<input type="text" class="span10" id="placing-name" name="placing-name" value="">
 												</div> <!-- /controls -->				
 											</div> <!-- /control-group -->
 											
-											<div class="control-group">
+											<div class="control-group">										
 												<label class="control-label" for="description">Description</label>
 												<div class="controls">
-													<textarea class="span10" rows="3" id="hue-description" name="hue-description"></textarea>
+													<textarea class="span10" rows="3" id="placing-description" name="placing-description"></textarea>
 												</div> <!-- /controls -->				
 											</div> <!-- /control-group -->
 											
 											<div class="form-actions">
-												<button type="submit" id="button-hue" name="button-hue" class="btn btn-primary" onclick="return Validation()">Create Hue</button>
+												<button type="submit" id="button-placing" name="button-placing" class="btn btn-primary" onclick="return Validation()">Create Page</button>
 
 												<button type="reset" class="btn btn-danger">Cancel</button>
 
@@ -93,23 +93,18 @@
 			<!-- /main-inner --> 
 		</div>
 		<!-- /main -->
-
 		<?php include APPPATH.'views/admin/master/footer.php'; ?>
 
 		<!-- Custome JS File Include -->
 		<script type="text/javascript">
 			function Validation(){
-				var hueName = $('#hue-name').val();
+				var placingName = $('#placing-name').val();
 
-				if (hueName == "")
+				if (placingName == "")
 				{
-					Message("Oops! Hue Name Can't Be Empty. Please Enter Hue Name.");
-					$('#hue-name').css({'border':'1px solid red'});
+					Message("Oops! Placing Name Can't Be Empty. Please Enter Page Name.");
+					$('#placing-name').css({'border':'1px solid red'});
 					return false;
-				}
-				else
-				{
-					$('#hue-description').css({'border':'1px solid gray'});
 				}
 			}
 		</script>

@@ -2,7 +2,7 @@
 	/**
 	 * 
 	 */
-	class Placing extends CI_Controller
+	class PlacingType extends CI_Controller
 	{
 		
 		public function __construct()
@@ -10,7 +10,7 @@
 			parent::__construct();
 			$this->load->model('AdminModel');
 			$this->load->model('DataTableModel');
-			$this->load->model('PlacingModel');
+			$this->load->model('PlacingTypeModel');
 		}
 
 		public function GetAdminAllInfo()
@@ -30,15 +30,15 @@
 			else
 			{
 				$data = array(
-					'title' => 'Placing - Media Source Ltd.',
+					'title' => 'Placing Type - Media Source Ltd.',
 					'adminInfo' => $this->GetAdminAllInfo()
 				);
 
-				$this->load->view('admin/system_setup/page/placing',$data);
+				$this->load->view('admin/system_setup/page/placing-type',$data);
 			}
 		}
 
-		public function Placing($msg = null)
+		public function PlacingType($msg = null)
 		{
 			if ($this->session->userdata('adminUserName') == "" || $this->session->userdata('adminPassword') == "")
 			{
@@ -47,16 +47,16 @@
 			else
 			{
 				$data = array(
-					'title' => 'Create Placing - Media Source Ltd.',
+					'title' => 'Create Placing Type - Media Source Ltd.',
 					'adminInfo' => $this->GetAdminAllInfo(),
 					'message' => $msg
 				);
 
-				$this->load->view('admin/system_setup/page/create-placing',$data);				
+				$this->load->view('admin/system_setup/page/create-placing-type',$data);				
 			}
 		}
 
-		public function CreatePlacing()
+		public function CreatePlacingType()
 		{
 			if ($this->session->userdata('adminUserName') == "" || $this->session->userdata('adminPassword') == "")
 			{
@@ -64,21 +64,21 @@
 			}
 			else
 			{
-				$placingName = $this->input->post('placing-name');
+				$placingTypeName = $this->input->post('placing-type-name');
 
-				$checkPlacing = $this->PlacingModel->CheckPlacingExists($placingName);
+				$checkPlacingType = $this->PlacingTypeModel->CheckPlacingTypeExists($placingTypeName);
 
-				if ($checkPlacing)
+				if ($checkPlacingType)
 				{
-					return redirect('Placing/Placing/3');
+					return redirect('PlacingType/PlacingType/3');
 				}
 				else
 				{
-					$placingDescription = $this->input->post('placing-description');
+					$placingTypeDescription = $this->input->post('placing-type-description');
 
 					$entryId = $this->GetAdminAllInfo()->Id;
 
-					$result = $this->PlacingModel->CreatePlacing($placingName,$placingDescription,$entryId);
+					$result = $this->PlacingTypeModel->CreatePlacingType($placingTypeName,$placingTypeDescription,$entryId);
 
 					if ($result)
 					{
@@ -92,7 +92,7 @@
 			}
 		}
 
-		public function GetPlacingAllInfo()
+		public function GetPlacingTypeAllInfo()
 		{
 			if ($this->session->userdata('adminUserName') == "" || $this->session->userdata('adminPassword') == "")
 			{
@@ -101,23 +101,23 @@
 			else
 			{
 				$option = "dt-common";
-				$table = "placing";
+				$table = "placingtype";
 				$selectColumn = array("Id","Name","Description");
 				$orderColumn = array("Id","Name",null,null);
 
-				$placingInfo = $this->DataTableModel->MakeDataTables($option,$table,$selectColumn,$orderColumn);
+				$placingTypeInfo = $this->DataTableModel->MakeDataTables($option,$table,$selectColumn,$orderColumn);
 				$sl = 1;
 				$data = array();
 
-				foreach ($placingInfo as $value)
+				foreach ($placingTypeInfo as $value)
 				{
-					$placing = array();
-					$placing[] = $sl;
-					$placing[] = $value->Name;
-					$placing[] = $value->Description;
-					$placing[] = '<button type="button" name="update" id="'.$value->Id.'" class="btn btn-warning btn-xs update">Update</button> <button type="button" name="delete" id="'.$value->Id.'" class="btn btn-danger delete">Delete</button>';
+					$placingType = array();
+					$placingType[] = $sl;
+					$placingType[] = $value->Name;
+					$placingType[] = $value->Description;
+					$placingType[] = '<button type="button" name="update" id="'.$value->Id.'" class="btn btn-warning btn-xs update">Update</button> <button type="button" name="delete" id="'.$value->Id.'" class="btn btn-danger delete">Delete</button>';
 					$sl++;
-					$data[] = $placing;
+					$data[] = $placingType;
 				}
 
 				$output = array(
@@ -131,7 +131,7 @@
 			}
 		}
 
-		public function GetPlacingById()
+		public function GetPlacingTypeById()
 		{
 			if ($this->session->userdata('adminUserName') == "" || $this->session->userdata('adminPassword') == "")
 			{
@@ -140,19 +140,19 @@
 			else
 			{
 				$output = array();
-				$placingId = $this->input->post('placingId');
+				$placingTypeId = $this->input->post('placingTypeId');
 
-				$data = $this->PlacingModel->GetPlacingById($placingId);
+				$data = $this->PlacingTypeModel->GetPlacingTypeById($placingTypeId);
 
-				$output['placingId'] = $data->Id;
-				$output['placingName'] = $data->Name;
-				$output['placingDescription'] = $data->Description;
+				$output['placingTypeId'] = $data->Id;
+				$output['placingTypeName'] = $data->Name;
+				$output['placingTypeDescription'] = $data->Description;
 
 				echo json_encode($output);
 			}
 		}
 
-		public function UpdatePlacing()
+		public function UpdatePlacingType()
 		{
 			if ($this->session->userdata('adminUserName') == "" || $this->session->userdata('adminPassword') == "")
 			{
@@ -160,25 +160,25 @@
 			}
 			else
 			{
-				$placingId = $this->input->post('placing-id');
-				$placingName = $this->input->post('placing-name');
-				$placingDescription = $this->input->post('placing-description');
+				$placingTypeId = $this->input->post('placing-type-id');
+				$placingTypeName = $this->input->post('placing-type-name');
+				$placingTypeDescription = $this->input->post('placing-type-description');
 				$updateId = $this->GetAdminAllInfo()->Id;
 
-				$result = $this->PlacingModel->UpdatePlacing($placingId,$placingName,$placingDescription,$updateId);
+				$result = $this->PlacingTypeModel->UpdatePlacingType($placingTypeId,$placingTypeName,$placingTypeDescription,$updateId);
 
 				if ($result)
 				{
-					echo "Great! You Updated Your Placing Successfully";
+					echo "Great! You Updated Your Placing Type Successfully";
 				}
 				else
 				{
-					echo "Oops! Sorry, Your Placing Can't Be Updated";
+					echo "Oops! Sorry, Your Placing Type Can't Be Updated";
 				}
 			}
 		}
 
-		public function DeletePlacing()
+		public function DeletePlacingType()
 		{
 			if ($this->session->userdata('adminUserName') == "" || $this->session->userdata('adminPassword') == "")
 			{
@@ -186,17 +186,17 @@
 			}
 			else
 			{
-				$placingId = $this->input->post('placingId');
+				$placingTypeId = $this->input->post('placingTypeId');
 
-				$result = $this->PlacingModel->DeletePlacing($placingId);
+				$result = $this->PlacingTypeModel->DeletePlacingType($placingTypeId);
 
 				if ($result)
 				{
-					echo "Placing Deleted From Database!";
+					echo "Placing Type Deleted From Database!";
 				}
 				else
 				{
-					echo "Oops, Something Wrong With Deleting Placing";
+					echo "Oops, Something Wrong With Deleting Placing Type";
 				}
 			}
 		}

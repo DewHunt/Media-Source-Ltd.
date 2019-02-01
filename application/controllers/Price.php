@@ -257,13 +257,37 @@
 				$output['inch'] = $data->Inch;
 				$output['priceDescription'] = $data->Description;
 
-				// $priceDetailsInfo = $this->PriceModel->GetPriceDetailsById($data->PriceId);
+				$priceDetailsInfo = $this->PriceModel->GetPriceById($data->PriceId);
 
-				// $output['mediaId'] = $priceDetailsInfo->MediaId;
-				// $output['publicationId'] = $data->PublicationId;
-				// $output['dayId'] = $data->DayId;
+				$output['Name'] = $priceDetailsInfo->Name;
+				$output['mediaId'] = $priceDetailsInfo->MediaId;
+				$output['publicationId'] = $priceDetailsInfo->PublicationId;
+				$output['day'] = $priceDetailsInfo->Day;
 
 				echo json_encode($output);
+			}
+		}
+
+		public function DeletePriceDetails()
+		{
+			if ($this->session->userdata('adminUserName') == "" || $this->session->userdata('adminPassword') == "")
+			{
+				return redirect('Admin/Index');
+			}
+			else
+			{
+				$priceDetailsId = $this->input->post('priceDetailsId');
+
+				$result = $this->PriceModel->DeletePriceDetails($priceDetailsId);
+
+				if ($result)
+				{
+					echo "Price Deleted From Database!";
+				}
+				else
+				{
+					echo "Oops, Something Wrong With Deleting Price";
+				}
 			}
 		}
 	}

@@ -23,6 +23,8 @@
 											<li class="has-sub">
 												<a href="#">Page Setup<span class="sub-arrow"></span></a>
 												<ul>
+													<li><a href="<?= base_url('index.php/Placing/Index'); ?>">Placing</a></li>
+													<li><a href="<?= base_url('index.php/PlacingType/Index'); ?>">Placing Type</a></li>
 													<li><a href="<?= base_url('index.php/Page/Index'); ?>">Page</a></li>
 													<li><a href="<?= base_url('index.php/Hue/Index'); ?>">Hue</a></li>
 													<li><a href="<?= base_url('index.php/Price/Index'); ?>">Price</a></li>
@@ -45,14 +47,6 @@
 													<li><a href="<?= base_url('index.php/Company/Index'); ?>">Company</a></li>
 													<li><a href="<?= base_url('index.php/Brand/Index'); ?>">Brand</a></li>
 													<li><a href="<?= base_url('index.php/SubBrand/Index'); ?>">Sub Brand</a></li>
-												</ul>
-											</li>
-											
-											<li class="has-sub">
-												<a href="#">Tarrif Setup<span class="sub-arrow"></span></a>
-												<ul>
-													<li><a href="<?= base_url('index.php/Placing/Index'); ?>">Placing</a></li>
-													<li><a href="<?= base_url('index.php/PageType/Index'); ?>">Page Type</a></li>
 												</ul>
 											</li>
 										</ul>

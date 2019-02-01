@@ -28,6 +28,8 @@
 								<b class="caret"></b>
 							</a>
 							<ul class="dropdown-menu">
+								<li><a href="<?= base_url('index.php/Placing/Index'); ?>">Placing</a></li>
+								<li><a href="<?= base_url('index.php/PlacingType/Index'); ?>">Placing Type</a></li>
 								<li><a href="<?= base_url('index.php/Page/Index'); ?>">Page</a></li>
 								<li><a href="<?= base_url('index.php/Hue/Index'); ?>">Hue</a></li>
 								<li><a href="<?= base_url('index.php/Price/Index'); ?>">Price</a></li>
@@ -58,18 +60,6 @@
 								<li><a href="<?= base_url('index.php/Company/Index'); ?>">Company</a></li>
 								<li><a href="<?= base_url('index.php/Brand/Index'); ?>">Brand</a></li>
 								<li><a href="<?= base_url('index.php/SubBrand/Index'); ?>">Sub Brand</a></li>
-							</ul>
-						</li>
-						
-						<li class="dropdown">
-							<a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown">
-								<i class="icon-long-arrow-down"></i>
-								<span>Tariff Setup </span>
-								<b class="caret"></b>
-							</a>
-							<ul class="dropdown-menu">
-								<li><a href="<?= base_url('index.php/Placing/Index'); ?>">Placing</a></li>
-								<li><a href="<?= base_url('index.php/PageType/Index'); ?>">Page Type</a></li>
 							</ul>
 						</li>
 					</ul>

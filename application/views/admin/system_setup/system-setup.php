@@ -71,6 +71,14 @@
 										<!-- /widget-header -->
 										<div class="widget-content">
 											<div class="shortcuts">
+												<a href="<?= base_url('index.php/Placing/Index'); ?>" class="shortcut">
+													<i class="shortcut-icon icon-file"></i> 
+													<span class="shortcut-label">Placing</span>
+												</a>
+												<a href="<?= base_url('index.php/PlacingType/Index'); ?>" class="shortcut">
+													<i class="shortcut-icon icon-file"></i> 
+													<span class="shortcut-label">Placing Type</span> 
+												</a>
 												<a href="<?= base_url('index.php/Page/Index'); ?>" class="shortcut"> 
 													<i class="shortcut-icon icon-file"></i>
 													<span class="shortcut-label">Page</span> 
@@ -145,31 +153,6 @@
 													<i class="shortcut-icon icon-file"></i>
 													<span class="shortcut-label">Sub Brand</span> 
 												</a> 
-											</div>
-											<!-- /shortcuts --> 
-										</div>
-										<!-- /widget-content --> 
-									</div>
-									<!-- /widget -->
-								</div>	<!-- /span9 -->
-								
-								<div class="span9">
-									<div class="widget">
-										<div class="widget-header">
-											<i class="icon-list-alt"></i>
-											<h3>Tariff Setup Menu</h3>
-										</div>
-										<!-- /widget-header -->
-										<div class="widget-content">
-											<div class="shortcuts">
-												<a href="<?= base_url('index.php/Placing/Index'); ?>" class="shortcut">
-													<i class="shortcut-icon icon-file"></i> 
-													<span class="shortcut-label">Placing</span>
-												</a>
-												<a href="<?= base_url('index.php/PageType/Index'); ?>" class="shortcut">
-													<i class="shortcut-icon icon-file"></i> 
-													<span class="shortcut-label">Page Type</span> 
-												</a>
 											</div>
 											<!-- /shortcuts --> 
 										</div>

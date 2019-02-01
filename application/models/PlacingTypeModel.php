@@ -2,16 +2,16 @@
 	/**
 	 * 
 	 */
-	class PlacingModel extends CI_Model
+	class PlacingTypeModel extends CI_Model
 	{		
 		public function __construct()
 		{
 			parent::__construct();
 		}
 
-		public function CheckPlacingExists($placingName)
+		public function CheckPlacingTypeExists($placingTypeName)
 		{
-			$sql = "SELECT * FROM placing WHERE Name = '$placingName'";
+			$sql = "SELECT * FROM placingtype WHERE Name = '$placingTypeName'";
 
 			$checkQuery = $this->db->query($sql);
 
@@ -25,11 +25,11 @@
 			}
 		}
 
-		public function CreatePlacing($placingName,$placingDescription,$entryId)
+		public function CreatePlacingType($placingTypeName,$placingTypeDescription,$entryId)
 		{
 			$entryDateTime = date('Y-m-d H:i:s');
 
-			$sql = "INSERT INTO placing (Name, Description, EntryBy, EntryDateTime) VALUES ('$placingName','$placingDescription','$entryId','$entryDateTime')";
+			$sql = "INSERT INTO placingtype (Name, Description, EntryBy, EntryDateTime) VALUES ('$placingTypeName','$placingTypeDescription','$entryId','$entryDateTime')";
 
 			$insertQuery = $this->db->query($sql);
 
@@ -43,9 +43,9 @@
 			}
 		}
 
-		public function GetPlacingById($placingId)
+		public function GetPlacingTypeById($placingTypeId)
 		{
-			$sql = "SELECT * FROM placing WHERE Id = '$placingId'";
+			$sql = "SELECT * FROM placingtype WHERE Id = '$placingTypeId'";
 
 			$query = $this->db->query($sql);
 
@@ -59,10 +59,10 @@
 			}
 		}
 
-		public function UpdatePlacing($placingId,$placingName,$placingDescription,$updateId)
+		public function UpdatePlacingType($placingTypeId,$placingTypeName,$placingTypeDescription,$updateId)
 		{
 			$updateTime = date('Y-m-d H:i:s');
-			$sql = "UPDATE placing SET Name = '$placingName', Description = '$placingDescription', UpdateBy = '$updateId', UpdateTime = '$updateTime' WHERE Id = '$placingId'";
+			$sql = "UPDATE placingtype SET Name = '$placingTypeName', Description = '$placingTypeDescription', UpdateBy = '$updateId', UpdateTime = '$updateTime' WHERE Id = '$placingTypeId'";
 
 			$updateQuery = $this->db->query($sql);
 
@@ -76,9 +76,9 @@
 			}
 		}
 
-		public function DeletePlacing($placingId)
+		public function DeletePlacingType($placingTypeId)
 		{
-			$sql = "DELETE FROM placing WHERE Id = '$placingId'";
+			$sql = "DELETE FROM placingtype WHERE Id = '$placingTypeId'";
 
 			$deleteQuery = $this->db->query($sql);
 
@@ -92,9 +92,9 @@
 			}
 		}
 
-		public function GetAllPlacing()
+		public function GetAllPlacingType()
 		{
-			$sql = "SELECT * FROM placing ORDER BY Name ASC";
+			$sql = "SELECT * FROM placingtype ORDER BY Name ASC";
 
 			$query = $this->db->query($sql);
 

@@ -77,5 +77,21 @@
 				return false;
 			}			
 		}
+
+		public function DeletePriceDetails($priceDetailsId)
+		{
+			$sql = "DELETE FROM pricedetails WHERE Id = '$priceDetailsId'";
+
+			$deleteQuery = $this->db->query($sql);
+
+			if ($deleteQuery)
+			{
+				return true;
+			}
+			else
+			{
+				return false;
+			}
+		}
 	}
 ?>

@@ -50,7 +50,7 @@
 								<div class="widget">
 									<div class="widget-header">
 										<i class="icon-tag"></i>
-										<h3>Media Setup<i class="icon-long-arrow-right"></i>&nbsp;&nbsp;Price<i class="icon-long-arrow-right"></i>&nbsp;&nbsp;Create Price</h3>
+										<h3>Page Setup<i class="icon-long-arrow-right"></i>&nbsp;&nbsp;Price<i class="icon-long-arrow-right"></i>&nbsp;&nbsp;Create Price</h3>
 									</div>
 									<!-- /widget-header -->
 									
@@ -74,7 +74,7 @@
 												<label class="control-label" for="publication">Publication</label>
 												<div class="controls">
 													<div id="publication-select-menu">
-														<select class="dropdown" name="publication-select-menu" id="publication-id" style="width: 99%;">
+														<select class="dropdown" name="publication-id" id="publication-id" style="width: 99%;">
 															<option value="">Select Publication</option>
 														</select>
 													</div>

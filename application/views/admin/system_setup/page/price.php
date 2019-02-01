@@ -51,8 +51,8 @@
 										</tfoot>
 									</table>
 
-									<div id="price-modal" class="modal fade">
-										<div class="modal-dialog">
+									<div id="price-modal" class="modal fade" role="dialog">
+										<div class="modal-dialog modal-lg">
 											<form method="POST" id="price-form">
 												<div class="modal-content">
 													<div class="modal-header">
@@ -61,18 +61,35 @@
 													</div>
 
 													<div class="modal-body">
+														<label class="control-label" for="name">Name</label>
+														<input type="text" id="price-media-name" name="price-media-name" value="" style="width: 99%;">
+
 														<label class="control-label" for="name"><span class="mendatory">*</span>&nbsp;Media</label><div id="media-select-menu"></div>
 														                     
 														<label class="control-label" for="Publication"><span class="mendatory">*</span>&nbsp;Publication</label>
 
 														<div id="publication-select-menu">
-															<select class="dropdown" name="publication-select-menu" id="publication-id" style="width: 99%;">
+															<select class="dropdown" name="publication-id" id="publication-id" style="width: 99%;">
 																<option value="">Select Publication</option>
 															</select>
 														</div>
 
 														<label class="control-label" for="day"><span class="mendatory">*</span>&nbsp;Day</label>
-														<div id="day-select-menu"></div>                     
+														<select class="dropdown" name="day", id="day" style="width: 99%;">
+															<option value="">Select Day</option>
+															<option value="All Days">All Days</option>
+															<option value="Saturday">Saturday</option>
+															<option value="Sunday">Sunday</option>
+															<option value="Monday">Monday</option>
+															<option value="Tuesday">Tuesday</option>
+															<option value="Wednesday">Wednesday</option>
+															<option value="Thursday">Thursday</option>
+															<option value="Friday">Friday</option>
+															<option value="Weekly">Weekly</option>
+															<option value="Monthly">Monthly</option>
+															<option value="Yearly">Yearly</option>
+														</select>
+
 														<label class="control-label" for="publication-place"><span class="mendatory">*</span>&nbsp;Place</label>
 														<div id="publication-place-select-menu"></div>
                      
@@ -164,6 +181,7 @@
 				});
 
 				GetDataForSelectMenu("MediaNameModel","GetAllMediaName","#media-select-menu","media-name-id","Select Media");
+				// GetDataForDependantSelectMenu("PublicationModel","GetPublicationByForignKey","MediaId",mediaId,"#publication-select-menu","publication-id","Select Publication");
 				GetDataForSelectMenu("PageModel","GetAllPage","#page-select-menu","page-id","Select Page Name");
 				GetDataForSelectMenu("HueModel","GetAllHue","#hue-select-menu","hue-id","Select Hue");
 
@@ -210,13 +228,13 @@
 						dataType:'json',
 						success:function(data){
 							$('#price-modal').modal('show');
+							$('#price-media-name').val(data.Name);
 							$('#media-name-id option[value="'+data.mediaId+'"]').prop('selected', true);
 
 							GetDataForDependantSelectMenu("PublicationModel","GetPublicationByForignKey","MediaId",data.mediaId,"#publication-select-menu","publication-id","Select Publication");
-							$('#publication-id option[value="'+data.publicationId+'"]').prop('selected', true);
-							// $('#publication-select-menu').html(data.publicationId);
+							$('#publication-id option[value="General"]').prop('selected', true);
+							$('#day option[value="'+data.day+'"]').prop('selected', true);
 
-							$('#day-id option[value="'+data.dayId+'"]').prop('selected', true);
 							$('#price-title').val(data.priceTitle);
 							$('#page-id option[value="'+data.pageId+'"]').prop('selected', true);
 							$('#hue-id option[value="'+data.hueId+'"]').prop('selected', true);
@@ -229,9 +247,24 @@
 				});
 
 				$(document).on('click', '.delete', function(){
-					var priceId = $(this).attr('id');
+					var priceDetailsId = $(this).attr('id');
 
-					alert(priceId);
+					if (confirm("Wait!, Are Your 100% Sure, You Really Want to Delete This?"))
+					{
+						$.ajax({
+							url:'<?php echo base_url('index.php/Price/DeletePriceDetails'); ?>',
+							method:'POST',
+							data:{priceDetailsId:priceDetailsId},
+							success:function(data){
+								alert(data);
+								dataTable.ajax.reload();
+							}
+						});
+					}
+					else
+					{
+						return false;
+					}
 				});
 			});
 		</script>

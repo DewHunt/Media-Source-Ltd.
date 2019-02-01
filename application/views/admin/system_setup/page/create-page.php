@@ -106,11 +106,7 @@
 					Message("Oops! Page Name Can't Be Empty. Please Enter Page Name.");
 					$('#page-name').css({'border':'1px solid red'});
 					return false;
-				}
-				else
-				{
-					$('#page-description').css({'border':'1px solid gray'});
-				}
+				}		
 			}
 		</script>
 	</body>
