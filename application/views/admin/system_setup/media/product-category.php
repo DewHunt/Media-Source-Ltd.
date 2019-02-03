@@ -129,7 +129,7 @@
 
 					if (productCategoryName == "")
 					{
-						alert("Oops! product Category Name Must Be Filled");
+						alert("Oops! Product Category Name Must Be Filled");
 						$('#product-category-name').css({'border':'1px solid red'});
 						return false;
 					}

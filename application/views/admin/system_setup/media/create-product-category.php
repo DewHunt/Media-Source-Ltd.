@@ -13,7 +13,7 @@
 			<div class="main-inner">
 				<div class="container">
 					<div class="row">
-						<form class="form-horizontal" id="parameter-form" method="POST" action="<?= base_url('index.php/ProductCategory/CreateProductCategory'); ?>">
+						<form class="form-horizontal" id="product-category-form" method="POST" action="<?= base_url('index.php/ProductCategory/CreateProductCategory'); ?>">
 							<div class="span12">
 
 								<?php
@@ -71,7 +71,7 @@
 											</div> <!-- /control-group -->
 											
 											<div class="form-actions">
-												<button type="submit" id="button-product-category" name="button-product-category" class="btn btn-primary" onclick="return Validation()">Create Parameter</button>
+												<button type="submit" id="button-product-category" name="button-product-category" class="btn btn-primary" onclick="return Validation()">Create Product Category</button>
 
 												<button type="reset" class="btn btn-danger">Cancel</button>
 
