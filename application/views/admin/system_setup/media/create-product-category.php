@@ -107,10 +107,6 @@
 					$('#product-category-name').css({'border':'1px solid red'});
 					return false;
 				}
-				else
-				{
-					$('#product-category-name').css({'border':'1px solid gray'});
-				}
 			}
 		</script>
 	</body>

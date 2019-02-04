@@ -102,7 +102,7 @@
 
 				if (placingName == "")
 				{
-					Message("Oops! Placing Name Can't Be Empty. Please Enter Page Name.");
+					Message("Oops! Placing Name Can't Be Empty. Please Enter Placing Name.");
 					$('#placing-name').css({'border':'1px solid red'});
 					return false;
 				}

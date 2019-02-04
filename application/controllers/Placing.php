@@ -82,11 +82,11 @@
 
 					if ($result)
 					{
-						return redirect('PlacingType/PlacingType/1');
+						return redirect('Placing/Placing/1');
 					}
 					else
 					{
-						return redirect('PlacingType/PlacingType/2');
+						return redirect('Placing/Placing/2');
 					}
 				}
 			}
