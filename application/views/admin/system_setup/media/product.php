@@ -161,8 +161,6 @@
 					}
 					else
 					{
-						$('#product-name').css({'border':'1px solid gray'});
-
 						$.ajax({
 							url:'<?php echo base_url("index.php/Product/UpdateProduct"); ?>',
 							method:'POST',

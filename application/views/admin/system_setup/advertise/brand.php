@@ -56,11 +56,11 @@
 													</div>
 
 													<div class="modal-body">
-														<label class="control-label" for="name"><span class="mendatory">*</span>&nbsp;Brand Name</label>
-														<input type="text" id="brand-name" name="brand-name" placeholder="Enter Product Name" style="width: 100%" value="">
-
 														<label class="control-label" for="company"><span class="mendatory">*</span>&nbsp;Company</label>
 														<div id="company-select-menu"></div>
+
+														<label class="control-label" for="name"><span class="mendatory">*</span>&nbsp;Brand Name</label>
+														<input type="text" id="brand-name" name="brand-name" placeholder="Enter Product Name" style="width: 100%" value="">
 
 														<label class="control-label" for="description">Description</label>
 														<textarea rows="3" id="brand-description" name="brand-description" style="width: 100%;"></textarea>
@@ -109,6 +109,94 @@
 							'orderable':false
 						},
 					],
+				});
+
+				GetDataForSelectMenu();
+
+				// Get Media Name Data Script Start
+				function GetDataForSelectMenu()
+				{
+					$.ajax({
+						type:'ajax',
+						url:'<?php echo base_url('index.php/Brand/GetDataForSelectMenu'); ?>',
+						success:function(data){
+							$('#company-select-menu').html(data);
+						}
+					});
+				} 
+				// Get Media Name Data Script End
+
+				$(document).on('click', '.update', function(){
+					var brandId = $(this).attr('id');
+
+					$.ajax({
+						url:'<?php echo base_url("index.php/Brand/GetBrandById"); ?>',
+						method:'POST',
+						data:{brandId:brandId},
+						dataType:'json',
+						success:function(data){
+							$('#brand-modal').modal('show');
+							$('#company-id option[value="'+data.companyId+'"]').prop('selected', true);
+							$('#brand-name').val(data.brandName);
+							$('#brand-description').val(data.brandDescription);
+							$('#brand-id').val(data.brandId);
+						}
+					});
+				});
+
+				$(document).on('submit', '#brand-form', function(event){
+					event.preventDefault();
+
+					var companyId = $('#company-id').val();
+					var brandName = $('#brand-name').val();
+
+					if (companyId == "")
+					{
+						alert("Oops! Company Can't Be Empty. Please Select Company");
+						return false;
+					}
+					else if (brandName == "")
+					{
+						alert("Oops! Brand Name Can't Be Empty. Please Enter Brand Name");
+						return false;
+					}
+					else
+					{
+						$.ajax({
+							url:'<?php echo base_url("index.php/Brand/UpdateBrand"); ?>',
+							method:'POST',
+							data:new FormData(this),
+							contentType:false,
+							processData:false,
+							success:function(data){
+								alert(data);
+								$('#brand-form')[0].reset();
+								$('#brand-modal').modal('hide');
+								dataTable.ajax.reload();
+							}
+						});
+					}
+				});
+
+				$(document).on('click', '.delete', function(){
+					var brandId = $(this).attr('id');
+
+					if (confirm("Wait! Are You 100% Sure, Really You Want To Delete This?"))
+					{
+						$.ajax({
+							url:'<?php echo base_url("index.php/Brand/DeleteBrand"); ?>',
+							method:'POST',
+							data:{brandId:brandId},
+							success:function(data){
+								alert(data);
+								dataTable.ajax.reload();
+							}
+						});						
+					}
+					else
+					{
+						return false;
+					}
 				});
 			});
 		</script>

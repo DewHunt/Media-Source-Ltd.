@@ -11,7 +11,7 @@
 
 		public function checkBrandExists($brandName,$companyId)
 		{
-			$sql = "SELECT * FROM brand WHERE Name = $brandName AND CompanyId = $companyId";
+			$sql = "SELECT * FROM brand WHERE Name = '$brandName' AND CompanyId = '$companyId'";
 
 			$checkQuery = $this->db->query($sql);
 
@@ -36,6 +36,87 @@
 			if ($query)
 			{
 				return true;
+			}
+			else
+			{
+				return false;
+			}
+		}
+
+		public function GetBrandById($brandId)
+		{
+			$sql = "SELECT * FROM brand WHERE Id = $brandId";
+
+			$query = $this->db->query($sql);
+
+			if ($query->num_rows() > 0)
+			{
+				return $query->row();
+			}
+			else
+			{
+				return false;
+			}
+		}
+
+		public function UpdateBrand($brandId,$brandName,$companyId,$brandDescription,$updateId)
+		{
+			$updateTime = date('Y-m-d H:i:s');
+			$sql = "UPDATE brand SET Name = '$brandName', CompanyId = '$companyId',  Description = '$brandDescription', UpdateBy = '$updateId', UpdateTime = '$updateTime' WHERE Id = '$brandId'";
+
+			$updateQuery = $this->db->query($sql);
+
+			if ($updateQuery)
+			{
+				return true;
+			}
+			else
+			{
+				return false;
+			}
+		}
+
+		public function DeleteBrand($brandId)
+		{
+			$sql = "DELETE FROM brand WHERE Id = $brandId";
+
+			$query = $this->db->query($sql);
+
+			if ($query)
+			{
+				return true;
+			}
+			else
+			{
+				return false;
+			}
+		}
+
+		public function GetAllBrand()
+		{
+			$sql = "SELECT * FROM brand ORDER BY Name ASC";
+
+			$query = $this->db->query($sql);
+
+			if ($query->num_rows() > 0)
+			{
+				return $query->result();
+			}
+			else
+			{
+				return false;
+			}
+		}
+
+		public function GetBrandByForignKey($fieldName,$id)
+		{
+			$sql = "SELECT * FROM brand WHERE $fieldName = $id ORDER BY Name ASC";
+
+			$query = $this->db->query($sql);
+
+			if ($query->num_rows() > 0)
+			{
+				return $query->result();
 			}
 			else
 			{

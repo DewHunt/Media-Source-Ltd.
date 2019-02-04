@@ -46,7 +46,7 @@
 		public function GetProductById($productId)
 		{
 			$sql = "SELECT * FROM product_cat WHERE Id = ".$productId;
-
+			
 			$query = $this->db->query($sql);
 
 			if ($query->num_rows() > 0)

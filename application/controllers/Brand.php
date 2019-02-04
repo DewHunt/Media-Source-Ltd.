@@ -90,7 +90,7 @@
 			}
 		}
 
-		public function CreateProduct()
+		public function CreateBrand()
 		{
 			if ($this->session->userdata('adminUserName') == "" || $this->session->userdata('adminPassword') == "")
 			{
@@ -99,7 +99,7 @@
 			else
 			{
 				$brandName = $this->input->post('brand-name');
-				$companyId = $this->input->post('comapny-id');
+				$companyId = $this->input->post('company-id');
 
 				$checkBrand = $this->BrandModel->checkBrandExists($brandName,$companyId);
 
@@ -165,6 +165,79 @@
 				);
 
 				echo json_encode($output);
+			}
+		}
+
+		public function GetBrandById()
+		{
+			if ($this->session->userdata('adminUserName') == "" || $this->session->userdata('adminPassword') == "")
+			{
+				return redirect('Admin/Index');
+			}
+			else
+			{
+				$output = array();
+				$brandId = $this->input->post('brandId');
+
+				$data = $this->BrandModel->GetBrandById($brandId);
+
+				$output['brandId'] = $data->Id;
+				$output['brandName'] = $data->Name;
+				$output['brandDescription'] = $data->Description;
+				$output['companyId'] = $data->CompanyId;
+
+				echo json_encode($output);
+			}
+		}
+
+		public function UpdateBrand()
+		{
+			if ($this->session->userdata('adminUserName') == "" || $this->session->userdata('adminPassword') == "")
+			{
+				return redirect('Admin/Index');
+			}
+			else
+			{
+				$brandName = $this->input->post('brand-name');
+				$companyId = $this->input->post('company-id');
+				$brandDescription = $this->input->post('brand-description');
+
+				$brandId = $this->input->post('brand-id');
+				$updateId = $this->GetAdminAllInfo()->Id;
+
+				$result = $this->BrandModel->UpdateBrand($brandId,$brandName,$companyId,$brandDescription,$updateId);
+
+				if ($result)
+				{
+					echo "Greate! You Updated Your Brand Successfully";
+				}
+				else
+				{
+					echo "Oops! Sorry, Your Brand Can't Be Updated";
+				}				
+			}
+		}
+
+		public function DeleteBrand()
+		{
+			if ($this->session->userdata('adminUserName') == "" || $this->session->userdata('adminPassword') == "")
+			{
+				return redirect('Admin/Index');
+			}
+			else
+			{
+				$brandId = $this->input->post('brandId');
+
+				$result = $this->BrandModel->DeleteBrand($brandId);
+				
+				if ($result)
+				{
+					echo "Brand Dleted From Database!";
+				}
+				else
+				{
+					echo "Oops! Something Wrong With Deleting Brand";
+				}
 			}
 		}
 	}

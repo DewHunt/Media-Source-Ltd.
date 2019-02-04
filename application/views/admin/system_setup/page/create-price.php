@@ -57,21 +57,21 @@
 									<div class="widget-content">
 										<fieldset>
 											<div class="control-group">											
-												<label class="control-label" for="name">Name</label>
+												<label class="control-label" for="name"><span class="mendatory">*</span>&nbsp;Name</label>
 												<div class="controls">
 													<input type="text" class="span10" id="price-media-name" name="price-media-name" value="">
 												</div> <!-- /controls -->				
 											</div> <!-- /control-group -->
 
 											<div class="control-group">                     
-												<label class="control-label" for="media">Media</label>
+												<label class="control-label" for="media"><span class="mendatory">*</span>&nbsp;Media</label>
 												<div class="controls">
 													<div id="media-select-menu"></div>
 												</div> <!-- /controls -->       
 											</div> <!-- /control-group -->
 											
 											<div class="control-group">                     
-												<label class="control-label" for="publication">Publication</label>
+												<label class="control-label" for="publication"><span class="mendatory">*</span>&nbsp;Publication</label>
 												<div class="controls">
 													<div id="publication-select-menu">
 														<select class="dropdown" name="publication-id" id="publication-id" style="width: 99%;">
@@ -82,7 +82,7 @@
 											</div> <!-- /control-group -->
 											
 											<div class="control-group">                     
-												<label class="control-label" for="day">Day</label>
+												<label class="control-label" for="day"><span class="mendatory">*</span>&nbsp;Day</label>
 												<div class="controls">
 													<select class="dropdown" name="day", id="day" style="width: 99%;">
 														<option value="">Select Day</option>
@@ -108,13 +108,13 @@
 														<thead>
 															<tr>
 																<th>SL</th>
-																<th>Price Title</th>
-																<th>Select Pages</th>
-																<th>Hue</th>
-																<th>Column</th>
+																<th><span class="mendatory">*</span>&nbsp;Price Title</th>
+																<th><span class="mendatory">*</span>&nbsp;Select Pages</th>
+																<th><span class="mendatory">*</span>&nbsp;Hue</th>
+																<th><span class="mendatory">*</span>&nbsp;Column</th>
 																<th>×</th>
-																<th>Inch</th>
-																<th>Price</th>
+																<th><span class="mendatory">*</span>&nbsp;Inch</th>
+																<th><span class="mendatory">*</span>&nbsp;Price</th>
 																<th>Remarks</th>
 															</tr>
 														</thead>

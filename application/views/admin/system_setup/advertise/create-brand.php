@@ -55,22 +55,22 @@
 									<!-- /widget-header -->
 									
 									<div class="widget-content">
-										<fieldset>
-											<div class="control-group">											
-												<label class="control-label" for="name"><span class="mendatory">*</span>&nbsp;Name</label>
-												<div class="controls">
-													<input type="text" class="span10" id="brand-name" name="brand-name" value="">
-												</div> <!-- /controls -->				
-											</div> <!-- /control-group -->
-											
+										<fieldset>											
 											<div class="control-group">                     
 												<label class="control-label" for="company"><span class="mendatory">*</span>&nbsp;Company</label>
 												<div class="controls">
 													<div id="company-select-menu"></div>
 												</div> <!-- /controls -->       
 											</div> <!-- /control-group -->
+
+											<div class="control-group">
+												<label class="control-label" for="name"><span class="mendatory">*</span>&nbsp;Name</label>
+												<div class="controls">
+													<input type="text" class="span10" id="brand-name" name="brand-name" value="">
+												</div> <!-- /controls -->				
+											</div> <!-- /control-group -->
 											
-											<div class="control-group">										
+											<div class="control-group">
 												<label class="control-label" for="description">Description</label>
 												<div class="controls">
 													<textarea class="span10" rows="3" id="brand-description" name="brand-description"></textarea>
@@ -122,6 +122,19 @@
 				var companyId = $('#company-id').val();
 				var brandName = $('#brand-name').val();
 
+				if (companyId == "")
+				{
+					Message("Oops! Company Can't Be Empty. Please Select Company");
+					$('#company-id').css({'border':'1px solid red'});
+					
+					$('#brand-name').css({'border':'1px solid gray'});
+					return false;
+				}
+				else
+				{
+					$('#company-id').css({'border':'1px solid gray'});
+				}
+
 				if (brandName == "")
 				{
 					Message("Oops! Brand Name Can't Be Empty. Please Enter Brand Name");
@@ -133,19 +146,6 @@
 				else
 				{
 					$('#brand-name').css({'border':'1px solid gray'});
-				}
-
-				if (companyId == "")
-				{
-					Message("Oops! Company Can't Be Empty. Please Select Company");
-					$('#company-id').css({'border':'1px solid red'});
-					
-					$('#company-name').css({'border':'1px solid gray'});
-					return false;
-				}
-				else
-				{
-					$('#company-id').css({'border':'1px solid gray'});
 				}
 			}
 		</script>
