@@ -157,7 +157,6 @@
 					}
 				}
 			}
-
 		}
 
 		public function GetPublicationAllInfo()
