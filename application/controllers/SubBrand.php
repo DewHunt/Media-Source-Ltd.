@@ -154,15 +154,15 @@
 				$companyId = $this->input->post('company-id');
 				$brandId = $this->input->post('brand-id');
 
-				$checkSubBrandName = $this->SubBrandModel->checkSubBrandExists($subBrandName,$companyId,$brandId);
+				$checkSubBrand = $this->SubBrandModel->checkSubBrandExists($subBrandName,$companyId,$brandId,"");
 
-				if ($checkSubBrandName)
+				if ($checkSubBrand)
 				{
 					return redirect('SubBrand/SubBrand/3');
 				}
 				else
 				{
-					$subBrandDescription = $this->input->post('subBrand-description');
+					$subBrandDescription = $this->input->post('sub-brand-description');
 
 					$entryId = $this->GetAdminAllInfo()->Id;
 
@@ -255,21 +255,30 @@
 			{
 				$subBrandName = $this->input->post('sub-brand-name');
 				$companyId = $this->input->post('company-id');
-				$subBrandDescription = $this->input->post('sub-brand-description');
 				$brandId = $this->input->post('brand-id');
-
 				$subBrandId = $this->input->post('sub-brand-id');
-				$updateId = $this->GetAdminAllInfo()->Id;
 
-				$result = $this->SubBrandModel->UpdateSubBrand($subBrandId,$subBrandName,$companyId,$subBrandDescription,$brandId,$updateId);
+				$checkSubBrand = $this->SubBrandModel->checkSubBrandExists($subBrandName,$companyId,$brandId,$subBrandId);
 
-				if ($result)
+				if ($checkSubBrand)
 				{
-					echo "Greate! You Updated Your Sub Brand Successfully";
+					echo "Oops! Sorry, Your This Sub Brand Alredy Created.";
 				}
 				else
 				{
-					echo "Oops! Sorry, Your Sub Brand Can't Be Updated";
+					$subBrandDescription = $this->input->post('sub-brand-description');
+					$updateId = $this->GetAdminAllInfo()->Id;
+
+					$result = $this->SubBrandModel->UpdateSubBrand($subBrandId,$subBrandName,$companyId,$subBrandDescription,$brandId,$updateId);
+
+					if ($result)
+					{
+						echo "Greate! You Updated Your Sub Brand Successfully";
+					}
+					else
+					{
+						echo "Oops! Sorry, Your Sub Brand Can't Be Updated";
+					}
 				}				
 			}
 		}

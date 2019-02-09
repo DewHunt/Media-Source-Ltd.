@@ -19,8 +19,8 @@
 
 				if (isset($_POST["search"]["value"]))
 				{
-					$this->db->like("Name",$_POST["search"]["value"]);
-					$this->db->or_where("Id",$_POST["search"]["value"]);
+					$this->db->like("Name",$_POST["search"]["value"])->where("State","1");
+					$this->db->or_where("Id",$_POST["search"]["value"])->where("State","1");
 				}
 
 				if (isset($_POST["order"]))
@@ -40,12 +40,12 @@
 
 				if (isset($_POST["search"]["value"]))
 				{
-					$this->db->like("Name",$_POST["search"]["value"]);
-					// $this->db->or_where("Id",$_POST["search"]["value"]);
-					$this->db->or_where("MediaId",$_POST["search"]["value"]);
-					// $this->db->or_where("PublicationTypeId",$_POST["search"]["value"]);
-					// $this->db->or_where("PublicationPlaceId",$_POST["search"]["value"]);
-					// $this->db->or_where("PublicationFrequencyId",$_POST["search"]["value"]);
+					$this->db->like("Name",$_POST["search"]["value"])->where("State","1");
+					// $this->db->or_where("Id",$_POST["search"]["value"])->where("State","1");
+					$this->db->or_where("MediaId",$_POST["search"]["value"])->where("State","1");
+					// $this->db->or_where("PublicationTypeId",$_POST["search"]["value"])->where("State","1");
+					// $this->db->or_where("PublicationPlaceId",$_POST["search"]["value"])->where("State","1");
+					// $this->db->or_where("PublicationFrequencyId",$_POST["search"]["value"])->where("State","1");
 				}
 
 				if (isset($_POST["order"]))
@@ -65,8 +65,8 @@
 
 				if (isset($_POST["search"]["value"]))
 				{
-					$this->db->like("Name",$_POST["search"]["value"]);
-					$this->db->or_where("ProductId",$_POST["search"]["value"]);
+					$this->db->like("Name",$_POST["search"]["value"])->where("State","1");
+					$this->db->or_where("ProductId",$_POST["search"]["value"])->where("State","1");
 				}
 
 				if (isset($_POST["order"]))
@@ -86,8 +86,8 @@
 
 				if (isset($_POST["search"]["value"]))
 				{
-					$this->db->like("Name",$_POST["search"]["value"]);
-					$this->db->or_where("PriceId",$_POST["search"]["value"]);
+					$this->db->like("Name",$_POST["search"]["value"])->where("State","1");
+					$this->db->or_where("PriceId",$_POST["search"]["value"])->where("State","1");
 				}
 
 				if (isset($_POST["order"]))
@@ -107,8 +107,8 @@
 
 				if (isset($_POST["search"]["value"]))
 				{
-					$this->db->like("Name",$_POST["search"]["value"]);
-					$this->db->or_where("CompanyId",$_POST["search"]["value"]);
+					$this->db->like("Name",$_POST["search"]["value"])->where("State","1");
+					$this->db->or_where("CompanyId",$_POST["search"]["value"])->where("State","1");
 				}
 
 				if (isset($_POST["order"]))
@@ -128,8 +128,8 @@
 
 				if (isset($_POST["search"]["value"]))
 				{
-					$this->db->like("Name",$_POST["search"]["value"]);
-					$this->db->or_where("Id",$_POST["search"]["value"]);
+					$this->db->like("Name",$_POST["search"]["value"])->where("State","1");
+					$this->db->or_where("Id",$_POST["search"]["value"])->where("State","1");
 				}
 
 				if (isset($_POST["order"]))
@@ -168,7 +168,7 @@
 		public function GetAllData($table)
 		{
 			$this->db->select("*");
-			$this->db->from($table);
+			$this->db->from($table)->where("State","1");
 
 			return $this->db->count_all_results();
 		}

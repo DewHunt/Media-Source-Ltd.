@@ -9,9 +9,16 @@
 			parent::__construct();
 		}
 
-		public function CheckCompanyExists($companyName)
+		public function CheckCompanyExists($companyName,$companyId)
 		{
-			$sql = "SELECT * FROM company WHERE Name = '$companyName'";
+			if ($companyId == "")
+			{
+				$sql = "SELECT * FROM company WHERE Name = '$companyName'";
+			}
+			else
+			{
+				$sql = "SELECT * FROM company WHERE Id != '$companyId' AND  Name = '$companyName'";
+			}
 
 			$checkQuery = $this->db->query($sql);
 
@@ -62,7 +69,7 @@
 		public function UpdateCompany($companyId,$companyName,$companyDescription,$updateId)
 		{
 			$updateTime = date('Y-m-d H:i:s');
-			$sql = "UPDATE company SET Name = '$companyName', Description = '$companyDescription', UpdateBy = '$updateId', UpdateTime = '$updateTime' WHERE Id = '$companyId'";
+			$sql = "UPDATE company SET Name = '".$companyName."', Description = '".$companyDescription."', UpdateBy = '".$updateId."', UpdateTime = '".$updateTime."' WHERE Id = '".$companyId."' AND State = '1'";
 
 			$updateQuery = $this->db->query($sql);
 

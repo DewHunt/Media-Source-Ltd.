@@ -9,9 +9,16 @@
 			parent::__construct();
 		}
 
-		public function checkSubBrandExists($subBrandName,$companyId,$brandId)
+		public function checkSubBrandExists($subBrandName,$companyId,$brandId,$subBrandId)
 		{
-			$sql = "SELECT * FROM subbrand WHERE Name = '$subBrandName' AND CompanyId = '$companyId' AND BrandId = '$brandId' AND State = 1";
+			if ($subBrandId == "")
+			{
+				$sql = "SELECT * FROM subbrand WHERE Name = '$subBrandName' AND CompanyId = '$companyId' AND BrandId = '$brandId' AND State = '1'";
+			}
+			else
+			{
+				$sql = "SELECT * FROM subbrand WHERE Id != $subBrandId AND Name = '$subBrandName' AND CompanyId = '$companyId' AND BrandId = '$brandId' AND State = '1'";
+			}
 
 			$checkQuery = $this->db->query($sql);
 
@@ -45,7 +52,7 @@
 
 		public function GetSubBrandById($subBrandId)
 		{
-			$sql = "SELECT * FROM subbrand WHERE Id = '$subBrandId'";
+			$sql = "SELECT * FROM subbrand WHERE Id = '$subBrandId' AND State = '1'";
 
 			$query = $this->db->query($sql);
 
@@ -63,7 +70,7 @@
 		{
 			$updateTime = date('Y-m-d H:i:s');
 
-			$sql = "UPDATE subbrand SET Name = '".$subBrandName."', CompanyId = '".$companyId."', Description = '".$subBrandDescription."', BrandId = '".$brandId."', UpdateBy = '".$updateId."', UpdateTime = '".$updateTime."' WHERE Id = '".$subBrandId."'";
+			$sql = "UPDATE subbrand SET Name = '".$subBrandName."', CompanyId = '".$companyId."', Description = '".$subBrandDescription."', BrandId = '".$brandId."', UpdateBy = '".$updateId."', UpdateTime = '".$updateTime."' WHERE Id = '".$subBrandId."'  AND State = '1'";
 
 			$query = $this->db->query($sql);
 

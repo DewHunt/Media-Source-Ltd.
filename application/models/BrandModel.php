@@ -9,9 +9,16 @@
 			parent::__construct();
 		}
 
-		public function checkBrandExists($brandName,$companyId)
+		public function checkBrandExists($brandName,$companyId,$brandId)
 		{
-			$sql = "SELECT * FROM brand WHERE Name = '$brandName' AND CompanyId = '$companyId'";
+			if ($brandId == "")
+			{
+				$sql = "SELECT * FROM brand WHERE Name = '$brandName' AND CompanyId = '$companyId'";
+			}
+			else
+			{
+				$sql = "SELECT * FROM brand WHERE Id != '$brandId' AND Name = '$brandName' AND CompanyId = '$companyId'";
+			}
 
 			$checkQuery = $this->db->query($sql);
 
@@ -76,9 +83,10 @@
 			}
 		}
 
-		public function DeleteBrand($brandId)
+		public function DeleteBrand($brandId,$deleteId)
 		{
-			$sql = "DELETE FROM brand WHERE Id = $brandId";
+			$deleteDateTime = date('Y-m-d H:i:s');
+			$sql = "UPDATE brand SET DeleteBY = '".$deleteId."', DeleteDateTime = '".$deleteDateTime."', State = '0' WHERE Id = '".$brandId."'";
 
 			$query = $this->db->query($sql);
 

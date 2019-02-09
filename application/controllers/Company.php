@@ -66,7 +66,7 @@
 			{
 				$companyName = $this->input->post('company-name');
 
-				$checkCompany = $this->CompanyModel->CheckCompanyExists($companyName);
+				$checkCompany = $this->CompanyModel->CheckCompanyExists($companyName,"");
 
 				if ($checkCompany)
 				{
@@ -162,18 +162,28 @@
 			{
 				$companyId = $this->input->post('company-id');
 				$companyName = $this->input->post('company-name');
-				$companyDescription = $this->input->post('company-description');
-				$updateId = $this->GetAdminAllInfo()->Id;
 
-				$result = $this->CompanyModel->UpdateCompany($companyId,$companyName,$companyDescription,$updateId);
+				$checkCompany = $this->CompanyModel->CheckCompanyExists($companyName,$companyId);
 
-				if ($result)
+				if ($checkCompany == "")
 				{
-					echo "Great! You Updated Your Company Successfully";
+					echo "Oops! Sorry, Your This Company Alredy Created.";
 				}
 				else
 				{
-					echo "Oops! Sorry, Your Company Can't Be Updated";
+					$companyDescription = $this->input->post('company-description');
+					$updateId = $this->GetAdminAllInfo()->Id;
+
+					$result = $this->CompanyModel->UpdateCompany($companyId,$companyName,$companyDescription,$updateId);
+
+					if ($result)
+					{
+						echo "Great! You Updated Your Company Successfully";
+					}
+					else
+					{
+						echo "Oops! Sorry, Your Company Can't Be Updated";
+					}
 				}
 			}
 		}

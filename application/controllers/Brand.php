@@ -101,7 +101,7 @@
 				$brandName = $this->input->post('brand-name');
 				$companyId = $this->input->post('company-id');
 
-				$checkBrand = $this->BrandModel->checkBrandExists($brandName,$companyId);
+				$checkBrand = $this->BrandModel->checkBrandExists($brandName,$companyId,"");
 
 				if ($checkBrand)
 				{
@@ -200,20 +200,29 @@
 			{
 				$brandName = $this->input->post('brand-name');
 				$companyId = $this->input->post('company-id');
-				$brandDescription = $this->input->post('brand-description');
-
 				$brandId = $this->input->post('brand-id');
-				$updateId = $this->GetAdminAllInfo()->Id;
 
-				$result = $this->BrandModel->UpdateBrand($brandId,$brandName,$companyId,$brandDescription,$updateId);
+				$checkBrand = $this->BrandModel->checkBrandExists($brandName,$companyId,$brandId);
 
-				if ($result)
+				if ($checkBrand)
 				{
-					echo "Greate! You Updated Your Brand Successfully";
+					echo "Oops! Sorry, Your This Brand Alredy Created.";
 				}
 				else
 				{
-					echo "Oops! Sorry, Your Brand Can't Be Updated";
+					$brandDescription = $this->input->post('brand-description');
+					$updateId = $this->GetAdminAllInfo()->Id;
+
+					$result = $this->BrandModel->UpdateBrand($brandId,$brandName,$companyId,$brandDescription,$updateId);
+
+					if ($result)
+					{
+						echo "Greate! You Updated Your Brand Successfully";
+					}
+					else
+					{
+						echo "Oops! Sorry, Your Brand Can't Be Updated";
+					}
 				}				
 			}
 		}
@@ -227,8 +236,9 @@
 			else
 			{
 				$brandId = $this->input->post('brandId');
+				$deleteId = $this->GetAdminAllInfo()->Id;
 
-				$result = $this->BrandModel->DeleteBrand($brandId);
+				$result = $this->BrandModel->DeleteBrand($brandId,$deleteId);
 				
 				if ($result)
 				{
