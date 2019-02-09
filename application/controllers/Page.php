@@ -66,9 +66,9 @@
 			{
 				$pageName = $this->input->post('page-name');
 
-				$checkPageName = $this->PageModel->CheckPageExists($pageName);
+				$checkPage = $this->PageModel->CheckPageExists($pageName,"");
 
-				if ($checkPageName)
+				if ($checkPage)
 				{
 					return redirect('Page/Page/3');
 				}
@@ -162,18 +162,28 @@
 			{
 				$pageId = $this->input->post('page-id');
 				$pageName = $this->input->post('page-name');
-				$pageDescription = $this->input->post('page-description');
-				$updateId = $this->GetAdminAllInfo()->Id;
 
-				$result = $this->PageModel->UpdatePage($pageId,$pageName,$pageDescription,$updateId);
+				$checkPage = $this->PageModel->CheckPageExists($pageName,$pageId);
 
-				if ($result)
+				if ($checkPage)
 				{
-					echo "Great! You Updated Your Page Successfully";
+					echo "Oops! Sorry, This Page Alredy Created.";
 				}
 				else
 				{
-					echo "Oops! Sorry, Your Page Can't Be Updated";
+					$pageDescription = $this->input->post('page-description');
+					$updateId = $this->GetAdminAllInfo()->Id;
+
+					$result = $this->PageModel->UpdatePage($pageId,$pageName,$pageDescription,$updateId);
+
+					if ($result)
+					{
+						echo "Great! You Updated Your Page Successfully";
+					}
+					else
+					{
+						echo "Oops! Sorry, Your Page Can't Be Updated";
+					}
 				}
 			}
 		}
@@ -187,8 +197,9 @@
 			else
 			{
 				$pageId = $this->input->post('pageId');
+				$deleteId = $this->GetAdminAllInfo()->Id;
 
-				$result = $this->PageModel->DeletePage($pageId);
+				$result = $this->PageModel->DeletePage($pageId,$deleteId);
 
 				if ($result)
 				{

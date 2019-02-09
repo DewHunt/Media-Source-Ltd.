@@ -262,7 +262,7 @@
 
 				if ($checkSubBrand)
 				{
-					echo "Oops! Sorry, Your This Sub Brand Alredy Created.";
+					echo "Oops! Sorry, This Sub Brand Alredy Created.";
 				}
 				else
 				{

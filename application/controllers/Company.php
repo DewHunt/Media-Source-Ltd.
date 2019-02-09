@@ -165,9 +165,9 @@
 
 				$checkCompany = $this->CompanyModel->CheckCompanyExists($companyName,$companyId);
 
-				if ($checkCompany == "")
+				if ($checkCompany)
 				{
-					echo "Oops! Sorry, Your This Company Alredy Created.";
+					echo "Oops! Sorry, This Company Alredy Created.";
 				}
 				else
 				{
@@ -197,8 +197,9 @@
 			else
 			{
 				$companyId = $this->input->post('companyId');
+				$deleteId = $this->GetAdminAllInfo()->Id;
 
-				$result = $this->CompanyModel->DeleteCompany($companyId);
+				$result = $this->CompanyModel->DeleteCompany($companyId,$deleteId);
 
 				if ($result)
 				{

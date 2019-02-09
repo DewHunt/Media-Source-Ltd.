@@ -68,7 +68,7 @@
 
 				$entryId = $this->GetAdminAllInfo()->Id;
 
-				$checkAdvertiseCategory = $this->AdvertiseCategoryModel->CheckAdvertiseCategoryExists($advertiseCategoryName);
+				$checkAdvertiseCategory = $this->AdvertiseCategoryModel->CheckAdvertiseCategoryExists($advertiseCategoryName,"");
 
 				if($checkAdvertiseCategoryName)
 				{
@@ -162,18 +162,28 @@
 			{
 				$advertiseCategoryId = $this->input->post('advertise-category-id');
 				$advertiseCategoryName = $this->input->post('advertise-category-name');
-				$advertiseCategoryDescription = $this->input->post('advertise-category-description');
-				$updateId = $this->GetAdminAllInfo()->Id;
 
-				$result = $this->AdvertiseCategoryModel->UpdateAdvertiseCategory($advertiseCategoryId,$advertiseCategoryName,$advertiseCategoryDescription,$updateId);
+				$checkAdvertiseCategory = $this->AdvertiseCategoryModel->CheckAdvertiseCategoryExists($advertiseCategoryName,$advertiseCategoryId);
 
-				if ($result)
+				if ($checkAdvertiseCategory)
 				{
-					echo "Great! You Updated Your Advertise Category Successfully";
+					echo "Oops! Sorry, This Advertise Category Alredy Created.";
 				}
 				else
 				{
-					echo "Oops! Sorry, Your Advertise Category Can't Be Updated";
+					$advertiseCategoryDescription = $this->input->post('advertise-category-description');
+					$updateId = $this->GetAdminAllInfo()->Id;
+
+					$result = $this->AdvertiseCategoryModel->UpdateAdvertiseCategory($advertiseCategoryId,$advertiseCategoryName,$advertiseCategoryDescription,$updateId);
+
+					if ($result)
+					{
+						echo "Great! You Updated Your Advertise Category Successfully";
+					}
+					else
+					{
+						echo "Oops! Sorry, Your Advertise Category Can't Be Updated";
+					}
 				}
 			}
 		}
@@ -187,8 +197,9 @@
 			else
 			{
 				$advertiseCategoryId = $this->input->post('advertiseCategoryId');
+				$deleteId = $this->GetAdminAllInfo()->Id;
 
-				$result = $this->AdvertiseCategoryModel->DeleteAdvertiseCategory($advertiseCategoryId);
+				$result = $this->AdvertiseCategoryModel->DeleteAdvertiseCategory($advertiseCategoryId,$deleteId);
 
 				if ($result)
 				{

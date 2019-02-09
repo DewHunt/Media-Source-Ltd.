@@ -9,9 +9,16 @@
 			parent::__construct();
 		}
 
-		public function CheckAdvertiseCategoryExists($advertiseCategoryName)
+		public function CheckAdvertiseCategoryExists($advertiseCategoryName,$advertiseCategoryId)
 		{
-			$sql = "SELECT * FROM adcategory WHERE Name = '$advertiseCategoryName'";
+			if ($advertiseCategoryId == "")
+			{
+				$sql = "SELECT * FROM adcategory WHERE Name = '$advertiseCategoryName'";
+			}
+			else
+			{
+				$sql = "SELECT * FROM adcategory WHERE Id != '$advertiseCategoryId' AND Name = '$advertiseCategoryName'";
+			}
 
 			$checkQuery = $this->db->query($sql);
 
@@ -76,13 +83,14 @@
 			}
 		}
 
-		public function DeleteAdvertiseCategory($advertiseCategoryId)
+		public function DeleteAdvertiseCategory($advertiseCategoryId,$deleteId)
 		{
-			$sql = "DELETE FROM adcategory WHERE Id = '$advertiseCategoryId'";
+			$deleteDateTime = date('Y-m-d H:i:s');
+			$sql = "UPDATE adcategory SET DeleteBY = '".$deleteId."', DeleteDateTime = '".$deleteDateTime."', State = '0' WHERE Id = '".$advertiseCategoryId."'";
 
-			$deleteQuery = $this->db->query($sql);
+			$query = $this->db->query($sql);
 
-			if ($deleteQuery)
+			if ($query)
 			{
 				return true;
 			}

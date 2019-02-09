@@ -10,9 +10,16 @@
 			parent::__construct();
 		}
 
-		public function CheckPageExists($pageName)
+		public function CheckPageExists($pageName,$pageId)
 		{
-			$sql = "SELECT * FROM page WHERE Name = '$pageName'";
+			if ($pageId == "")
+			{
+				$sql = "SELECT * FROM page WHERE Name = '$pageName'";
+			}
+			else
+			{
+				$sql = "SELECT * FROM page WHERE Id != '$pageId' AND Name = '$pageName'";
+			}
 
 			$checkQuery = $this->db->query($sql);
 
@@ -77,13 +84,14 @@
 			}
 		}
 
-		public function DeletePage($pageId)
+		public function DeletePage($pageId,$deleteId)
 		{
-			$sql = "DELETE FROM page WHERE Id = '$pageId'";
+			$deleteDateTime = date('Y-m-d H:i:s');
+			$sql = "UPDATE page SET DeleteBY = '".$deleteId."', DeleteDateTime = '".$deleteDateTime."', State = '0' WHERE Id = '".$pageId."'";
 
-			$deleteQuery = $this->db->query($sql);
+			$query = $this->db->query($sql);
 
-			if ($deleteQuery)
+			if ($query)
 			{
 				return true;
 			}

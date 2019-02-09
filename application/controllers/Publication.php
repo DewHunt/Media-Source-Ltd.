@@ -108,9 +108,9 @@
 				$publicationName = $this->input->post('publication-name');
 				$mediaNameId = $this->input->post('media-name-id');
 
-				$checkPublicationName = $this->PublicationModel->checkPublicationExists($publicationName,$mediaNameId);
+				$checkPublication = $this->PublicationModel->CheckPublicationExists($publicationName,$mediaNameId,"");
 
-				if ($checkPublicationName)
+				if ($checkPublication)
 				{
 					return redirect('Publication/Publication/3');
 				}
@@ -125,7 +125,7 @@
 					$entryId = $this->GetAdminAllInfo()->Id;
 
 					// Copy Image and Get Image New Name
-					$config['upload_path'] = "images/publication_logo/";
+					$config['upload_path'] = "images/";
 					$config['allowed_types'] = "jpg|jpeg|png|gif";
 					$this->load->library('upload',$config);
 
@@ -139,7 +139,7 @@
 					{
 						$extention = pathinfo($publicationImage, PATHINFO_EXTENSION);
 						$slug = strtolower(preg_replace('/[^A-Za-z0-9-]+/', '_', $publicationName));
-						$dbImageName = $slug."_".$mediaNameId."_".date('ymds').".".$extention;
+						$dbImageName = "pub_".$slug."_".$mediaNameId."_".date('ymds').".".$extention;
 						$copyImageName = $config['upload_path'].$dbImageName;
 
 						copy($_FILES['publication-image']['tmp_name'],$copyImageName);
@@ -185,7 +185,7 @@
 					$publication[] = $this->PublicationTypeModel->GetPublicationTypeById($value->PublicationType)->Name;
 					$publication[] = $this->PublicationFrequencyModel->GetPublicationFrequencyById($value->PubFreQuencyId)->Name;
 					$publication[] = $value->Description;
-					$publication[] = '<img src="'.base_url("images/publication_logo/").$value->Logo.'" width="80px" height="80px">';
+					$publication[] = '<img src="'.base_url("images/").$value->Logo.'" width="80px" height="80px">';
 					$publication[] = '<button type="button" name="update" id="'.$value->Id.'" class="btn btn-warning btn-xs update">Update</button> <button type="button" name="delete" id="'.$value->Id.'" class="btn btn-danger btn-xs delete">Delete</button>';
 					$sl++;
 					$data[] = $publication;
@@ -231,7 +231,7 @@
 				}
 				else
 				{
-					$output['publicationImage'] = '<img src="'.base_url("images/publication_logo/").$data->Logo.'" class="img-thumbnail" width="80px" height="80px"> <input type="hidden" name="previous-publication-image" id="previous-publication-image" value="'.$data->Logo.'">';
+					$output['publicationImage'] = '<img src="'.base_url("images/").$data->Logo.'" class="img-thumbnail" width="80px" height="80px"> <input type="hidden" name="previous-publication-image" id="previous-publication-image" value="'.$data->Logo.'">';
 				}
 
 				echo json_encode($output);
@@ -248,58 +248,67 @@
 			{
 				$publicationName = $this->input->post('publication-name');
 				$mediaNameId = $this->input->post('media-name-id');
-				$publicationTypeId = $this->input->post('publication-type-id');
-				$publicationPlaceId = $this->input->post('publication-place-id');
-				$publicationFrequencyId = $this->input->post('publication-frequency-id');
-				$publicationLanguage = $this->input->post('publication-language');
-				$publicationDescription = $this->input->post('publication-description');
-
 				$publicationId = $this->input->post('publication-id');
-				$updateId = $this->GetAdminAllInfo()->Id;
-				$newPublicationImage = "";
 
-				if ($_FILES["new-publication-image"]["name"] == "")
+				$checkPublication = $this->PublicationModel->CheckPublicationExists($publicationName,$mediaNameId,$publicationId);
+
+				if ($checkPublication)
 				{
-					$dbImageName = $this->input->post("previous-publication-image");
+					echo "Oops! Sorry, This Publication Alredy Created.";
 				}
 				else
 				{
-					$publicationImage = $_FILES['new-publication-image']['name'];
-					$previousImage = $this->input->post('previous-publication-image');
+					$publicationTypeId = $this->input->post('publication-type-id');
+					$publicationPlaceId = $this->input->post('publication-place-id');
+					$publicationFrequencyId = $this->input->post('publication-frequency-id');
+					$publicationLanguage = $this->input->post('publication-language');
+					$publicationDescription = $this->input->post('publication-description');
+					$updateId = $this->GetAdminAllInfo()->Id;
+					$newPublicationImage = "";
 
-					// Copy Image and Get Image New Name
-					$config['upload_path'] = "images/publication_logo/";
-					$config['allowed_types'] = "jpg|jpeg|png|gif";
-					$this->load->library('upload',$config);
+					if (!empty($_FILES["new-publication-image"]["name"]))
+					{
+						$publicationImage = $_FILES['new-publication-image']['name'];
+						$previousImage = $this->input->post('previous-publication-image');
 
-					$extention = pathinfo($publicationImage, PATHINFO_EXTENSION);
-					$slug = strtolower(preg_replace('/[^A-Za-z0-9-]+/', '_', $publicationName));
-					$dbImageName = $slug."_".$mediaNameId."_".date('ymds').".".$extention;
-					$copyImageName = $config['upload_path'].$dbImageName;
+						// Copy Image and Get Image New Name
+						$config['upload_path'] = "images/";
+						$config['allowed_types'] = "jpg|jpeg|png|gif";
+						$this->load->library('upload',$config);
 
-					if ($previousImage != "")
-					{					
-						$deleteImage = $config['upload_path'].$previousImage;
+						$extention = pathinfo($publicationImage, PATHINFO_EXTENSION);
+						$slug = strtolower(preg_replace('/[^A-Za-z0-9-]+/', '_', $publicationName));
+						$dbImageName = "pub_".$slug."_".$mediaNameId."_".date('ymds').".".$extention;
+						$copyImageName = $config['upload_path'].$dbImageName;
 
-						if (file_exists($deleteImage))
-						{
-							chown($deleteImage, 666);
-							unlink($deleteImage);
+						if ($previousImage != "")
+						{					
+							$deleteImage = $config['upload_path'].$previousImage;
+
+							if (file_exists($deleteImage))
+							{
+								chown($deleteImage, 666);
+								unlink($deleteImage);
+							}
 						}
+
+						copy($_FILES['new-publication-image']['tmp_name'],$copyImageName);
+					}
+					else
+					{
+						$dbImageName = $this->input->post("previous-publication-image");
 					}
 
-					copy($_FILES['new-publication-image']['tmp_name'],$copyImageName);
-				}
+					$result = $this->PublicationModel->UpdatePublication($publicationId,$publicationName,$mediaNameId,$publicationTypeId,$publicationPlaceId,$publicationFrequencyId,$publicationLanguage,$publicationDescription,$dbImageName,$updateId);
 
-				$result = $this->PublicationModel->UpdatePublication($publicationId,$publicationName,$mediaNameId,$publicationTypeId,$publicationPlaceId,$publicationFrequencyId,$publicationLanguage,$publicationDescription,$dbImageName,$updateId);
-
-				if ($result)
-				{
-					echo "Greate! You Updated Your Publication Successfully";
-				}
-				else
-				{
-					echo "Oops! Sorry, Your Publication Can't Be Updated";
+					if ($result)
+					{
+						echo "Greate! You Updated Your Publication Successfully";
+					}
+					else
+					{
+						echo "Oops! Sorry, Your Publication Can't Be Updated";
+					}
 				}				
 			}
 		}
@@ -313,27 +322,9 @@
 			else
 			{
 				$publicationId = $this->input->post('publicationId');
+				$deleteId = $this->GetAdminAllInfo()->Id;
 
-				$publicationImageName = $this->PublicationModel->GetPublicationById($publicationId)->Logo;
-
-				// Delete Image and Get Image New Name Start
-				$config['upload_path'] = "images/publication_logo/";
-				$config['allowed_types'] = "jpg|jpeg|png|gif";
-				$this->load->library('upload',$config);
-
-				if ($publicationImageName != "")
-				{					
-					$deleteImage = $config['upload_path'].$publicationImageName;
-
-					if (file_exists($deleteImage))
-					{
-						chown($deleteImage, 666);
-						unlink($deleteImage);
-					}
-				}
-				// Delete Image and Get Image New Name End
-
-				$result = $this->PublicationModel->DeletePublication($publicationId);
+				$result = $this->PublicationModel->DeletePublication($publicationId,$deleteId);
 				
 				if ($result)
 				{

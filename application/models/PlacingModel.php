@@ -9,9 +9,16 @@
 			parent::__construct();
 		}
 
-		public function CheckPlacingExists($placingName)
+		public function CheckPlacingExists($placingName,$placingId)
 		{
-			$sql = "SELECT * FROM placing WHERE Name = '$placingName'";
+			if ($placingId == "")
+			{
+				$sql = "SELECT * FROM placing WHERE Name = '$placingName'";
+			}
+			else
+			{
+				$sql = "SELECT * FROM placing WHERE Id != '$placingId' AND Name = '$placingName'";
+			}
 
 			$checkQuery = $this->db->query($sql);
 
@@ -76,13 +83,14 @@
 			}
 		}
 
-		public function DeletePlacing($placingId)
+		public function DeletePlacing($placingId,$deleteId)
 		{
-			$sql = "DELETE FROM placing WHERE Id = '$placingId'";
+			$deleteDateTime = date('Y-m-d H:i:s');
+			$sql = "UPDATE placing SET DeleteBY = '".$deleteId."', DeleteDateTime = '".$deleteDateTime."', State = '0' WHERE Id = '".$placingId."'";
 
-			$deleteQuery = $this->db->query($sql);
+			$query = $this->db->query($sql);
 
-			if ($deleteQuery)
+			if ($query)
 			{
 				return true;
 			}

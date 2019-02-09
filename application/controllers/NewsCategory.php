@@ -68,7 +68,7 @@
 
 				$entryId = $this->GetAdminAllInfo()->Id;
 
-				$checkNewsCategory = $this->NewsCategoryModel->CheckNewsCategoryExists($newsCategoryName);
+				$checkNewsCategory = $this->NewsCategoryModel->CheckNewsCategoryExists($newsCategoryName,"");
 
 				if($checkNewsCategory)
 				{
@@ -162,18 +162,28 @@
 			{
 				$newsCategoryId = $this->input->post('news-category-id');
 				$newsCategoryName = $this->input->post('news-category-name');
-				$newsCategoryDescription = $this->input->post('news-category-description');
-				$updateId = $this->GetAdminAllInfo()->Id;
 
-				$result = $this->NewsCategoryModel->UpdateNewsCategory($newsCategoryId,$newsCategoryName,$newsCategoryDescription,$updateId);
+				$checkNewsCategory = $this->NewsCategoryModel->CheckNewsCategoryExists($newsCategoryName,$newsCategoryId);
 
-				if ($result)
+				if ($checkNewsCategory)
 				{
-					echo "Great! You Updated Your News Category Successfully";
+					echo "Oops! Sorry, This News Category Alredy Created.";
 				}
 				else
 				{
-					echo "Oops! Sorry, Your News Category Can't Be Updated";
+					$newsCategoryDescription = $this->input->post('news-category-description');
+					$updateId = $this->GetAdminAllInfo()->Id;
+
+					$result = $this->NewsCategoryModel->UpdateNewsCategory($newsCategoryId,$newsCategoryName,$newsCategoryDescription,$updateId);
+
+					if ($result)
+					{
+						echo "Great! You Updated Your News Category Successfully";
+					}
+					else
+					{
+						echo "Oops! Sorry, Your News Category Can't Be Updated";
+					}
 				}
 			}
 		}
@@ -187,8 +197,9 @@
 			else
 			{
 				$newsCategoryId = $this->input->post('newsCategoryId');
+				$deleteId = $this->GetAdminAllInfo()->Id;
 
-				$result = $this->NewsCategoryModel->DeleteNewsCategory($newsCategoryId);
+				$result = $this->NewsCategoryModel->DeleteNewsCategory($newsCategoryId,$deleteId);
 
 				if ($result)
 				{

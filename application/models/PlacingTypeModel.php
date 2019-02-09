@@ -9,9 +9,16 @@
 			parent::__construct();
 		}
 
-		public function CheckPlacingTypeExists($placingTypeName)
+		public function CheckPlacingTypeExists($placingTypeName,$placingTypeId)
 		{
-			$sql = "SELECT * FROM placingtype WHERE Name = '$placingTypeName'";
+			if ($placingTypeId == "")
+			{
+				$sql = "SELECT * FROM placingtype WHERE Name = '$placingTypeName'";
+			}
+			else
+			{
+				$sql = "SELECT * FROM placingtype WHERE Id != '$placingTypeId' AND Name = '$placingTypeName'";
+			}
 
 			$checkQuery = $this->db->query($sql);
 
@@ -76,13 +83,14 @@
 			}
 		}
 
-		public function DeletePlacingType($placingTypeId)
+		public function DeletePlacingType($placingTypeId,$deleteId)
 		{
-			$sql = "DELETE FROM placingtype WHERE Id = '$placingTypeId'";
+			$deleteDateTime = date('Y-m-d H:i:s');
+			$sql = "UPDATE placingtype SET DeleteBY = '".$deleteId."', DeleteDateTime = '".$deleteDateTime."', State = '0' WHERE Id = '".$placingTypeId."'";
 
-			$deleteQuery = $this->db->query($sql);
+			$query = $this->db->query($sql);
 
-			if ($deleteQuery)
+			if ($query)
 			{
 				return true;
 			}

@@ -66,7 +66,7 @@
 			{
 				$placingTypeName = $this->input->post('placing-type-name');
 
-				$checkPlacingType = $this->PlacingTypeModel->CheckPlacingTypeExists($placingTypeName);
+				$checkPlacingType = $this->PlacingTypeModel->CheckPlacingTypeExists($placingTypeName,"");
 
 				if ($checkPlacingType)
 				{
@@ -162,18 +162,28 @@
 			{
 				$placingTypeId = $this->input->post('placing-type-id');
 				$placingTypeName = $this->input->post('placing-type-name');
-				$placingTypeDescription = $this->input->post('placing-type-description');
-				$updateId = $this->GetAdminAllInfo()->Id;
 
-				$result = $this->PlacingTypeModel->UpdatePlacingType($placingTypeId,$placingTypeName,$placingTypeDescription,$updateId);
+				$checkPlacingType = $this->PlacingTypeModel->CheckPlacingTypeExists($placingTypeName,$placingTypeId);
 
-				if ($result)
+				if ($checkPlacingType)
 				{
-					echo "Great! You Updated Your Placing Type Successfully";
+					echo "Oops! Sorry, This Placing Type Alredy Created.";
 				}
 				else
 				{
-					echo "Oops! Sorry, Your Placing Type Can't Be Updated";
+					$placingTypeDescription = $this->input->post('placing-type-description');
+					$updateId = $this->GetAdminAllInfo()->Id;
+
+					$result = $this->PlacingTypeModel->UpdatePlacingType($placingTypeId,$placingTypeName,$placingTypeDescription,$updateId);
+
+					if ($result)
+					{
+						echo "Great! You Updated Your Placing Type Successfully";
+					}
+					else
+					{
+						echo "Oops! Sorry, Your Placing Type Can't Be Updated";
+					}
 				}
 			}
 		}
@@ -187,8 +197,9 @@
 			else
 			{
 				$placingTypeId = $this->input->post('placingTypeId');
+				$deleteId = $this->GetAdminAllInfo()->Id;
 
-				$result = $this->PlacingTypeModel->DeletePlacingType($placingTypeId);
+				$result = $this->PlacingTypeModel->DeletePlacingType($placingTypeId,$deleteId);
 
 				if ($result)
 				{

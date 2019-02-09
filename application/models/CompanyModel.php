@@ -83,13 +83,14 @@
 			}
 		}
 
-		public function DeleteCompany($companyId)
+		public function DeleteCompany($companyId,$deleteId)
 		{
-			$sql = "DELETE FROM company WHERE Id = '$companyId'";
+			$deleteDateTime = date('Y-m-d H:i:s');
+			$sql = "UPDATE company SET DeleteBY = '".$deleteId."', DeleteDateTime = '".$deleteDateTime."', State = '0' WHERE Id = '".$companyId."'";
 
-			$deleteQuery = $this->db->query($sql);
+			$query = $this->db->query($sql);
 
-			if ($deleteQuery)
+			if ($query)
 			{
 				return true;
 			}

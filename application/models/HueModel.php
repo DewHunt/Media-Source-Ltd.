@@ -10,9 +10,16 @@
 			parent::__construct();
 		}
 
-		public function CheckHueExists($hueName)
+		public function CheckHueExists($hueName,$hueId)
 		{
-			$sql = "SELECT * FROM hue WHERE Name = '$hueName'";
+			if ($hueId == "")
+			{
+				$sql = "SELECT * FROM hue WHERE Name = '$hueName'";
+			}
+			else
+			{
+				$sql = "SELECT * FROM hue WHERE Id != '$hueId' AND Name = '$hueName'";
+			}
 
 			$checkQuery = $this->db->query($sql);
 
@@ -77,13 +84,14 @@
 			}
 		}
 
-		public function DeleteHue($hueId)
+		public function DeleteHue($hueId,$deleteId)
 		{
-			$sql = "DELETE FROM hue WHERE Id = '$hueId'";
+			$deleteDateTime = date('Y-m-d H:i:s');
+			$sql = "UPDATE hue SET DeleteBY = '".$deleteId."', DeleteDateTime = '".$deleteDateTime."', State = '0' WHERE Id = '".$hueId."'";
 
-			$deleteQuery = $this->db->query($sql);
+			$query = $this->db->query($sql);
 
-			if ($deleteQuery)
+			if ($query)
 			{
 				return true;
 			}

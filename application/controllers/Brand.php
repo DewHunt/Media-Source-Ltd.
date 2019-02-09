@@ -206,7 +206,7 @@
 
 				if ($checkBrand)
 				{
-					echo "Oops! Sorry, Your This Brand Alredy Created.";
+					echo "Oops! Sorry, This Brand Alredy Created.";
 				}
 				else
 				{

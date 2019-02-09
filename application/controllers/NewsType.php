@@ -66,7 +66,7 @@
 			{
 				$newsTypeName = $this->input->post('news-type-name');
 
-				$checkNewsType = $this->NewsTypeModel->CheckNewsTypeExists($newsTypeName);
+				$checkNewsType = $this->NewsTypeModel->CheckNewsTypeExists($newsTypeName,"");
 
 				if ($checkNewsType)
 				{
@@ -162,18 +162,28 @@
 			{
 				$newsTypeId = $this->input->post('news-type-id');
 				$newsTypeName = $this->input->post('news-type-name');
-				$newsTypeDescription = $this->input->post('news-type-description');
-				$updateId = $this->GetAdminAllInfo()->Id;
 
-				$result = $this->NewsTypeModel->UpdateNewsType($newsTypeId,$newsTypeName,$newsTypeDescription,$updateId);
+				$checkNewsType = $this->NewsTypeModel->CheckNewsTypeExists($newsTypeName,$newsTypeId);
 
-				if ($result)
+				if ($checkNewsType)
 				{
-					echo "Great! You Updated Your News Type Successfully";
+					echo "Oops! Sorry, This News Type Alredy Created.";
 				}
 				else
 				{
-					echo "Oops! Sorry, Your News Type Can't Be Updated";
+					$newsTypeDescription = $this->input->post('news-type-description');
+					$updateId = $this->GetAdminAllInfo()->Id;
+
+					$result = $this->NewsTypeModel->UpdateNewsType($newsTypeId,$newsTypeName,$newsTypeDescription,$updateId);
+
+					if ($result)
+					{
+						echo "Great! You Updated Your News Type Successfully";
+					}
+					else
+					{
+						echo "Oops! Sorry, Your News Type Can't Be Updated";
+					}
 				}
 			}
 		}
@@ -187,8 +197,9 @@
 			else
 			{
 				$newsTypeId = $this->input->post('newsTypeId');
+				$deleteId = $this->GetAdminAllInfo()->Id;
 
-				$result = $this->NewsTypeModel->DeleteNewsType($newsTypeId);
+				$result = $this->NewsTypeModel->DeleteNewsType($newsTypeId,$deleteId);
 
 				if ($result)
 				{

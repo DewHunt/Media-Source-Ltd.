@@ -9,9 +9,16 @@
 			parent::__construct();
 		}
 
-		public function CheckNewsCategoryExists($newsCategoryName)
+		public function CheckNewsCategoryExists($newsCategoryName,$newsCategoryId)
 		{
-			$sql = "SELECT * FROM newscategory WHERE Name = '$newsCategoryName'";
+			if ($newsCategoryId == "")
+			{
+				$sql = "SELECT * FROM newscategory WHERE Name = '$newsCategoryName'";
+			}
+			else
+			{
+				$sql = "SELECT * FROM newscategory WHERE Id != $newsCategoryId AND Name = '$newsCategoryName'";
+			}
 
 			$checkQuery = $this->db->query($sql);
 
@@ -76,13 +83,14 @@
 			}
 		}
 
-		public function DeleteNewsCategory($newsCategoryId)
+		public function DeleteNewsCategory($newsCategoryId,$deleteId)
 		{
-			$sql = "DELETE FROM newscategory WHERE Id = '$newsCategoryId'";
+			$deleteDateTime = date('Y-m-d H:i:s');
+			$sql = "UPDATE newscategory SET DeleteBY = '".$deleteId."', DeleteDateTime = '".$deleteDateTime."', State = '0' WHERE Id = '".$newsCategoryId."'";
 
-			$deleteQuery = $this->db->query($sql);
+			$query = $this->db->query($sql);
 
-			if ($deleteQuery)
+			if ($query)
 			{
 				return true;
 			}

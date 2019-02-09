@@ -66,7 +66,7 @@
 			{
 				$placingName = $this->input->post('placing-name');
 
-				$checkPlacing = $this->PlacingModel->CheckPlacingExists($placingName);
+				$checkPlacing = $this->PlacingModel->CheckPlacingExists($placingName,"");
 
 				if ($checkPlacing)
 				{
@@ -162,18 +162,28 @@
 			{
 				$placingId = $this->input->post('placing-id');
 				$placingName = $this->input->post('placing-name');
-				$placingDescription = $this->input->post('placing-description');
-				$updateId = $this->GetAdminAllInfo()->Id;
 
-				$result = $this->PlacingModel->UpdatePlacing($placingId,$placingName,$placingDescription,$updateId);
+				$checkPlacing = $this->PlacingModel->CheckPlacingExists($placingName,$placingId);
 
-				if ($result)
+				if ($checkPlacing)
 				{
-					echo "Great! You Updated Your Placing Successfully";
+					echo "Oops! Sorry, This Placing Alredy Created.";
 				}
 				else
 				{
-					echo "Oops! Sorry, Your Placing Can't Be Updated";
+					$placingDescription = $this->input->post('placing-description');
+					$updateId = $this->GetAdminAllInfo()->Id;
+
+					$result = $this->PlacingModel->UpdatePlacing($placingId,$placingName,$placingDescription,$updateId);
+
+					if ($result)
+					{
+						echo "Great! You Updated Your Placing Successfully";
+					}
+					else
+					{
+						echo "Oops! Sorry, Your Placing Can't Be Updated";
+					}
 				}
 			}
 		}
@@ -187,8 +197,9 @@
 			else
 			{
 				$placingId = $this->input->post('placingId');
+				$deleteId = $this->GetAdminAllInfo()->Id;
 
-				$result = $this->PlacingModel->DeletePlacing($placingId);
+				$result = $this->PlacingModel->DeletePlacing($placingId,$deleteId);
 
 				if ($result)
 				{

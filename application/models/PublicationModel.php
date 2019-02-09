@@ -9,9 +9,16 @@
 			parent::__construct();
 		}
 
-		public function checkPublicationExists($publicationName,$mediaNameId)
+		public function CheckPublicationExists($publicationName,$mediaNameId,$publicationId)
 		{
-			$sql = "SELECT * FROM publication WHERE Name = '".$publicationName."' AND MediaId = '".$mediaNameId."'";
+			if ($publicationId == "")
+			{
+				$sql = "SELECT * FROM publication WHERE Name = '$publicationName' AND MediaId = '$mediaNameId'";
+			}
+			else
+			{
+				$sql = "SELECT * FROM publication WHERE Id != '$publicationId' AND Name = '$publicationName' AND MediaId = '$mediaNameId'";
+			}
 
 			$checkQuery = $this->db->query($sql);
 
@@ -77,9 +84,10 @@
 			}
 		}
 
-		public function DeletePublication($publicationId)
+		public function DeletePublication($publicationId,$deleteId)
 		{
-			$sql = "DELETE FROM publication WHERE Id = '".$publicationId."'";
+			$deleteDateTime = date('Y-m-d H:i:s');
+			$sql = "UPDATE publication SET DeleteBY = '".$deleteId."', DeleteDateTime = '".$deleteDateTime."', State = '0' WHERE Id = '".$publicationId."'";
 
 			$query = $this->db->query($sql);
 

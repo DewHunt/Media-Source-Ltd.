@@ -17,7 +17,7 @@
 			}
 			else
 			{
-				$sql = "SELECT * FROM subbrand WHERE Id != $subBrandId AND Name = '$subBrandName' AND CompanyId = '$companyId' AND BrandId = '$brandId' AND State = '1'";
+				$sql = "SELECT * FROM subbrand WHERE Id != '$subBrandId' AND Name = '$subBrandName' AND CompanyId = '$companyId' AND BrandId = '$brandId' AND State = '1'";
 			}
 
 			$checkQuery = $this->db->query($sql);

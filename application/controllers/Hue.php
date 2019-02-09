@@ -66,9 +66,9 @@
 			{
 				$hueName = $this->input->post('hue-name');
 
-				$checkHueName = $this->HueModel->CheckHueExists($hueName);
+				$checkHue = $this->HueModel->CheckHueExists($hueName,"");
 
-				if ($checkHueName)
+				if ($checkHue)
 				{
 					return redirect('Hue/Hue/3');
 				}
@@ -162,18 +162,28 @@
 			{
 				$hueId = $this->input->post('hue-id');
 				$hueName = $this->input->post('hue-name');
-				$hueDescription = $this->input->post('hue-description');
-				$updateId = $this->GetAdminAllInfo()->Id;
 
-				$result = $this->HueModel->UpdateHue($hueId,$hueName,$hueDescription,$updateId);
+				$checkHue = $this->HueModel->CheckHueExists($hueName,$hueId);
 
-				if ($result)
+				if ($checkHue)
 				{
-					echo "Great! You Updated Your Hue Successfully";
+					echo "Oops! Sorry, This Hue Alredy Created.";
 				}
 				else
 				{
-					echo "Oops! Sorry, Your Hue Can't Be Updated";
+					$hueDescription = $this->input->post('hue-description');
+					$updateId = $this->GetAdminAllInfo()->Id;
+
+					$result = $this->HueModel->UpdateHue($hueId,$hueName,$hueDescription,$updateId);
+
+					if ($result)
+					{
+						echo "Great! You Updated Your Hue Successfully";
+					}
+					else
+					{
+						echo "Oops! Sorry, Your Hue Can't Be Updated";
+					}
 				}
 			}
 		}
@@ -187,8 +197,9 @@
 			else
 			{
 				$hueId = $this->input->post('hueId');
+				$deleteId = $this->GetAdminAllInfo()->Id;
 
-				$result = $this->HueModel->DeleteHue($hueId);
+				$result = $this->HueModel->DeleteHue($hueId,$deleteId);
 
 				if ($result)
 				{

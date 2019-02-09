@@ -9,9 +9,16 @@
 			parent::__construct();
 		}
 
-		public function CheckNewsTypeExists($newsTypeName)
+		public function CheckNewsTypeExists($newsTypeName,$newsTypeId)
 		{
-			$sql = "SELECT * FROM newstype WHERE Name = '$newsTypeName'";
+			if ($newsTypeId = "")
+			{
+				$sql = "SELECT * FROM newstype WHERE Name = '$newsTypeName'";
+			}
+			else
+			{
+				$sql = "SELECT * FROM newstype WHERE Id != '$newsTypeId' AND Name = '$newsTypeName'";
+			}
 
 			$checkQuery = $this->db->query($sql);
 
@@ -76,13 +83,14 @@
 			}
 		}
 
-		public function DeleteNewsType($newsTypeId)
+		public function DeleteNewsType($newsTypeId,$deleteId)
 		{
-			$sql = "DELETE FROM newstype WHERE Id = '$newsTypeId'";
+			$deleteDateTime = date('Y-m-d H:i:s');
+			$sql = "UPDATE newstype SET DeleteBY = '".$deleteId."', DeleteDateTime = '".$deleteDateTime."', State = '0' WHERE Id = '".$newsTypeId."'";
 
-			$deleteQuery = $this->db->query($sql);
+			$query = $this->db->query($sql);
 
-			if ($deleteQuery)
+			if ($query)
 			{
 				return true;
 			}
