@@ -119,31 +119,98 @@
 															</tr>
 														</thead>
 														<tbody>
-															<tr>
-																<td>1</td>
-																<td>
-																	<input type="text" class="span2" id="price-title-1" name="price-title-1" value="">
-																</td>
-																<td>
-																	<div id="page-select-menu-1"></div>
-																</td>
-																<td>
-																	<div id="hue-select-menu-1"></div>
-																</td>
-																<td>
-																	<input type="text" class="span1" id="col-1" name="col-1" value="1">
-																</td>
-																<td>×</td>
-																<td>
-																	<input type="text" class="span1" id="inch-1" name="inch-1" value="1">
-																</td>
-																<td>
-																	<input type="text" class="span1" id="price-1" name="price-1" value="">
-																</td>
-																<td>
-																	<input type="text" class="span1" id="price-description-1" name="price-description-1" value="">
-																</td>
-															</tr>
+															<?php
+																$sl = 1;
+																foreach ($priceDetailsInfo as $value)
+																{
+															?>
+																<tr>
+																	<td><?= $sl; ?></td>
+																	<td>
+																		<input type="text" class="span2" id="price-title-<?= $sl; ?>" name="price-title-<?= $sl; ?>" value="<?= $value->Name; ?>">
+																	</td>
+																	<td>
+																		<?php
+																			$pageInfo = $this->PageModel->GetAllPage();
+																			$output = '';
+
+																			if ($pageInfo)
+																			{
+																				$output .= '<select class="dropdown" name="page-id-'.$sl.'" id="page-id-'.$sl.'" style="width: 99%;">';
+																				$output .= '<option value="">Select Page</option>';
+																				foreach ($pageInfo as $data)
+																				{
+																					if ($value->PageNoId == $data->Id)
+																					{
+																						$output .= '<option value="'.$data->Id.'" selected>'.$data->Name.'</option>';
+																					}
+																					else
+																					{
+																						$output .= '<option value="'.$data->Id.'">'.$data->Name.'</option>';
+																					}
+																				}
+																				$output .= '</select>';
+																			}
+																			else
+																			{
+																				$output .= '<select class="dropdown" name="page-id-'.$sl.'" id="page-id-'.$sl.'" disable style="width: 99%;">';
+																				$output .= '<option value="">Data Option Not Found</option>';
+																				$output .= '</select>';				
+																			}
+
+																			echo $output;
+																		?>
+																	</td>
+																	<td>
+																		<?php
+																			$hueInfo = $this->HueModel->GetAllHue();
+																			$output = '';
+
+																			if ($hueInfo)
+																			{
+																				$output .= '<select class="dropdown" name="hue-id-'.$sl.'" id="hue-id-'.$sl.'" style="width: 99%;">';
+																				$output .= '<option value="">Select Page</option>';
+																				foreach ($hueInfo as $data)
+																				{
+																					if ($value->Hue == $data->Id)
+																					{
+																						$output .= '<option value="'.$data->Id.'" selected>'.$data->Name.'</option>';
+																					}
+																					else
+																					{
+																						$output .= '<option value="'.$data->Id.'">'.$data->Name.'</option>';
+																					}
+																				}
+																				$output .= '</select>';
+																			}
+																			else
+																			{
+																				$output .= '<select class="dropdown" name="hue-id-'.$sl.'" id="hue-id-'.$sl.'" disable style="width: 99%;">';
+																				$output .= '<option value="">Data Option Not Found</option>';
+																				$output .= '</select>';				
+																			}
+
+																			echo $output;
+																		?>
+																	</td>
+																	<td>
+																		<input type="text" class="span1" id="col-<?= $sl; ?>" name="col-<?= $sl; ?>" value="<?= $value->Col; ?>">
+																	</td>
+																	<td>×</td>
+																	<td>
+																		<input type="text" class="span1" id="inch-<?= $sl; ?>" name="inch-<?= $sl; ?>" value="<?= $value->Inch; ?>">
+																	</td>
+																	<td>
+																		<input type="text" class="span1" id="price-<?= $sl; ?>" name="price-<?= $sl; ?>" value="<?= $value->Price; ?>">
+																	</td>
+																	<td>
+																		<input type="text" class="span1" id="price-description-<?= $sl; ?>" name="price-description-<?= $sl; ?>" value="<?= $value->Description; ?>">
+																	</td>
+																</tr>
+															<?php
+																$sl++;
+																}
+															?>
 														</tbody>
 													</table>
 												</div> <!-- /controls -->				
@@ -154,7 +221,7 @@
 												<button onclick="return remove();" class="btn btn-danger">Remove</button>
 
 												<button type="submit" id="button-price" name="button-price" class="btn btn-primary" onclick="return Validation()">Create Price</button>
-												<input type="hidden" name="sl" id="sl" value="1"> 
+												<input type="text" name="sl" id="sl" value="<?= $sl-1; ?>"> 
 											</div> <!-- /form-actions -->
 										</fieldset>
 									</div> <!-- /widget-content -->
@@ -186,8 +253,8 @@
 				var pageIdNameAttr = "page-id-"+sl;
 				var hueIdNameAttr = "hue-id-"+sl;
 
-				GetDataForSelectMenu("PageModel","GetAllPage",pageSelectMenu,pageIdNameAttr,"Select Page Name");
-				GetDataForSelectMenu("HueModel","GetAllHue",hueSelectMenu,hueIdNameAttr,"Select Hue");
+				GetDataForSelectMenu("PageModel","GetAllPage",pageSelectMenu,pageIdNameAttr,"Select Page Name",0);
+				GetDataForSelectMenu("HueModel","GetAllHue",hueSelectMenu,hueIdNameAttr,"Select Hue",0);
 
 				document.getElementById("sl").value = sl;
 
@@ -242,9 +309,6 @@
 			GetDataForDependantSelectMenu("PublicationModel","GetPublicationByForignKey","MediaId",<?= $priceInfo->MediaId?>,"#publication-select-menu","publication-id","Select Publication",<?= $priceInfo->PublicationId;?>);
 
 			$('#day option[value="<?= $priceInfo->Day; ?>"]').prop('selected', true);
-
-			GetDataForSelectMenu("PageModel","GetAllPage","#page-select-menu-1","page-id-1","Select Page Name",0);
-			GetDataForSelectMenu("HueModel","GetAllHue","#hue-select-menu-1","hue-id-1","Select Hue",0);
 
 			// Get All Data For Select Menu Script Start
 			$(document).on('change', '#media-name-id', function(){
