@@ -188,7 +188,7 @@
 				// Get All Data For Select Menu Script Start
 				$(document).on('change', '#media-name-id', function(){
 					var id = $('#media-name-id').val();
-					GetDataForDependantSelectMenu("PublicationModel","GetPublicationByForignKey","MediaId",id,"#publication-select-menu","publication-id","Select Publication");
+					GetDataForDependantSelectMenu("PublicationModel","GetPublicationByForignKey","MediaId",id,"#publication-select-menu","publication-id","Select Publication",0);
 				});
 
 				function GetDataForSelectMenu(modelName,methodName,divId,idNameAttr,selectHeader)
@@ -204,13 +204,13 @@
 					});
 				} 
 
-				function GetDataForDependantSelectMenu(modelName,methodName,fieldName,id,divId,idNameAttr,selectHeader)
+				function GetDataForDependantSelectMenu(modelName,methodName,fieldName,id,divId,idNameAttr,selectHeader,selectId)
 				{
 					$.ajax({
 						type:'ajax',
 						url:'<?php echo base_url('index.php/Price/GetDataForDependantSelectMenu'); ?>',
 						method:'POST',
-						data:{modelName:modelName,methodName:methodName,fieldName:fieldName,id:id,idNameAttr:idNameAttr,selectHeader:selectHeader},
+						data:{modelName:modelName,methodName:methodName,fieldName:fieldName,id:id,idNameAttr:idNameAttr,selectHeader:selectHeader,selectId:selectId},
 						success:function(data){
 							$(divId).html(data);
 						}
@@ -219,19 +219,20 @@
 				// Get All Data For Select Menu Script End
 
 				$(document).on('click', '.update', function(){
-					var priceDetailsId = $(this).attr('id');
+					var priceId = $(this).attr('id');
 
 					$.ajax({
 						url:'<?php echo base_url("index.php/Price/GetPriceDetailsById"); ?>',
 						method:'POST',
-						data:{priceDetailsId:priceDetailsId},
+						data:{priceId:priceId},
 						dataType:'json',
 						success:function(data){
 							$('#price-modal').modal('show');
 							$('#price-media-name').val(data.Name);
 							$('#media-name-id option[value="'+data.mediaId+'"]').prop('selected', true);
 
-							GetDataForDependantSelectMenu("PublicationModel","GetPublicationByForignKey","MediaId",data.mediaId,"#publication-select-menu","publication-id","Select Publication");
+							GetDataForDependantSelectMenu("PublicationModel","GetPublicationByForignKey","MediaId",data.mediaId,"#publication-select-menu","publication-id","Select Publication",data.publicationId);
+
 							$('#publication-id option[value="General"]').prop('selected', true);
 							$('#day option[value="'+data.day+'"]').prop('selected', true);
 

@@ -70,7 +70,7 @@
 
 				$entryId = $this->GetAdminAllInfo()->Id;
 
-				$checkMediaName = $this->MediaNameModel->CheckMediaNameExsits($mediaName);
+				$checkMediaName = $this->MediaNameModel->CheckMediaNameExsits($mediaName,"");
 
 				if ($checkMediaName)
 				{
@@ -84,7 +84,7 @@
 					$mediaAddress = $this->input->post('media-address');
 
 					// Copy Image and Get Image New Name
-					$config['upload_path'] = "images/media_logo/";
+					$config['upload_path'] = "images/";
 					$config['allowed_types'] = "jpg|jpeg|png|gif";
 					$this->load->library('upload',$config);
 
@@ -98,7 +98,7 @@
 					{
 						$extention = pathinfo($mediaImage, PATHINFO_EXTENSION);
 						$slug = strtolower(preg_replace('/[^A-Za-z0-9-]+/', '_', $mediaName));
-						$dbImageName = $slug."_".date('ymds').".".$extention;
+						$dbImageName = "med_".$slug."_".date('ymds').".".$extention;
 						$copyImageName = $config['upload_path'].$dbImageName;
 
 						copy($_FILES['media-image']['tmp_name'],$copyImageName);
@@ -143,7 +143,7 @@
 					$media[] = $value->Owner;
 					$media[] = $value->Phone;
 					$media[] = $value->Email;
-					$media[] = '<img src="'.base_url("images/media_logo/").$value->Image.'" width="80px" height="80px">';
+					$media[] = '<img src="'.base_url("images/").$value->Image.'" width="80px" height="80px">';
 					$media[] = '<button type="button" name="update" id="'.$value->Id.'" class="btn btn-warning btn-xs update">Update</button> <button type="button" name="delete" id="'.$value->Id.'" class="btn btn-danger btn-xs delete">Delete</button>';
 					$sl++;
 					$data[] = $media;
@@ -203,56 +203,66 @@
 			else
 			{
 				$mediaName = $this->input->post('media-name');
-				$mediaOwner = $this->input->post('media-owner');
-				$mediaPhone = $this->input->post('media-phone');
-				$mediaEmail = $this->input->post('media-email');
-				$mediaAddress = $this->input->post('media-address');
 				$mediaId = $this->input->post('media-id');
-				$updateId = $this->GetAdminAllInfo()->Id;
-				$newMediaImage = "";
 
-				if ($_FILES["new-media-image"]["name"] == "")
+				$checkMediaName = $this->MediaNameModel->CheckMediaNameExsits($mediaName,$mediaId);
+
+				if ($checkMediaName)
 				{
-					$dbImageName = $this->input->post("previous-media-image");
+					echo "Oops! Sorry, This Media Name Alredy Created.";
 				}
 				else
 				{
-					$mediaImage = $_FILES['new-media-image']['name'];
-					$previousImage = $this->input->post('previous-media-image');
+					$mediaOwner = $this->input->post('media-owner');
+					$mediaPhone = $this->input->post('media-phone');
+					$mediaEmail = $this->input->post('media-email');
+					$mediaAddress = $this->input->post('media-address');
+					$updateId = $this->GetAdminAllInfo()->Id;
+					$newMediaImage = "";
 
-				// Copy Image and Get Image New Name
-					$config['upload_path'] = "images/media_logo/";
-					$config['allowed_types'] = "jpg|jpeg|png|gif";
-					$this->load->library('upload',$config);
+					if (!empty($_FILES["new-media-image"]["name"]))
+					{
+						$mediaImage = $_FILES['new-media-image']['name'];
+						$previousImage = $this->input->post('previous-media-image');
 
-					$extention = pathinfo($mediaImage, PATHINFO_EXTENSION);
-					$slug = strtolower(preg_replace('/[^A-Za-z0-9-]+/', '_', $mediaName));
-					$dbImageName = $slug."_".date('ymds').".".$extention;
-					$copyImageName = $config['upload_path'].$dbImageName;
+						// Copy Image and Get Image New Name
+						$config['upload_path'] = "images/";
+						$config['allowed_types'] = "jpg|jpeg|png|gif";
+						$this->load->library('upload',$config);
 
-					if ($previousImage != "")
-					{					
-						$deleteImage = $config['upload_path'].$previousImage;
+						$extention = pathinfo($mediaImage, PATHINFO_EXTENSION);
+						$slug = strtolower(preg_replace('/[^A-Za-z0-9-]+/', '_', $mediaName));
+						$dbImageName = "med_".$slug."_".date('ymds').".".$extention;
+						$copyImageName = $config['upload_path'].$dbImageName;
 
-						if (file_exists($deleteImage))
-						{
-							chown($deleteImage, 666);
-							unlink($deleteImage);
+						if ($previousImage != "")
+						{					
+							$deleteImage = $config['upload_path'].$previousImage;
+
+							if (file_exists($deleteImage))
+							{
+								chown($deleteImage, 666);
+								unlink($deleteImage);
+							}
 						}
+
+						copy($_FILES['new-media-image']['tmp_name'],$copyImageName);
+					}
+					else
+					{
+						$dbImageName = $this->input->post("previous-media-image");
 					}
 
-					copy($_FILES['new-media-image']['tmp_name'],$copyImageName);
-				}
+					$result = $this->MediaNameModel->UpdateMediaName($mediaId,$mediaName,$mediaOwner,$mediaPhone,$mediaEmail,$mediaAddress,$dbImageName,$updateId);
 
-				$result = $this->MediaNameModel->UpdateMediaName($mediaId,$mediaName,$mediaOwner,$mediaPhone,$mediaEmail,$mediaAddress,$dbImageName,$updateId);
-
-				if ($result)
-				{
-					echo "Greate! You Updated Your Media Name Successfully";
-				}
-				else
-				{
-					echo "Oops! Sorry, Your Media Name Can't Be Updated";
+					if ($result)
+					{
+						echo "Greate! You Updated Your Media Name Successfully";
+					}
+					else
+					{
+						echo "Oops! Sorry, Your Media Name Can't Be Updated";
+					}
 				}
 			}
 		}
@@ -266,27 +276,9 @@
 			else
 			{
 				$mediaId = $this->input->post('mediaId');
+				$deleteId = $this->GetAdminAllInfo()->Id;
 
-				$mediaImageName = $this->MediaNameModel->GetMediaNameById($mediaId)->Image;
-
-				// Delete Image and Get Image New Name Start
-				$config['upload_path'] = "images/media_logo/";
-				$config['allowed_types'] = "jpg|jpeg|png|gif";
-				$this->load->library('upload',$config);
-
-				if ($mediaImageName != "")
-				{					
-					$deleteImage = $config['upload_path'].$mediaImageName;
-
-					if (file_exists($deleteImage))
-					{
-						chown($deleteImage, 666);
-						unlink($deleteImage);
-					}
-				}
-				// Delete Image and Get Image New Name End
-
-				$result = $this->MediaNameModel->DeleteMediaName($mediaId);
+				$result = $this->MediaNameModel->DeleteMediaName($mediaId,$deleteId);
 				
 				if ($result)
 				{

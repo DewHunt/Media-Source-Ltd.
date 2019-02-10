@@ -43,7 +43,7 @@
 			}
 		}
 
-		public function Price($msg = null)
+		public function Price($msg = null,$action = null)
 		{
 			if ($this->session->userdata('adminUserName') == "" || $this->session->userdata('adminPassword') == "")
 			{
@@ -74,6 +74,7 @@
 				$methodName = $this->input->post('methodName');
 				$idNameAttr = $this->input->post('idNameAttr');
 				$selectHeader = $this->input->post('selectHeader');
+				$selectId = $this->input->post('selectId');
 
 				$result = $this->$modelName->$methodName();
 
@@ -83,7 +84,14 @@
 					$output .= '<option value="">'.$selectHeader.'</option>';
 					foreach ($result as $value)
 					{
-						$output .= '<option value="'.$value->Id.'">'.$value->Name.'</option>';
+						if ($selectId == $value->Id)
+						{
+							$output .= '<option value="'.$value->Id.'" selected>'.$value->Name.'</option>';
+						}
+						else
+						{
+							$output .= '<option value="'.$value->Id.'">'.$value->Name.'</option>';
+						}
 					}
 					$output .= '</select>';
 				}
@@ -113,6 +121,7 @@
 				$id = $this->input->post('id');
 				$idNameAttr = $this->input->post('idNameAttr');
 				$selectHeader = $this->input->post('selectHeader');
+				$selectId = $this->input->post('selectId');
 
 				$result = $this->$modelName->$methodName($fieldName,$id);
 
@@ -122,7 +131,14 @@
 					$output .= '<option value="">'.$selectHeader.'</option>';
 					foreach ($result as $value)
 					{
-						$output .= '<option value="'.$value->Id.'">'.$value->Name.'</option>';
+						if ($selectId == $value->Id)
+						{
+							$output .= '<option value="'.$value->Id.'" selected>'.$value->Name.'</option>';
+						}
+						else
+						{
+							$output .= '<option value="'.$value->Id.'">'.$value->Name.'</option>';
+						}
 					}
 					$output .= '</select>';
 				}
@@ -218,7 +234,7 @@
 					$price[] = $this->PageModel->GetPageById($value->PageNoId)->Name;
 					$price[] = $this->HueModel->GetHueById($value->Hue)->Name;
 					$price[] = $value->Price;
-					$price[] = '<button type="button" name="update" id="'.$value->Id.'" class="btn btn-warning btn-xs update">Update</button> <button type="button" name="delete" id="'.$value->Id.'" class="btn btn-danger btn-xs delete">Delete</button>';
+					$price[] = '<a href="'.base_url('index.php/Price/Update/_/'.$value->PriceId).'"><button class="btn btn-warning btn-xs">Update</button></a> <button type="button" name="delete" id="'.$value->PriceId.'" class="btn btn-danger btn-xs delete">Delete</button>';
 					$sl++;
 					$data[] = $price;
 				}
@@ -234,6 +250,28 @@
 			}
 		}
 
+		public function Update($msg = null,$id = null)
+		{
+			if ($this->session->userdata('adminUserName') == "" || $this->session->userdata('adminPassword') == "")
+			{
+				return redirect('Admin/Index');
+			}
+			else
+			{
+				$priceId = $id;
+
+				$data = array(
+					'title' => 'Update Price - Media Source Ltd.',
+					'adminInfo' => $this->GetAdminAllInfo(),
+					'message' => $msg,
+					'priceInfo' => $this->PriceModel->GetPriceById($priceId),
+					'priceDetailsInfo' => $this->PriceModel->GetPriceDetailsById($priceId)
+				);
+
+				$this->load->view('admin/system_setup/page/update-price',$data);				
+			}
+		}
+
 		public function GetPriceDetailsById()
 		{
 			if ($this->session->userdata('adminUserName') == "" || $this->session->userdata('adminPassword') == "")
@@ -242,29 +280,35 @@
 			}
 			else
 			{
-				$output = array();
-				$priceDetailsId = $this->input->post('priceDetailsId');
+				$output_price = array();
+				$output_price_details = array();
+				$priceId = $this->input->post('priceId');
 
-				$data = $this->PriceModel->GetPriceDetailsById($priceDetailsId);
+				$priceDetailsInfo = $this->PriceModel->GetPriceDetailsById($priceId);
 
-				$output['priceDetailsId'] = $data->Id;
-				$output['priceId'] = $data->PriceId;
-				$output['priceTitle'] = $data->Name;
-				$output['hueId'] = $data->Hue;
-				$output['pageId'] = $data->PageNoId;
-				$output['price'] = $data->Price;
-				$output['col'] = $data->Col;
-				$output['inch'] = $data->Inch;
-				$output['priceDescription'] = $data->Description;
+				foreach ($priceDetailsInfo as $value)
+				{
+					$output_price_details['priceDetailsId'] = $value->Id;
+					$output_price_details['priceId'] = $value->PriceId;
+					$output_price_details['priceTitle'] = $value->Name;
+					$output_price_details['hueId'] = $value->Hue;
+					$output_price_details['pageId'] = $value->PageNoId;
+					$output_price_details['price'] = $value->Price;
+					$output_price_details['col'] = $value->Col;
+					$output_price_details['inch'] = $value->Inch;
+					$output_price_details['priceDescription'] = $value->Description;
 
-				$priceDetailsInfo = $this->PriceModel->GetPriceById($data->PriceId);
+					echo json_encode($output_price_details);
+				}
 
-				$output['Name'] = $priceDetailsInfo->Name;
-				$output['mediaId'] = $priceDetailsInfo->MediaId;
-				$output['publicationId'] = $priceDetailsInfo->PublicationId;
-				$output['day'] = $priceDetailsInfo->Day;
+				$priceInfo = $this->PriceModel->GetPriceById($priceId);
 
-				echo json_encode($output);
+				$output_price['Name'] = $priceInfo->Name;
+				$output_price['mediaId'] = $priceInfo->MediaId;
+				$output_price['publicationId'] = $priceInfo->PublicationId;
+				$output_price['day'] = $priceInfo->Day;
+
+				echo json_encode($output_price);
 			}
 		}
 

@@ -68,9 +68,9 @@
 
 				$entryId = $this->GetAdminAllInfo()->Id;
 
-				$checkProductCategoryName = $this->ProductCategoryModel->CheckProductCategoryExists($productCategoryName);
+				$checkProductCategory = $this->ProductCategoryModel->CheckProductCategoryExists($productCategoryName,"");
 
-				if($checkProductCategoryName)
+				if($checkProductCategory)
 				{
 					return redirect('ProductCategory/ProductCategory/3');
 				}
@@ -162,18 +162,28 @@
 			{
 				$productCategoryId = $this->input->post('product-category-id');
 				$productCategoryName = $this->input->post('product-category-name');
-				$productCategoryDescription = $this->input->post('product-category-description');
-				$updateId = $this->GetAdminAllInfo()->Id;
 
-				$result = $this->ProductCategoryModel->UpdateProductCategory($productCategoryId,$productCategoryName,$productCategoryDescription,$updateId);
+				$checkProductCategory = $this->ProductCategoryModel->CheckProductCategoryExists($productCategoryName,$productCategoryId);
 
-				if ($result)
+				if ($checkProductCategory)
 				{
-					echo "Great! You Updated Your Product Category Successfully";
+					echo "Oops! Sorry, This Product Category Alredy Created.";
 				}
 				else
 				{
-					echo "Oops! Sorry, Your Product Category Can't Be Updated";
+					$productCategoryDescription = $this->input->post('product-category-description');
+					$updateId = $this->GetAdminAllInfo()->Id;
+
+					$result = $this->ProductCategoryModel->UpdateProductCategory($productCategoryId,$productCategoryName,$productCategoryDescription,$updateId);
+
+					if ($result)
+					{
+						echo "Great! You Updated Your Product Category Successfully";
+					}
+					else
+					{
+						echo "Oops! Sorry, Your Product Category Can't Be Updated";
+					}
 				}
 			}
 		}
@@ -187,8 +197,9 @@
 			else
 			{
 				$productCategoryId = $this->input->post('productCategoryId');
+				$deleteId = $this->GetAdminAllInfo()->Id;
 
-				$result = $this->ProductCategoryModel->DeleteProductCategory($productCategoryId);
+				$result = $this->ProductCategoryModel->DeleteProductCategory($productCategoryId,$deleteId);
 
 				if ($result)
 				{

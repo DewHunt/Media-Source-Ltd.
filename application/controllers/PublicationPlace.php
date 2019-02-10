@@ -69,9 +69,9 @@
 
 				$entryId = $this->GetAdminAllInfo()->Id;
 
-				$checkPublicationPlaceName = $this->PublicationPlaceModel->CheckPublicationPlaceExists($publicationPlaceName);
+				$checkPublicationPlace = $this->PublicationPlaceModel->CheckPublicationPlaceExists($publicationPlaceName,"");
 
-				if($checkPublicationPlaceName)
+				if($checkPublicationPlace)
 				{
 					return redirect('PublicationPlace/PublicationPlace/3');
 				}
@@ -161,18 +161,28 @@
 			{
 				$publicationPlaceId = $this->input->post('publication-place-id');
 				$publicationPlaceName = $this->input->post('publication-place-name');
-				$publicationPlaceDescription = $this->input->post('publication-place-description');
-				$updateId = $this->GetAdminAllInfo()->Id;
 
-				$result = $this->PublicationPlaceModel->UpdatePublicationPlace($publicationPlaceId,$publicationPlaceName,$publicationPlaceDescription,$updateId);
+				$checkPublicationPlace = $this->PublicationPlaceModel->CheckPublicationPlaceExists($publicationPlaceName,$publicationPlaceId);
 
-				if ($result)
+				if ($checkPublicationPlace)
 				{
-					echo "Great! You Updated Your Publication Place Successfully";
+					echo "Oops! Sorry, This Publication Place Alredy Created.";
 				}
 				else
 				{
-					echo "Oops! Sorry, Your Publication Place Can't Be Updated";
+					$publicationPlaceDescription = $this->input->post('publication-place-description');
+					$updateId = $this->GetAdminAllInfo()->Id;
+
+					$result = $this->PublicationPlaceModel->UpdatePublicationPlace($publicationPlaceId,$publicationPlaceName,$publicationPlaceDescription,$updateId);
+
+					if ($result)
+					{
+						echo "Great! You Updated Your Publication Place Successfully";
+					}
+					else
+					{
+						echo "Oops! Sorry, Your Publication Place Can't Be Updated";
+					}
 				}
 			}
 		}
@@ -186,8 +196,9 @@
 			else
 			{
 				$publicationPlaceId = $this->input->post('publicationPlaceId');
+				$deleteId = $this->GetAdminAllInfo()->Id;
 
-				$result = $this->PublicationPlaceModel->DeletePublicationPlace($publicationPlaceId);
+				$result = $this->PublicationPlaceModel->DeletePublicationPlace($publicationPlaceId,$deleteId);
 
 				if ($result)
 				{

@@ -69,9 +69,9 @@
 
 				$entryId = $this->GetAdminAllInfo()->Id;
 
-				$checkPublicationFrequencyName = $this->PublicationFrequencyModel->CheckPublicationFrequencyExists($publicationFrequencyName);
+				$checkPublicationFrequency = $this->PublicationFrequencyModel->CheckPublicationFrequencyExists($publicationFrequencyName,"");
 
-				if($checkPublicationFrequencyName)
+				if($checkPublicationFrequency)
 				{
 					return redirect('PublicationFrequency/PublicationFrequency/3');
 				}
@@ -161,18 +161,28 @@
 			{
 				$publicationFrequencyId = $this->input->post('publication-frequency-id');
 				$publicationFrequencyName = $this->input->post('publication-frequency-name');
-				$publicationFrequencyDescription = $this->input->post('publication-frequency-description');
-				$updateId = $this->GetAdminAllInfo()->Id;
 
-				$result = $this->PublicationFrequencyModel->UpdatePublicationFrequency($publicationFrequencyId,$publicationFrequencyName,$publicationFrequencyDescription,$updateId);
+				$checkPublicationFrequency = $this->PublicationFrequencyModel->CheckPublicationFrequencyExists($publicationFrequencyName,$publicationFrequencyId);
 
-				if ($result)
+				if ($checkPublicationFrequency)
 				{
-					echo "Great! You Updated Your Publication Frequency Successfully";
+					echo "Oops! Sorry, This Publication Frequency Alredy Created.";
 				}
 				else
 				{
-					echo "Oops! Sorry, Your Publication Frequency Can't Be Updated";
+					$publicationFrequencyDescription = $this->input->post('publication-frequency-description');
+					$updateId = $this->GetAdminAllInfo()->Id;
+
+					$result = $this->PublicationFrequencyModel->UpdatePublicationFrequency($publicationFrequencyId,$publicationFrequencyName,$publicationFrequencyDescription,$updateId);
+
+					if ($result)
+					{
+						echo "Great! You Updated Your Publication Frequency Successfully";
+					}
+					else
+					{
+						echo "Oops! Sorry, Your Publication Frequency Can't Be Updated";
+					}
 				}
 			}
 		}
@@ -186,8 +196,9 @@
 			else
 			{
 				$publicationFrequencyId = $this->input->post('publicationFrequencyId');
+				$deleteId = $this->GetAdminAllInfo()->Id;
 
-				$result = $this->PublicationFrequencyModel->DeletePublicationFrequency($publicationFrequencyId);
+				$result = $this->PublicationFrequencyModel->DeletePublicationFrequency($publicationFrequencyId,$deleteId);
 
 				if ($result)
 				{

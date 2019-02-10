@@ -9,9 +9,16 @@
 			parent::__construct();
 		}
 
-		public function CheckMediaNameExsits($mediaName)
+		public function CheckMediaNameExsits($mediaName,$mediaId)
 		{
-			$sql = "SELECT Name FROM media WHERE Name = '".$mediaName."'";
+			if ($mediaId == "")
+			{
+				$sql = "SELECT Name FROM media WHERE Name = '$mediaName'";
+			}
+			else
+			{
+				$sql = "SELECT Name FROM media WHERE Id != '$mediaId' AND Name = '$mediaName'";
+			}
 
 			$query = $this->db->query($sql);
 
@@ -77,9 +84,10 @@
 			}
 		}
 
-		public function DeleteMediaName($mediaId)
+		public function DeleteMediaName($mediaId,$deleteId)
 		{
-			$sql = "DELETE FROM media WHERE Id = '".$mediaId."'";
+			$deleteDateTime = date('Y-m-d H:i:s');
+			$sql = "UPDATE media SET DeleteBY = '".$deleteId."', DeleteDateTime = '".$deleteDateTime."', State = '0' WHERE Id = '".$mediaId."'";
 
 			$query = $this->db->query($sql);
 

@@ -9,9 +9,16 @@
 			parent::__construct();
 		}
 
-		public function CheckProductCategoryExists($productCategoryName)
+		public function CheckProductCategoryExists($productCategoryName,$productCategoryId)
 		{
-			$sql = "SELECT * FROM product WHERE Name = '$productCategoryName'";
+			if ($productCategoryId == "")
+			{
+				$sql = "SELECT * FROM product WHERE Name = '$productCategoryName'";
+			}
+			else
+			{
+				$sql = "SELECT * FROM product WHERE Id != '$productCategoryId' AND Name = '$productCategoryName'";
+			}
 
 			$checkQuery = $this->db->query($sql);
 
@@ -61,8 +68,8 @@
 
 		public function UpdateProductCategory($productCategoryId,$productCategoryName,$productCategoryDescription,$updateId)
 		{
-			$updateDateTime = date('Y-m-d H:i:s');
-			$sql = "UPDATE product SET Name = '$productCategoryName', Description = '$productCategoryDescription', UpdateBy = '$updateId', UpdateDateTime = '$updateDateTime' WHERE Id = '$productCategoryId'";
+			$updateTime = date('Y-m-d H:i:s');
+			$sql = "UPDATE product SET Name = '$productCategoryName', Description = '$productCategoryDescription', UpdateBy = '$updateId', UpdateTime = '$updateTime' WHERE Id = '$productCategoryId'";
 
 			$updateQuery = $this->db->query($sql);
 
@@ -76,13 +83,14 @@
 			}
 		}
 
-		public function DeleteProductCategory($productCategoryId)
+		public function DeleteProductCategory($productCategoryId,$deleteId)
 		{
-			$sql = "DELETE FROM product WHERE Id = '$productCategoryId'";
+			$deleteDateTime = date('Y-m-d H:i:s');
+			$sql = "UPDATE product SET DeleteBY = '".$deleteId."', DeleteDateTime = '".$deleteDateTime."', State = '0' WHERE Id = '".$productCategoryId."'";
 
-			$deleteQuery = $this->db->query($sql);
+			$query = $this->db->query($sql);
 
-			if ($deleteQuery)
+			if ($query)
 			{
 				return true;
 			}

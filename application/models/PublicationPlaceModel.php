@@ -10,9 +10,16 @@
 			parent::__construct();
 		}
 
-		public function CheckPublicationPlaceExists($publicationPlaceName)
+		public function CheckPublicationPlaceExists($publicationPlaceName,$publicationPlaceId)
 		{
-			$sql = "SELECT * FROM pubplace WHERE Name = '$publicationPlaceName'";
+			if ($publicationPlaceId == "")
+			{
+				$sql = "SELECT * FROM pubplace WHERE Name = '$publicationPlaceName'";
+			}
+			else
+			{
+				$sql = "SELECT * FROM pubplace WHERE Id != '$publicationPlaceId' AND Name = '$publicationPlaceName'";
+			}
 
 			$checkQuery = $this->db->query($sql);
 
@@ -77,13 +84,14 @@
 			}			
 		}
 
-		public function DeletePublicationPlace($publicationPlaceId)
+		public function DeletePublicationPlace($publicationPlaceId,$deleteId)
 		{
-			$sql = "DELETE FROM pubplace WHERE Id = '$publicationPlaceId'";
+			$deleteDateTime = date('Y-m-d H:i:s');
+			$sql = "UPDATE pubplace SET DeleteBY = '".$deleteId."', DeleteDateTime = '".$deleteDateTime."', State = '0' WHERE Id = '".$publicationPlaceId."'";
 
-			$deleteQuery = $this->db->query($sql);
+			$query = $this->db->query($sql);
 
-			if ($deleteQuery)
+			if ($query)
 			{
 				return true;
 			}

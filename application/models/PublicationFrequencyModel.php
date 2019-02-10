@@ -10,9 +10,16 @@
 			parent::__construct();
 		}
 
-		public function CheckPublicationFrequencyExists($publicationFrequencyName)
+		public function CheckPublicationFrequencyExists($publicationFrequencyName,$publicationFrequencyId)
 		{
-			$sql = "SELECT * FROM pubfrequency WHERE Name = '$publicationFrequencyName'";
+			if ($publicationFrequencyId == "")
+			{
+				$sql = "SELECT * FROM pubfrequency WHERE Name = '$publicationFrequencyName'";
+			}
+			else
+			{
+				$sql = "SELECT * FROM pubfrequency WHERE Id != '$publicationFrequencyId' AND Name = '$publicationFrequencyName'";
+			}
 
 			$checkQuery = $this->db->query($sql);
 
@@ -77,13 +84,14 @@
 			}
 		}
 
-		public function DeletePublicationFrequency($publicationFrequencyId)
+		public function DeletePublicationFrequency($publicationFrequencyId,$deleteId)
 		{
-			$sql = "DELETE FROM pubfrequency WHERE Id = '$publicationFrequencyId'";
+			$deleteDateTime = date('Y-m-d H:i:s');
+			$sql = "UPDATE pubfrequency SET DeleteBY = '".$deleteId."', DeleteDateTime = '".$deleteDateTime."', State = '0' WHERE Id = '".$publicationFrequencyId."'";
 
-			$deleteQuery = $this->db->query($sql);
+			$query = $this->db->query($sql);
 
-			if ($deleteQuery)
+			if ($query)
 			{
 				return true;
 			}

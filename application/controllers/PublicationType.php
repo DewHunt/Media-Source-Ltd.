@@ -66,9 +66,9 @@
 			{
 				$publicationTypeName = $this->input->post('publication-type-name');
 
-				$checkPublicationTypeName = $this->PublicationTypeModel->CheckPublicationTypeExists($publicationTypeName);
+				$checkPublicationType = $this->PublicationTypeModel->CheckPublicationTypeExists($publicationTypeName,"");
 
-				if ($checkPublicationTypeName)
+				if ($checkPublicationType)
 				{
 					return redirect('PublicationType/PublicationType/3');
 				}
@@ -162,18 +162,28 @@
 			{
 				$publicationTypeId = $this->input->post('publication-type-id');
 				$publicationTypeName = $this->input->post('publication-type-name');
-				$publicationTypeDescription = $this->input->post('publication-type-description');
-				$updateId = $this->GetAdminAllInfo()->Id;
 
-				$result = $this->PublicationTypeModel->UpdatePublicationType($publicationTypeId,$publicationTypeName,$publicationTypeDescription,$updateId);
+				$checkPublicationType = $this->PublicationTypeModel->CheckPublicationTypeExists($publicationTypeName,$publicationTypeId);
 
-				if ($result)
+				if ($checkPublicationType)
 				{
-					echo "Great! You Updated Your Publication Type Successfully";
+					echo "Oops! Sorry, This Publication Type Alredy Created.";
 				}
 				else
 				{
-					echo "Oops! Sorry, Your Publication Type Can't Be Updated";
+					$publicationTypeDescription = $this->input->post('publication-type-description');
+					$updateId = $this->GetAdminAllInfo()->Id;
+
+					$result = $this->PublicationTypeModel->UpdatePublicationType($publicationTypeId,$publicationTypeName,$publicationTypeDescription,$updateId);
+
+					if ($result)
+					{
+						echo "Great! You Updated Your Publication Type Successfully";
+					}
+					else
+					{
+						echo "Oops! Sorry, Your Publication Type Can't Be Updated";
+					}
 				}
 			}
 		}
@@ -187,8 +197,9 @@
 			else
 			{
 				$publicationTypeId = $this->input->post('publicationTypeId');
+				$deleteId = $this->GetAdminAllInfo()->Id;
 
-				$result = $this->PublicationTypeModel->DeletePublicationType($publicationTypeId);
+				$result = $this->PublicationTypeModel->DeletePublicationType($publicationTypeId,$deleteId);
 
 				if ($result)
 				{

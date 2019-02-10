@@ -10,9 +10,16 @@
 			parent::__construct();
 		}
 
-		public function CheckPublicationTypeExists($publicationTypeName)
+		public function CheckPublicationTypeExists($publicationTypeName,$publicationTypeId)
 		{
-			$sql = "SELECT * FROM pubtype WHERE Name = '$publicationTypeName'";
+			if ($publicationTypeId == "")
+			{
+				$sql = "SELECT * FROM pubtype WHERE Name = '$publicationTypeName'";
+			}
+			else
+			{
+				$sql = "SELECT * FROM pubtype WHERE Id != '$publicationTypeId' AND Name = '$publicationTypeName'";
+			}
 
 			$checkQuery = $this->db->query($sql);
 
@@ -77,13 +84,14 @@
 			}
 		}
 
-		public function DeletePublicationType($publicationTypeId)
+		public function DeletePublicationType($publicationTypeId,$deleteId)
 		{
-			$sql = "DELETE FROM pubtype WHERE Id = '$publicationTypeId'";
+			$deleteDateTime = date('Y-m-d H:i:s');
+			$sql = "UPDATE pubtype SET DeleteBY = '".$deleteId."', DeleteDateTime = '".$deleteDateTime."', State = '0' WHERE Id = '".$publicationTypeId."'";
 
-			$deleteQuery = $this->db->query($sql);
+			$query = $this->db->query($sql);
 
-			if ($deleteQuery)
+			if ($query)
 			{
 				return true;
 			}

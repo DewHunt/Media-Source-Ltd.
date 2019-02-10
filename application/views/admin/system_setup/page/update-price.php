@@ -59,7 +59,7 @@
 											<div class="control-group">											
 												<label class="control-label" for="name"><span class="mendatory">*</span>&nbsp;Name</label>
 												<div class="controls">
-													<input type="text" class="span10" id="price-media-name" name="price-media-name" value="">
+													<input type="text" class="span10" id="price-media-name" name="price-media-name" value="<?= $priceInfo->Name; ?>">
 												</div> <!-- /controls -->				
 											</div> <!-- /control-group -->
 
@@ -237,7 +237,12 @@
 				return false;
 			}
 
-			GetDataForSelectMenu("MediaNameModel","GetAllMediaName","#media-select-menu","media-name-id","Select Media",0);
+			GetDataForSelectMenu("MediaNameModel","GetAllMediaName","#media-select-menu","media-name-id","Select Media",<?= $priceInfo->MediaId;?>);
+
+			GetDataForDependantSelectMenu("PublicationModel","GetPublicationByForignKey","MediaId",<?= $priceInfo->MediaId?>,"#publication-select-menu","publication-id","Select Publication",<?= $priceInfo->PublicationId;?>);
+
+			$('#day option[value="<?= $priceInfo->Day; ?>"]').prop('selected', true);
+
 			GetDataForSelectMenu("PageModel","GetAllPage","#page-select-menu-1","page-id-1","Select Page Name",0);
 			GetDataForSelectMenu("HueModel","GetAllHue","#hue-select-menu-1","hue-id-1","Select Hue",0);
 
@@ -247,26 +252,26 @@
 				GetDataForDependantSelectMenu("PublicationModel","GetPublicationByForignKey","MediaId",id,"#publication-select-menu","publication-id","Select Publication",0);
 			});
 
-			function GetDataForSelectMenu(modelName,methodName,divId,idNameAttr,selectHeader)
+			function GetDataForSelectMenu(modelName,methodName,divId,idNameAttr,selectHeader,selectId)
 			{
 				$.ajax({
 					type:'ajax',
 					url:'<?php echo base_url('index.php/Price/GetDataForSelectMenu'); ?>',
 					method:'POST',
-					data:{modelName:modelName,methodName:methodName,idNameAttr:idNameAttr,selectHeader:selectHeader},
+					data:{modelName:modelName,methodName:methodName,idNameAttr:idNameAttr,selectHeader:selectHeader,selectId:selectId},
 					success:function(data){
 						$(divId).html(data);
 					}
 				});
 			} 
 
-			function GetDataForDependantSelectMenu(modelName,methodName,fieldName,id,divId,idNameAttr,selectHeader)
+			function GetDataForDependantSelectMenu(modelName,methodName,fieldName,id,divId,idNameAttr,selectHeader,selectId)
 			{
 				$.ajax({
 					type:'ajax',
 					url:'<?php echo base_url('index.php/Price/GetDataForDependantSelectMenu'); ?>',
 					method:'POST',
-					data:{modelName:modelName,methodName:methodName,fieldName:fieldName,id:id,idNameAttr:idNameAttr,selectHeader:selectHeader},
+					data:{modelName:modelName,methodName:methodName,fieldName:fieldName,id:id,idNameAttr:idNameAttr,selectHeader:selectHeader,selectId:selectId},
 					success:function(data){
 						$(divId).html(data);
 					}

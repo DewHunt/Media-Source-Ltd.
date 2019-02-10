@@ -62,15 +62,15 @@
 			}
 		}
 
-		public function GetPriceDetailsById($priceDetailsId)
+		public function GetPriceDetailsById($priceId)
 		{
-			$sql = "SELECT * FROM pricedetails WHERE Id = $priceDetailsId";
+			$sql = "SELECT * FROM pricedetails WHERE PriceId = $priceId";
 
 			$query = $this->db->query($sql);
 
 			if ($query->num_rows() > 0)
 			{
-				return $query->row();
+				return $query->result();
 			}
 			else
 			{

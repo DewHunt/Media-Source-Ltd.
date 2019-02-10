@@ -9,9 +9,16 @@
 			parent::__construct();
 		}
 
-		public function checkProductExists($productName,$productCategoryId)
+		public function CheckProductExists($productName,$productCategoryId,$productId)
 		{
-			$sql = "SELECT * FROM product_cat WHERE Name = '".$productName."' AND ProductId = '".$productCategoryId."'";
+			if ($productId)
+			{
+				$sql = "SELECT * FROM product_cat WHERE Name = '$productName' AND ProductId = '$productCategoryId'";
+			}
+			else
+			{
+				$sql = "SELECT * FROM product_cat WHERE Id != '$productId' AND Name = '$productName' AND ProductId = '$productCategoryId'";
+			}
 
 			$checkQuery = $this->db->query($sql);
 
@@ -76,9 +83,10 @@
 			}
 		}
 
-		public function DeleteProduct($productId)
+		public function DeleteProduct($productId,$deleteId)
 		{
-			$sql = "DELETE FROM product_cat WHERE Id = '".$productId."'";
+			$deleteDateTime = date('Y-m-d H:i:s');
+			$sql = "UPDATE product_cat SET DeleteBY = '".$deleteId."', DeleteDateTime = '".$deleteDateTime."', State = '0' WHERE Id = '".$productId."'";
 
 			$query = $this->db->query($sql);
 

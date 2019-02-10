@@ -101,9 +101,9 @@
 				$productName = $this->input->post('product-name');
 				$productCategoryId = $this->input->post('product-category-id');
 
-				$checkProductName = $this->ProductModel->checkProductExists($productName,$productCategoryId);
+				$checkProduct = $this->ProductModel->CheckProductExists($productName,$productCategoryId,"");
 
-				if ($checkProductName)
+				if ($checkProduct)
 				{
 					return redirect('Product/Product/3');
 				}
@@ -200,20 +200,29 @@
 			{
 				$productName = $this->input->post('product-name');
 				$productCategoryId = $this->input->post('product-category-id');
-				$productDescription = $this->input->post('product-description');
-
 				$productId = $this->input->post('product-id');
-				$updateId = $this->GetAdminAllInfo()->Id;
 
-				$result = $this->ProductModel->UpdateProduct($productId,$productCategoryId,$productName,$productDescription,$updateId);
+				$checkProduct = $this->ProductModel->CheckProductExists($productName,$productCategoryId,$productId);
 
-				if ($result)
+				if ($checkProduct)
 				{
-					echo "Greate! You Updated Your Product Successfully";
+					echo "Oops! Sorry, This Product Alredy Created.";
 				}
 				else
 				{
-					echo "Oops! Sorry, Your Product Can't Be Updated";
+					$productDescription = $this->input->post('product-description');
+					$updateId = $this->GetAdminAllInfo()->Id;
+
+					$result = $this->ProductModel->UpdateProduct($productId,$productCategoryId,$productName,$productDescription,$updateId);
+
+					if ($result)
+					{
+						echo "Greate! You Updated Your Product Successfully";
+					}
+					else
+					{
+						echo "Oops! Sorry, Your Product Can't Be Updated";
+					}
 				}				
 			}
 		}
@@ -227,8 +236,9 @@
 			else
 			{
 				$productId = $this->input->post('productId');
+				$deleteId = $this->GetAdminAllInfo()->Id;
 
-				$result = $this->ProductModel->DeleteProduct($productId);
+				$result = $this->ProductModel->DeleteProduct($productId,$deleteId);
 				
 				if ($result)
 				{
