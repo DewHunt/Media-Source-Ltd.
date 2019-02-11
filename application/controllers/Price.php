@@ -26,7 +26,7 @@
 			return $this->AdminModel->GetAdminAllInfo($adminUserName,$adminPassword);
 		}
 
-		public function Index()
+		public function Index($msg = null)
 		{
 			if ($this->session->userdata('adminUserName') == "" || $this->session->userdata('adminPassword') == "")
 			{
@@ -36,10 +36,11 @@
 			{
 				$data = array(
 					'title' => 'Price - Media Source Ltd.',
-					'adminInfo' => $this->GetAdminAllInfo()
+					'adminInfo' => $this->GetAdminAllInfo(),
+					'message' => $msg
 				);
 
-				$this->load->view('admin/system_setup/page/Price',$data);
+				$this->load->view('admin/system_setup/page/price',$data);
 			}
 		}
 
@@ -272,7 +273,7 @@
 			}
 		}
 
-		public function GetPriceDetailsById()
+		public function UpdatePrice()
 		{
 			if ($this->session->userdata('adminUserName') == "" || $this->session->userdata('adminPassword') == "")
 			{
@@ -280,35 +281,48 @@
 			}
 			else
 			{
-				$output_price = array();
-				$output_price_details = array();
-				$priceId = $this->input->post('priceId');
+				$priceId = $this->input->post('price-id');
 
-				$priceDetailsInfo = $this->PriceModel->GetPriceDetailsById($priceId);
+				$priceMediaName = $this->input->post('price-media-name');
+				$mediaId = $this->input->post('media-name-id');
+				$publicationId = $this->input->post('publication-id');
+				$day = $this->input->post('day');
+				$updateId = $this->GetAdminAllInfo()->Id;
+				$totalRow = $this->input->post('sl');
 
-				foreach ($priceDetailsInfo as $value)
-				{
-					$output_price_details['priceDetailsId'] = $value->Id;
-					$output_price_details['priceId'] = $value->PriceId;
-					$output_price_details['priceTitle'] = $value->Name;
-					$output_price_details['hueId'] = $value->Hue;
-					$output_price_details['pageId'] = $value->PageNoId;
-					$output_price_details['price'] = $value->Price;
-					$output_price_details['col'] = $value->Col;
-					$output_price_details['inch'] = $value->Inch;
-					$output_price_details['priceDescription'] = $value->Description;
+				$updatePrice = $this->PriceModel->UpdatePrice($priceId,$priceMediaName,$mediaId,$publicationId,$day,$updateId);
 
-					echo json_encode($output_price_details);
+				$deletePriceDetails = $this->PriceModel->DeletePriceDetails($priceId);
+
+				for ($i=1; $i <= $totalRow; $i++)
+				{ 
+					$priceTitleNameAttr = "price-title-".$i;
+					$pageIdNameAttr = "page-id-".$i;
+					$hueIdNameAttr = "hue-id-".$i;
+					$colNameAttr = "col-".$i;
+					$inchNameAttr = "inch-".$i;
+					$priceNameAttr = "price-".$i;
+					$priceDescriptionNameAttr = "price-description-".$i;
+
+					$priceTitle = $this->input->post($priceTitleNameAttr);
+					$pageId = $this->input->post($pageIdNameAttr);
+					$hueId = $this->input->post($hueIdNameAttr);
+					$col = $this->input->post($colNameAttr);
+					$inch = $this->input->post($inchNameAttr);
+					$price = $this->input->post($priceNameAttr);
+					$priceDescription = $this->input->post($priceDescriptionNameAttr);
+
+					$result = $this->PriceModel->UpdatePriceDetails($priceId,$priceTitle,$hueId,$pageId,$price,$col,$inch,$priceDescription,$updateId);
 				}
 
-				$priceInfo = $this->PriceModel->GetPriceById($priceId);
-
-				$output_price['Name'] = $priceInfo->Name;
-				$output_price['mediaId'] = $priceInfo->MediaId;
-				$output_price['publicationId'] = $priceInfo->PublicationId;
-				$output_price['day'] = $priceInfo->Day;
-
-				echo json_encode($output_price);
+				if ($result)
+				{
+					return redirect('Price/Index/1');
+				}
+				else
+				{
+					return redirect('Price/Update/2/$priceId');
+				}
 			}
 		}
 
@@ -320,11 +334,12 @@
 			}
 			else
 			{
-				$priceDetailsId = $this->input->post('priceDetailsId');
+				$priceId = $this->input->post('priceId');
 
-				$result = $this->PriceModel->DeletePriceDetails($priceDetailsId);
+				$deletePrice = $this->PriceModel->DeletePrice($priceId);
+				$deletePriceDetails = $this->PriceModel->DeletePriceDetails($priceId);
 
-				if ($result)
+				if ($deletePriceDetails)
 				{
 					echo "Price Deleted From Database!";
 				}

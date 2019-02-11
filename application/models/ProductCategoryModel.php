@@ -13,11 +13,11 @@
 		{
 			if ($productCategoryId == "")
 			{
-				$sql = "SELECT * FROM product WHERE Name = '$productCategoryName'";
+				$sql = "SELECT * FROM product WHERE Name = '$productCategoryName' AND State = '1'";
 			}
 			else
 			{
-				$sql = "SELECT * FROM product WHERE Id != '$productCategoryId' AND Name = '$productCategoryName'";
+				$sql = "SELECT * FROM product WHERE Id != '$productCategoryId' AND Name = '$productCategoryName' AND State = '1'";
 			}
 
 			$checkQuery = $this->db->query($sql);
@@ -52,7 +52,7 @@
 
 		public function GetProductCategoryById($productCategoryId)
 		{
-			$sql = "SELECT * FROM product WHERE Id = '$productCategoryId'";
+			$sql = "SELECT * FROM product WHERE Id = '$productCategoryId' AND State = '1'";
 
 			$query = $this->db->query($sql);
 
@@ -69,7 +69,7 @@
 		public function UpdateProductCategory($productCategoryId,$productCategoryName,$productCategoryDescription,$updateId)
 		{
 			$updateTime = date('Y-m-d H:i:s');
-			$sql = "UPDATE product SET Name = '$productCategoryName', Description = '$productCategoryDescription', UpdateBy = '$updateId', UpdateTime = '$updateTime' WHERE Id = '$productCategoryId'";
+			$sql = "UPDATE product SET Name = '$productCategoryName', Description = '$productCategoryDescription', UpdateBy = '$updateId', UpdateTime = '$updateTime' WHERE Id = '$productCategoryId' AND State = '1'";
 
 			$updateQuery = $this->db->query($sql);
 
@@ -102,7 +102,7 @@
 
 		public function GetAllProductCategory()
 		{
-			$sql = "SELECT * FROM product ORDER BY Name ASC";
+			$sql = "SELECT * FROM product WHERE State = '1' ORDER BY Name ASC";
 
 			$query = $this->db->query($sql);
 

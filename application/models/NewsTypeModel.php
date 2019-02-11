@@ -13,11 +13,11 @@
 		{
 			if ($newsTypeId = "")
 			{
-				$sql = "SELECT * FROM newstype WHERE Name = '$newsTypeName'";
+				$sql = "SELECT * FROM newstype WHERE Name = '$newsTypeName' AND State = '1'";
 			}
 			else
 			{
-				$sql = "SELECT * FROM newstype WHERE Id != '$newsTypeId' AND Name = '$newsTypeName'";
+				$sql = "SELECT * FROM newstype WHERE Id != '$newsTypeId' AND Name = '$newsTypeName' AND State = '1'";
 			}
 
 			$checkQuery = $this->db->query($sql);
@@ -52,7 +52,7 @@
 
 		public function GetNewsTypeById($newsTypeId)
 		{
-			$sql = "SELECT * FROM newstype WHERE Id = '$newsTypeId'";
+			$sql = "SELECT * FROM newstype WHERE Id = '$newsTypeId' AND State = '1'";
 
 			$query = $this->db->query($sql);
 
@@ -69,7 +69,7 @@
 		public function UpdateNewsType($newsTypeId,$newsTypeName,$newsTypeDescription,$updateId)
 		{
 			$updateTime = date('Y-m-d H:i:s');
-			$sql = "UPDATE newstype SET Name = '$newsTypeName', Description = '$newsTypeDescription', UpdateBy = '$updateId', UpdateTime = '$updateTime' WHERE Id = '$newsTypeId'";
+			$sql = "UPDATE newstype SET Name = '$newsTypeName', Description = '$newsTypeDescription', UpdateBy = '$updateId', UpdateTime = '$updateTime' WHERE Id = '$newsTypeId' AND State = '1'";
 
 			$updateQuery = $this->db->query($sql);
 
@@ -102,7 +102,7 @@
 
 		public function GetAllPlacingType()
 		{
-			$sql = "SELECT * FROM newstype ORDER BY Name ASC";
+			$sql = "SELECT * FROM newstype WHERE State = '1' ORDER BY Name ASC";
 
 			$query = $this->db->query($sql);
 

@@ -13,11 +13,11 @@
 		{
 			if ($companyId == "")
 			{
-				$sql = "SELECT * FROM company WHERE Name = '$companyName'";
+				$sql = "SELECT * FROM company WHERE Name = '$companyName' AND State = '1'";
 			}
 			else
 			{
-				$sql = "SELECT * FROM company WHERE Id != '$companyId' AND  Name = '$companyName'";
+				$sql = "SELECT * FROM company WHERE Id != '$companyId' AND  Name = '$companyName' AND State = '1'";
 			}
 
 			$checkQuery = $this->db->query($sql);
@@ -52,7 +52,7 @@
 
 		public function GetCompanyById($companyId)
 		{
-			$sql = "SELECT * FROM company WHERE Id = '$companyId'";
+			$sql = "SELECT * FROM company WHERE Id = '$companyId' AND State = '1'";
 
 			$query = $this->db->query($sql);
 
@@ -102,7 +102,7 @@
 
 		public function GetAllCompany()
 		{
-			$sql = "SELECT * FROM company ORDER BY Name ASC";
+			$sql = "SELECT * FROM company WHERE State = '1' ORDER BY Name ASC";
 
 			$query = $this->db->query($sql);
 

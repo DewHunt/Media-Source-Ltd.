@@ -13,11 +13,11 @@
 		{
 			if ($publicationId == "")
 			{
-				$sql = "SELECT * FROM publication WHERE Name = '$publicationName' AND MediaId = '$mediaNameId'";
+				$sql = "SELECT * FROM publication WHERE Name = '$publicationName' AND MediaId = '$mediaNameId' AND State = '1'";
 			}
 			else
 			{
-				$sql = "SELECT * FROM publication WHERE Id != '$publicationId' AND Name = '$publicationName' AND MediaId = '$mediaNameId'";
+				$sql = "SELECT * FROM publication WHERE Id != '$publicationId' AND Name = '$publicationName' AND MediaId = '$mediaNameId' AND State = '1'";
 			}
 
 			$checkQuery = $this->db->query($sql);
@@ -52,7 +52,7 @@
 
 		public function GetPublicationById($publicationId)
 		{
-			$sql = "SELECT * FROM publication WHERE Id = ".$publicationId;
+			$sql = "SELECT * FROM publication WHERE Id = '$publicationId' AND State = '1'";
 
 			$query = $this->db->query($sql);
 
@@ -70,7 +70,7 @@
 		{
 			$updateTime = date('Y-m-d H:i:s');
 
-			$sql = "UPDATE publication SET Name = '".$publicationName."', MediaId = '".$mediaNameId."', PublicationType = '".$publicationTypeId."', PubPlaceId = '".$publicationPlaceId."', PubFreQuencyId = '".$publicationFrequencyId."', PublicationLan = '".$publicationLanguage."', Description = '".$publicationDescription."', Logo = '".$dbImageName."', UpdateBy = '".$updateId."', UpdateTime = '".$updateTime."' WHERE Id = '".$publicationId."'";
+			$sql = "UPDATE publication SET Name = '".$publicationName."', MediaId = '".$mediaNameId."', PublicationType = '".$publicationTypeId."', PubPlaceId = '".$publicationPlaceId."', PubFreQuencyId = '".$publicationFrequencyId."', PublicationLan = '".$publicationLanguage."', Description = '".$publicationDescription."', Logo = '".$dbImageName."', UpdateBy = '".$updateId."', UpdateTime = '".$updateTime."' WHERE Id = '".$publicationId."' AND State = '1'";
 
 			$query = $this->db->query($sql);
 
@@ -103,7 +103,7 @@
 
 		public function GetAllPublication()
 		{
-			$sql = "SELECT * FROM publication ORDER BY Name ASC";
+			$sql = "SELECT * FROM publication WHERE State = '1' ORDER BY Name ASC";
 
 			$query = $this->db->query($sql);
 
@@ -119,7 +119,7 @@
 
 		public function GetPublicationByForignKey($fieldName,$id)
 		{
-			$sql = "SELECT * FROM publication WHERE $fieldName = $id ORDER BY Name ASC";
+			$sql = "SELECT * FROM publication WHERE $fieldName = $id AND State = '1' ORDER BY Name ASC";
 
 			$query = $this->db->query($sql);
 

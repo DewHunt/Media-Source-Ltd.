@@ -14,11 +14,11 @@
 		{
 			if ($hueId == "")
 			{
-				$sql = "SELECT * FROM hue WHERE Name = '$hueName'";
+				$sql = "SELECT * FROM hue WHERE Name = '$hueName' AND State = '1'";
 			}
 			else
 			{
-				$sql = "SELECT * FROM hue WHERE Id != '$hueId' AND Name = '$hueName'";
+				$sql = "SELECT * FROM hue WHERE Id != '$hueId' AND Name = '$hueName' AND State = '1'";
 			}
 
 			$checkQuery = $this->db->query($sql);
@@ -53,7 +53,7 @@
 
 		public function GetHueById($hueId)
 		{
-			$sql = "SELECT * FROM hue WHERE Id = '$hueId'";
+			$sql = "SELECT * FROM hue WHERE Id = '$hueId' AND State = '1'";
 
 			$query = $this->db->query($sql);
 
@@ -70,7 +70,7 @@
 		public function UpdateHue($hueId,$hueName,$hueDescription,$updateId)
 		{
 			$updateTime = date('Y-m-d H:i:s');
-			$sql = "UPDATE hue SET Name = '$hueName', Description = '$hueDescription', UpdateBy = '$updateId', UpdateTime = '$updateTime' WHERE Id = '$hueId'";
+			$sql = "UPDATE hue SET Name = '$hueName', Description = '$hueDescription', UpdateBy = '$updateId', UpdateTime = '$updateTime' WHERE Id = '$hueId' AND State = '1'";
 
 			$updateQuery = $this->db->query($sql);
 
@@ -103,7 +103,7 @@
 
 		public function GetAllHue()
 		{
-			$sql = "SELECT * FROM hue ORDER BY Name ASC";
+			$sql = "SELECT * FROM hue WHERE State = '1' ORDER BY Name ASC";
 
 			$query = $this->db->query($sql);
 

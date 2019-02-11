@@ -13,11 +13,11 @@
 		{
 			if ($placingId == "")
 			{
-				$sql = "SELECT * FROM placing WHERE Name = '$placingName'";
+				$sql = "SELECT * FROM placing WHERE Name = '$placingName' AND State = '1'";
 			}
 			else
 			{
-				$sql = "SELECT * FROM placing WHERE Id != '$placingId' AND Name = '$placingName'";
+				$sql = "SELECT * FROM placing WHERE Id != '$placingId' AND Name = '$placingName' AND State = '1'";
 			}
 
 			$checkQuery = $this->db->query($sql);
@@ -52,7 +52,7 @@
 
 		public function GetPlacingById($placingId)
 		{
-			$sql = "SELECT * FROM placing WHERE Id = '$placingId'";
+			$sql = "SELECT * FROM placing WHERE Id = '$placingId' AND State = '1'";
 
 			$query = $this->db->query($sql);
 
@@ -69,7 +69,7 @@
 		public function UpdatePlacing($placingId,$placingName,$placingDescription,$updateId)
 		{
 			$updateTime = date('Y-m-d H:i:s');
-			$sql = "UPDATE placing SET Name = '$placingName', Description = '$placingDescription', UpdateBy = '$updateId', UpdateTime = '$updateTime' WHERE Id = '$placingId'";
+			$sql = "UPDATE placing SET Name = '$placingName', Description = '$placingDescription', UpdateBy = '$updateId', UpdateTime = '$updateTime' WHERE Id = '$placingId' AND State = '1'";
 
 			$updateQuery = $this->db->query($sql);
 
@@ -102,7 +102,7 @@
 
 		public function GetAllPlacing()
 		{
-			$sql = "SELECT * FROM placing ORDER BY Name ASC";
+			$sql = "SELECT * FROM placing WHERE State = '1' ORDER BY Name ASC";
 
 			$query = $this->db->query($sql);
 

@@ -13,11 +13,11 @@
 		{
 			if ($placingTypeId == "")
 			{
-				$sql = "SELECT * FROM placingtype WHERE Name = '$placingTypeName'";
+				$sql = "SELECT * FROM placingtype WHERE Name = '$placingTypeName' AND State = '1'";
 			}
 			else
 			{
-				$sql = "SELECT * FROM placingtype WHERE Id != '$placingTypeId' AND Name = '$placingTypeName'";
+				$sql = "SELECT * FROM placingtype WHERE Id != '$placingTypeId' AND Name = '$placingTypeName' AND State = '1'";
 			}
 
 			$checkQuery = $this->db->query($sql);
@@ -52,7 +52,7 @@
 
 		public function GetPlacingTypeById($placingTypeId)
 		{
-			$sql = "SELECT * FROM placingtype WHERE Id = '$placingTypeId'";
+			$sql = "SELECT * FROM placingtype WHERE Id = '$placingTypeId' AND State = '1'";
 
 			$query = $this->db->query($sql);
 
@@ -69,7 +69,7 @@
 		public function UpdatePlacingType($placingTypeId,$placingTypeName,$placingTypeDescription,$updateId)
 		{
 			$updateTime = date('Y-m-d H:i:s');
-			$sql = "UPDATE placingtype SET Name = '$placingTypeName', Description = '$placingTypeDescription', UpdateBy = '$updateId', UpdateTime = '$updateTime' WHERE Id = '$placingTypeId'";
+			$sql = "UPDATE placingtype SET Name = '$placingTypeName', Description = '$placingTypeDescription', UpdateBy = '$updateId', UpdateTime = '$updateTime' WHERE Id = '$placingTypeId' AND State = '1'";
 
 			$updateQuery = $this->db->query($sql);
 
@@ -102,7 +102,7 @@
 
 		public function GetAllPlacingType()
 		{
-			$sql = "SELECT * FROM placingtype ORDER BY Name ASC";
+			$sql = "SELECT * FROM placingtype WHERE State = '1' ORDER BY Name ASC";
 
 			$query = $this->db->query($sql);
 

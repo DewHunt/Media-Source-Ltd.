@@ -13,36 +13,16 @@
 			<div class="main-inner">
 				<div class="container">
 					<div class="row">
-						<form class="form-horizontal" id="price-form" method="POST" action="<?= base_url('index.php/Price/CreatePrice'); ?>">
+						<form class="form-horizontal" id="price-form" method="POST" action="<?= base_url('index.php/Price/UpdatePrice'); ?>">
 							<div class="span12">
 
 								<?php
-									if ($message == 1)
-									{
-								?>
-										<div class="alert alert-success success-message">
-											<a type="button" class="btn btn-danger close" data-dismiss="alert" href="<?=  base_url('index.php/Price/Price');?>">&times;</a>
-											<strong>Great!</strong> Your Price Created Successfully...
-										</div>
-								<?php
-									}
-
 									if ($message == 2)
 									{
 								?>
 										<div class="alert alert-info error-message">
-											<a type="button" class="btn btn-danger close" data-dismiss="alert" href="<?= base_url('index.php/Price/Price'); ?>">&times;</a>
-											<strong>Oops! Sorry,</strong> Your Price Can't Be Created...
-										</div>
-								<?php
-									}
-
-									if ($message == 3)
-									{
-								?>
-										<div class="alert alert-info error-message">
-											<a type="button" class="btn btn-danger close" data-dismiss="alert" href="<?= base_url('index.php/Price/Price'); ?>">&times;</a>
-											<strong>Oops! Sorry,</strong> Your Price Already Saved In Data Base...
+											<a type="button" class="btn btn-danger close" data-dismiss="alert" href="<?= base_url('index.php/Price/Update/_/'.$priceInfo->Id); ?>">&times;</a>
+											<strong>Oops! Sorry,</strong> Your Price Can't Be Updated...
 										</div>
 								<?php
 									}
@@ -220,8 +200,9 @@
 												<button onclick="return addRow();" class="btn btn-primary">Add More</button>
 												<button onclick="return remove();" class="btn btn-danger">Remove</button>
 
-												<button type="submit" id="button-price" name="button-price" class="btn btn-primary" onclick="return Validation()">Create Price</button>
-												<input type="text" name="sl" id="sl" value="<?= $sl-1; ?>"> 
+												<button type="submit" id="button-price" name="button-price" class="btn btn-primary" onclick="return Validation()">Update Price</button>
+												<input type="hidden" name="sl" id="sl" value="<?= $sl-1; ?>">
+												<input type="hidden" name="price-id" id="price-id" value="<?= $priceInfo->Id; ?>">
 											</div> <!-- /form-actions -->
 										</fieldset>
 									</div> <!-- /widget-content -->

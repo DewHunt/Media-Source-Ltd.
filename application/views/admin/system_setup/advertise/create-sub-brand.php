@@ -148,6 +148,55 @@
 				});
 			}
 			// Get All Data For Select Menu Script End
+
+			function Validation()
+			{
+				var companyId = $('#company-id').val();
+				var brandId = $('#brand-id').val();
+				var subBrandName = $('#sub-brand-name').val();
+
+				if (companyId == "")
+				{
+					Message("Oops! Company Can't Be Empty. Please Select Company");
+					$('#company-id').css({'border':'1px solid red'});
+
+					$('#brand-id').css({'border':'1px solid gray'});					
+					$('#sub-brand-name').css({'border':'1px solid gray'});
+					return false;
+				}
+				else
+				{
+					$('#company-id').css({'border':'1px solid gray'});
+				}
+
+				if (brandId == "")
+				{
+					Message("Oops! Brand Can't Be Empty. Please Select Company");
+					$('#brand-id').css({'border':'1px solid red'});
+
+					$('#company-id').css({'border':'1px solid gray'});					
+					$('#sub-brand-name').css({'border':'1px solid gray'});
+					return false;
+				}
+				else
+				{
+					$('#brand-id').css({'border':'1px solid gray'});
+				}
+
+				if (subBrandName == "")
+				{
+					Message("Oops! Brand Name Can't Be Empty. Please Enter Brand Name");
+					$('#sub-brand-name').css({'border':'1px solid red'});
+
+					$('#company-id').css({'border':'1px solid gray'});
+					$('#brand-id').css({'border':'1px solid gray'});
+					return false;
+				}
+				else
+				{
+					$('#sub-brand-name').css({'border':'1px solid gray'});
+				}
+			}
 		</script>
 	</body>
 </html>

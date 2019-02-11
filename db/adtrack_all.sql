@@ -1,22 +1,20 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.4
--- https://www.phpmyadmin.net/
+-- version 4.1.6
+-- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 30, 2019 at 08:06 PM
--- Server version: 10.1.28-MariaDB
--- PHP Version: 7.1.10
+-- Generation Time: Feb 11, 2019 at 02:33 PM
+-- Server version: 5.5.36
+-- PHP Version: 5.4.25
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
-START TRANSACTION;
 SET time_zone = "+00:00";
 
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
+/*!40101 SET NAMES utf8 */;
 
 --
 -- Database: `adtrack_all`
@@ -28,8 +26,8 @@ SET time_zone = "+00:00";
 -- Table structure for table `adcategory`
 --
 
-CREATE TABLE `adcategory` (
-  `Id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `adcategory` (
+  `Id` int(11) NOT NULL AUTO_INCREMENT,
   `Name` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
   `Description` text COLLATE utf8_unicode_ci,
   `EntryBy` int(11) DEFAULT NULL,
@@ -38,8 +36,10 @@ CREATE TABLE `adcategory` (
   `UpdateTime` datetime DEFAULT NULL,
   `DeleteBy` int(11) DEFAULT NULL,
   `DeleteDateTime` datetime DEFAULT NULL,
-  `State` tinyint(3) DEFAULT '1'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `State` tinyint(3) DEFAULT '1',
+  PRIMARY KEY (`Id`),
+  UNIQUE KEY `NewIndex1` (`Name`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=3 ;
 
 --
 -- Dumping data for table `adcategory`
@@ -47,7 +47,7 @@ CREATE TABLE `adcategory` (
 
 INSERT INTO `adcategory` (`Id`, `Name`, `Description`, `EntryBy`, `EntryDateTime`, `UpdateBy`, `UpdateTime`, `DeleteBy`, `DeleteDateTime`, `State`) VALUES
 (1, 'Private', 'Private', 1, '2019-01-03 10:02:35', NULL, NULL, NULL, NULL, 1),
-(2, 'Government', 'Government', 1, '2019-01-03 10:02:52', NULL, NULL, NULL, NULL, 1);
+(2, 'Government', 'Government', 1, '2019-01-03 10:02:52', 1, '2019-02-04 10:06:40', NULL, NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -55,8 +55,8 @@ INSERT INTO `adcategory` (`Id`, `Name`, `Description`, `EntryBy`, `EntryDateTime
 -- Table structure for table `adentry`
 --
 
-CREATE TABLE `adentry` (
-  `Id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `adentry` (
+  `Id` int(11) NOT NULL AUTO_INCREMENT,
   `BatchId` decimal(30,0) DEFAULT NULL,
   `MediaId` int(11) DEFAULT NULL,
   `PublicationId` int(3) DEFAULT NULL,
@@ -67,8 +67,9 @@ CREATE TABLE `adentry` (
   `UpdateDateTime` datetime DEFAULT NULL,
   `DeleteBy` int(3) DEFAULT NULL,
   `DeleteDateTime` datetime DEFAULT NULL,
-  `State` tinyint(3) DEFAULT '1'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `State` tinyint(3) DEFAULT '1',
+  PRIMARY KEY (`Id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=10 ;
 
 --
 -- Dumping data for table `adentry`
@@ -91,8 +92,8 @@ INSERT INTO `adentry` (`Id`, `BatchId`, `MediaId`, `PublicationId`, `Date`, `Ent
 -- Table structure for table `adentrydetails`
 --
 
-CREATE TABLE `adentrydetails` (
-  `Id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `adentrydetails` (
+  `Id` int(11) NOT NULL AUTO_INCREMENT,
   `AdentryId` int(11) DEFAULT NULL,
   `ProductId` int(4) DEFAULT NULL,
   `ProductCatId` int(4) DEFAULT NULL,
@@ -117,8 +118,9 @@ CREATE TABLE `adentrydetails` (
   `UpdateDateTime` datetime DEFAULT NULL,
   `DeleteBy` int(3) DEFAULT NULL,
   `DeleteDateTime` datetime DEFAULT NULL,
-  `State` tinyint(3) DEFAULT '1'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `State` tinyint(3) DEFAULT '1',
+  PRIMARY KEY (`Id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=10 ;
 
 --
 -- Dumping data for table `adentrydetails`
@@ -141,8 +143,8 @@ INSERT INTO `adentrydetails` (`Id`, `AdentryId`, `ProductId`, `ProductCatId`, `C
 -- Table structure for table `adentryreport`
 --
 
-CREATE TABLE `adentryreport` (
-  `Id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `adentryreport` (
+  `Id` int(11) NOT NULL AUTO_INCREMENT,
   `AdentryId` int(11) DEFAULT NULL,
   `BatchId` varchar(30) COLLATE utf8_unicode_ci DEFAULT NULL,
   `MediaId` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
@@ -181,8 +183,9 @@ CREATE TABLE `adentryreport` (
   `PublicationLan` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
   `Adtheme` varchar(200) COLLATE utf8_unicode_ci NOT NULL,
   `ColsInchs` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
-  `Cost` varchar(100) COLLATE utf8_unicode_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `Cost` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`Id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=10 ;
 
 --
 -- Dumping data for table `adentryreport`
@@ -205,8 +208,8 @@ INSERT INTO `adentryreport` (`Id`, `AdentryId`, `BatchId`, `MediaId`, `Publicati
 -- Table structure for table `adinfo`
 --
 
-CREATE TABLE `adinfo` (
-  `Id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `adinfo` (
+  `Id` int(11) NOT NULL AUTO_INCREMENT,
   `AD_ID` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
   `Title` varchar(250) COLLATE utf8_unicode_ci DEFAULT NULL,
   `BrandId` int(11) DEFAULT NULL,
@@ -223,8 +226,9 @@ CREATE TABLE `adinfo` (
   `UpdateTime` datetime DEFAULT NULL,
   `DeleteBy` int(11) DEFAULT NULL,
   `DeleteDateTime` datetime DEFAULT NULL,
-  `State` tinyint(3) DEFAULT '1'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `State` tinyint(3) DEFAULT '1',
+  PRIMARY KEY (`Id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -232,8 +236,8 @@ CREATE TABLE `adinfo` (
 -- Table structure for table `brand`
 --
 
-CREATE TABLE `brand` (
-  `Id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `brand` (
+  `Id` int(11) NOT NULL AUTO_INCREMENT,
   `Name` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
   `CompanyId` int(11) DEFAULT NULL,
   `SubBrandId` int(11) DEFAULT NULL,
@@ -244,8 +248,9 @@ CREATE TABLE `brand` (
   `UpdateTime` datetime DEFAULT NULL,
   `DeleteBy` int(11) DEFAULT NULL,
   `DeleteDateTime` datetime DEFAULT NULL,
-  `State` tinyint(3) DEFAULT '1'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `State` tinyint(3) DEFAULT '1',
+  PRIMARY KEY (`Id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=32 ;
 
 --
 -- Dumping data for table `brand`
@@ -273,7 +278,8 @@ INSERT INTO `brand` (`Id`, `Name`, `CompanyId`, `SubBrandId`, `Description`, `En
 (27, 'Fun Cake', 1, NULL, 'Fun Cake', 1, '2019-01-06 11:05:02', NULL, NULL, NULL, NULL, 1),
 (28, 'ACI', 1, NULL, 'ACI', 1, '2019-01-06 11:13:58', 1, '2019-01-06 11:14:22', NULL, NULL, 1),
 (29, 'Ispahani', 3, NULL, 'Ispahani', 1, '2019-01-06 11:20:35', NULL, NULL, NULL, NULL, 1),
-(30, 'Square', 5, NULL, 'Square', 1, '2019-01-07 05:31:16', NULL, NULL, NULL, NULL, 1);
+(30, 'Square', 5, NULL, 'Square', 1, '2019-01-07 05:31:16', 1, '2019-02-09 08:42:44', NULL, NULL, 1),
+(31, 'Dew', 1, NULL, 'Hunt', 1, '2019-02-09 08:23:36', NULL, NULL, 1, '2019-02-09 08:25:17', 0);
 
 -- --------------------------------------------------------
 
@@ -281,8 +287,8 @@ INSERT INTO `brand` (`Id`, `Name`, `CompanyId`, `SubBrandId`, `Description`, `En
 -- Table structure for table `company`
 --
 
-CREATE TABLE `company` (
-  `Id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `company` (
+  `Id` int(11) NOT NULL AUTO_INCREMENT,
   `Name` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
   `Description` text COLLATE utf8_unicode_ci,
   `EntryBy` int(11) DEFAULT NULL,
@@ -291,8 +297,10 @@ CREATE TABLE `company` (
   `UpdateTime` datetime DEFAULT NULL,
   `DeleteBy` int(11) DEFAULT NULL,
   `DeleteDateTime` datetime DEFAULT NULL,
-  `State` tinyint(3) DEFAULT '1'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `State` tinyint(3) DEFAULT '1',
+  PRIMARY KEY (`Id`),
+  UNIQUE KEY `NewIndex1` (`Name`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=7 ;
 
 --
 -- Dumping data for table `company`
@@ -302,7 +310,8 @@ INSERT INTO `company` (`Id`, `Name`, `Description`, `EntryBy`, `EntryDateTime`, 
 (1, 'ACI Ltd.', 'ACI Ltd.', 1, '2019-01-05 06:29:37', NULL, NULL, NULL, NULL, 1),
 (2, 'ACI Motors Ltd.', 'ACI Motors Ltd.', 1, '2019-01-05 06:32:53', NULL, NULL, NULL, NULL, 1),
 (3, 'Ispahani Group', 'Ispahani Group', 1, '2019-01-05 06:33:06', NULL, NULL, NULL, NULL, 1),
-(5, 'Square Toiletries Ltd.', 'Square Toiletries Ltd.', 1, '2019-01-05 06:33:49', NULL, NULL, NULL, NULL, 1);
+(5, 'Square Toiletries Ltd.', 'Square Toiletries Ltd.', 1, '2019-01-05 06:33:49', 1, '2019-02-04 11:56:19', NULL, NULL, 1),
+(6, 'Dew', 'Hunt', 1, '2019-02-07 07:47:34', NULL, NULL, 1, '2019-02-11 13:26:39', 0);
 
 -- --------------------------------------------------------
 
@@ -310,8 +319,8 @@ INSERT INTO `company` (`Id`, `Name`, `Description`, `EntryBy`, `EntryDateTime`, 
 -- Table structure for table `dataentry`
 --
 
-CREATE TABLE `dataentry` (
-  `Id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `dataentry` (
+  `Id` int(11) NOT NULL AUTO_INCREMENT,
   `BatchId` varchar(30) COLLATE utf8_unicode_ci DEFAULT NULL,
   `MediaId` int(11) DEFAULT NULL,
   `PublicationId` int(3) DEFAULT NULL,
@@ -323,8 +332,9 @@ CREATE TABLE `dataentry` (
   `DeleteBy` int(3) DEFAULT NULL,
   `DeleteDateTime` datetime DEFAULT NULL,
   `Name` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
-  `State` tinyint(3) DEFAULT '1'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `State` tinyint(3) DEFAULT '1',
+  PRIMARY KEY (`Id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=51 ;
 
 --
 -- Dumping data for table `dataentry`
@@ -359,8 +369,8 @@ INSERT INTO `dataentry` (`Id`, `BatchId`, `MediaId`, `PublicationId`, `Date`, `E
 -- Table structure for table `dataentrydetails`
 --
 
-CREATE TABLE `dataentrydetails` (
-  `Id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `dataentrydetails` (
+  `Id` int(11) NOT NULL AUTO_INCREMENT,
   `DataentryId` int(11) DEFAULT NULL,
   `ProductId` int(4) DEFAULT NULL,
   `ProductCatId` int(4) DEFAULT NULL,
@@ -392,8 +402,9 @@ CREATE TABLE `dataentrydetails` (
   `DeleteBy` int(3) DEFAULT NULL,
   `DeleteDateTime` datetime DEFAULT NULL,
   `State` tinyint(3) DEFAULT '1',
-  `outlook` varchar(255) COLLATE utf8_unicode_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `outlook` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`Id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=51 ;
 
 --
 -- Dumping data for table `dataentrydetails`
@@ -428,8 +439,8 @@ INSERT INTO `dataentrydetails` (`Id`, `DataentryId`, `ProductId`, `ProductCatId`
 -- Table structure for table `dataentryreport`
 --
 
-CREATE TABLE `dataentryreport` (
-  `Id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `dataentryreport` (
+  `Id` int(11) NOT NULL AUTO_INCREMENT,
   `DataEntryId` int(11) DEFAULT NULL,
   `BatchId` varchar(30) COLLATE utf8_unicode_ci DEFAULT NULL,
   `MediaId` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
@@ -465,8 +476,9 @@ CREATE TABLE `dataentryreport` (
   `DeleteBy` int(3) DEFAULT NULL,
   `DeleteDateTime` datetime DEFAULT NULL,
   `State` tinyint(3) DEFAULT '1',
-  `outlook` varchar(255) COLLATE utf8_unicode_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `outlook` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`Id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=51 ;
 
 --
 -- Dumping data for table `dataentryreport`
@@ -501,8 +513,8 @@ INSERT INTO `dataentryreport` (`Id`, `DataEntryId`, `BatchId`, `MediaId`, `Publi
 -- Table structure for table `hue`
 --
 
-CREATE TABLE `hue` (
-  `Id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `hue` (
+  `Id` int(11) NOT NULL AUTO_INCREMENT,
   `Name` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
   `Description` text COLLATE utf8_unicode_ci,
   `EntryBy` int(11) DEFAULT NULL,
@@ -511,8 +523,10 @@ CREATE TABLE `hue` (
   `UpdateTime` datetime DEFAULT NULL,
   `DeleteBy` int(11) DEFAULT NULL,
   `DeleteDateTime` datetime DEFAULT NULL,
-  `State` tinyint(3) DEFAULT '1'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `State` tinyint(3) DEFAULT '1',
+  PRIMARY KEY (`Id`),
+  UNIQUE KEY `NewIndex1` (`Name`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=3 ;
 
 --
 -- Dumping data for table `hue`
@@ -528,8 +542,8 @@ INSERT INTO `hue` (`Id`, `Name`, `Description`, `EntryBy`, `EntryDateTime`, `Upd
 -- Table structure for table `keyword`
 --
 
-CREATE TABLE `keyword` (
-  `Id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `keyword` (
+  `Id` int(11) NOT NULL AUTO_INCREMENT,
   `Name` varchar(50) NOT NULL,
   `Description` text NOT NULL,
   `EntryBy` int(11) NOT NULL,
@@ -538,8 +552,9 @@ CREATE TABLE `keyword` (
   `UpdateTime` datetime NOT NULL,
   `DeleteBy` int(11) NOT NULL,
   `DeleteDateTime` datetime NOT NULL,
-  `State` tinyint(4) NOT NULL DEFAULT '1'
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `State` tinyint(4) NOT NULL DEFAULT '1',
+  PRIMARY KEY (`Id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=16 ;
 
 --
 -- Dumping data for table `keyword`
@@ -566,8 +581,8 @@ INSERT INTO `keyword` (`Id`, `Name`, `Description`, `EntryBy`, `EntryDateTime`, 
 -- Table structure for table `media`
 --
 
-CREATE TABLE `media` (
-  `Id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `media` (
+  `Id` int(11) NOT NULL AUTO_INCREMENT,
   `Name` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
   `Owner` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
   `Phone` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
@@ -580,19 +595,22 @@ CREATE TABLE `media` (
   `UpdateTime` datetime DEFAULT NULL,
   `DeleteBy` int(11) DEFAULT NULL,
   `DeleteDateTime` datetime DEFAULT NULL,
-  `State` tinyint(3) DEFAULT '1'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `State` tinyint(3) DEFAULT '1',
+  PRIMARY KEY (`Id`),
+  UNIQUE KEY `NewIndex1` (`Name`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=55 ;
 
 --
 -- Dumping data for table `media`
 --
 
 INSERT INTO `media` (`Id`, `Name`, `Owner`, `Phone`, `Email`, `Address`, `Image`, `EntryBy`, `EntryDateTime`, `UpdateBy`, `UpdateTime`, `DeleteBy`, `DeleteDateTime`, `State`) VALUES
-(48, 'Prothom Alo', 'Transcom Group', '01733991755', 'adprothomalo@gmail.com', '100 Kazi Nazrul Islam Avenue, CA Bhobon Kawran Bazar', 'med_4442019-01-03_1546492710.png', 1, '2019-01-03 06:18:35', NULL, NULL, NULL, NULL, 1),
-(49, 'Financial Express', 'International Publications LImited', '9553550', 'editor@thefinancialexpress-bd.com', 'Tropicana Tower (4th Floor),45,Topkhana Road, Dhaka-1000 . GPO BOX : 2526 Edit', 'med_97842019-01-03_1546492912.png', 1, '2019-01-03 06:21:57', NULL, NULL, NULL, NULL, 1),
-(50, 'Daily Star', 'Transcom Group', '9144330', 'editor@thedailystar.net', '229,Tejgaon Industrial Area, Dhaka-1208 GPO BOX: 3257', 'med_71802019-01-03_1546493160.png', 1, '2019-01-03 06:26:05', NULL, NULL, NULL, NULL, 1),
-(51, 'Bangladesh Pratidin', 'East West Media Group Limited', '09612120000', 'bdpratidin@gmail.com', '371/A,Block D, Bashundhara', 'med_74452019-01-03_1546493251.png', 1, '2019-01-03 06:27:36', NULL, NULL, NULL, NULL, 1),
-(52, 'Asian Age', 'Express Media Ltd.', '9121130', 'editor@daiyasianage.com', 'S R Tower (2nd & 6th Floor), 49 Old Airport Road, Tejgaon, Dhaka-1215 . Print from B.S Printing Press 5212, Toyenb. Circular Road, Sutrapur, Dhaka-1000', 'med_57952019-01-03_1546493643.png', 1, '2019-01-03 06:34:08', NULL, NULL, NULL, NULL, 1);
+(48, 'Prothom Alo', 'Transcom Group', '01733991755', 'adprothomalo@gmail.com', '100 Kazi Nazrul Islam Avenue, CA Bhobon Kawran Bazar', 'med_prothom_alo_19021002.jpg', 1, '2019-01-03 06:18:35', 1, '2019-02-10 07:52:02', NULL, NULL, 1),
+(49, 'Financial Express', 'International Publications LImited', '9553550', 'editor@thefinancialexpress-bd.com', 'Tropicana Tower (4th Floor),45,Topkhana Road, Dhaka-1000 . GPO BOX : 2526 Edit', 'med_financial_express_19021047.png', 1, '2019-01-03 06:21:57', 1, '2019-02-10 07:51:47', NULL, NULL, 1),
+(50, 'Daily Star', 'Transcom Group', '9144330', 'editor@thedailystar.net', '229,Tejgaon Industrial Area, Dhaka-1208 GPO BOX: 3257', 'med_daily_star_19021026.png', 1, '2019-01-03 06:26:05', 1, '2019-02-10 07:51:26', NULL, NULL, 1),
+(51, 'Bangladesh Pratidin', 'East West Media Group Limited', '09612120000', 'bdpratidin@gmail.com', '371/A,Block D, Bashundhara', 'med_bangladesh_pratidin_19021013.jpg', 1, '2019-01-03 06:27:36', 1, '2019-02-10 07:51:13', NULL, NULL, 1),
+(52, 'Asian Age', 'Express Media Ltd.', '9121130', 'editor@daiyasianage.com', 'S R Tower (2nd & 6th Floor), 49 Old Airport Road, Tejgaon, Dhaka-1215 . Print from B.S Printing Press 5212, Toyenb. Circular Road, Sutrapur, Dhaka-1000', 'med_asian_age_19021047.png', 1, '2019-01-03 06:34:08', 1, '2019-02-10 07:50:47', NULL, NULL, 1),
+(54, 'Dew', 'Dew Hunt', '01766328322', 'dew@gmail.com', 'Gulshan', 'med_dew_19021023.jpg', 1, '2019-02-10 07:44:46', 1, '2019-02-10 07:50:23', 1, '2019-02-10 07:52:37', 0);
 
 -- --------------------------------------------------------
 
@@ -600,8 +618,8 @@ INSERT INTO `media` (`Id`, `Name`, `Owner`, `Phone`, `Email`, `Address`, `Image`
 -- Table structure for table `newscategory`
 --
 
-CREATE TABLE `newscategory` (
-  `Id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `newscategory` (
+  `Id` int(11) NOT NULL AUTO_INCREMENT,
   `Name` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
   `Description` text COLLATE utf8_unicode_ci,
   `EntryBy` int(11) DEFAULT NULL,
@@ -610,8 +628,10 @@ CREATE TABLE `newscategory` (
   `UpdateTime` datetime DEFAULT NULL,
   `DeleteBy` int(11) DEFAULT NULL,
   `DeleteDateTime` datetime DEFAULT NULL,
-  `State` tinyint(3) DEFAULT '1'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `State` tinyint(3) DEFAULT '1',
+  PRIMARY KEY (`Id`),
+  UNIQUE KEY `NewIndex1` (`Name`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=4 ;
 
 --
 -- Dumping data for table `newscategory`
@@ -628,8 +648,8 @@ INSERT INTO `newscategory` (`Id`, `Name`, `Description`, `EntryBy`, `EntryDateTi
 -- Table structure for table `newstype`
 --
 
-CREATE TABLE `newstype` (
-  `Id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `newstype` (
+  `Id` int(11) NOT NULL AUTO_INCREMENT,
   `Name` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
   `Description` text COLLATE utf8_unicode_ci,
   `EntryBy` int(11) DEFAULT NULL,
@@ -638,8 +658,10 @@ CREATE TABLE `newstype` (
   `UpdateTime` datetime DEFAULT NULL,
   `DeleteBy` int(11) DEFAULT NULL,
   `DeleteDateTime` datetime DEFAULT NULL,
-  `State` tinyint(3) DEFAULT '1'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `State` tinyint(3) DEFAULT '1',
+  PRIMARY KEY (`Id`),
+  UNIQUE KEY `NewIndex1` (`Name`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=5 ;
 
 --
 -- Dumping data for table `newstype`
@@ -657,8 +679,8 @@ INSERT INTO `newstype` (`Id`, `Name`, `Description`, `EntryBy`, `EntryDateTime`,
 -- Table structure for table `operation`
 --
 
-CREATE TABLE `operation` (
-  `Id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `operation` (
+  `Id` int(11) NOT NULL AUTO_INCREMENT,
   `Name` varchar(100) DEFAULT NULL,
   `EntryBy` int(11) DEFAULT NULL,
   `EntryDateTime` datetime DEFAULT NULL,
@@ -667,8 +689,9 @@ CREATE TABLE `operation` (
   `DeleteBy` int(11) DEFAULT NULL,
   `DeleteDateTime` datetime DEFAULT NULL,
   `Remarks` text,
-  `State` tinyint(3) DEFAULT '1'
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `State` tinyint(3) DEFAULT '1',
+  PRIMARY KEY (`Id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=33 ;
 
 --
 -- Dumping data for table `operation`
@@ -698,8 +721,8 @@ INSERT INTO `operation` (`Id`, `Name`, `EntryBy`, `EntryDateTime`, `LastModified
 -- Table structure for table `outlook`
 --
 
-CREATE TABLE `outlook` (
-  `Id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `outlook` (
+  `Id` int(11) NOT NULL AUTO_INCREMENT,
   `Name` varchar(255) NOT NULL,
   `EntryBy` int(11) NOT NULL,
   `EntryDateTime` datetime NOT NULL,
@@ -708,8 +731,9 @@ CREATE TABLE `outlook` (
   `DeleteBy` int(11) NOT NULL,
   `DeleteDateTime` datetime NOT NULL,
   `State` tinyint(4) NOT NULL DEFAULT '1',
-  `Description` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `Description` varchar(255) NOT NULL,
+  PRIMARY KEY (`Id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
 
 --
 -- Dumping data for table `outlook`
@@ -726,8 +750,8 @@ INSERT INTO `outlook` (`Id`, `Name`, `EntryBy`, `EntryDateTime`, `UpdateBy`, `Up
 -- Table structure for table `page`
 --
 
-CREATE TABLE `page` (
-  `Id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `page` (
+  `Id` int(11) NOT NULL AUTO_INCREMENT,
   `Name` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
   `Description` text COLLATE utf8_unicode_ci,
   `EntryBy` int(11) DEFAULT NULL,
@@ -739,8 +763,10 @@ CREATE TABLE `page` (
   `State` tinyint(3) DEFAULT '1',
   `MediaId` int(11) DEFAULT NULL,
   `PublicationId` int(11) DEFAULT NULL,
-  `Day` varchar(15) COLLATE utf8_unicode_ci DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `Day` varchar(15) COLLATE utf8_unicode_ci DEFAULT NULL,
+  PRIMARY KEY (`Id`),
+  UNIQUE KEY `NewIndex1` (`Name`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=63 ;
 
 --
 -- Dumping data for table `page`
@@ -799,8 +825,8 @@ INSERT INTO `page` (`Id`, `Name`, `Description`, `EntryBy`, `EntryDateTime`, `Up
 -- Table structure for table `pageposition`
 --
 
-CREATE TABLE `pageposition` (
-  `Id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `pageposition` (
+  `Id` int(11) NOT NULL AUTO_INCREMENT,
   `Name` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
   `Description` text COLLATE utf8_unicode_ci,
   `EntryBy` int(11) DEFAULT NULL,
@@ -809,8 +835,10 @@ CREATE TABLE `pageposition` (
   `UpdateTime` datetime DEFAULT NULL,
   `DeleteBy` int(11) DEFAULT NULL,
   `DeleteDateTime` datetime DEFAULT NULL,
-  `State` tinyint(3) DEFAULT '1'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `State` tinyint(3) DEFAULT '1',
+  PRIMARY KEY (`Id`),
+  UNIQUE KEY `NewIndex1` (`Name`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=5 ;
 
 --
 -- Dumping data for table `pageposition`
@@ -828,8 +856,8 @@ INSERT INTO `pageposition` (`Id`, `Name`, `Description`, `EntryBy`, `EntryDateTi
 -- Table structure for table `placing`
 --
 
-CREATE TABLE `placing` (
-  `Id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `placing` (
+  `Id` int(11) NOT NULL AUTO_INCREMENT,
   `Name` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
   `Description` text COLLATE utf8_unicode_ci,
   `EntryBy` int(11) DEFAULT NULL,
@@ -838,8 +866,10 @@ CREATE TABLE `placing` (
   `UpdateTime` datetime DEFAULT NULL,
   `DeleteBy` int(11) DEFAULT NULL,
   `DeleteDateTime` datetime DEFAULT NULL,
-  `State` tinyint(3) DEFAULT '1'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `State` tinyint(3) DEFAULT '1',
+  PRIMARY KEY (`Id`),
+  UNIQUE KEY `NewIndex1` (`Name`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=3 ;
 
 --
 -- Dumping data for table `placing`
@@ -855,8 +885,8 @@ INSERT INTO `placing` (`Id`, `Name`, `Description`, `EntryBy`, `EntryDateTime`, 
 -- Table structure for table `placingtype`
 --
 
-CREATE TABLE `placingtype` (
-  `Id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `placingtype` (
+  `Id` int(11) NOT NULL AUTO_INCREMENT,
   `Name` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
   `Description` text COLLATE utf8_unicode_ci,
   `EntryBy` int(11) DEFAULT NULL,
@@ -865,8 +895,10 @@ CREATE TABLE `placingtype` (
   `UpdateTime` datetime DEFAULT NULL,
   `DeleteBy` int(11) DEFAULT NULL,
   `DeleteDateTime` datetime DEFAULT NULL,
-  `State` tinyint(3) DEFAULT '1'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `State` tinyint(3) DEFAULT '1',
+  PRIMARY KEY (`Id`),
+  UNIQUE KEY `NewIndex1` (`Name`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=13 ;
 
 --
 -- Dumping data for table `placingtype`
@@ -892,8 +924,8 @@ INSERT INTO `placingtype` (`Id`, `Name`, `Description`, `EntryBy`, `EntryDateTim
 -- Table structure for table `position`
 --
 
-CREATE TABLE `position` (
-  `Id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `position` (
+  `Id` int(11) NOT NULL AUTO_INCREMENT,
   `Name` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
   `Description` text COLLATE utf8_unicode_ci,
   `EntryBy` int(11) DEFAULT NULL,
@@ -902,8 +934,10 @@ CREATE TABLE `position` (
   `UpdateTime` datetime DEFAULT NULL,
   `DeleteBy` int(11) DEFAULT NULL,
   `DeleteDateTime` datetime DEFAULT NULL,
-  `State` tinyint(3) DEFAULT '1'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `State` tinyint(3) DEFAULT '1',
+  PRIMARY KEY (`Id`),
+  UNIQUE KEY `NewIndex1` (`Name`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=3 ;
 
 --
 -- Dumping data for table `position`
@@ -919,8 +953,8 @@ INSERT INTO `position` (`Id`, `Name`, `Description`, `EntryBy`, `EntryDateTime`,
 -- Table structure for table `price`
 --
 
-CREATE TABLE `price` (
-  `Id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `price` (
+  `Id` int(11) NOT NULL AUTO_INCREMENT,
   `Name` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
   `MediaId` int(11) DEFAULT NULL,
   `PublicationId` int(11) DEFAULT NULL,
@@ -931,8 +965,10 @@ CREATE TABLE `price` (
   `UpdateTime` datetime DEFAULT NULL,
   `DeleteBy` int(11) DEFAULT NULL,
   `DeleteDateTime` datetime DEFAULT NULL,
-  `State` tinyint(3) DEFAULT '1'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `State` tinyint(3) DEFAULT '1',
+  PRIMARY KEY (`Id`),
+  UNIQUE KEY `Name` (`Name`,`MediaId`,`PublicationId`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=162 ;
 
 --
 -- Dumping data for table `price`
@@ -957,7 +993,7 @@ INSERT INTO `price` (`Id`, `Name`, `MediaId`, `PublicationId`, `Day`, `EntryBy`,
 (96, 'Daily Star Pricing(Star Weekend)', 50, 52, 'Friday', 1, '2016-11-14 09:39:53', 1, '2017-09-09 06:59:02', NULL, NULL, 1),
 (130, 'Sonibarer Shokal (B.Pratidin)', 51, 58, 'Saturday', 1, '2017-04-18 05:15:08', 1, '2017-09-17 10:35:15', NULL, NULL, 1),
 (152, 'Asian Age General Price', 52, 60, 'AllDays', 1, '2017-08-09 07:42:29', 1, '2017-09-12 08:04:23', NULL, NULL, 1),
-(160, 'Dew Hunt', 52, 60, 'Saturday', 1, '2019-01-30 18:59:41', NULL, NULL, NULL, NULL, 1);
+(160, 'Dew Hunt', 52, 61, 'Yearly', 1, '2019-01-30 18:59:41', 1, '2019-02-11 09:11:46', NULL, NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -965,8 +1001,8 @@ INSERT INTO `price` (`Id`, `Name`, `MediaId`, `PublicationId`, `Day`, `EntryBy`,
 -- Table structure for table `pricedetails`
 --
 
-CREATE TABLE `pricedetails` (
-  `Id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `pricedetails` (
+  `Id` int(11) NOT NULL AUTO_INCREMENT,
   `PriceId` int(11) DEFAULT NULL,
   `Name` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
   `Hue` int(11) DEFAULT NULL,
@@ -981,8 +1017,10 @@ CREATE TABLE `pricedetails` (
   `UpdateTime` datetime DEFAULT NULL,
   `DeleteBy` int(11) DEFAULT NULL,
   `DeleteDateTime` datetime DEFAULT NULL,
-  `State` tinyint(3) DEFAULT '1'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `State` tinyint(3) DEFAULT '1',
+  PRIMARY KEY (`Id`),
+  UNIQUE KEY `Name` (`Name`,`PageNoId`,`Col`,`Inch`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=4457 ;
 
 --
 -- Dumping data for table `pricedetails`
@@ -1141,9 +1179,10 @@ INSERT INTO `pricedetails` (`Id`, `PriceId`, `Name`, `Hue`, `PageNoId`, `Price`,
 (4433, 38, 'BP-Jacket 3rdd Page', 1, 58, '9500.00', 1, 1, '', 1, '2017-10-23 11:56:26', NULL, NULL, NULL, NULL, 1),
 (4434, 38, 'BP-Jacket 4th Page', 1, 59, '10000.00', 1, 1, '', 1, '2017-10-23 11:56:26', NULL, NULL, NULL, NULL, 1),
 (4435, 38, 'BP- Sports b/w', 2, 23, '4500.00', 1, 1, '', 1, '2017-10-23 11:56:27', NULL, NULL, NULL, NULL, 1),
-(4439, 160, 'Salman', 1, 47, '10.00', 1, 1, 'Ten', 1, '2019-01-30 18:59:41', NULL, NULL, NULL, NULL, 1),
-(4440, 160, 'Sabbir', 2, 48, '15.00', 1, 1, 'Fifteen', 1, '2019-01-30 18:59:41', NULL, NULL, NULL, NULL, 1),
-(4441, 160, 'Shishir', 1, 34, '20.00', 1, 1, 'Twenty', 1, '2019-01-30 18:59:41', NULL, NULL, NULL, NULL, 1);
+(4448, 160, 'Salman', 1, 47, '10.00', 1, 1, 'Ten', NULL, NULL, 1, '2019-02-11 09:11:46', NULL, NULL, 1),
+(4449, 160, 'Sabbir', 2, 48, '15.00', 1, 1, 'Fifteen', NULL, NULL, 1, '2019-02-11 09:11:46', NULL, NULL, 1),
+(4450, 160, 'Shishir', 1, 34, '20.00', 1, 1, 'Twenty', NULL, NULL, 1, '2019-02-11 09:11:46', NULL, NULL, 1),
+(4451, 160, 'Dew', 1, 35, '25.00', 1, 1, 'Twenty Five', NULL, NULL, 1, '2019-02-11 09:11:46', NULL, NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -1151,8 +1190,8 @@ INSERT INTO `pricedetails` (`Id`, `PriceId`, `Name`, `Hue`, `PageNoId`, `Price`,
 -- Table structure for table `product`
 --
 
-CREATE TABLE `product` (
-  `Id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `product` (
+  `Id` int(11) NOT NULL AUTO_INCREMENT,
   `Name` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
   `Description` text COLLATE utf8_unicode_ci,
   `EntryBy` int(11) DEFAULT NULL,
@@ -1161,8 +1200,10 @@ CREATE TABLE `product` (
   `UpdateTime` datetime DEFAULT NULL,
   `DeleteBy` int(11) DEFAULT NULL,
   `DeleteDateTime` datetime DEFAULT NULL,
-  `State` tinyint(3) DEFAULT '1'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `State` tinyint(3) DEFAULT '1',
+  PRIMARY KEY (`Id`),
+  UNIQUE KEY `NewIndex1` (`Name`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=118 ;
 
 --
 -- Dumping data for table `product`
@@ -1204,7 +1245,8 @@ INSERT INTO `product` (`Id`, `Name`, `Description`, `EntryBy`, `EntryDateTime`, 
 (112, 'IT', '', 1, '2017-05-23 08:16:09', NULL, NULL, NULL, NULL, 1),
 (113, 'Equipment & Solution', '', 1, '2017-07-17 08:08:48', NULL, NULL, NULL, NULL, 1),
 (114, 'Decorative Paints', '', 1, '2017-11-05 08:14:10', 1, '2017-11-05 08:20:32', NULL, NULL, 1),
-(116, 'General', '', 1, '2017-12-13 10:45:47', NULL, NULL, NULL, NULL, 1);
+(116, 'General', 'General', 1, '2017-12-13 10:45:47', 1, '2019-02-10 08:02:24', NULL, NULL, 1),
+(117, 'Dew', 'Hunt', 1, '2019-02-10 08:00:39', NULL, NULL, 1, '2019-02-10 08:01:17', 0);
 
 -- --------------------------------------------------------
 
@@ -1212,8 +1254,8 @@ INSERT INTO `product` (`Id`, `Name`, `Description`, `EntryBy`, `EntryDateTime`, 
 -- Table structure for table `product_cat`
 --
 
-CREATE TABLE `product_cat` (
-  `Id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `product_cat` (
+  `Id` int(11) NOT NULL AUTO_INCREMENT,
   `ProductId` int(11) DEFAULT NULL,
   `Name` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
   `Description` text COLLATE utf8_unicode_ci,
@@ -1223,8 +1265,10 @@ CREATE TABLE `product_cat` (
   `UpdateTime` datetime DEFAULT NULL,
   `DeleteBy` int(11) DEFAULT NULL,
   `DeleteDateTime` datetime DEFAULT NULL,
-  `State` tinyint(3) DEFAULT '1'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `State` tinyint(3) DEFAULT '1',
+  PRIMARY KEY (`Id`),
+  UNIQUE KEY `NewIndex1` (`Name`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=5 ;
 
 --
 -- Dumping data for table `product_cat`
@@ -1233,7 +1277,8 @@ CREATE TABLE `product_cat` (
 INSERT INTO `product_cat` (`Id`, `ProductId`, `Name`, `Description`, `EntryBy`, `EntryDateTime`, `UpdateBy`, `UpdateTime`, `DeleteBy`, `DeleteDateTime`, `State`) VALUES
 (1, 85, 'Soap', 'Soap', 1, '2019-01-06 10:43:23', NULL, NULL, NULL, NULL, 1),
 (2, 111, 'Corporate', 'Corporate', 1, '2019-01-06 10:51:18', NULL, NULL, NULL, NULL, 1),
-(3, 81, 'Salt', 'Salt', 1, '2019-01-06 10:57:25', NULL, NULL, NULL, NULL, 1);
+(3, 81, 'Salt', 'Salt', 1, '2019-01-06 10:57:25', NULL, NULL, NULL, NULL, 1),
+(4, 110, 'Dew', 'Hunt', 1, '2019-02-10 08:19:51', NULL, NULL, 0, '2019-02-10 08:24:20', 0);
 
 -- --------------------------------------------------------
 
@@ -1241,8 +1286,8 @@ INSERT INTO `product_cat` (`Id`, `ProductId`, `Name`, `Description`, `EntryBy`, 
 -- Table structure for table `pubfrequency`
 --
 
-CREATE TABLE `pubfrequency` (
-  `Id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `pubfrequency` (
+  `Id` int(11) NOT NULL AUTO_INCREMENT,
   `Name` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
   `Description` text COLLATE utf8_unicode_ci,
   `EntryBy` int(11) DEFAULT NULL,
@@ -1251,8 +1296,10 @@ CREATE TABLE `pubfrequency` (
   `UpdateTime` datetime DEFAULT NULL,
   `DeleteBy` int(11) DEFAULT NULL,
   `DeleteDateTime` datetime DEFAULT NULL,
-  `State` tinyint(3) DEFAULT '1'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `State` tinyint(3) DEFAULT '1',
+  PRIMARY KEY (`Id`),
+  UNIQUE KEY `NewIndex1` (`Name`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=7 ;
 
 --
 -- Dumping data for table `pubfrequency`
@@ -1263,7 +1310,8 @@ INSERT INTO `pubfrequency` (`Id`, `Name`, `Description`, `EntryBy`, `EntryDateTi
 (2, 'Weekly', 'Weekly', 1, '2016-11-08 07:00:29', NULL, NULL, NULL, NULL, 1),
 (3, 'Fortnightly', 'Fortnightly', 1, '2016-11-08 07:00:42', NULL, NULL, NULL, NULL, 1),
 (4, 'Monthly', 'Monthly', 1, '2016-11-08 07:00:55', NULL, NULL, NULL, NULL, 1),
-(5, 'Yearly', 'Yearly', 1, '2016-11-08 07:01:13', 1, '2019-01-30 08:53:27', NULL, NULL, 1);
+(5, 'Yearly', 'Yearly', 1, '2016-11-08 07:01:13', 1, '2019-01-30 08:53:27', NULL, NULL, 1),
+(6, 'Dew', 'Hunt', 1, '2019-02-10 06:53:58', 1, '2019-02-10 06:54:29', 1, '2019-02-10 06:54:38', 0);
 
 -- --------------------------------------------------------
 
@@ -1271,8 +1319,8 @@ INSERT INTO `pubfrequency` (`Id`, `Name`, `Description`, `EntryBy`, `EntryDateTi
 -- Table structure for table `publication`
 --
 
-CREATE TABLE `publication` (
-  `Id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `publication` (
+  `Id` int(11) NOT NULL AUTO_INCREMENT,
   `Name` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
   `MediaId` int(11) DEFAULT NULL,
   `PublicationType` int(11) DEFAULT NULL,
@@ -1287,8 +1335,10 @@ CREATE TABLE `publication` (
   `UpdateTime` datetime DEFAULT NULL,
   `DeleteBy` int(11) DEFAULT NULL,
   `DeleteDateTime` datetime DEFAULT NULL,
-  `State` tinyint(3) DEFAULT '1'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `State` tinyint(3) DEFAULT '1',
+  PRIMARY KEY (`Id`),
+  UNIQUE KEY `NewIndex1` (`Name`,`MediaId`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=63 ;
 
 --
 -- Dumping data for table `publication`
@@ -1319,7 +1369,8 @@ INSERT INTO `publication` (`Id`, `Name`, `MediaId`, `PublicationType`, `PubPlace
 (58, 'Sonibarer Shokal', 51, 2, 1, 2, 'Bangla', 'Tabulate Paper size [Saturday]', '', 0, '2019-01-03 09:02:43', NULL, NULL, NULL, NULL, 1),
 (59, 'Special Supplementary', 51, 2, 1, 5, 'Bangla', 'Yearly Supplementary', '', 0, '2019-01-03 09:03:39', NULL, NULL, NULL, NULL, 1),
 (60, 'General', 52, 1, 1, 1, 'English', 'Daily Newspaper', '', 0, '2019-01-03 09:04:47', NULL, NULL, NULL, NULL, 1),
-(61, 'Special Supplementary', 52, 2, 1, 5, 'English', 'Yearly Supplementary', '', 0, '2019-01-03 09:05:51', NULL, NULL, NULL, NULL, 1);
+(61, 'Special Supplementary', 52, 2, 1, 5, 'English', 'Yearly Supplementary', '', 0, '2019-01-03 09:05:51', NULL, NULL, NULL, NULL, 1),
+(62, 'Dew', 52, 2, 1, 5, 'Bangla', 'Hunt', 'pub_dew_52_19021040.jpg', 1, '2019-02-10 06:39:32', 1, '2019-02-10 06:40:40', 1, '2019-02-10 06:41:12', 0);
 
 -- --------------------------------------------------------
 
@@ -1327,8 +1378,8 @@ INSERT INTO `publication` (`Id`, `Name`, `MediaId`, `PublicationType`, `PubPlace
 -- Table structure for table `pubplace`
 --
 
-CREATE TABLE `pubplace` (
-  `Id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `pubplace` (
+  `Id` int(11) NOT NULL AUTO_INCREMENT,
   `Name` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
   `Description` text COLLATE utf8_unicode_ci,
   `EntryBy` int(11) DEFAULT NULL,
@@ -1337,8 +1388,10 @@ CREATE TABLE `pubplace` (
   `UpdateTime` datetime DEFAULT NULL,
   `DeleteBy` int(11) DEFAULT NULL,
   `DeleteDateTime` datetime DEFAULT NULL,
-  `State` tinyint(3) DEFAULT '1'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `State` tinyint(3) DEFAULT '1',
+  PRIMARY KEY (`Id`),
+  UNIQUE KEY `NewIndex1` (`Name`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=10 ;
 
 --
 -- Dumping data for table `pubplace`
@@ -1352,7 +1405,8 @@ INSERT INTO `pubplace` (`Id`, `Name`, `Description`, `EntryBy`, `EntryDateTime`,
 (5, 'Khulna', 'Khulna', 1, '2016-11-08 07:10:24', NULL, NULL, NULL, NULL, 1),
 (6, 'Rajshahi', 'Rajshahi', 1, '2016-11-08 07:10:36', NULL, NULL, NULL, NULL, 1),
 (7, 'Rangpur', 'Rangpur', 1, '2016-11-08 07:10:48', NULL, NULL, NULL, NULL, 1),
-(8, 'Comilla', 'Comilla', 1, '2016-11-08 07:11:02', 1, '2019-01-30 08:49:20', NULL, NULL, 1);
+(8, 'Comilla', 'Comilla', 1, '2016-11-08 07:11:02', 1, '2019-01-30 08:49:20', NULL, NULL, 1),
+(9, 'Dew', 'Hunt', 1, '2019-02-10 07:02:07', NULL, NULL, 0, '2019-02-10 07:04:05', 0);
 
 -- --------------------------------------------------------
 
@@ -1360,8 +1414,8 @@ INSERT INTO `pubplace` (`Id`, `Name`, `Description`, `EntryBy`, `EntryDateTime`,
 -- Table structure for table `pubtype`
 --
 
-CREATE TABLE `pubtype` (
-  `Id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `pubtype` (
+  `Id` int(11) NOT NULL AUTO_INCREMENT,
   `Name` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
   `Description` text COLLATE utf8_unicode_ci,
   `EntryBy` int(11) DEFAULT NULL,
@@ -1370,8 +1424,10 @@ CREATE TABLE `pubtype` (
   `UpdateTime` datetime DEFAULT NULL,
   `DeleteBy` int(11) DEFAULT NULL,
   `DeleteDateTime` datetime DEFAULT NULL,
-  `State` tinyint(3) DEFAULT '1'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `State` tinyint(3) DEFAULT '1',
+  PRIMARY KEY (`Id`),
+  UNIQUE KEY `NewIndex1` (`Name`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=6 ;
 
 --
 -- Dumping data for table `pubtype`
@@ -1381,7 +1437,8 @@ INSERT INTO `pubtype` (`Id`, `Name`, `Description`, `EntryBy`, `EntryDateTime`, 
 (1, 'Newspaper ', 'Newspaper ', 1, '2016-11-08 06:58:08', NULL, NULL, NULL, NULL, 1),
 (2, 'Supplementary', 'Supplementary', 1, '2016-11-08 06:58:21', NULL, NULL, NULL, NULL, 1),
 (3, 'Magazine', 'Magazine', 1, '2016-11-08 06:58:37', NULL, NULL, NULL, NULL, 1),
-(4, 'Online News', '', 1, '2017-04-11 06:02:29', NULL, NULL, NULL, NULL, 1);
+(4, 'Online News', '', 1, '2017-04-11 06:02:29', NULL, NULL, NULL, NULL, 1),
+(5, 'Dew', 'Hunt', 1, '2019-02-10 07:21:43', NULL, NULL, 1, '2019-02-10 07:22:50', 0);
 
 -- --------------------------------------------------------
 
@@ -1389,8 +1446,8 @@ INSERT INTO `pubtype` (`Id`, `Name`, `Description`, `EntryBy`, `EntryDateTime`, 
 -- Table structure for table `spot`
 --
 
-CREATE TABLE `spot` (
-  `Id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `spot` (
+  `Id` int(11) NOT NULL AUTO_INCREMENT,
   `Name` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
   `Description` text COLLATE utf8_unicode_ci,
   `EntryBy` int(11) DEFAULT NULL,
@@ -1399,8 +1456,10 @@ CREATE TABLE `spot` (
   `UpdateTime` datetime DEFAULT NULL,
   `DeleteBy` int(11) DEFAULT NULL,
   `DeleteDateTime` datetime DEFAULT NULL,
-  `State` tinyint(3) DEFAULT '1'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `State` tinyint(3) DEFAULT '1',
+  PRIMARY KEY (`Id`),
+  UNIQUE KEY `NewIndex1` (`Name`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=14 ;
 
 --
 -- Dumping data for table `spot`
@@ -1427,8 +1486,8 @@ INSERT INTO `spot` (`Id`, `Name`, `Description`, `EntryBy`, `EntryDateTime`, `Up
 -- Table structure for table `subbrand`
 --
 
-CREATE TABLE `subbrand` (
-  `Id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `subbrand` (
+  `Id` int(11) NOT NULL AUTO_INCREMENT,
   `Name` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
   `CompanyId` int(11) DEFAULT NULL,
   `Description` text COLLATE utf8_unicode_ci,
@@ -1439,8 +1498,9 @@ CREATE TABLE `subbrand` (
   `UpdateTime` datetime DEFAULT NULL,
   `DeleteBy` int(11) DEFAULT NULL,
   `DeleteDateTime` datetime DEFAULT NULL,
-  `State` tinyint(3) DEFAULT '1'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `State` tinyint(3) DEFAULT '1',
+  PRIMARY KEY (`Id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=40 ;
 
 --
 -- Dumping data for table `subbrand`
@@ -1477,10 +1537,12 @@ INSERT INTO `subbrand` (`Id`, `Name`, `CompanyId`, `Description`, `BrandId`, `En
 (28, 'Chaka Super White Powder', 5, 'Chaka Super White Powder', 22, 1, '2019-01-05 10:58:50', NULL, NULL, NULL, NULL, 1),
 (29, 'Revive Talcum Powder', 5, 'Revive Talcum Powder', 24, 1, '2019-01-05 11:02:06', NULL, NULL, NULL, NULL, 1),
 (30, 'Sandal Soap', 1, 'Sandal Soap', 26, 1, '2019-01-06 10:46:20', NULL, NULL, NULL, NULL, 1),
-(31, 'ACI Fun Cake', 1, 'ACI Fun Cake', 27, 1, '2019-01-06 11:05:20', NULL, NULL, NULL, NULL, 1),
+(31, 'ACI Fun Cake', 1, 'ACI Fun Cake', 27, 1, '2019-01-06 11:05:20', NULL, NULL, 1, '2019-02-09 08:23:55', 0),
 (32, 'ACI', 1, '', 28, 1, '2019-01-06 11:15:49', NULL, NULL, NULL, NULL, 1),
 (33, 'Ispahani', 3, 'Ispahani', 29, 1, '2019-01-06 11:21:24', NULL, NULL, NULL, NULL, 1),
-(34, 'Square', 5, 'Square', 30, 1, '2019-01-07 05:31:46', NULL, NULL, NULL, NULL, 1);
+(34, 'Square', 5, 'Square', 30, 1, '2019-01-07 05:31:46', NULL, NULL, NULL, NULL, 1),
+(35, 'Dew', 1, 'Hunt', 28, 1, '2019-02-09 07:29:33', 1, '2019-02-09 07:33:42', 1, '2019-02-09 07:42:57', 0),
+(37, 'Dew', 2, 'Dew Hunt 160', 6, 1, '2019-02-09 07:36:03', 1, '2019-02-09 08:57:51', NULL, NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -1488,8 +1550,8 @@ INSERT INTO `subbrand` (`Id`, `Name`, `CompanyId`, `Description`, `BrandId`, `En
 -- Table structure for table `synopsis`
 --
 
-CREATE TABLE `synopsis` (
-  `Id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `synopsis` (
+  `Id` int(11) NOT NULL AUTO_INCREMENT,
   `DataEntryReportId` int(11) DEFAULT NULL,
   `SummaryId` int(20) DEFAULT NULL,
   `Title` text,
@@ -1500,8 +1562,9 @@ CREATE TABLE `synopsis` (
   `UpdateTime` datetime DEFAULT NULL,
   `DeleteBy` int(11) DEFAULT NULL,
   `DeleteDateTime` datetime DEFAULT NULL,
-  `State` tinyint(4) DEFAULT '1'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `State` tinyint(4) DEFAULT '1',
+  PRIMARY KEY (`Id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -1509,16 +1572,17 @@ CREATE TABLE `synopsis` (
 -- Table structure for table `sysuserright`
 --
 
-CREATE TABLE `sysuserright` (
-  `Id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `sysuserright` (
+  `Id` int(11) NOT NULL AUTO_INCREMENT,
   `SysUserCatId` int(11) DEFAULT NULL,
   `OperationId` int(11) DEFAULT NULL,
   `Name` varchar(200) DEFAULT NULL,
   `Url` varchar(200) DEFAULT NULL,
   `Title` varchar(200) DEFAULT NULL,
   `State` tinyint(3) DEFAULT '1',
-  `Order` int(11) DEFAULT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+  `Order` int(11) DEFAULT NULL,
+  PRIMARY KEY (`Id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=29 ;
 
 --
 -- Dumping data for table `sysuserright`
@@ -1560,13 +1624,14 @@ INSERT INTO `sysuserright` (`Id`, `SysUserCatId`, `OperationId`, `Name`, `Url`, 
 -- Table structure for table `sysuserrightcat`
 --
 
-CREATE TABLE `sysuserrightcat` (
-  `Id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `sysuserrightcat` (
+  `Id` int(11) NOT NULL AUTO_INCREMENT,
   `Name` varchar(200) DEFAULT NULL,
   `Url` varchar(200) DEFAULT NULL,
   `Order` int(11) DEFAULT NULL,
-  `State` tinyint(4) DEFAULT '1'
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+  `State` tinyint(4) DEFAULT '1',
+  PRIMARY KEY (`Id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=16 ;
 
 --
 -- Dumping data for table `sysuserrightcat`
@@ -1593,12 +1658,13 @@ INSERT INTO `sysuserrightcat` (`Id`, `Name`, `Url`, `Order`, `State`) VALUES
 -- Table structure for table `userright`
 --
 
-CREATE TABLE `userright` (
-  `Id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `userright` (
+  `Id` int(11) NOT NULL AUTO_INCREMENT,
   `UserTableId` int(11) DEFAULT NULL,
   `SysuserRightId` int(11) DEFAULT NULL,
-  `State` tinyint(3) DEFAULT '1'
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+  `State` tinyint(3) DEFAULT '1',
+  PRIMARY KEY (`Id`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -1606,8 +1672,8 @@ CREATE TABLE `userright` (
 -- Table structure for table `users`
 --
 
-CREATE TABLE `users` (
-  `Id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `users` (
+  `Id` int(11) NOT NULL AUTO_INCREMENT,
   `UserId` varchar(50) DEFAULT NULL,
   `Password` varchar(50) DEFAULT NULL,
   `Name` varchar(250) DEFAULT NULL,
@@ -1621,8 +1687,9 @@ CREATE TABLE `users` (
   `PasswordChangeStatus` tinyint(1) DEFAULT '0',
   `AdminStatus` tinyint(1) DEFAULT '0',
   `CreateBy` int(11) DEFAULT NULL,
-  `State` tinyint(1) DEFAULT '1'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `State` tinyint(1) DEFAULT '1',
+  PRIMARY KEY (`Id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
 
 --
 -- Dumping data for table `users`
@@ -1630,479 +1697,6 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`Id`, `UserId`, `Password`, `Name`, `DesignationId`, `UserGroupId`, `Location`, `Phone`, `Email`, `Picture`, `Signature`, `PasswordChangeStatus`, `AdminStatus`, `CreateBy`, `State`) VALUES
 (1, 'dew', '12345', 'Dew Hunt', NULL, 1, NULL, '01766328322', 'dew@gmail.com', NULL, NULL, 0, 0, NULL, 1);
-
---
--- Indexes for dumped tables
---
-
---
--- Indexes for table `adcategory`
---
-ALTER TABLE `adcategory`
-  ADD PRIMARY KEY (`Id`),
-  ADD UNIQUE KEY `NewIndex1` (`Name`);
-
---
--- Indexes for table `adentry`
---
-ALTER TABLE `adentry`
-  ADD PRIMARY KEY (`Id`);
-
---
--- Indexes for table `adentrydetails`
---
-ALTER TABLE `adentrydetails`
-  ADD PRIMARY KEY (`Id`);
-
---
--- Indexes for table `adentryreport`
---
-ALTER TABLE `adentryreport`
-  ADD PRIMARY KEY (`Id`);
-
---
--- Indexes for table `adinfo`
---
-ALTER TABLE `adinfo`
-  ADD PRIMARY KEY (`Id`);
-
---
--- Indexes for table `brand`
---
-ALTER TABLE `brand`
-  ADD PRIMARY KEY (`Id`);
-
---
--- Indexes for table `company`
---
-ALTER TABLE `company`
-  ADD PRIMARY KEY (`Id`),
-  ADD UNIQUE KEY `NewIndex1` (`Name`);
-
---
--- Indexes for table `dataentry`
---
-ALTER TABLE `dataentry`
-  ADD PRIMARY KEY (`Id`);
-
---
--- Indexes for table `dataentrydetails`
---
-ALTER TABLE `dataentrydetails`
-  ADD PRIMARY KEY (`Id`);
-
---
--- Indexes for table `dataentryreport`
---
-ALTER TABLE `dataentryreport`
-  ADD PRIMARY KEY (`Id`);
-
---
--- Indexes for table `hue`
---
-ALTER TABLE `hue`
-  ADD PRIMARY KEY (`Id`),
-  ADD UNIQUE KEY `NewIndex1` (`Name`);
-
---
--- Indexes for table `keyword`
---
-ALTER TABLE `keyword`
-  ADD PRIMARY KEY (`Id`);
-
---
--- Indexes for table `media`
---
-ALTER TABLE `media`
-  ADD PRIMARY KEY (`Id`),
-  ADD UNIQUE KEY `NewIndex1` (`Name`);
-
---
--- Indexes for table `newscategory`
---
-ALTER TABLE `newscategory`
-  ADD PRIMARY KEY (`Id`),
-  ADD UNIQUE KEY `NewIndex1` (`Name`);
-
---
--- Indexes for table `newstype`
---
-ALTER TABLE `newstype`
-  ADD PRIMARY KEY (`Id`),
-  ADD UNIQUE KEY `NewIndex1` (`Name`);
-
---
--- Indexes for table `operation`
---
-ALTER TABLE `operation`
-  ADD PRIMARY KEY (`Id`);
-
---
--- Indexes for table `outlook`
---
-ALTER TABLE `outlook`
-  ADD PRIMARY KEY (`Id`);
-
---
--- Indexes for table `page`
---
-ALTER TABLE `page`
-  ADD PRIMARY KEY (`Id`),
-  ADD UNIQUE KEY `NewIndex1` (`Name`);
-
---
--- Indexes for table `pageposition`
---
-ALTER TABLE `pageposition`
-  ADD PRIMARY KEY (`Id`),
-  ADD UNIQUE KEY `NewIndex1` (`Name`);
-
---
--- Indexes for table `placing`
---
-ALTER TABLE `placing`
-  ADD PRIMARY KEY (`Id`),
-  ADD UNIQUE KEY `NewIndex1` (`Name`);
-
---
--- Indexes for table `placingtype`
---
-ALTER TABLE `placingtype`
-  ADD PRIMARY KEY (`Id`),
-  ADD UNIQUE KEY `NewIndex1` (`Name`);
-
---
--- Indexes for table `position`
---
-ALTER TABLE `position`
-  ADD PRIMARY KEY (`Id`),
-  ADD UNIQUE KEY `NewIndex1` (`Name`);
-
---
--- Indexes for table `price`
---
-ALTER TABLE `price`
-  ADD PRIMARY KEY (`Id`),
-  ADD UNIQUE KEY `Name` (`Name`,`MediaId`,`PublicationId`);
-
---
--- Indexes for table `pricedetails`
---
-ALTER TABLE `pricedetails`
-  ADD PRIMARY KEY (`Id`),
-  ADD UNIQUE KEY `Name` (`Name`,`PageNoId`,`Col`,`Inch`);
-
---
--- Indexes for table `product`
---
-ALTER TABLE `product`
-  ADD PRIMARY KEY (`Id`),
-  ADD UNIQUE KEY `NewIndex1` (`Name`);
-
---
--- Indexes for table `product_cat`
---
-ALTER TABLE `product_cat`
-  ADD PRIMARY KEY (`Id`),
-  ADD UNIQUE KEY `NewIndex1` (`Name`);
-
---
--- Indexes for table `pubfrequency`
---
-ALTER TABLE `pubfrequency`
-  ADD PRIMARY KEY (`Id`),
-  ADD UNIQUE KEY `NewIndex1` (`Name`);
-
---
--- Indexes for table `publication`
---
-ALTER TABLE `publication`
-  ADD PRIMARY KEY (`Id`),
-  ADD UNIQUE KEY `NewIndex1` (`Name`,`MediaId`);
-
---
--- Indexes for table `pubplace`
---
-ALTER TABLE `pubplace`
-  ADD PRIMARY KEY (`Id`),
-  ADD UNIQUE KEY `NewIndex1` (`Name`);
-
---
--- Indexes for table `pubtype`
---
-ALTER TABLE `pubtype`
-  ADD PRIMARY KEY (`Id`),
-  ADD UNIQUE KEY `NewIndex1` (`Name`);
-
---
--- Indexes for table `spot`
---
-ALTER TABLE `spot`
-  ADD PRIMARY KEY (`Id`),
-  ADD UNIQUE KEY `NewIndex1` (`Name`);
-
---
--- Indexes for table `subbrand`
---
-ALTER TABLE `subbrand`
-  ADD PRIMARY KEY (`Id`);
-
---
--- Indexes for table `synopsis`
---
-ALTER TABLE `synopsis`
-  ADD PRIMARY KEY (`Id`);
-
---
--- Indexes for table `sysuserright`
---
-ALTER TABLE `sysuserright`
-  ADD PRIMARY KEY (`Id`);
-
---
--- Indexes for table `sysuserrightcat`
---
-ALTER TABLE `sysuserrightcat`
-  ADD PRIMARY KEY (`Id`);
-
---
--- Indexes for table `userright`
---
-ALTER TABLE `userright`
-  ADD PRIMARY KEY (`Id`);
-
---
--- Indexes for table `users`
---
-ALTER TABLE `users`
-  ADD PRIMARY KEY (`Id`);
-
---
--- AUTO_INCREMENT for dumped tables
---
-
---
--- AUTO_INCREMENT for table `adcategory`
---
-ALTER TABLE `adcategory`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
---
--- AUTO_INCREMENT for table `adentry`
---
-ALTER TABLE `adentry`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
-
---
--- AUTO_INCREMENT for table `adentrydetails`
---
-ALTER TABLE `adentrydetails`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
-
---
--- AUTO_INCREMENT for table `adentryreport`
---
-ALTER TABLE `adentryreport`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
-
---
--- AUTO_INCREMENT for table `adinfo`
---
-ALTER TABLE `adinfo`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `brand`
---
-ALTER TABLE `brand`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
-
---
--- AUTO_INCREMENT for table `company`
---
-ALTER TABLE `company`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
-
---
--- AUTO_INCREMENT for table `dataentry`
---
-ALTER TABLE `dataentry`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
-
---
--- AUTO_INCREMENT for table `dataentrydetails`
---
-ALTER TABLE `dataentrydetails`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
-
---
--- AUTO_INCREMENT for table `dataentryreport`
---
-ALTER TABLE `dataentryreport`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
-
---
--- AUTO_INCREMENT for table `hue`
---
-ALTER TABLE `hue`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
---
--- AUTO_INCREMENT for table `keyword`
---
-ALTER TABLE `keyword`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
-
---
--- AUTO_INCREMENT for table `media`
---
-ALTER TABLE `media`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
-
---
--- AUTO_INCREMENT for table `newscategory`
---
-ALTER TABLE `newscategory`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
---
--- AUTO_INCREMENT for table `newstype`
---
-ALTER TABLE `newstype`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
-
---
--- AUTO_INCREMENT for table `operation`
---
-ALTER TABLE `operation`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
-
---
--- AUTO_INCREMENT for table `outlook`
---
-ALTER TABLE `outlook`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
---
--- AUTO_INCREMENT for table `page`
---
-ALTER TABLE `page`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=63;
-
---
--- AUTO_INCREMENT for table `pageposition`
---
-ALTER TABLE `pageposition`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
-
---
--- AUTO_INCREMENT for table `placing`
---
-ALTER TABLE `placing`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
---
--- AUTO_INCREMENT for table `placingtype`
---
-ALTER TABLE `placingtype`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
-
---
--- AUTO_INCREMENT for table `position`
---
-ALTER TABLE `position`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
---
--- AUTO_INCREMENT for table `price`
---
-ALTER TABLE `price`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=161;
-
---
--- AUTO_INCREMENT for table `pricedetails`
---
-ALTER TABLE `pricedetails`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4442;
-
---
--- AUTO_INCREMENT for table `product`
---
-ALTER TABLE `product`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=117;
-
---
--- AUTO_INCREMENT for table `product_cat`
---
-ALTER TABLE `product_cat`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
---
--- AUTO_INCREMENT for table `pubfrequency`
---
-ALTER TABLE `pubfrequency`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
-
---
--- AUTO_INCREMENT for table `publication`
---
-ALTER TABLE `publication`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=62;
-
---
--- AUTO_INCREMENT for table `pubplace`
---
-ALTER TABLE `pubplace`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
-
---
--- AUTO_INCREMENT for table `pubtype`
---
-ALTER TABLE `pubtype`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
-
---
--- AUTO_INCREMENT for table `spot`
---
-ALTER TABLE `spot`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
-
---
--- AUTO_INCREMENT for table `subbrand`
---
-ALTER TABLE `subbrand`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
-
---
--- AUTO_INCREMENT for table `synopsis`
---
-ALTER TABLE `synopsis`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `sysuserright`
---
-ALTER TABLE `sysuserright`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
-
---
--- AUTO_INCREMENT for table `sysuserrightcat`
---
-ALTER TABLE `sysuserrightcat`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
-
---
--- AUTO_INCREMENT for table `userright`
---
-ALTER TABLE `userright`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `users`
---
-ALTER TABLE `users`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

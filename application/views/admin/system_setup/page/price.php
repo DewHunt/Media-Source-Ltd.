@@ -16,6 +16,18 @@
 						<?php include APPPATH.'views/admin/master/system-left-menu.php'?>
 						
 						<div class="span9">
+
+							<?php
+								if ($message == 1)
+								{
+							?>
+									<div class="alert alert-success success-message">
+										<a type="button" class="btn btn-danger close" data-dismiss="alert" href="<?= base_url('index.php/Price/Index'); ?>">&times;</a>
+										<strong>Greate!</strong> Your Price Updated...
+									</div>
+							<?php
+								}
+							?>
 							<div class="widget">
 								<div class="widget-header">
 									<i class="icon-th-list"></i>
@@ -50,102 +62,6 @@
 											</tr>
 										</tfoot>
 									</table>
-
-									<div id="price-modal" class="modal fade" role="dialog">
-										<div class="modal-dialog modal-lg">
-											<form method="POST" id="price-form">
-												<div class="modal-content">
-													<div class="modal-header">
-														<button type="button" class="close" data-dismiss="modal">&times;</button>
-														<h3 class="modal-title">Update Price</h3>
-													</div>
-
-													<div class="modal-body">
-														<label class="control-label" for="name">Name</label>
-														<input type="text" id="price-media-name" name="price-media-name" value="" style="width: 99%;">
-
-														<label class="control-label" for="name"><span class="mendatory">*</span>&nbsp;Media</label><div id="media-select-menu"></div>
-														                     
-														<label class="control-label" for="Publication"><span class="mendatory">*</span>&nbsp;Publication</label>
-
-														<div id="publication-select-menu">
-															<select class="dropdown" name="publication-id" id="publication-id" style="width: 99%;">
-																<option value="">Select Publication</option>
-															</select>
-														</div>
-
-														<label class="control-label" for="day"><span class="mendatory">*</span>&nbsp;Day</label>
-														<select class="dropdown" name="day", id="day" style="width: 99%;">
-															<option value="">Select Day</option>
-															<option value="All Days">All Days</option>
-															<option value="Saturday">Saturday</option>
-															<option value="Sunday">Sunday</option>
-															<option value="Monday">Monday</option>
-															<option value="Tuesday">Tuesday</option>
-															<option value="Wednesday">Wednesday</option>
-															<option value="Thursday">Thursday</option>
-															<option value="Friday">Friday</option>
-															<option value="Weekly">Weekly</option>
-															<option value="Monthly">Monthly</option>
-															<option value="Yearly">Yearly</option>
-														</select>
-
-														<label class="control-label" for="publication-place"><span class="mendatory">*</span>&nbsp;Place</label>
-														<div id="publication-place-select-menu"></div>
-                     
-														<label class="control-label" for="price-details"><span class="mendatory">*</span>&nbsp;Price Details</label>
-
-														<table class="table table-striped table-bordered table-responsive">
-															<thead>
-																<tr>
-																	<th>SL</th>
-																	<th>Price Title</th>
-																	<th>Select Pages</th>
-																	<th>Hue</th>
-																	<th>Column</th>
-																	<th>×</th>
-																	<th>Inch</th>
-																	<th>Price</th>
-																</tr>
-															</thead>
-															<tbody>
-																<tr>
-																	<td>1</td>
-																	<td>
-																		<input type="text" class="span2" id="price-title" name="price-title" value="">
-																	</td>
-																	<td>
-																		<div id="page-select-menu"></div>
-																	</td>
-																	<td>
-																		<div id="hue-select-menu"></div>
-																	</td>
-																	<td>
-																		<input type="text" class="span1" id="col" name="col" value="1">
-																	</td>
-																	<td>×</td>
-																	<td>
-																		<input type="text" class="span1" id="inch" name="inch" value="1">
-																	</td>
-																	<td>
-																		<input type="text" class="span1" id="price" name="price" value="">
-																	</td>
-																</tr>
-															</tbody>
-														</table>
-													</div>
-
-													<div class="modal-footer">
-														<input type="hidden" name="price-id" id="price-id" value="">
-
-														<input type="submit" name="update-price" id="update-price" class="btn btn-success" value="Update">
-
-														<button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-													</div>
-												</div>
-											</form>
-										</div>
-									</div>
 								</div>  <!-- /widget-content --> 
 							</div>  <!-- /widget --> 
 						</div>  <!-- /span9 -->
@@ -218,44 +134,15 @@
 				} 
 				// Get All Data For Select Menu Script End
 
-				$(document).on('click', '.update', function(){
-					var priceId = $(this).attr('id');
-
-					$.ajax({
-						url:'<?php echo base_url("index.php/Price/GetPriceDetailsById"); ?>',
-						method:'POST',
-						data:{priceId:priceId},
-						dataType:'json',
-						success:function(data){
-							$('#price-modal').modal('show');
-							$('#price-media-name').val(data.Name);
-							$('#media-name-id option[value="'+data.mediaId+'"]').prop('selected', true);
-
-							GetDataForDependantSelectMenu("PublicationModel","GetPublicationByForignKey","MediaId",data.mediaId,"#publication-select-menu","publication-id","Select Publication",data.publicationId);
-
-							$('#publication-id option[value="General"]').prop('selected', true);
-							$('#day option[value="'+data.day+'"]').prop('selected', true);
-
-							$('#price-title').val(data.priceTitle);
-							$('#page-id option[value="'+data.pageId+'"]').prop('selected', true);
-							$('#hue-id option[value="'+data.hueId+'"]').prop('selected', true);
-							$('#col').val(data.col);
-							$('#inch').html(data.inch);
-							$('#price').html(data.price);
-							$('#price-id').val(data.priceId);
-						}
-					});
-				});
-
 				$(document).on('click', '.delete', function(){
-					var priceDetailsId = $(this).attr('id');
+					var priceId = $(this).attr('id');
 
 					if (confirm("Wait!, Are Your 100% Sure, You Really Want to Delete This?"))
 					{
 						$.ajax({
 							url:'<?php echo base_url('index.php/Price/DeletePriceDetails'); ?>',
 							method:'POST',
-							data:{priceDetailsId:priceDetailsId},
+							data:{priceId:priceId},
 							success:function(data){
 								alert(data);
 								dataTable.ajax.reload();

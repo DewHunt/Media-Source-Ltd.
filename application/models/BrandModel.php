@@ -13,11 +13,11 @@
 		{
 			if ($brandId == "")
 			{
-				$sql = "SELECT * FROM brand WHERE Name = '$brandName' AND CompanyId = '$companyId'";
+				$sql = "SELECT * FROM brand WHERE Name = '$brandName' AND CompanyId = '$companyId' AND State = '1'";
 			}
 			else
 			{
-				$sql = "SELECT * FROM brand WHERE Id != '$brandId' AND Name = '$brandName' AND CompanyId = '$companyId'";
+				$sql = "SELECT * FROM brand WHERE Id != '$brandId' AND Name = '$brandName' AND CompanyId = '$companyId' AND State = '1'";
 			}
 
 			$checkQuery = $this->db->query($sql);
@@ -52,7 +52,7 @@
 
 		public function GetBrandById($brandId)
 		{
-			$sql = "SELECT * FROM brand WHERE Id = $brandId";
+			$sql = "SELECT * FROM brand WHERE Id = '$brandId' AND State = '1'";
 
 			$query = $this->db->query($sql);
 
@@ -69,7 +69,7 @@
 		public function UpdateBrand($brandId,$brandName,$companyId,$brandDescription,$updateId)
 		{
 			$updateTime = date('Y-m-d H:i:s');
-			$sql = "UPDATE brand SET Name = '$brandName', CompanyId = '$companyId',  Description = '$brandDescription', UpdateBy = '$updateId', UpdateTime = '$updateTime' WHERE Id = '$brandId'";
+			$sql = "UPDATE brand SET Name = '$brandName', CompanyId = '$companyId',  Description = '$brandDescription', UpdateBy = '$updateId', UpdateTime = '$updateTime' WHERE Id = '$brandId' AND State = '1'";
 
 			$updateQuery = $this->db->query($sql);
 
@@ -102,7 +102,7 @@
 
 		public function GetAllBrand()
 		{
-			$sql = "SELECT * FROM brand ORDER BY Name ASC";
+			$sql = "SELECT * FROM brand WHERE State = '1' ORDER BY Name ASC";
 
 			$query = $this->db->query($sql);
 
@@ -116,9 +116,9 @@
 			}
 		}
 
-		public function GetBrandByForignKey($fieldName,$id)
+		public function GetBrandByForeignKey($fieldName,$id)
 		{
-			$sql = "SELECT * FROM brand WHERE $fieldName = $id ORDER BY Name ASC";
+			$sql = "SELECT * FROM brand WHERE $fieldName = $id AND State = '1' ORDER BY Name ASC";
 
 			$query = $this->db->query($sql);
 

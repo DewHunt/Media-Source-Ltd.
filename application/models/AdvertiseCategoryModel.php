@@ -13,11 +13,11 @@
 		{
 			if ($advertiseCategoryId == "")
 			{
-				$sql = "SELECT * FROM adcategory WHERE Name = '$advertiseCategoryName'";
+				$sql = "SELECT * FROM adcategory WHERE Name = '$advertiseCategoryName' AND State = '1'";
 			}
 			else
 			{
-				$sql = "SELECT * FROM adcategory WHERE Id != '$advertiseCategoryId' AND Name = '$advertiseCategoryName'";
+				$sql = "SELECT * FROM adcategory WHERE Id != '$advertiseCategoryId' AND Name = '$advertiseCategoryName' AND State = '1'";
 			}
 
 			$checkQuery = $this->db->query($sql);
@@ -52,7 +52,7 @@
 
 		public function GetAdvertiseCategoryById($advertiseCategoryId)
 		{
-			$sql = "SELECT * FROM adcategory WHERE Id = '$advertiseCategoryId'";
+			$sql = "SELECT * FROM adcategory WHERE Id = '$advertiseCategoryId' AND State = '1'";
 
 			$query = $this->db->query($sql);
 
@@ -69,7 +69,7 @@
 		public function UpdateAdvertiseCategory($advertiseCategoryId,$advertiseCategoryName,$advertiseCategoryDescription,$updateId)
 		{
 			$updateTime = date('Y-m-d H:i:s');
-			$sql = "UPDATE adcategory SET Name = '$advertiseCategoryName', Description = '$advertiseCategoryDescription', UpdateBy = '$updateId', UpdateTime = '$updateTime' WHERE Id = '$advertiseCategoryId'";
+			$sql = "UPDATE adcategory SET Name = '$advertiseCategoryName', Description = '$advertiseCategoryDescription', UpdateBy = '$updateId', UpdateTime = '$updateTime' WHERE Id = '$advertiseCategoryId' AND State = '1'";
 
 			$updateQuery = $this->db->query($sql);
 
@@ -100,9 +100,9 @@
 			}
 		}
 
-		public function GetAllProductCategory()
+		public function GetAllAdvertiseCategory()
 		{
-			$sql = "SELECT * FROM adcategory ORDER BY Name ASC";
+			$sql = "SELECT * FROM adcategory WHERE State = '1' ORDER BY Name ASC";
 
 			$query = $this->db->query($sql);
 

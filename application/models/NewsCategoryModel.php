@@ -13,11 +13,11 @@
 		{
 			if ($newsCategoryId == "")
 			{
-				$sql = "SELECT * FROM newscategory WHERE Name = '$newsCategoryName'";
+				$sql = "SELECT * FROM newscategory WHERE Name = '$newsCategoryName' AND State = '1'";
 			}
 			else
 			{
-				$sql = "SELECT * FROM newscategory WHERE Id != $newsCategoryId AND Name = '$newsCategoryName'";
+				$sql = "SELECT * FROM newscategory WHERE Id != $newsCategoryId AND Name = '$newsCategoryName' AND State = '1'";
 			}
 
 			$checkQuery = $this->db->query($sql);
@@ -52,7 +52,7 @@
 
 		public function GetNewsCategoryById($newsCategoryId)
 		{
-			$sql = "SELECT * FROM newscategory WHERE Id = '$newsCategoryId'";
+			$sql = "SELECT * FROM newscategory WHERE Id = '$newsCategoryId' AND State = '1'";
 
 			$query = $this->db->query($sql);
 
@@ -69,7 +69,7 @@
 		public function UpdateNewsCategory($newsCategoryId,$newsCategoryName,$newsCategoryDescription,$updateId)
 		{
 			$updateTime = date('Y-m-d H:i:s');
-			$sql = "UPDATE newscategory SET Name = '$newsCategoryName', Description = '$newsCategoryDescription', UpdateBy = '$updateId', UpdateTime = '$updateTime' WHERE Id = '$newsCategoryId'";
+			$sql = "UPDATE newscategory SET Name = '$newsCategoryName', Description = '$newsCategoryDescription', UpdateBy = '$updateId', UpdateTime = '$updateTime' WHERE Id = '$newsCategoryId' AND State = '1'";
 
 			$updateQuery = $this->db->query($sql);
 
@@ -102,7 +102,7 @@
 
 		public function GetAllNewsCategory()
 		{
-			$sql = "SELECT * FROM newscategory ORDER BY Name ASC";
+			$sql = "SELECT * FROM newscategory WHERE State = '1' ORDER BY Name ASC";
 
 			$query = $this->db->query($sql);
 

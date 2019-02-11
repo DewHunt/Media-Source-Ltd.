@@ -15,6 +15,38 @@
 					<div class="row">
 						<form id="edit-profile" class="form-horizontal">
 							<div class="span12">
+
+								<?php
+									if ($message == 1)
+									{
+								?>
+										<div class="alert alert-success success-message">
+											<a type="button" class="btn btn-danger close" data-dismiss="alert" href="<?=  base_url('index.php/AdvertiseInfo/AdvertiseInfo');?>">&times;</a>
+											<strong>Great!</strong> Your Advertise Info Created Successfully...
+										</div>
+								<?php
+									}
+
+									if ($message == 2)
+									{
+								?>
+										<div class="alert alert-info error-message">
+											<a type="button" class="btn btn-danger close" data-dismiss="alert" href="<?= base_url('index.php/AdvertiseInfo/AdvertiseInfo'); ?>">&times;</a>
+											<strong>Oops! Sorry,</strong> Your Advertise Info Can't Be Created...
+										</div>
+								<?php
+									}
+
+									if ($message == 3)
+									{
+								?>
+										<div class="alert alert-info error-message">
+											<a type="button" class="btn btn-danger close" data-dismiss="alert" href="<?= base_url('index.php/AdvertiseInfo/AdvertiseInfo'); ?>">&times;</a>
+											<strong>Oops! Sorry,</strong> Your Advertise Info Already Saved In Data Base...
+										</div>
+								<?php
+									}
+								?>
 								<div class="widget">
 									<div class="widget-header">
 										<i class="icon-tag"></i>
@@ -27,86 +59,64 @@
 											<div class="control-group">											
 												<label class="control-label" for="advertise-id">Advetise Id</label>
 												<div class="controls">
-													<input type="text" class="span10" id="advertise-id" name="advertise-id" value="">
+													<input type="text" class="span10" id="adinfo-advertise-id" name="adinfo-advertise-id" value="">
 												</div> <!-- /controls -->				
 											</div> <!-- /control-group -->
 											
 											<div class="control-group">											
 												<label class="control-label" for="title">Title</label>
 												<div class="controls">
-													<input type="text" class="span10" id="title" name="title" value="">
+													<input type="text" class="span10" id="adinfo-title" name="adinfo-title" value="">
 												</div> <!-- /controls -->				
 											</div> <!-- /control-group -->
 											
 											<div class="control-group">                     
 												<label class="control-label" for="company">Company</label>
 												<div class="controls">
-													<select class="dropdown span10">
-														<option value="">Select Company</option>
-														<option value="">ABC Real State Ltd.</option>
-														<option value="">Abul Khair Group</option>
-														<option value="">Bata</option>
-														<option value="">Basic Bank Ltd.</option>
-														<option value="">Global Brand</option>
-													</select>
+													<div id="company-select-menu"></div>
 												</div> <!-- /controls -->       
 											</div> <!-- /control-group -->
 											
 											<div class="control-group">                     
 												<label class="control-label" for="brand">Brand</label>
 												<div class="controls">
-													<select class="dropdown span10">
-														<option value="">Select Brand</option>
-														<option value="">Rapoo</option>
-														<option value="">Topo Link</option>
-														<option value="">Asus</option>
-														<option value="">Zebex</option>
-														<option value="">Sewoo</option>
-													</select>
+													<div id="brand-select-menu">
+														<select class="dropdown" name="brand-id" id="brand-id" style="width: 99%;">
+															<option value="">Select Brand</option>
+														</select>
+													</div>
 												</div> <!-- /controls -->       
 											</div> <!-- /control-group -->
 											
 											<div class="control-group">                     
 												<label class="control-label" for="subbrand">Sub Brand</label>
 												<div class="controls">
-													<select class="dropdown span10">
-														<option value="">Select Sub Brand</option>
-														<option value="">Asus Zenfone Mobile</option>
-														<option value="">Asus Laptop</option>
-														<option value="">Asus Gaming Notebook</option>
-													</select>
+													<div id="sub-brand-select-menu">
+														<select class="dropdown" name="sub-brand-id" id="sub-brand-id" style="width: 99%;">
+															<option value="">Select Sub Brand</option>
+														</select>
+													</div>
 												</div> <!-- /controls -->       
 											</div> <!-- /control-group -->
 											
 											<div class="control-group">                     
 												<label class="control-label" for="product">Product</label>
 												<div class="controls">
-													<select class="dropdown span10">
-														<option value="">Select Product</option>
-														<option value="">Achar</option>
-														<option value="">Adhesive</option>
-														<option value="">Aerosol</option>
-														<option value="">Argent Banking</option>
-														<option value="">Air Compressor</option>
-													</select>
+													<div id="product-select-menu"></div>
 												</div> <!-- /controls -->       
 											</div> <!-- /control-group -->
 											
 											<div class="control-group">                     
 												<label class="control-label" for="advertise-type">Advertise Type</label>
 												<div class="controls">
-													<select class="dropdown span10">
-														<option value="">Select Advertise Type</option>
-														<option value="">Government</option>
-														<option value="">Private</option>
-													</select>
+													<div id="advertise-type-select-menu"></div>
 												</div> <!-- /controls -->       
 											</div> <!-- /control-group -->
 											
 											<div class="control-group">										
 												<label class="control-label" for="notes">Notes</label>
 												<div class="controls">
-													<textarea class="span10" rows="3" id="notes" name="notes"></textarea>
+													<textarea class="span10" rows="3" id="adinfo-notes" name="adinfo-notes"></textarea>
 												</div> <!-- /controls -->				
 											</div> <!-- /control-group -->
 											
@@ -120,13 +130,16 @@
 											<div class="control-group">									
 												<label class="control-label" for="image">Image</label>
 												<div class="controls">
-													<input type="file" name="image" id="image">
+													<input type="file" name="adinfo-image" id="adinfo-image">
 												</div> <!-- /controls -->				
 											</div> <!-- /control-group -->
 											
 											<div class="form-actions">
-												<a href="client.html" type="submit" class="btn btn-primary">Create Advertise Info</a> 
-												<button class="btn">Cancel</button>
+												<button type="submit" id="button-adinfo" name="button-adinfo" class="btn btn-primary" onclick="return Validation()">Create Advertise Info</button>
+												<button type="reset" class="btn btn-danger">Cancel</button>
+
+												<!-- The Toast Message ID -->
+												<p id="message"></p>
 											</div> <!-- /form-actions -->
 										</fieldset>
 									</div> <!-- /widget-content -->
@@ -144,5 +157,49 @@
 		</div>
 		<!-- /main -->
 		<?php include APPPATH.'views/admin/master/footer.php'; ?>
+
+		<script type="text/javascript">
+			GetDataForSelectMenu("CompanyModel","GetAllCompany","#company-select-menu","company-id","Select Company",0);
+			GetDataForSelectMenu("ProductModel","GetAllProduct","#product-select-menu","product-id","Select Product",0);
+			GetDataForSelectMenu("AdvertiseCategoryModel","GetAllAdvertiseCategory","#advertise-type-select-menu","advertise-type-id","Select Advertise Type",0);
+
+			// Get All Data For Select Menu Script Start
+			$(document).on('change', '#company-id', function(){
+				var id = $('#company-id').val();
+				GetDataForDependantSelectMenu("BrandModel","GetBrandByForeignKey","CompanyId",id,"#brand-select-menu","brand-id","Select Brand",0);
+			});
+
+			$(document).on('change', '#brand-id', function(){
+				var id = $('#brand-id').val();
+				GetDataForDependantSelectMenu("SubBrandModel","GetSubBrandByForeignKey","BrandId",id,"#sub-brand-select-menu","sub-brand-id","Select Sub Brand",0);
+			});
+
+			function GetDataForSelectMenu(modelName,methodName,divId,idNameAttr,selectHeader,selectId)
+			{
+				$.ajax({
+					type:'ajax',
+					url:'<?php echo base_url('index.php/AdvertiseInfo/GetDataForSelectMenu'); ?>',
+					method:'POST',
+					data:{modelName:modelName,methodName:methodName,idNameAttr:idNameAttr,selectHeader:selectHeader,selectId:selectId},
+					success:function(data){
+						$(divId).html(data);
+					}
+				});
+			} 
+
+			function GetDataForDependantSelectMenu(modelName,methodName,fieldName,id,divId,idNameAttr,selectHeader,selectId)
+			{
+				$.ajax({
+					type:'ajax',
+					url:'<?php echo base_url('index.php/AdvertiseInfo/GetDataForDependantSelectMenu'); ?>',
+					method:'POST',
+					data:{modelName:modelName,methodName:methodName,fieldName:fieldName,id:id,idNameAttr:idNameAttr,selectHeader:selectHeader,selectId:selectId},
+					success:function(data){
+						$(divId).html(data);
+					}
+				});
+			} 
+			// Get All Data For Select Menu Script End			
+		</script>
 	</body>
 </html>

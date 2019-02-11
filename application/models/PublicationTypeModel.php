@@ -14,11 +14,11 @@
 		{
 			if ($publicationTypeId == "")
 			{
-				$sql = "SELECT * FROM pubtype WHERE Name = '$publicationTypeName'";
+				$sql = "SELECT * FROM pubtype WHERE Name = '$publicationTypeName' AND State = '1'";
 			}
 			else
 			{
-				$sql = "SELECT * FROM pubtype WHERE Id != '$publicationTypeId' AND Name = '$publicationTypeName'";
+				$sql = "SELECT * FROM pubtype WHERE Id != '$publicationTypeId' AND Name = '$publicationTypeName' AND State = '1'";
 			}
 
 			$checkQuery = $this->db->query($sql);
@@ -53,7 +53,7 @@
 
 		public function GetPublicationTypeById($publicationTypeId)
 		{
-			$sql = "SELECT * FROM pubtype WHERE Id = '$publicationTypeId'";
+			$sql = "SELECT * FROM pubtype WHERE Id = '$publicationTypeId' AND State = '1'";
 
 			$query = $this->db->query($sql);
 
@@ -70,7 +70,7 @@
 		public function UpdatePublicationType($publicationTypeId,$publicationTypeName,$publicationTypeDescription,$updateId)
 		{
 			$updateTime = date('Y-m-d H:i:s');
-			$sql = "UPDATE pubtype SET Name = '$publicationTypeName', Description = '$publicationTypeDescription', UpdateBy = '$updateId', UpdateTime = '$updateTime' WHERE Id = '$publicationTypeId'";
+			$sql = "UPDATE pubtype SET Name = '$publicationTypeName', Description = '$publicationTypeDescription', UpdateBy = '$updateId', UpdateTime = '$updateTime' WHERE Id = '$publicationTypeId' AND State = '1'";
 
 			$updateQuery = $this->db->query($sql);
 
@@ -103,7 +103,7 @@
 
 		public function GetAllPublicationType()
 		{
-			$sql = "SELECT * FROM pubtype ORDER BY Name ASC";
+			$sql = "SELECT * FROM pubtype WHERE State = '1' ORDER BY Name ASC";
 
 			$query = $this->db->query($sql);
 

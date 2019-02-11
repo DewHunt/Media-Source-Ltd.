@@ -13,11 +13,11 @@
 		{
 			if ($productId)
 			{
-				$sql = "SELECT * FROM product_cat WHERE Name = '$productName' AND ProductId = '$productCategoryId'";
+				$sql = "SELECT * FROM product_cat WHERE Name = '$productName' AND ProductId = '$productCategoryId' AND State = '1'";
 			}
 			else
 			{
-				$sql = "SELECT * FROM product_cat WHERE Id != '$productId' AND Name = '$productName' AND ProductId = '$productCategoryId'";
+				$sql = "SELECT * FROM product_cat WHERE Id != '$productId' AND Name = '$productName' AND ProductId = '$productCategoryId' AND State = '1'";
 			}
 
 			$checkQuery = $this->db->query($sql);
@@ -52,7 +52,7 @@
 
 		public function GetProductById($productId)
 		{
-			$sql = "SELECT * FROM product_cat WHERE Id = ".$productId;
+			$sql = "SELECT * FROM product_cat WHERE Id = '$productId' AND State = '1'";
 			
 			$query = $this->db->query($sql);
 
@@ -69,7 +69,7 @@
 		public function UpdateProduct($productId,$productCategoryId,$productName,$productDescription,$updateId)
 		{
 			$updateTime = date('Y-m-d H:i:s');
-			$sql = "UPDATE product_cat SET ProductId = '$productCategoryId', Name = '$productName', Description = '$productDescription', UpdateBy = '$updateId', UpdateTime = '$updateTime' WHERE Id = '$productId'";
+			$sql = "UPDATE product_cat SET ProductId = '$productCategoryId', Name = '$productName', Description = '$productDescription', UpdateBy = '$updateId', UpdateTime = '$updateTime' WHERE Id = '$productId' AND State = '1'";
 
 			$updateQuery = $this->db->query($sql);
 
@@ -93,6 +93,38 @@
 			if ($query)
 			{
 				return true;
+			}
+			else
+			{
+				return false;
+			}
+		}
+
+		public function GetAllProduct()
+		{
+			$sql = "SELECT * FROM product_cat WHERE State = '1' ORDER BY Name ASC";
+
+			$query = $this->db->query($sql);
+
+			if ($query->num_rows() > 0)
+			{
+				return $query->result();
+			}
+			else
+			{
+				return false;
+			}
+		}
+
+		public function GetProductByForeignKey($fieldName,$id)
+		{
+			$sql = "SELECT * FROM product_cat WHERE $fieldName = $id AND State = '1' ORDER BY Name ASC";
+
+			$query = $this->db->query($sql);
+
+			if ($query->num_rows() > 0)
+			{
+				return $query->result();
 			}
 			else
 			{

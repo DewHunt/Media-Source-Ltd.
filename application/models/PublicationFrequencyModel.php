@@ -14,11 +14,11 @@
 		{
 			if ($publicationFrequencyId == "")
 			{
-				$sql = "SELECT * FROM pubfrequency WHERE Name = '$publicationFrequencyName'";
+				$sql = "SELECT * FROM pubfrequency WHERE Name = '$publicationFrequencyName' AND State = '1'";
 			}
 			else
 			{
-				$sql = "SELECT * FROM pubfrequency WHERE Id != '$publicationFrequencyId' AND Name = '$publicationFrequencyName'";
+				$sql = "SELECT * FROM pubfrequency WHERE Id != '$publicationFrequencyId' AND Name = '$publicationFrequencyName' AND State = '1'";
 			}
 
 			$checkQuery = $this->db->query($sql);
@@ -53,7 +53,7 @@
 
 		public function GetPublicationFrequencyById($publicationFrequencyId)
 		{
-			$sql = "SELECT * FROM pubfrequency WHERE Id = '$publicationFrequencyId'";
+			$sql = "SELECT * FROM pubfrequency WHERE Id = '$publicationFrequencyId' AND State = '1'";
 
 			$query = $this->db->query($sql);
 
@@ -70,7 +70,7 @@
 		public function UpdatePublicationFrequency($publicationFrequencyId,$publicationFrequencyName,$publicationFrequencyDescription,$updateId)
 		{
 			$updateTime = date('Y-m-d H:i:s');
-			$sql = "UPDATE pubfrequency SET Name = '$publicationFrequencyName', Description = '$publicationFrequencyDescription', UpdateBy = '$updateId', UpdateTime = '$updateTime' WHERE Id = '$publicationFrequencyId'";
+			$sql = "UPDATE pubfrequency SET Name = '$publicationFrequencyName', Description = '$publicationFrequencyDescription', UpdateBy = '$updateId', UpdateTime = '$updateTime' WHERE Id = '$publicationFrequencyId' AND State = '1'";
 
 			$updateQuery = $this->db->query($sql);
 
@@ -103,7 +103,7 @@
 
 		public function GetAllPublicationFrequency()
 		{
-			$sql = "SELECT * FROM pubfrequency ORDER BY Name ASC";
+			$sql = "SELECT * FROM pubfrequency WHERE State = '1' ORDER BY Name ASC";
 
 			$query = $this->db->query($sql);
 

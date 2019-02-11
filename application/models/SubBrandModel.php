@@ -100,5 +100,37 @@
 				return false;
 			}
 		}
+
+		public function GetAllSubBrand()
+		{
+			$sql = "SELECT * FROM subbrand WHERE State = '1' ORDER BY Name ASC";
+
+			$query = $this->db->query($sql);
+
+			if ($query->num_rows() > 0)
+			{
+				return $query->result();
+			}
+			else
+			{
+				return false;
+			}
+		}
+
+		public function GetSubBrandByForeignKey($fieldName,$id)
+		{
+			$sql = "SELECT * FROM subbrand WHERE $fieldName = $id AND State = '1' ORDER BY Name ASC";
+
+			$query = $this->db->query($sql);
+
+			if ($query->num_rows() > 0)
+			{
+				return $query->result();
+			}
+			else
+			{
+				return false;
+			}
+		}
 	}
 ?>

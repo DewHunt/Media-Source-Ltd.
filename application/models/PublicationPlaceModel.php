@@ -14,11 +14,11 @@
 		{
 			if ($publicationPlaceId == "")
 			{
-				$sql = "SELECT * FROM pubplace WHERE Name = '$publicationPlaceName'";
+				$sql = "SELECT * FROM pubplace WHERE Name = '$publicationPlaceName' AND State = '1'";
 			}
 			else
 			{
-				$sql = "SELECT * FROM pubplace WHERE Id != '$publicationPlaceId' AND Name = '$publicationPlaceName'";
+				$sql = "SELECT * FROM pubplace WHERE Id != '$publicationPlaceId' AND Name = '$publicationPlaceName' AND State = '1'";
 			}
 
 			$checkQuery = $this->db->query($sql);
@@ -53,7 +53,7 @@
 
 		public function GetPublicationPlaceById($publicationPlaceId)
 		{
-			$sql = "SELECT * FROM pubplace WHERE Id = '$publicationPlaceId'";
+			$sql = "SELECT * FROM pubplace WHERE Id = '$publicationPlaceId' AND State = '1'";
 
 			$query = $this->db->query($sql);
 
@@ -70,7 +70,7 @@
 		public function UpdatePublicationPlace($publicationPlaceId,$publicationPlaceName,$publicationPlaceDescription,$updateId)
 		{
 			$updateTime = date('Y-m-d H:i:s');
-			$sql = "UPDATE pubplace SET Name = '$publicationPlaceName', Description = '$publicationPlaceDescription', UpdateBy = '$updateId', UpdateTime = '$updateTime' WHERE Id = '$publicationPlaceId'";
+			$sql = "UPDATE pubplace SET Name = '$publicationPlaceName', Description = '$publicationPlaceDescription', UpdateBy = '$updateId', UpdateTime = '$updateTime' WHERE Id = '$publicationPlaceId' AND State = '1'";
 
 			$updateQuery = $this->db->query($sql);
 
@@ -103,7 +103,7 @@
 
 		public function GetAllPublicationPlace()
 		{
-			$sql = "SELECT * FROM pubplace ORDER BY Name ASC";
+			$sql = "SELECT * FROM pubplace WHERE State = '1' ORDER BY Name ASC";
 
 			$query = $this->db->query($sql);
 
