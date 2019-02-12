@@ -9,6 +9,11 @@
 		{
 			parent::__construct();
 			$this->load->model('AdminModel');
+			$this->load->model('CompanyModel');
+			$this->load->model('BrandModel');
+			$this->load->model('SubBrandModel');
+			$this->load->model('ProductModel');
+			$this->load->model('DataTableModel');
 			$this->load->model('AdvertiseInfoModel');
 		}
 
@@ -115,6 +120,52 @@
 						return redirect('AdvertiseInfo/AdvertiseInfo/2');
 					}
 				}
+			}
+		}
+
+		public function GetAdvertiseInfoAllInfo()
+		{
+			if ($this->session->userdata('adminUserName') == "" || $this->session->userdata('adminPassword') == "")
+			{
+				return redirect('Admin/Index');
+			}
+			else
+			{
+				$option = "dt-adinfo";
+				$table = "adinfo";
+				$selectColumn = array("Id","AD_ID","Title","BrandId","SubBrandId","CompanyId","Notes","Image","ProductId","AtypeId","AdTheme");
+				$orderColumn = array("Id","Title",null,null,null,null,null,null,null,null,null,null);
+
+				$adInfo = $this->DataTableModel->MakeDataTables($option,$table,$selectColumn,$orderColumn);
+				$sl = 1;
+				$data = array();
+
+				foreach ($adInfo as $value)
+				{
+					$info = array();
+					$info[] = $sl;
+					$info[] = $value->Title;
+					$info[] = $this->CompanyModel->GetCompanyById($value->CompanyId)->Name;
+					$info[] = $this->BrandModel->GetBrandById($value->BrandId)->Name;
+					$info[] = $this->SubBrandModel->GetSubBrandById($value->SubBrandId)->Name;
+					$info[] = $this->ProductModel->GetProductById($value->ProductId)->Name;
+					$info[] = $value->AtypeId;
+					$info[] = $value->Notes;
+					$info[] = $value->Image;
+					// $info[] = '<img src="'.base_url("images/").$value->Image.'" width="80px" height="80px">';
+					$info[] = '<button type="button" name="update" id="'.$value->Id.'" class="btn btn-warning btn-xs update">Update</button> <button type="button" name="delete" id="'.$value->Id.'" class="btn btn-danger btn-xs delete">Delete</button>';
+					$sl++;
+					$data[] = $info;
+				}
+
+				$output = array(
+					'draw' => intval($_POST['draw']),
+					'recordsTotal' => $this->DataTableModel->GetAllData($table),
+					'recordsFiltered' => $this->DataTableModel->GetFilteredData($option,$table,$selectColumn,$orderColumn),
+					'data' => $data
+				);
+
+				echo json_encode($output);
 			}
 		}
 	}
