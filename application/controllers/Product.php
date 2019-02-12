@@ -57,39 +57,6 @@
 			}
 		}
 
-		public function GetDataForSelectMenu()
-		{
-			if ($this->session->userdata('adminUserName') == "" || $this->session->userdata('adminPassword') == "")
-			{
-				return redirect('Admin/Index');
-			}
-			else
-			{
-				$output = '';
-
-				$result = $this->ProductCategoryModel->GetAllProductCategory();
-
-				if ($result)
-				{
-					$output .= '<select class="dropdown" name="product-category-id" id="product-category-id" style="width: 99%;">';
-					$output .= '<option value="">Select Product Category</option>';
-					foreach ($result as $value)
-					{
-						$output .= '<option value="'.$value->Id.'">'.$value->Name.'</option>';
-					}
-					$output .= '</select>';
-				}
-				else
-				{
-					$output .= '<select class="dropdown span10" name="product-category-id" id="product-category-id" disable>';
-					$output .= '<option value="">Product Category Not Found</option>';
-					$output .= '</select>';				
-				}
-
-				echo $output;
-			}
-		}
-
 		public function CreateProduct()
 		{
 			if ($this->session->userdata('adminUserName') == "" || $this->session->userdata('adminPassword') == "")

@@ -110,17 +110,19 @@
 						},
 					],
 				});
-
-				GetDataForSelectMenu();
+				
+				GetDataForSelectMenu("CompanyModel","GetAllCompany","#company-select-menu","company-id","Select Company",0);
 
 				// Get Media Name Data Script Start
-				function GetDataForSelectMenu()
+				function GetDataForSelectMenu(modelName,methodName,divId,idNameAttr,selectHeader,selectId)
 				{
 					$.ajax({
 						type:'ajax',
-						url:'<?php echo base_url('index.php/Brand/GetDataForSelectMenu'); ?>',
+						url:'<?php echo base_url('index.php/SelectMenu/GetDataForSelectMenu'); ?>',
+						method:'POST',
+						data:{modelName:modelName,methodName:methodName,idNameAttr:idNameAttr,selectHeader:selectHeader,selectId:selectId},
 						success:function(data){
-							$('#company-select-menu').html(data);
+							$(divId).html(data);
 						}
 					});
 				} 

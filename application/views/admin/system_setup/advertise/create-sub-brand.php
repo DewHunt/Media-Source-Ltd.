@@ -68,7 +68,7 @@
 												<div class="controls">
 													<div id="brand-select-menu">
 														<select class="dropdown" name="brand-id" id="brand-id" style="width: 99%;">
-															<option value="">Select Brand</option>
+															<option value="0">Select Brand</option>
 														</select>
 													</div>
 												</div> <!-- /controls -->       
@@ -114,34 +114,34 @@
 		<?php include APPPATH.'views/admin/master/footer.php'; ?>
 
 		<script type="text/javascript">
-			GetDataForSelectMenu("CompanyModel","GetAllCompany","#company-select-menu","company-id","Select Company");
+			GetDataForSelectMenu("CompanyModel","GetAllCompany","#company-select-menu","company-id","Select Company",0);
 
 			// Get All Data For Select Menu Script Start
 			$(document).on('change', '#company-id', function(){
 				var id = $('#company-id').val();
-				GetDataForDependantSelectMenu("BrandModel","GetBrandByForignKey","CompanyId",id,"#brand-select-menu","brand-id","Select Brand");
+				GetDataForDependantSelectMenu("BrandModel","GetBrandByForeignKey","CompanyId",id,"#brand-select-menu","brand-id","Select Brand",0);
 			});
 
-			function GetDataForSelectMenu(modelName,methodName,divId,idNameAttr,selectHeader)
+			function GetDataForSelectMenu(modelName,methodName,divId,idNameAttr,selectHeader,selectId)
 			{
 				$.ajax({
 					type:'ajax',
-					url:'<?php echo base_url('index.php/SubBrand/GetDataForSelectMenu'); ?>',
+					url:'<?php echo base_url('index.php/SelectMenu/GetDataForSelectMenu'); ?>',
 					method:'POST',
-					data:{modelName:modelName,methodName:methodName,idNameAttr:idNameAttr,selectHeader:selectHeader},
+					data:{modelName:modelName,methodName:methodName,idNameAttr:idNameAttr,selectHeader:selectHeader,selectId:selectId},
 					success:function(data){
 						$(divId).html(data);
 					}
 				});
 			} 
 
-			function GetDataForDependantSelectMenu(modelName,methodName,fieldName,id,divId,idNameAttr,selectHeader)
+			function GetDataForDependantSelectMenu(modelName,methodName,fieldName,id,divId,idNameAttr,selectHeader,selectId)
 			{
 				$.ajax({
 					type:'ajax',
-					url:'<?php echo base_url('index.php/SubBrand/GetDataForDependantSelectMenu'); ?>',
+					url:'<?php echo base_url('index.php/SelectMenu/GetDataForDependantSelectMenu'); ?>',
 					method:'POST',
-					data:{modelName:modelName,methodName:methodName,fieldName:fieldName,id:id,idNameAttr:idNameAttr,selectHeader:selectHeader},
+					data:{modelName:modelName,methodName:methodName,fieldName:fieldName,id:id,idNameAttr:idNameAttr,selectHeader:selectHeader,selectId:selectId},
 					success:function(data){
 						$(divId).html(data);
 					}

@@ -251,7 +251,7 @@
 			{
 				$.ajax({
 					type:'ajax',
-					url:'<?php echo base_url('index.php/Price/GetDataForSelectMenu'); ?>',
+					url:'<?php echo base_url('index.php/SelectMenu/GetDataForSelectMenu'); ?>',
 					method:'POST',
 					data:{modelName:modelName,methodName:methodName,idNameAttr:idNameAttr,selectHeader:selectHeader},
 					success:function(data){
@@ -264,7 +264,7 @@
 			{
 				$.ajax({
 					type:'ajax',
-					url:'<?php echo base_url('index.php/Price/GetDataForDependantSelectMenu'); ?>',
+					url:'<?php echo base_url('index.php/SelectMenu/GetDataForDependantSelectMenu'); ?>',
 					method:'POST',
 					data:{modelName:modelName,methodName:methodName,fieldName:fieldName,id:id,idNameAttr:idNameAttr,selectHeader:selectHeader},
 					success:function(data){

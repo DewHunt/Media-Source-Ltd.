@@ -9,11 +9,6 @@
 		{
 			parent::__construct();
 			$this->load->model('AdminModel');
-			$this->load->model('CompanyModel');
-			$this->load->model('BrandModel');
-			$this->load->model('SubBrandModel');
-			$this->load->model('ProductModel');
-			$this->load->model('AdvertiseCategoryModel');
 			$this->load->model('AdvertiseInfoModel');
 		}
 
@@ -60,7 +55,7 @@
 			}
 		}
 
-		public function GetDataForSelectMenu()
+		public function CreateAdvertiseInfo()
 		{
 			if ($this->session->userdata('adminUserName') == "" || $this->session->userdata('adminPassword') == "")
 			{
@@ -68,87 +63,58 @@
 			}
 			else
 			{
-				$output = '';
-				$modelName = $this->input->post('modelName');
-				$methodName = $this->input->post('methodName');
-				$idNameAttr = $this->input->post('idNameAttr');
-				$selectHeader = $this->input->post('selectHeader');
-				$selectId = $this->input->post('selectId');
+				$adinfoAdvertiseId = $this->input->post('adinfo-advertise-id');
 
-				$result = $this->$modelName->$methodName();
+				$checkAdvertiseInfo = $this->AdvertiseInfoModel->CheckAdvertiseInfoExists($adinfoAdvertiseId,"");
 
-				if ($result)
+				if ($checkAdvertiseInfo)
 				{
-					$output .= '<select class="dropdown" name="'.$idNameAttr.'" id="'.$idNameAttr.'" style="width: 99%;">';
-					$output .= '<option value="">'.$selectHeader.'</option>';
-					foreach ($result as $value)
-					{
-						if ($selectId == $value->Id)
-						{
-							$output .= '<option value="'.$value->Id.'" selected>'.$value->Name.'</option>';
-						}
-						else
-						{
-							$output .= '<option value="'.$value->Id.'">'.$value->Name.'</option>';
-						}
-					}
-					$output .= '</select>';
+					return redirect('AdvertiseInfo/AdvertiseInfo/3');
 				}
 				else
 				{
-					$output .= '<select class="dropdown" name="'.$idNameAttr.'" id="'.$idNameAttr.'" disable style="width: 99%;">';
-					$output .= '<option value="">Data Option Not Found</option>';
-					$output .= '</select>';				
-				}
+					$adinfoTitle = $this->input->post('adinfo-title');
+					$companyId = $this->input->post('company-id');
+					$brandId = $this->input->post('brand-id');
+					$subBrandId = $this->input->post('sub-brand-id');
+					$productId = $this->input->post('product-id');
+					$advertiseTypeId = $this->input->post('advertise-type-id');
+					$adinfoNote = $this->input->post('adinfo-notes');
+					$adinfoTheme = $this->input->post('advertise-theme');
+					$entryId = $this->GetAdminAllInfo()->Id;
 
-				echo $output;
-			}
-		}
+					$adinfoImage = $this->input->post('');
 
-		public function GetDataForDependantSelectMenu()
-		{
-			if ($this->session->userdata('adminUserName') == "" || $this->session->userdata('adminPassword') == "")
-			{
-				return redirect('Admin/Index');
-			}
-			else
-			{
-				$output = '';
-				$modelName = $this->input->post('modelName');
-				$methodName = $this->input->post('methodName');
-				$fieldName = $this->input->post('fieldName');
-				$id = $this->input->post('id');
-				$idNameAttr = $this->input->post('idNameAttr');
-				$selectHeader = $this->input->post('selectHeader');
-				$selectId = $this->input->post('selectId');
+					// Copy Image and Get Image New Name
+					$config['upload_path'] = "images/";
+					$config['allowed_types'] = "jpg|jpeg|png|gif";
+					$this->load->library('upload',$config);
 
-				$result = $this->$modelName->$methodName($fieldName,$id);
-
-				if ($result)
-				{
-					$output .= '<select class="dropdown" name="'.$idNameAttr.'" id="'.$idNameAttr.'" style="width: 99%;">';
-					$output .= '<option value="">'.$selectHeader.'</option>';
-					foreach ($result as $value)
+					if ($adinfoImage == "")
 					{
-						if ($selectId == $value->Id)
-						{
-							$output .= '<option value="'.$value->Id.'" selected>'.$value->Name.'</option>';
-						}
-						else
-						{
-							$output .= '<option value="'.$value->Id.'">'.$value->Name.'</option>';
-						}
+						$dbImageName = "";
 					}
-					$output .= '</select>';
-				}
-				else
-				{
-					$output .= '<select class="dropdown" name="'.$idNameAttr.'" id="'.$idNameAttr.'" disable style="width: 99%;">';
-					$output .= '<option value="">Data Option Not Found</option>';
-					$output .= '</select>';				
-				}
+					else
+					{
+						$extention = pathinfo($adinfoImage, PATHINFO_EXTENSION);
+						$slug = strtolower(preg_replace('/[^A-Za-z0-9-]+/', '_', $adinfoTitle));
+						$dbImageName = "adinfo_".$slug."_".date('ymds').".".$extention;
+						$copyImageName = $config['upload_path'].$dbImageName;
 
-				echo $output;
+						copy($_FILES['media-image']['tmp_name'],$copyImageName);
+					}
+
+					$result = $this->AdvertiseInfoModel->CreateAdvertiseInfo($adinfoAdvertiseId,$adinfoTitle,$brandId,$subBrandId,$companyId,$adinfoNote,$dbImageName,$productId,$advertiseTypeId,$adinfoTheme,$entryId);
+
+					if ($result)
+					{
+						return redirect('AdvertiseInfo/AdvertiseInfo/1');
+					}
+					else
+					{
+						return redirect('AdvertiseInfo/AdvertiseInfo/2');
+					}
+				}
 			}
 		}
 	}

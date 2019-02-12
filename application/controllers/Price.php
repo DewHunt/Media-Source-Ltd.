@@ -11,7 +11,6 @@
 			$this->load->model('AdminModel');
 			$this->load->model('MediaNameModel');
 			$this->load->model('PublicationModel');
-			$this->load->model('DayModel');
 			$this->load->model('PageModel');
 			$this->load->model('HueModel');
 			$this->load->model('PriceModel');
@@ -59,98 +58,6 @@
 				);
 
 				$this->load->view('admin/system_setup/page/create-price',$data);				
-			}
-		}
-
-		public function GetDataForSelectMenu()
-		{
-			if ($this->session->userdata('adminUserName') == "" || $this->session->userdata('adminPassword') == "")
-			{
-				return redirect('Admin/Index');
-			}
-			else
-			{
-				$output = '';
-				$modelName = $this->input->post('modelName');
-				$methodName = $this->input->post('methodName');
-				$idNameAttr = $this->input->post('idNameAttr');
-				$selectHeader = $this->input->post('selectHeader');
-				$selectId = $this->input->post('selectId');
-
-				$result = $this->$modelName->$methodName();
-
-				if ($result)
-				{
-					$output .= '<select class="dropdown" name="'.$idNameAttr.'" id="'.$idNameAttr.'" style="width: 99%;">';
-					$output .= '<option value="">'.$selectHeader.'</option>';
-					foreach ($result as $value)
-					{
-						if ($selectId == $value->Id)
-						{
-							$output .= '<option value="'.$value->Id.'" selected>'.$value->Name.'</option>';
-						}
-						else
-						{
-							$output .= '<option value="'.$value->Id.'">'.$value->Name.'</option>';
-						}
-					}
-					$output .= '</select>';
-				}
-				else
-				{
-					$output .= '<select class="dropdown" name="'.$idNameAttr.'" id="'.$idNameAttr.'" disable style="width: 99%;">';
-					$output .= '<option value="">Data Option Not Found</option>';
-					$output .= '</select>';				
-				}
-
-				echo $output;
-			}
-		}
-
-		public function GetDataForDependantSelectMenu()
-		{
-			if ($this->session->userdata('adminUserName') == "" || $this->session->userdata('adminPassword') == "")
-			{
-				return redirect('Admin/Index');
-			}
-			else
-			{
-				$output = '';
-				$modelName = $this->input->post('modelName');
-				$methodName = $this->input->post('methodName');
-				$fieldName = $this->input->post('fieldName');
-				$id = $this->input->post('id');
-				$idNameAttr = $this->input->post('idNameAttr');
-				$selectHeader = $this->input->post('selectHeader');
-				$selectId = $this->input->post('selectId');
-
-				$result = $this->$modelName->$methodName($fieldName,$id);
-
-				if ($result)
-				{
-					$output .= '<select class="dropdown" name="'.$idNameAttr.'" id="'.$idNameAttr.'" style="width: 99%;">';
-					$output .= '<option value="">'.$selectHeader.'</option>';
-					foreach ($result as $value)
-					{
-						if ($selectId == $value->Id)
-						{
-							$output .= '<option value="'.$value->Id.'" selected>'.$value->Name.'</option>';
-						}
-						else
-						{
-							$output .= '<option value="'.$value->Id.'">'.$value->Name.'</option>';
-						}
-					}
-					$output .= '</select>';
-				}
-				else
-				{
-					$output .= '<select class="dropdown" name="'.$idNameAttr.'" id="'.$idNameAttr.'" disable style="width: 99%;">';
-					$output .= '<option value="">Data Option Not Found</option>';
-					$output .= '</select>';				
-				}
-
-				echo $output;
 			}
 		}
 

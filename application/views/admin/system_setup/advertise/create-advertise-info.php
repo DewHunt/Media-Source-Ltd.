@@ -13,7 +13,7 @@
 			<div class="main-inner">
 				<div class="container">
 					<div class="row">
-						<form id="edit-profile" class="form-horizontal">
+						<form class="form-horizontal" id="adinfo-form" method="POST" action="<?= base_url('index.php/AdvertiseInfo/CreateAdvertiseInfo'); ?>">
 							<div class="span12">
 
 								<?php
@@ -82,7 +82,7 @@
 												<div class="controls">
 													<div id="brand-select-menu">
 														<select class="dropdown" name="brand-id" id="brand-id" style="width: 99%;">
-															<option value="">Select Brand</option>
+															<option value="0">Select Brand</option>
 														</select>
 													</div>
 												</div> <!-- /controls -->       
@@ -93,7 +93,7 @@
 												<div class="controls">
 													<div id="sub-brand-select-menu">
 														<select class="dropdown" name="sub-brand-id" id="sub-brand-id" style="width: 99%;">
-															<option value="">Select Sub Brand</option>
+															<option value="0">Select Sub Brand</option>
 														</select>
 													</div>
 												</div> <!-- /controls -->       
@@ -178,7 +178,7 @@
 			{
 				$.ajax({
 					type:'ajax',
-					url:'<?php echo base_url('index.php/AdvertiseInfo/GetDataForSelectMenu'); ?>',
+					url:'<?php echo base_url('index.php/SelectMenu/GetDataForSelectMenu'); ?>',
 					method:'POST',
 					data:{modelName:modelName,methodName:methodName,idNameAttr:idNameAttr,selectHeader:selectHeader,selectId:selectId},
 					success:function(data){
@@ -191,7 +191,7 @@
 			{
 				$.ajax({
 					type:'ajax',
-					url:'<?php echo base_url('index.php/AdvertiseInfo/GetDataForDependantSelectMenu'); ?>',
+					url:'<?php echo base_url('index.php/SelectMenu/GetDataForDependantSelectMenu'); ?>',
 					method:'POST',
 					data:{modelName:modelName,methodName:methodName,fieldName:fieldName,id:id,idNameAttr:idNameAttr,selectHeader:selectHeader,selectId:selectId},
 					success:function(data){
@@ -199,7 +199,67 @@
 					}
 				});
 			} 
-			// Get All Data For Select Menu Script End			
+			// Get All Data For Select Menu Script End
+
+			function Validation()
+			{
+				var adinfoAdvertiseId = $('#adinfo-advertise-id').val();
+				var adinfoTitle = $('#adinfo-title').val();
+				var companyId = $('#company-id').val();
+				var brandId = $('#brand-id').val();
+				var subBrandId = $('#sub-brand-id').val();
+				var productId = $('#product-id').val();
+				var advertiseTypeId = $('#advertise-type-id').val();
+
+				if (adinfoAdvertiseId == "")
+				{
+					Message("Oops! Advertise ID Can't Be Empty. Please Select Advertise ID");
+					$('#adinfo-advertise-id').focus();
+					return false;
+				}
+
+				if (adinfoTitle == "")
+				{
+					Message("Oops! Title Can't Be Empty. Please Select Title");
+					$('#adinfo-title').focus();
+					return false;
+				}
+
+				if (companyId == 0)
+				{
+					Message("Oops! Company Can't Be Empty. Please Select Company");
+					$('#company-id').focus();
+					return false;
+				}
+
+				if (brandId == 0)
+				{
+					Message("Oops! Brand Can't Be Empty. Please Select Brand");
+					$('#brand-id').focus();
+					return false;
+				}
+
+				if (subBrandId == 0)
+				{
+					Message("Oops! Sub Brand Can't Be Empty. Please Select Sub Brand");
+					$('#sub-brand-id').focus();
+					return false;
+				}
+
+				if (productId == 0)
+				{
+					Message("Oops! Product Can't Be Empty. Please Select Product");
+					$('#product-id').focus();
+					return false;
+				}
+
+				if (advertiseTypeId == 0)
+				{
+					Message("Oops! Advertise Type Can't Be Empty. Please Select Advertise Type");
+					$('#advertise-type-id').focus();
+					return false;
+				}
+			}			
 		</script>
 	</body>
 </html>

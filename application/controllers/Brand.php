@@ -57,39 +57,6 @@
 			}
 		}
 
-		public function GetDataForSelectMenu()
-		{
-			if ($this->session->userdata('adminUserName') == "" || $this->session->userdata('adminPassword') == "")
-			{
-				return redirect('Admin/Index');
-			}
-			else
-			{
-				$output = '';
-
-				$result = $this->CompanyModel->GetAllCompany();
-
-				if ($result)
-				{
-					$output .= '<select class="dropdown" name="company-id" id="company-id" style="width: 99%;">';
-					$output .= '<option value="">Select Company</option>';
-					foreach ($result as $value)
-					{
-						$output .= '<option value="'.$value->Id.'">'.$value->Name.'</option>';
-					}
-					$output .= '</select>';
-				}
-				else
-				{
-					$output .= '<select class="dropdown span10" name="company-id" id="company-id" disable>';
-					$output .= '<option value="">Company Not Found</option>';
-					$output .= '</select>';				
-				}
-
-				echo $output;
-			}
-		}
-
 		public function CreateBrand()
 		{
 			if ($this->session->userdata('adminUserName') == "" || $this->session->userdata('adminPassword') == "")

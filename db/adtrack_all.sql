@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 11, 2019 at 02:33 PM
+-- Generation Time: Feb 12, 2019 at 02:30 PM
 -- Server version: 5.5.36
 -- PHP Version: 5.4.25
 
@@ -228,7 +228,14 @@ CREATE TABLE IF NOT EXISTS `adinfo` (
   `DeleteDateTime` datetime DEFAULT NULL,
   `State` tinyint(3) DEFAULT '1',
   PRIMARY KEY (`Id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=4 ;
+
+--
+-- Dumping data for table `adinfo`
+--
+
+INSERT INTO `adinfo` (`Id`, `AD_ID`, `Title`, `BrandId`, `SubBrandId`, `CompanyId`, `Notes`, `Image`, `ProductId`, `AtypeId`, `AdTheme`, `EntryBy`, `EntryDateTime`, `UpdateBy`, `UpdateTime`, `DeleteBy`, `DeleteDateTime`, `State`) VALUES
+(3, 'ad-001', 'Dew Hunt', 25, 7, 1, 'This Is Private Ad Notes.', '', 2, '1', 'This Is Private Ad Theme.', 1, '2019-02-12 13:40:47', NULL, NULL, NULL, NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -968,7 +975,7 @@ CREATE TABLE IF NOT EXISTS `price` (
   `State` tinyint(3) DEFAULT '1',
   PRIMARY KEY (`Id`),
   UNIQUE KEY `Name` (`Name`,`MediaId`,`PublicationId`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=162 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=161 ;
 
 --
 -- Dumping data for table `price`
@@ -1020,7 +1027,7 @@ CREATE TABLE IF NOT EXISTS `pricedetails` (
   `State` tinyint(3) DEFAULT '1',
   PRIMARY KEY (`Id`),
   UNIQUE KEY `Name` (`Name`,`PageNoId`,`Col`,`Inch`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=4457 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=4452 ;
 
 --
 -- Dumping data for table `pricedetails`
@@ -1500,7 +1507,7 @@ CREATE TABLE IF NOT EXISTS `subbrand` (
   `DeleteDateTime` datetime DEFAULT NULL,
   `State` tinyint(3) DEFAULT '1',
   PRIMARY KEY (`Id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=40 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=38 ;
 
 --
 -- Dumping data for table `subbrand`

@@ -137,17 +137,17 @@
 					],
 				});
 
-				GetDataForSelectMenu("MediaNameModel","GetAllMediaName","#media-select-menu","media-name-id","Select Media");
-				GetDataForSelectMenu("PublicationTypeModel","GetAllPublicationType","#publication-type-select-menu","publication-type-id","Select Publication Type");
-				GetDataForSelectMenu("PublicationPlaceModel","GetAllPublicationPlace","#publication-place-select-menu","publication-place-id","Select Publication Place");
-				GetDataForSelectMenu("PublicationFrequencyModel","GetAllPublicationFrequency","#publication-frequency-select-menu","publication-frequency-id","Select Publication Frequency");
+				GetDataForSelectMenu("MediaNameModel","GetAllMediaName","#media-select-menu","media-name-id","Select Media",0);
+				GetDataForSelectMenu("PublicationTypeModel","GetAllPublicationType","#publication-type-select-menu","publication-type-id","Select Publication Type",0);
+				GetDataForSelectMenu("PublicationPlaceModel","GetAllPublicationPlace","#publication-place-select-menu","publication-place-id","Select Publication Place",0);
+				GetDataForSelectMenu("PublicationFrequencyModel","GetAllPublicationFrequency","#publication-frequency-select-menu","publication-frequency-id","Select Publication Frequency",0);
 
 				// Get Media Name Data Script Start
 				function GetDataForSelectMenu(modelName,methodName,divId,idNameAttr,selectHeader)
 				{
 					$.ajax({
 						type:'ajax',
-						url:'<?php echo base_url('index.php/Publication/GetDataForSelectMenu'); ?>',
+						url:'<?php echo base_url('index.php/SelectMenu/GetDataForSelectMenu'); ?>',
 						method:'POST',
 						data:{modelName:modelName,methodName:methodName,idNameAttr:idNameAttr,selectHeader:selectHeader},
 						success:function(data){

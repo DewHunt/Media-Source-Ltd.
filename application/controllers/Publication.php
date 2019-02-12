@@ -11,7 +11,6 @@
 			$this->load->model('AdminModel');
 			$this->load->model('MediaNameModel');
 			$this->load->model('PublicationTypeModel');
-			$this->load->model('PublicationPlaceModel');
 			$this->load->model('PublicationFrequencyModel');
 			$this->load->model('DataTableModel');
 			$this->load->model('PublicationModel');
@@ -57,43 +56,6 @@
 				);
 
 				$this->load->view('admin/system_setup/media/create-publication',$data);				
-			}
-		}
-
-		public function GetDataForSelectMenu()
-		{
-			if ($this->session->userdata('adminUserName') == "" || $this->session->userdata('adminPassword') == "")
-			{
-				return redirect('Admin/Index');
-			}
-			else
-			{
-				$output = '';
-				$modelName = $this->input->post('modelName');
-				$methodName = $this->input->post('methodName');
-				$idNameAttr = $this->input->post('idNameAttr');
-				$selectHeader = $this->input->post('selectHeader');
-
-				$result = $this->$modelName->$methodName();
-
-				if ($result)
-				{
-					$output .= '<select class="dropdown" name="'.$idNameAttr.'" id="'.$idNameAttr.'" style="width: 99%;">';
-					$output .= '<option value="">'.$selectHeader.'</option>';
-					foreach ($result as $value)
-					{
-						$output .= '<option value="'.$value->Id.'">'.$value->Name.'</option>';
-					}
-					$output .= '</select>';
-				}
-				else
-				{
-					$output .= '<select class="dropdown" name="'.$idNameAttr.'" id="'.$idNameAttr.'" disable>';
-					$output .= '<option value="">Data Option Not Found</option>';
-					$output .= '</select>';				
-				}
-
-				echo $output;
 			}
 		}
 
