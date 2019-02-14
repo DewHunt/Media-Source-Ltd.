@@ -56,29 +56,29 @@
 									
 									<div class="widget-content">
 										<fieldset>
-											<div class="control-group">											
-												<label class="control-label" for="advertise-id">Advetise Id</label>
+											<div class="control-group">	
+												<label class="control-label" for="advertise-id"><span class="mendatory">*</span>&nbsp;Advetise Id</label>
 												<div class="controls">
 													<input type="text" class="span10" id="adinfo-advertise-id" name="adinfo-advertise-id" value="">
 												</div> <!-- /controls -->				
 											</div> <!-- /control-group -->
 											
-											<div class="control-group">											
-												<label class="control-label" for="title">Title</label>
+											<div class="control-group">
+												<label class="control-label" for="title"><span class="mendatory">*</span>&nbsp;Title</label>
 												<div class="controls">
 													<input type="text" class="span10" id="adinfo-title" name="adinfo-title" value="">
 												</div> <!-- /controls -->				
 											</div> <!-- /control-group -->
 											
 											<div class="control-group">                     
-												<label class="control-label" for="company">Company</label>
+												<label class="control-label" for="company"><span class="mendatory">*</span>&nbsp;Company</label>
 												<div class="controls">
 													<div id="company-select-menu"></div>
 												</div> <!-- /controls -->       
 											</div> <!-- /control-group -->
 											
 											<div class="control-group">                     
-												<label class="control-label" for="brand">Brand</label>
+												<label class="control-label" for="brand"><span class="mendatory">*</span>&nbsp;Brand</label>
 												<div class="controls">
 													<div id="brand-select-menu">
 														<select class="dropdown" name="brand-id" id="brand-id" style="width: 99%;">
@@ -89,7 +89,7 @@
 											</div> <!-- /control-group -->
 											
 											<div class="control-group">                     
-												<label class="control-label" for="subbrand">Sub Brand</label>
+												<label class="control-label" for="subbrand"><span class="mendatory">*</span>&nbsp;Sub Brand</label>
 												<div class="controls">
 													<div id="sub-brand-select-menu">
 														<select class="dropdown" name="sub-brand-id" id="sub-brand-id" style="width: 99%;">
@@ -100,21 +100,21 @@
 											</div> <!-- /control-group -->
 											
 											<div class="control-group">                     
-												<label class="control-label" for="product">Product</label>
+												<label class="control-label" for="product"><span class="mendatory">*</span>&nbsp;Product</label>
 												<div class="controls">
 													<div id="product-select-menu"></div>
 												</div> <!-- /controls -->       
 											</div> <!-- /control-group -->
 											
 											<div class="control-group">                     
-												<label class="control-label" for="advertise-type">Advertise Type</label>
+												<label class="control-label" for="advertise-type"><span class="mendatory">*</span>&nbsp;Advertise Type</label>
 												<div class="controls">
 													<div id="advertise-type-select-menu"></div>
 												</div> <!-- /controls -->       
 											</div> <!-- /control-group -->
 											
 											<div class="control-group">										
-												<label class="control-label" for="notes">Notes</label>
+												<label class="control-label" for="notes">Advertise Notes</label>
 												<div class="controls">
 													<textarea class="span10" rows="3" id="adinfo-notes" name="adinfo-notes"></textarea>
 												</div> <!-- /controls -->				
