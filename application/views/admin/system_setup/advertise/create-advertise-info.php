@@ -13,7 +13,7 @@
 			<div class="main-inner">
 				<div class="container">
 					<div class="row">
-						<form class="form-horizontal" id="adinfo-form" method="POST" action="<?= base_url('index.php/AdvertiseInfo/CreateAdvertiseInfo'); ?>">
+						<form class="form-horizontal" id="adinfo-form" method="POST" action="<?= base_url('index.php/AdvertiseInfo/CreateAdvertiseInfo'); ?>" enctype="multipart/form-data">
 							<div class="span12">
 
 								<?php
@@ -59,7 +59,7 @@
 											<div class="control-group">	
 												<label class="control-label" for="advertise-id"><span class="mendatory">*</span>&nbsp;Advetise Id</label>
 												<div class="controls">
-													<input type="text" class="span10" id="adinfo-advertise-id" name="adinfo-advertise-id" value="">
+													<input type="text" class="span10" id="adinfo-ad-id" name="adinfo-ad-id" value="">
 												</div> <!-- /controls -->				
 											</div> <!-- /control-group -->
 											
@@ -123,7 +123,7 @@
 											<div class="control-group">									
 												<label class="control-label" for="advertise-theme">Advertise Theme</label>
 												<div class="controls">
-													<textarea class="span10" rows="3" id="advertise-theme" name="advertise-theme"></textarea>
+													<textarea class="span10" rows="3" id="adinfo-theme" name="adinfo-theme"></textarea>
 												</div> <!-- /controls -->				
 											</div> <!-- /control-group -->
 											
@@ -203,13 +203,13 @@
 
 			function Validation()
 			{
-				var adinfoAdvertiseId = $('#adinfo-advertise-id').val();
+				var adinfoAdvertiseId = $('#adinfo-ad-id').val();
 				var adinfoTitle = $('#adinfo-title').val();
 				var companyId = $('#company-id').val();
 				var brandId = $('#brand-id').val();
 				var subBrandId = $('#sub-brand-id').val();
 				var productId = $('#product-id').val();
-				var advertiseTypeId = $('#advertise-type-id').val();
+				var advertiseTypeId = $('#adinfo-type-id').val();
 
 				if (adinfoAdvertiseId == "")
 				{

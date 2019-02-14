@@ -13,6 +13,7 @@
 			$this->load->model('BrandModel');
 			$this->load->model('SubBrandModel');
 			$this->load->model('ProductModel');
+			$this->load->model('AdvertiseCategoryModel');
 			$this->load->model('DataTableModel');
 			$this->load->model('AdvertiseInfoModel');
 		}
@@ -68,9 +69,9 @@
 			}
 			else
 			{
-				$adinfoAdvertiseId = $this->input->post('adinfo-advertise-id');
+				$adinfoADID = $this->input->post('adinfo-ad-id');
 
-				$checkAdvertiseInfo = $this->AdvertiseInfoModel->CheckAdvertiseInfoExists($adinfoAdvertiseId,"");
+				$checkAdvertiseInfo = $this->AdvertiseInfoModel->CheckAdvertiseInfoExists($adinfoADID,"");
 
 				if ($checkAdvertiseInfo)
 				{
@@ -85,7 +86,7 @@
 					$productId = $this->input->post('product-id');
 					$advertiseTypeId = $this->input->post('advertise-type-id');
 					$adinfoNote = $this->input->post('adinfo-notes');
-					$adinfoTheme = $this->input->post('advertise-theme');
+					$adinfoTheme = $this->input->post('adinfo-theme');
 					$entryId = $this->GetAdminAllInfo()->Id;
 
 					// Copy Image and Get Image New Name
@@ -102,14 +103,14 @@
 					else
 					{
 						$extention = pathinfo($adinfoImage, PATHINFO_EXTENSION);
-						$slug = strtolower(preg_replace('/[^A-Za-z0-9-]+/', '_', $adinfoTitle));
+						$slug = strtolower(preg_replace('/[^A-Za-z0-9-]+/', '_', $adinfoADID));
 						$dbImageName = "adinfo_".$slug."_".date('ymds').".".$extention;
 						$copyImageName = $config['upload_path'].$dbImageName;
 
-						copy($_FILES['media-image']['tmp_name'],$copyImageName);
+						copy($_FILES['adinfo-image']['tmp_name'],$copyImageName);
 					}
 
-					$result = $this->AdvertiseInfoModel->CreateAdvertiseInfo($adinfoAdvertiseId,$adinfoTitle,$brandId,$subBrandId,$companyId,$adinfoNote,$dbImageName,$productId,$advertiseTypeId,$adinfoTheme,$entryId);
+					$result = $this->AdvertiseInfoModel->CreateAdvertiseInfo($adinfoADID,$adinfoTitle,$brandId,$subBrandId,$companyId,$adinfoNote,$dbImageName,$productId,$advertiseTypeId,$adinfoTheme,$entryId);
 
 					if ($result)
 					{
@@ -149,10 +150,9 @@
 					$info[] = $this->BrandModel->GetBrandById($value->BrandId)->Name;
 					$info[] = $this->SubBrandModel->GetSubBrandById($value->SubBrandId)->Name;
 					$info[] = $this->ProductModel->GetProductById($value->ProductId)->Name;
-					$info[] = $value->AtypeId;
+					$info[] = $this->AdvertiseCategoryModel->GetAdvertiseCategoryById($value->AtypeId)->Name;
 					$info[] = $value->Notes;
-					$info[] = $value->Image;
-					// $info[] = '<img src="'.base_url("images/").$value->Image.'" width="80px" height="80px">';
+					$info[] = '<img src="'.base_url("images/").$value->Image.'" width="50px" height="50px">';
 					$info[] = '<button type="button" name="update" id="'.$value->Id.'" class="btn btn-warning btn-xs update">Update</button> <button type="button" name="delete" id="'.$value->Id.'" class="btn btn-danger btn-xs delete">Delete</button>';
 					$sl++;
 					$data[] = $info;
@@ -166,6 +166,122 @@
 				);
 
 				echo json_encode($output);
+			}
+		}
+
+		public function GetAdvertiseInfoById()
+		{
+			if ($this->session->userdata('adminUserName') == "" || $this->session->userdata('adminPassword') == "")
+			{
+				return redirect('Admin/Index');
+			}
+			else
+			{
+				$output = array();
+				$adinfoId = $this->input->post('adinfoId');
+
+				$data = $this->AdvertiseInfoModel->GetAdvertiseInfoById($adinfoId);
+
+				$output['adinfoId'] = $data->Id;
+				$output['adinfoADID'] = $data->AD_ID;
+				$output['adinfoTitle'] = $data->Title;
+				$output['brandId'] = $data->BrandId;
+				$output['subBrandId'] = $data->SubBrandId;
+				$output['companyId'] = $data->CompanyId;
+				$output['adinfoNotes'] = $data->Notes;
+				$output['previousMediaImage'] = $data->Image;
+				$output['productId'] = $data->ProductId;
+				$output['advertiseTypeId'] = $data->AtypeId;
+				$output['adinfoTheme'] = $data->AdTheme;
+
+				if ($data->Image == "")
+				{
+					$output['adinfoImage'] = '<input type="hidden" name="previous-adinfo-image" id="previous-adinfo-image" value="">';
+				}
+				else
+				{
+					$output['adinfoImage'] = '<img src="'.base_url("images/").$data->Image.'" class="img-thumbnail" width="80px" height="80px"> <input type="hidden" name="previous-adinfo-image" id="previous-adinfo-image" value="'.$data->Image.'">';
+				}
+
+				echo json_encode($output);
+			}
+		}
+
+		public function UpdateAdvertiseInfo()
+		{
+			if ($this->session->userdata('adminUserName') == "" || $this->session->userdata('adminPassword') == "")
+			{
+				return redirect('Admin/Index');
+			}
+			else
+			{
+				$adinfoADID = $this->input->post('adinfo-ad-id');
+				$adinfoId = $this->input->post('adinfo-id');
+
+				$checkAdvertiseInfo = $this->AdvertiseInfoModel->CheckAdvertiseInfoExists($adinfoADID,$adinfoId);
+
+				if ($checkAdvertiseInfo)
+				{
+					echo "Oops! Sorry, This Advertise Info Alredy Created.";
+				}
+				else
+				{
+					$adinfoTitle = $this->input->post('adinfo-title');
+					$companyId = $this->input->post('company-id');
+					$brandId = $this->input->post('brand-id');
+					$subBrandId = $this->input->post('sub-brand-id');
+					$productId = $this->input->post('product-id');
+					$advertiseTypeId = $this->input->post('advertise-type-id');
+					$adinfoNote = $this->input->post('adinfo-notes');
+					$adinfoTheme = $this->input->post('adinfo-theme');
+
+					$updateId = $this->GetAdminAllInfo()->Id;
+					$newAdinfoImage = "";
+
+					if (!empty($_FILES["new-adinfo-image"]["name"]))
+					{
+						$adinfoImage = $_FILES['new-adinfo-image']['name'];
+						$previousImage = $this->input->post('previous-adinfo-image');
+
+						// Copy Image and Get Image New Name
+						$config['upload_path'] = "images/";
+						$config['allowed_types'] = "jpg|jpeg|png|gif";
+						$this->load->library('upload',$config);
+
+						$extention = pathinfo($adinfoImage, PATHINFO_EXTENSION);
+						$slug = strtolower(preg_replace('/[^A-Za-z0-9-]+/', '_', $adinfoADID));
+						$dbImageName = "adinfo_".$slug."_".date('ymds').".".$extention;
+						$copyImageName = $config['upload_path'].$dbImageName;
+
+						if ($previousImage != "")
+						{					
+							$deleteImage = $config['upload_path'].$previousImage;
+
+							if (file_exists($deleteImage))
+							{
+								chown($deleteImage, 666);
+								unlink($deleteImage);
+							}
+						}
+
+						copy($_FILES['new-adinfo-image']['tmp_name'],$copyImageName);
+					}
+					else
+					{
+						$dbImageName = $this->input->post("previous-adinfo-image");
+					}
+
+					$result = $this->AdvertiseInfoModel->UpdateAdvertiseInfo($adinfoId,$adinfoADID,$adinfoTitle,$brandId,$subBrandId,$companyId,$adinfoNote,$dbImageName,$productId,$advertiseTypeId,$adinfoTheme,$updateId);
+
+					if ($result)
+					{
+						echo "Greate! You Updated Your Advertise Info Successfully";
+					}
+					else
+					{
+						echo "Oops! Sorry, Your Advertise Info Can't Be Updated";
+					}
+				}
 			}
 		}
 	}

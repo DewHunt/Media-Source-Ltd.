@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 12, 2019 at 02:30 PM
+-- Generation Time: Feb 14, 2019 at 01:53 PM
 -- Server version: 5.5.36
 -- PHP Version: 5.4.25
 
@@ -228,14 +228,15 @@ CREATE TABLE IF NOT EXISTS `adinfo` (
   `DeleteDateTime` datetime DEFAULT NULL,
   `State` tinyint(3) DEFAULT '1',
   PRIMARY KEY (`Id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=10 ;
 
 --
 -- Dumping data for table `adinfo`
 --
 
 INSERT INTO `adinfo` (`Id`, `AD_ID`, `Title`, `BrandId`, `SubBrandId`, `CompanyId`, `Notes`, `Image`, `ProductId`, `AtypeId`, `AdTheme`, `EntryBy`, `EntryDateTime`, `UpdateBy`, `UpdateTime`, `DeleteBy`, `DeleteDateTime`, `State`) VALUES
-(3, 'ad-001', 'Dew Hunt', 25, 7, 1, 'This Is Private Ad Notes.', '', 2, '1', 'This Is Private Ad Theme.', 1, '2019-02-12 13:40:47', NULL, NULL, NULL, NULL, 1);
+(8, 'ad-001', 'Dew Hunt', 6, 17, 2, 'This Is Private Advertise Notes.', 'adinfo_ad-001_19021451.jpg', 2, '1', 'This Is Private Advertise Theme.', 1, '2019-02-14 12:31:22', 1, '2019-02-14 12:51:51', NULL, NULL, 1),
+(9, 'ad-002', 'Salman', 28, 32, 1, 'This Is Private Advertise Notes.', 'adinfo_ad-002_19021427.png', 1, '2', 'This Is Private Advertise Notes.', 1, '2019-02-14 12:32:41', 1, '2019-02-14 12:56:24', NULL, NULL, 1);
 
 -- --------------------------------------------------------
 
