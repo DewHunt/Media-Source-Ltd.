@@ -83,12 +83,12 @@
 					$adinfoTheme = $this->input->post('advertise-theme');
 					$entryId = $this->GetAdminAllInfo()->Id;
 
-					$adinfoImage = $this->input->post('');
-
 					// Copy Image and Get Image New Name
 					$config['upload_path'] = "images/";
 					$config['allowed_types'] = "jpg|jpeg|png|gif";
 					$this->load->library('upload',$config);
+
+					$adinfoImage = $_FILES['adinfo-image']['name'];
 
 					if ($adinfoImage == "")
 					{
