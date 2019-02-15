@@ -159,7 +159,6 @@
 										</fieldset>
 									</div> <!-- /widget-content -->
 								</div> <!-- /widget -->
-								<!-- /widget --> 
 							</div>
 							<!-- /span12 -->
 						</form>

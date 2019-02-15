@@ -7,13 +7,13 @@
 	<body>
 		<?php include APPPATH.'views/admin/master/navbar.php'; ?>
 
-		<?php include APPPATH.'views/admin/master/system-sub-navbar.php'; ?>
+		<?php include APPPATH.'views/admin/master/data-entry-sub-navbar.php'; ?>
 		
 		<div class="main">
 			<div class="main-inner">
 				<div class="container">
 					<div class="row">
-						<?php include APPPATH.'views/admin/master/system-left-menu.php'?>
+						<?php include APPPATH.'views/admin/master/data-entry-left-menu.php'?>
 						
 						<div class="span9">
 

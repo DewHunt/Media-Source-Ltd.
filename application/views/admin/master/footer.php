@@ -35,8 +35,12 @@
 		<script type="text/javascript" src="<?= base_url('assets/js/full-calendar/fullcalendar.min.js'); ?>"></script>
 		
 		<script type="text/javascript" src="<?= base_url('assets/js/base.js'); ?>"></script>
+
+		<script src="<?= base_url('assets/datepicker/js/bootstrap-datepicker.js'); ?>"></script>
 		
 		<script src="<?= base_url('assets/chosen/chosen.jquery.js'); ?>"></script>
+		
+		<script src="<?= base_url('assets/multiple-select.js'); ?>"></script>
 
 		<!-- Toast Message JS File Include -->
 		<script type="text/javascript" src="<?= base_url('assets/js/toast-message.js'); ?>"></script>

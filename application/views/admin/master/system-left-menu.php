@@ -47,6 +47,7 @@
 													<li><a href="<?= base_url('index.php/Company/Index'); ?>">Company</a></li>
 													<li><a href="<?= base_url('index.php/Brand/Index'); ?>">Brand</a></li>
 													<li><a href="<?= base_url('index.php/SubBrand/Index'); ?>">Sub Brand</a></li>
+													<li><a href="<?= base_url('index.php/Keyword/Index'); ?>">Keyword</a></li>
 												</ul>
 											</li>
 										</ul>

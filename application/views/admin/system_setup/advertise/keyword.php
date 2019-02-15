@@ -19,11 +19,11 @@
 							<div class="widget">
 								<div class="widget-header">
 									<i class="icon-th-list"></i>
-									<h3>All Company Information</h3>
-									<a href="<?= base_url('index.php/Company/Company'); ?>" type="submit" class="btn btn-primary" target="_blank">Create Company</a> 
+									<h3>All Keyword Information</h3>
+									<a href="<?= base_url('index.php/Keyword/Keyword'); ?>" type="submit" class="btn btn-primary" target="_blank">Create Keyword</a> 
 								</div>  <!-- /widget-header -->
 								<div class="widget-content">
-									<table id="company-data" class="table table-striped table-bordered">
+									<table id="keyword-data" class="table table-striped table-bordered">
 										<thead>
 											<tr>
 												<th>Sl</th>
@@ -43,27 +43,27 @@
 										</tfoot>
 									</table>
 
-									<div id="company-modal" class="modal fade">
+									<div id="keyword-modal" class="modal fade">
 										<div class="modal-dialog">
-											<form method="POST" id="company-form">
+											<form method="POST" id="keyword-form">
 												<div class="modal-content">
 													<div class="modal-header">
 														<button type="button" class="close" data-dismiss="modal">&times;</button>
-														<h3 class="modal-title">Update Company</h3>
+														<h3 class="modal-title">Update Keyword</h3>
 													</div>
 
 													<div class="modal-body">
-														<label>Company Name&nbsp;<span class="mendatory">*</span></label>
-														<input type="text" name="company-name" id="company-name" class="form-control" style="width: 100%;">
+														<label>Keyword Name&nbsp;<span class="mendatory">*</span></label>
+														<input type="text" name="keyword-name" id="keyword-name" class="form-control" style="width: 100%;">
 
 														<label>Description</label>
-														<textarea rows="3" name="company-description" id="company-description" class="form-control" style="width: 100%;"></textarea>
+														<textarea rows="3" name="keyword-description" id="keyword-description" class="form-control" style="width: 100%;"></textarea>
 													</div>
 
 													<div class="modal-footer">
-														<input type="hidden" name="company-id" id="company-id" value="">
+														<input type="hidden" name="keyword-id" id="keyword-id" value="">
 
-														<input type="submit" name="update-company" id="update-company" class="btn btn-success" value="Update">
+														<input type="submit" name="update-keyword" id="update-keyword" class="btn btn-success" value="Update">
 
 														<button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
 													</div>
@@ -88,12 +88,12 @@
 					$(this).toggleClass('tap');
 				});
 
-				var dataTable = $('#company-data').DataTable({
+				var dataTable = $('#keyword-data').DataTable({
 					'processing':true,
 					'serverSide':true,
 					'order':[],
 					'ajax':{
-						url:'<?php echo base_url('index.php/Company/GetCompanyAllInfo'); ?>',
+						url:'<?php echo base_url('index.php/Keyword/GetKeywordAllInfo'); ?>',
 						type:'POST'
 					},
 					'dataType':'json',
@@ -107,46 +107,46 @@
 
 
 				$(document).on('click', '.update', function(){
-					var companyId = $(this).attr('id');
+					var keywordId = $(this).attr('id');
 
 					$.ajax({
-						url:'<?php echo base_url("index.php/Company/GetCompanyById"); ?>',
+						url:'<?php echo base_url("index.php/Keyword/GetKeywordById"); ?>',
 						method:'POST',
-						data:{companyId:companyId},
+						data:{keywordId:keywordId},
 						dataType:'json',
 						success:function(data){
-							$('#company-modal').modal('show');
-							$('#company-name').val(data.companyName);
-							$('#company-description').val(data.companyDescription);
-							$('#company-id').val(data.companyId);
+							$('#keyword-modal').modal('show');
+							$('#keyword-name').val(data.keywordName);
+							$('#keyword-description').val(data.keywordDescription);
+							$('#keyword-id').val(data.keywordId);
 						}
 					});
 				});
 
-				$(document).on('submit', '#company-form', function(event){
+				$(document).on('submit', '#keyword-form', function(event){
 					event.preventDefault();
 
-					var companyName = $('#company-name').val();
-					var companyDescription = $('#company-description').val();
+					var keywordName = $('#keyword-name').val();
+					var keywordDescription = $('#keyword-description').val();
 
-					if (companyName == "")
+					if (keywordName == "")
 					{
-						alert("Oops! Company Name Must Be Filled");
-						$('#company-name').css({'border':'1px solid red'});
+						alert("Oops! Keyword Name Must Be Filled");
+						$('#keyword-name').css({'border':'1px solid red'});
 						return false;
 					}
 					else
 					{
 						$.ajax({
-							url:'<?php echo base_url("index.php/Company/UpdateCompany"); ?>',
+							url:'<?php echo base_url("index.php/Keyword/UpdateKeyword"); ?>',
 							method:'POST',
 							data:new FormData(this),
 							contentType:false,
 							processData:false,
 							success:function(data){
 								alert(data);
-								$('#company-form')[0].reset();
-								$('#company-modal').modal('hide');
+								$('#keyword-form')[0].reset();
+								$('#keyword-modal').modal('hide');
 								dataTable.ajax.reload();
 							}
 						});
@@ -154,14 +154,14 @@
 				});
 
 				$(document).on('click', '.delete', function(){
-					var companyId = $(this).attr('id');
+					var keywordId = $(this).attr('id');
 
 					if (confirm("Wait!, Are Your 100% Sure, You Really Want to Delete This?"))
 					{
 						$.ajax({
-							url:'<?php echo base_url('index.php/Company/DeleteCompany'); ?>',
+							url:'<?php echo base_url('index.php/Keyword/DeleteKeyword'); ?>',
 							method:'POST',
-							data:{companyId:companyId},
+							data:{keywordId:keywordId},
 							success:function(data){
 								alert(data);
 								dataTable.ajax.reload();

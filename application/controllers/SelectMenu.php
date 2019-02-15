@@ -12,8 +12,11 @@
 			$this->load->model('BrandModel');
 			$this->load->model('CompanyModel');
 			$this->load->model('HueModel');
+			$this->load->model('KeywordModel');
 			$this->load->model('SubBrandModel');
 			$this->load->model('MediaNameModel');
+			$this->load->model('NewsTypeModel');
+			$this->load->model('NewsCategoryModel');
 			$this->load->model('PageModel');
 			$this->load->model('ProductModel');
 			$this->load->model('ProductCategoryModel');

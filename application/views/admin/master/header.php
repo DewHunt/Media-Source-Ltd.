@@ -47,6 +47,9 @@
 		<!-- Toast Message CSS File Include -->
 		<?= link_tag('assets/css/toast-message.css'); ?>
 
+		<!-- Toast Multiple Select CSS File Include -->
+		<?= link_tag('assets/multiple-select.css'); ?>
+
 		<!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
 		<!--[if lt IE 9]>
 			<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
@@ -61,5 +64,21 @@
 
 			.paginition{
 				margin: 0px;
+			}
+
+			#ded-input{
+				width: 90px;
+			}
+
+			#ded-pos-input{
+				width: 30px;
+			}
+
+			#ded-col-input, #ded-inch-input{
+				width: 20px;
+			}
+
+			#ded-select{
+				width: 80px;
 			}
 		</style>

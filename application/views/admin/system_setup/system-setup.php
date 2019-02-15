@@ -133,14 +133,6 @@
 										<!-- /widget-header -->
 										<div class="widget-content">
 											<div class="shortcuts">
-												<a href="<?= base_url('index.php/AdvertiseCategory/Index'); ?>" class="shortcut">
-													<i class="shortcut-icon icon-file"></i> 
-													<span class="shortcut-label">Advertise Category</span>
-												</a>
-												<a href="<?= base_url('index.php/AdvertiseInfo/Index'); ?>" class="shortcut">
-													<i class="shortcut-icon icon-file"></i>
-													<span class="shortcut-label">Advertise Info</span> 
-												</a>
 												<a href="<?= base_url('index.php/Company/Index'); ?>" class="shortcut">
 													<i class="shortcut-icon icon-file"></i> 
 													<span class="shortcut-label">Company</span> 
@@ -152,7 +144,19 @@
 												<a href="<?= base_url('index.php/SubBrand/Index'); ?>" class="shortcut"> 
 													<i class="shortcut-icon icon-file"></i>
 													<span class="shortcut-label">Sub Brand</span> 
+												</a>
+												<a href="<?= base_url('index.php/Keyword/Index'); ?>" class="shortcut"> 
+													<i class="shortcut-icon icon-file"></i>
+													<span class="shortcut-label">Keyword</span> 
 												</a> 
+												<a href="<?= base_url('index.php/AdvertiseCategory/Index'); ?>" class="shortcut">
+													<i class="shortcut-icon icon-file"></i> 
+													<span class="shortcut-label">Advertise Category</span>
+												</a>
+												<a href="<?= base_url('index.php/AdvertiseInfo/Index'); ?>" class="shortcut">
+													<i class="shortcut-icon icon-file"></i>
+													<span class="shortcut-label">Advertise Info</span> 
+												</a>
 											</div>
 											<!-- /shortcuts --> 
 										</div>

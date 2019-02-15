@@ -13,7 +13,7 @@
 			<div class="main-inner">
 				<div class="container">
 					<div class="row">
-						<form class="form-horizontal" id="company-form" method="POST" action="<?= base_url('index.php/Company/CreateCompany'); ?>">
+						<form class="form-horizontal" id="keyword-form" method="POST" action="<?= base_url('index.php/Keyword/CreateKeyword'); ?>">
 							<div class="span12">
 
 								<?php
@@ -21,8 +21,8 @@
 									{
 								?>
 										<div class="alert alert-success success-message">
-											<a type="button" class="btn btn-danger close" data-dismiss="alert" href="<?=  base_url('index.php/Company/Company');?>">&times;</a>
-											<strong>Great!</strong> Your Company Created Successfully...
+											<a type="button" class="btn btn-danger close" data-dismiss="alert" href="<?=  base_url('index.php/Keyword/Keyword');?>">&times;</a>
+											<strong>Great!</strong> Your Keyword Created Successfully...
 										</div>
 								<?php
 									}
@@ -31,8 +31,8 @@
 									{
 								?>
 										<div class="alert alert-info error-message">
-											<a type="button" class="btn btn-danger close" data-dismiss="alert" href="<?= base_url('index.php/Company/Company'); ?>">&times;</a>
-											<strong>Oops! Sorry,</strong> Your Company Can't Be Created...
+											<a type="button" class="btn btn-danger close" data-dismiss="alert" href="<?= base_url('index.php/Keyword/Keyword'); ?>">&times;</a>
+											<strong>Oops! Sorry,</strong> Your Keyword Can't Be Created...
 										</div>
 								<?php
 									}
@@ -41,8 +41,8 @@
 									{
 								?>
 										<div class="alert alert-info error-message">
-											<a type="button" class="btn btn-danger close" data-dismiss="alert" href="<?= base_url('index.php/Company/Company'); ?>">&times;</a>
-											<strong>Oops! Sorry,</strong> Your Company Already Saved In Data Base...
+											<a type="button" class="btn btn-danger close" data-dismiss="alert" href="<?= base_url('index.php/Keyword/Keyword'); ?>">&times;</a>
+											<strong>Oops! Sorry,</strong> Your Keyword Already Saved In Data Base...
 										</div>
 								<?php
 									}
@@ -50,7 +50,7 @@
 								<div class="widget">
 									<div class="widget-header">
 										<i class="icon-tag"></i>
-										<h3>Advertise Setup<i class="icon-long-arrow-right"></i>&nbsp;&nbsp;Company<i class="icon-long-arrow-right"></i>&nbsp;&nbsp;Create Company</h3>
+										<h3>Advertise Setup<i class="icon-long-arrow-right"></i>&nbsp;&nbsp;Keyword<i class="icon-long-arrow-right"></i>&nbsp;&nbsp;Create Keyword</h3>
 									</div>
 									<!-- /widget-header -->
 									
@@ -59,19 +59,19 @@
 											<div class="control-group">											
 												<label class="control-label" for="name">Name</label>
 												<div class="controls">
-													<input type="text" class="span10" id="company-name" name="company-name" value="">
+													<input type="text" class="span10" id="keyword-name" name="keyword-name" value="">
 												</div> <!-- /controls -->				
 											</div> <!-- /control-group -->
 											
 											<div class="control-group">										
 												<label class="control-label" for="description">Description</label>
 												<div class="controls">
-													<textarea class="span10" rows="3" id="company-description" name="company-description"></textarea>
+													<textarea class="span10" rows="3" id="keyword-description" name="keyword-description"></textarea>
 												</div> <!-- /controls -->				
 											</div> <!-- /control-group -->
 											
 											<div class="form-actions">
-												<button type="submit" id="button-company" name="button-company" class="btn btn-primary" onclick="return Validation()">Create Company</button>
+												<button type="submit" id="button-keyword" name="button-keyword" class="btn btn-primary" onclick="return Validation()">Create Keyword</button>
 
 												<button type="reset" class="btn btn-danger">Cancel</button>
 
@@ -99,12 +99,12 @@
 		<!-- Custome JS File Include -->
 		<script type="text/javascript">
 			function Validation(){
-				var companyName = $('#company-name').val();
+				var keywordName = $('#keyword-name').val();
 
-				if (companyName == "")
+				if (keywordName == "")
 				{
-					Message("Oops! Company Name Can't Be Empty. Please Enter Company Name.");
-					$('#company-name').css({'border':'1px solid red'});
+					Message("Oops! Keyword Name Can't Be Empty. Please Enter Keyword Name.");
+					$('#keyword-name').css({'border':'1px solid red'});
 					return false;
 				}
 			}

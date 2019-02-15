@@ -100,7 +100,7 @@
 			}
 		}
 
-		public function GetAllPlacingType()
+		public function GetAllNewsType()
 		{
 			$sql = "SELECT * FROM newstype WHERE State = '1' ORDER BY Name ASC";
 
