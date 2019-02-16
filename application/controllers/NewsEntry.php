@@ -9,6 +9,9 @@
 		{
 			parent::__construct();
 			$this->load->model('AdminModel');
+			$this->load->model('HueModel');
+			$this->load->model('PlacingModel');
+			$this->load->model('PageModel');
 			$this->load->model('NewsEntryModel');
 		}
 
@@ -76,7 +79,7 @@
 
 			$totalRow = $this->input->post('sl');
 
-			$dataEntryId = $this->NewsEntryModel->CreateDataEntry($dbDate,$batchId,$mediaId,$publicationId,$entryId);
+			// $dataEntryId = $this->NewsEntryModel->CreateDataEntry($dbDate,$batchId,$mediaId,$publicationId,$entryId);
 
 			for ($i=1; $i <= $totalRow; $i++)
 			{ 
@@ -86,7 +89,7 @@
 				$pageIdNameAttr = "page-id-".$i;
 				$pageNoNameAttr = "page-no-".$i;
 				$positionNameAttr = "position-".$i;
-				$hueIdNameAttr = "huw-id-".$i;
+				$hueIdNameAttr = "hue-id-".$i;
 				$productIdNameAttr = "product-id-".$i;
 				$colNameAttr = "col-".$i;
 				$inchNameAttr = "inch-".$i;
@@ -94,18 +97,18 @@
 				$keywordNameAttr = "keyword-id-".$i;
 				$imageNameAttr = "image-".$i;
 
-				$caption = $this->input->post($);
-				$newsTypeId = $this->input->post($);
-				$newsCategoryId = $this->input->post($);
-				$pageId = $this->input->post($);
-				$pageNo = $this->input->post($);
-				$position = $this->input->post($);
-				$hueId = $this->input->post($);
-				$productId = $this->input->post($);
-				$col = $this->input->post($);
-				$inch = $this->input->post($);
-				$subBrandId = $this->input->post($);
-				$keywordId = $this->input->post($);
+				$caption = $this->input->post($captionNameAttr);
+				$newsTypeId = $this->input->post($newsTypeIdNameAttr);
+				$newsCategoryId = $this->input->post($newsCategoryIdNameAttr);
+				$pageId = $this->input->post($pageIdNameAttr);
+				$pageNo = $this->input->post($pageNoNameAttr);
+				$position = $this->input->post($positionNameAttr);
+				$hueId = $this->input->post($hueIdNameAttr);
+				$productId = $this->input->post($productIdNameAttr);
+				$col = $this->input->post($colNameAttr);
+				$inch = $this->input->post($inchNameAttr);
+				$subBrandId = $this->input->post($subBrandIdNameAttr);
+				$keywordId = $this->input->post($keywordNameAttr);
 
 				// Copy Image and Get Image New Name
 				$config['upload_path'] = "images/";
@@ -120,13 +123,34 @@
 				}
 				else
 				{
-					$extention = pathinfo($dataEntryImage, PATHINFO_EXTENSION);
+					$extension = pathinfo($dataEntryImage, PATHINFO_EXTENSION);
 
-					$dbImageName = $mediaId.'_PN_'.$pageId.'_PNO_'.$pageNo.'_POS_'. $position.'_SZ_'. $col * $inch.'_DT_'.date('d-m-Y_').time().'.'.$extension;
+					echo "<br>".$dbImageName = $mediaId.'_PN_'.$pageId.'_PNO_'.$pageNo.'_POS_'. $position.'_SZ_'. $col * $inch.'_DT_'.date('d-m-Y_').time().'.'.$extension;
 					$copyImageName = $config['upload_path'].$dbImageName;
 
 					copy($_FILES[$imageNameAttr]['tmp_name'],$copyImageName);
 				}
+
+				$publicationInfo = $this->NewsEntryModel->GetPublicationInfo($publicationId);
+
+				echo "<br><br>Media Name = ".$publicationInfo->MediaName;
+				echo "<br>Publication Name = ".$publicationInfo->PublicationName;
+				echo "<br>Publication Language = ".$publicationInfo->PublicationLanguage;
+				echo "<br>Publication Type = ".$publicationInfo->TypeName;
+				echo "<br>Publication Frequency = ".$publicationInfo->FrequencyName;
+				echo "<br>Publication Place = ".$publicationInfo->PlaceName;
+
+				$subBrandInfo = $this->NewsEntryModel->GetSubBrandInfo($subBrandId);
+
+				echo "<br><br>Company Name = ".$subBrandInfo->CompanyName;
+				echo "<br>Brand Name = ".$subBrandInfo->BrandName;
+				echo "<br>Sub Brand Name = ".$subBrandInfo->SubBrandName;
+
+				$productInfo = $this->NewsEntryModel->GetProductInfo($productId);
+
+				echo "<br><br>Product Name = ".$productInfo->ProductName;
+				echo "<br>Product Category Name = ".$productInfo->ProductCategoryName;
+				echo "<br><br>----------------------------------------------------------";
 			}
 		}
 	}

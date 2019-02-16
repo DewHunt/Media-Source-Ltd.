@@ -54,7 +54,7 @@
 								<!-- /widget-header -->
 							</div> <!-- /widget -->
 						</div>	<!-- /span12 -->
-					<form id="news-entry-form" method="POST" action="<?= base_url('index.php/NewsEntry/CreateNews'); ?>">
+					<form id="news-entry-form" method="POST" action="<?= base_url('index.php/NewsEntry/CreateNews'); ?>" enctype="multipart/form-data">
 						<table class="table table-striped table-bordered">
 							<caption><h1>Data Entry</h1></caption>
 

@@ -96,9 +96,9 @@
 					}
 					else
 					{
-						$extention = pathinfo($mediaImage, PATHINFO_EXTENSION);
+						$extension = pathinfo($mediaImage, PATHINFO_EXTENSION);
 						$slug = strtolower(preg_replace('/[^A-Za-z0-9-]+/', '_', $mediaName));
-						$dbImageName = "med_".$slug."_".date('ymds').".".$extention;
+						$dbImageName = "med_".$slug."_".date('ymds').".".$extension;
 						$copyImageName = $config['upload_path'].$dbImageName;
 
 						copy($_FILES['media-image']['tmp_name'],$copyImageName);
