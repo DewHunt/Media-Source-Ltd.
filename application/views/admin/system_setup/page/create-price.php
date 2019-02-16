@@ -185,8 +185,8 @@
 				var pageIdNameAttr = "page-id-"+sl;
 				var hueIdNameAttr = "hue-id-"+sl;
 
-				GetDataForSelectMenu("PageModel","GetAllPage",pageSelectMenu,pageIdNameAttr,"Select Page Name");
-				GetDataForSelectMenu("HueModel","GetAllHue",hueSelectMenu,hueIdNameAttr,"Select Hue");
+				GetDataForSelectMenu("PageModel","GetAllPage",pageSelectMenu,pageIdNameAttr,"Select Page Name",0);
+				GetDataForSelectMenu("HueModel","GetAllHue",hueSelectMenu,hueIdNameAttr,"Select Hue",0);
 
 				document.getElementById("sl").value = sl;
 

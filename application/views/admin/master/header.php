@@ -66,19 +66,23 @@
 				margin: 0px;
 			}
 
-			#ded-input{
+			.ded-input{
 				width: 90px;
 			}
 
-			#ded-pos-input{
+			.ded-file-input{
+				width: 0px;
+			}
+
+			.ded-pos-input{
 				width: 30px;
 			}
 
-			#ded-col-input, #ded-inch-input{
+			.ded-col-input, .ded-inch-input{
 				width: 20px;
 			}
 
-			#ded-select{
+			.ded-select{
 				width: 80px;
 			}
 		</style>

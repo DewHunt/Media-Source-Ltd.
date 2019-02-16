@@ -68,11 +68,11 @@
 							<tbody>
 								<tr>
 									<td>
-										<input class="date-picker" type="text" name="date">
+										<input class="date-picker" type="text" id="date" name="date">
 									</td>
 
 									<td>
-										<input type="text" id="batch-id" name="batch-id" value="">
+										<input type="text" id="batch-id" name="batch-id" value="<?= $batchId; ?>" readonly>
 									</td>
 
 									<td>
@@ -90,7 +90,7 @@
 							</tbody>
 						</table>
 
-						<table class="table table-striped table-bordered">
+						<table class="table-striped table-bordered" width="100%">
 							<caption><h1>Data Entry Details</h1></caption>
 							<thead>
 								<th>Sl</th>
@@ -113,64 +113,57 @@
 									<td>1</td>
 
 									<td>
-										<input type="text" id="ded-input" name="caption" value="">
+										<input type="text" class="ded-input" id="caption-1" name="caption-1" value="">
 									</td>
 
 									<td>
-										<div id="news-type-select-menu"></div>
+										<div id="news-type-select-menu-1"></div>
 									</td>
 
 									<td>
-										<div id="news-category-select-menu"></div>
+										<div id="news-category-select-menu-1"></div>
 									</td>
 
 									<td>
-										<div id="page-select-menu"></div>										
+										<div id="page-select-menu-1"></div>
 									</td>
 
 									<td>
-										<select id="ded-select" name="page-no">
-											<option value="">Select</option>
-											<option value="1">1</option>
-											<option value="2">2</option>
-											<option value="3">3</option>
-											<option value="4">4</option>
-											<option value="5">5</option>
-										</select>										
+										<input type="text" class="ded-pos-input" id="page-no-1" name="page-no-1" value="">
 									</td>
 
 									<td>										
-										<input type="text" id="ded-pos-input" name="position" value="">
+										<input type="text" class="ded-pos-input" id="position-1" name="position-1" value="">
 									</td>
 
 									<td>
-										<div id="hue-select-menu"></div>									
+										<div id="hue-select-menu-1"></div>									
 									</td>
 
 									<td>
-										<div id="product-select-menu"></div>										
+										<div id="product-select-menu-1"></div>
 									</td>
 
 									<td>
-										<input type="text" id="ded-col-input" name="col" value="">
+										<input type="text" class="ded-col-input" id="col-1" name="col-1" value="">
 									</td>
 
 									<td>X</td>
 
 									<td>
-										<input type="text" id="ded-inch-input" name="inch" value="">
+										<input type="text" class="ded-inch-input" id="inch-1" name="inch-1" value="">
 									</td>
 
 									<td>
-										<div id="sub-brand-select-menu"></div>										
+										<div id="sub-brand-select-menu-1"></div>
 									</td>
 
 									<td>
-										<div id="keyword-select-menu"></div>										
+										<div id="keyword-select-menu-1"></div>
 									</td>
 
 									<td>
-										<input type="file" id="ded-input" name="image">
+										<input type="file" class="ded-file-input" id="image-1" name="image-1">
 									</td>
 								</tr>
 							</tbody>
@@ -202,6 +195,30 @@
 				var sl = document.getElementById('sl').value;
 				sl++;
 
+				var newsTypeSelectMenu = "#news-type-select-menu-"+sl;
+				var newsCategorySelectMenu = "#news-category-select-menu-"+sl;
+				var pageSelectMenu = "#page-select-menu-"+sl;
+				var hueSelectMenu = "#hue-select-menu-"+sl;
+				var productSelectMenu = "#product-select-menu-"+sl;
+				var subBrandSelectMenu = "#sub-brand-select-menu-"+sl;
+				var keywordSelectMenu = "#keyword-select-menu-"+sl;
+
+				var newsTypeIdNameAttr = "news-type-id-"+sl;
+				var newsCategoryIdNameAttr = "news-category-id-"+sl;
+				var pageIdNameAttr = "page-id-"+sl;
+				var hueIdNameAttr = "hue-id-"+sl;
+				var productIdNameAttr = "product-id-"+sl;
+				var subBrandIdNameAttr = "sub-brand-id-"+sl;
+				var keywordIdNameAttr = "keyword-id-"+sl;
+
+				GetDataForSelectMenu("NewsTypeModel","GetAllNewsType",newsTypeSelectMenu,newsTypeIdNameAttr,"Select",0);
+				GetDataForSelectMenu("NewsCategoryModel","GetAllNewsCategory",newsCategorySelectMenu,newsCategoryIdNameAttr,"Select",0);
+				GetDataForSelectMenu("PageModel","GetAllPage",pageSelectMenu,pageIdNameAttr,"Select",0);
+				GetDataForSelectMenu("HueModel","GetAllHue",hueSelectMenu,hueIdNameAttr,"Select",0);
+				GetDataForSelectMenu("ProductModel","GetAllProduct",productSelectMenu,productIdNameAttr,"Select",0);
+				GetDataForSelectMenu("SubBrandModel","GetAllSubBrand",subBrandSelectMenu,subBrandIdNameAttr,"Select",0);
+				GetDataForSelectMenu("KeywordModel","GetAllKeyword",keywordSelectMenu,keywordIdNameAttr,"Select",0);
+
 				document.getElementById("sl").value = sl;
 
 				var table = document.getElementsByTagName('table')[1];
@@ -225,20 +242,20 @@
 				var cell15 = newRow.insertCell(14);
 
 				cell1.innerHTML = sl;
-				cell2.innerHTML = '<input type="text" id="ded-input" name="caption'+sl+'" value="">';
-				cell3.innerHTML = '<select id="ded-select" name="news-type'+sl+'"><option value="">Select</option><option value="Editorial">Editorial</option><option value="Post Editorial">Post Editorial</option><option value="Features">Features</option><option value="News">News</option></select>';
-				cell4.innerHTML = '<select id="ded-select" name="news-category'+sl+'"><option value="">Select</option><option value="Negetive">Negetive</option><option value="Normal">Normal</option><option value="Positive">Positive</option></select>';
-				cell5.innerHTML = '<select id="ded-select" name="page-name'+sl+'"><option value="">Select</option><option value="2nd Cover Page">2nd Cover Page</option><option value="3rd Cover Page">3rd Cover Page</option><option value="5th Page">5th Page</option><option value="7th Page">7th Page</option><option value="9th Page">9th Page</option></select>';
-				cell6.innerHTML = '<select id="ded-select" name="page-no'+sl+'"><option value="">Select</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option></select>';
-				cell7.innerHTML = '<input type="text" id="ded-pos-input" name="position'+sl+'" value="">';
-				cell8.innerHTML = '<select id="ded-select" name="hue'+sl+'"><option value="">Select</option><option value="Black & White">Black & White</option><option value="Color">Color</option></select>';
-				cell9.innerHTML = '<select id="ded-select" name="product'+sl+'"><option value="">Select</option><option value="Achar">Achar</option><option value="Adhesive">Adhesive</option><option value="Aerosol">Aerosol</option><option value="Agent Banking">Agent Banking</option><option value="Air Compressor">Air Compressor</option></select>';
-				cell10.innerHTML = '<input type="text" id="ded-col-input" name="col'+sl+'" value="">';
+				cell2.innerHTML = '<input type="text" class="ded-input" id="caption-'+sl+'" name="caption-'+sl+'" value="">';
+				cell3.innerHTML = '<div id="news-type-select-menu-'+sl+'"></div>';
+				cell4.innerHTML = '<div id="news-category-select-menu-'+sl+'"></div>';
+				cell5.innerHTML = '<div id="page-select-menu-'+sl+'"></div>';
+				cell6.innerHTML = '<input type="text" class="ded-pos-input" id="page-no-'+sl+'" name="page-no-'+sl+'" value="">';
+				cell7.innerHTML = '<input type="text" class="ded-pos-input" id="position-'+sl+'" name="position-'+sl+'" value="">';
+				cell8.innerHTML = '<div id="hue-select-menu-'+sl+'"></div>';
+				cell9.innerHTML = '<div id="product-select-menu-'+sl+'"></div>';
+				cell10.innerHTML = '<input type="text" class="ded-col-input" id="col-'+sl+'" name="col-'+sl+'" value="">';
 				cell11.innerHTML = 'X';
-				cell12.innerHTML = '<input type="text" id="ded-inch-input" name="inch'+sl+'" value="">';
-				cell13.innerHTML = '<select id="ded-select" name="sub-brand'+sl+'"><option value="">Select</option><option value="Fram Fresh Milk">Farm Fresh Milk</option><option value="7UP">7UP</option><option value="Amra IT">Amra IT</option><option value="Agent Banking">Agent Banking</option><option value="Air Compressor">Air Compressor</option></select>';
-				cell14.innerHTML = '<select name="keyword'+sl+'"><option value="ACI">ACI</option><option value="Anwar Group">Anwar Group</option><option value="Bata">Bata</option><option value="Barger">Berger</option><option value="Bikroy.com">Bikroy.com</option></select>';
-				cell15.innerHTML = '<input type="file" id="ded-input" name="image'+sl+'">';
+				cell12.innerHTML = '<input type="text" class="ded-inch-input" id="inch-'+sl+'" name="inch-'+sl+'" value="">';
+				cell13.innerHTML = '<div id="sub-brand-select-menu-'+sl+'"></div>';
+				cell14.innerHTML = '<div id="keyword-select-menu-'+sl+'"></div>';
+				cell15.innerHTML = '<input type="file" class="ded-input" id="image-'+sl+'" name="image-'+sl+'">';
 
 				return false;
 			}
@@ -272,13 +289,13 @@
 
 
 			GetDataForSelectMenu("MediaNameModel","GetAllMediaName","#media-select-menu","media-name-id","Select Media",0);
-			GetDataForSelectMenu("NewsTypeModel","GetAllNewsType","#news-type-select-menu","news-type-id","Select",0);
-			GetDataForSelectMenu("NewsCategoryModel","GetAllNewsCategory","#news-category-select-menu","news-category-id","Select",0);
-			GetDataForSelectMenu("PageModel","GetAllPage","#page-select-menu","page-id","Select",0);
-			GetDataForSelectMenu("HueModel","GetAllHue","#hue-select-menu","hue-id","Select",0);
-			GetDataForSelectMenu("ProductModel","GetAllProduct","#product-select-menu","product-id","Select",0);
-			GetDataForSelectMenu("SubBrandModel","GetAllSubBrand","#sub-brand-select-menu","sub-brand-id","Select",0);
-			GetDataForSelectMenu("KeywordModel","GetAllKeyword","#keyword-select-menu","keyword-id","Select",0);
+			GetDataForSelectMenu("NewsTypeModel","GetAllNewsType","#news-type-select-menu-1","news-type-id-1","Select",0);
+			GetDataForSelectMenu("NewsCategoryModel","GetAllNewsCategory","#news-category-select-menu-1","news-category-id-1","Select",0);
+			GetDataForSelectMenu("PageModel","GetAllPage","#page-select-menu-1","page-id-1","Select",0);
+			GetDataForSelectMenu("HueModel","GetAllHue","#hue-select-menu-1","hue-id-1","Select",0);
+			GetDataForSelectMenu("ProductModel","GetAllProduct","#product-select-menu-1","product-id-1","Select",0);
+			GetDataForSelectMenu("SubBrandModel","GetAllSubBrand","#sub-brand-select-menu-1","sub-brand-id-1","Select",0);
+			GetDataForSelectMenu("KeywordModel","GetAllKeyword","#keyword-select-menu-1","keyword-id-1","Select",0);
 
 			$(document).on('change', '#media-name-id', function(){
 				var id = $('#media-name-id').val();
@@ -313,79 +330,73 @@
 			} 
 			// Get All Data For Select Menu Script End
 
-			function Validation()
-			{
-				var priceMediaName = $('#price-media-name').val();
-				var mediaId = $('#media-name-id').val();
-				var publicationId = $('#publication-id').val();
-				var day = $('#day').val();
+			// function Validation()
+			// {
+			// 	var priceMediaName = $('#price-media-name').val();
+			// 	var mediaId = $('#media-name-id').val();
+			// 	var publicationId = $('#publication-id').val();
+			// 	var day = $('#day').val();
 
-				var totalRow = $('#sl').val();
+			// 	var totalRow = $('#sl').val();
 
-				if (mediaId == "")
-				{
-					alert("Media Name Can't Be Empty");
-					return false;
-				}
+			// 	if (mediaId == 0)
+			// 	{
+			// 		alert("Media Name Can't Be Empty");
+			// 		return false;
+			// 	}
 
-				if (publicationId == "")
-				{
-					alert("Publication Can't Be Empty");
-					return false;
-				}
+			// 	if (publicationId == 0)
+			// 	{
+			// 		alert("Publication Can't Be Empty");
+			// 		return false;
+			// 	}
 
-				if (day == "")
-				{
-					alert("Day Can't Be Empty");
-					return false;
-				}
+			// 	for (var i = 1; i <= totalRow; i++)
+			// 	{
+			// 		var priceTitleIdAttr = "#price-title-"+i;
+			// 		var pageIdAttr = "#page-id-"+i;
+			// 		var hueIdAttr = "#hue-id-"+i;
+			// 		var colIdAttr = "#col-"+i;
+			// 		var inchIdAttr = "#inch-"+i;
+			// 		var priceIdAttr = "#price-"+i;
 
-				for (var i = 1; i <= totalRow; i++)
-				{
-					var priceTitleIdAttr = "#price-title-"+i;
-					var pageIdAttr = "#page-id-"+i;
-					var hueIdAttr = "#hue-id-"+i;
-					var colIdAttr = "#col-"+i;
-					var inchIdAttr = "#inch-"+i;
-					var priceIdAttr = "#price-"+i;
+			// 		if ($(priceTitleIdAttr).val() == "")
+			// 		{
+			// 			alert("In Row "+i+", Price Title Can't be Empty");
+			// 			return false;
+			// 		}
 
-					if ($(priceTitleIdAttr).val() == "")
-					{
-						alert("In Row "+i+", Price Title Can't be Empty");
-						return false;
-					}
+			// 		if ($(pageIdAttr).val() == "")
+			// 		{
+			// 			alert("In Row "+i+", Page Name Can't Be Empty.");
+			// 			return false;
+			// 		}
 
-					if ($(pageIdAttr).val() == "")
-					{
-						alert("In Row "+i+", Page Name Can't Be Empty.");
-						return false;
-					}
+			// 		if ($(hueIdAttr).val() == "")
+			// 		{
+			// 			alert("In Row "+i+", Hue Can't Be Empty");
+			// 			return false;
+			// 		}
 
-					if ($(hueIdAttr).val() == "")
-					{
-						alert("In Row "+i+", Hue Can't Be Empty");
-						return false;
-					}
+			// 		if ($(colIdAttr).val() == "")
+			// 		{
+			// 			alert("In Row "+i+", Column Can't be Empty");
+			// 			return false;
+			// 		}
 
-					if ($(colIdAttr).val() == "")
-					{
-						alert("In Row "+i+", Column Can't be Empty");
-						return false;
-					}
+			// 		if ($(inchIdAttr).val() == "")
+			// 		{
+			// 			alert("In Row "+i+", Inch Can't be Empty");
+			// 			return false;
+			// 		}
 
-					if ($(inchIdAttr).val() == "")
-					{
-						alert("In Row "+i+", Inch Can't be Empty");
-						return false;
-					}
-
-					if ($(priceIdAttr).val() == "")
-					{
-						alert("In Row "+i+", Price Can't be Enpty");
-						return false;
-					}
-				}
-			}
+			// 		if ($(priceIdAttr).val() == "")
+			// 		{
+			// 			alert("In Row "+i+", Price Can't be Enpty");
+			// 			return false;
+			// 		}
+			// 	}
+			// }
 		</script>
 	</body>
 </html>
