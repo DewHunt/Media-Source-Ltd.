@@ -116,5 +116,25 @@
 				return false;
 			}
 		}
+
+		public function GetPageByForignKey($fieldName,$id)
+		{
+			$sql = "SELECT pricedetails.PageNoId AS Id, page.Name AS Name
+			FROM price
+			LEFT JOIN pricedetails ON (price.Id = pricedetails.PriceID)
+			LEFT JOIN page ON (pricedetails.PageNoId = page.Id)
+			WHERE price.$fieldName = '$id' ORDER BY page.Name ASC";
+
+			$query = $this->db->query($sql);
+
+			if ($query->num_rows() > 0)
+			{
+				return $query->result();
+			}
+			else
+			{
+				return false;
+			}
+		}
 	}
 ?>

@@ -81,6 +81,15 @@
 
 			// $dataEntryId = $this->NewsEntryModel->CreateDataEntry($dbDate,$batchId,$mediaId,$publicationId,$entryId);
 
+			$publicationInfo = $this->NewsEntryModel->GetPublicationInfo($publicationId);
+
+			echo "<br><br>Media Name = ".$publicationInfo->MediaName;
+			echo "<br>Publication Name = ".$publicationInfo->PublicationName;
+			echo "<br>Publication Language = ".$publicationInfo->PublicationLanguage;
+			echo "<br>Publication Type = ".$publicationInfo->TypeName;
+			echo "<br>Publication Frequency = ".$publicationInfo->FrequencyName;
+			echo "<br>Publication Place = ".$publicationInfo->PlaceName;
+
 			for ($i=1; $i <= $totalRow; $i++)
 			{ 
 				$captionNameAttr = "caption-".$i;
@@ -131,15 +140,6 @@
 					copy($_FILES[$imageNameAttr]['tmp_name'],$copyImageName);
 				}
 
-				$publicationInfo = $this->NewsEntryModel->GetPublicationInfo($publicationId);
-
-				echo "<br><br>Media Name = ".$publicationInfo->MediaName;
-				echo "<br>Publication Name = ".$publicationInfo->PublicationName;
-				echo "<br>Publication Language = ".$publicationInfo->PublicationLanguage;
-				echo "<br>Publication Type = ".$publicationInfo->TypeName;
-				echo "<br>Publication Frequency = ".$publicationInfo->FrequencyName;
-				echo "<br>Publication Place = ".$publicationInfo->PlaceName;
-
 				$subBrandInfo = $this->NewsEntryModel->GetSubBrandInfo($subBrandId);
 
 				echo "<br><br>Company Name = ".$subBrandInfo->CompanyName;
@@ -150,6 +150,12 @@
 
 				echo "<br><br>Product Name = ".$productInfo->ProductName;
 				echo "<br>Product Category Name = ".$productInfo->ProductCategoryName;
+
+				$priceInfo = $this->NewsEntryModel->GetPriceInfo($mediaId,$publicationId,$col,$inch,$hueId,$pageId);
+
+				echo "<br><br>Price = ".$priceInfo->Price;
+				echo "<br><br>Hue = ".$priceInfo->HueName;
+				echo "<br><br>Page Name = ".$priceInfo->PageName;
 				echo "<br><br>----------------------------------------------------------";
 			}
 		}

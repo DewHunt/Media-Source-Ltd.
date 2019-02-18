@@ -53,7 +53,7 @@
 				INNER JOIN pubtype ON (publication.PublicationType = pubtype.Id)
 				INNER JOIN pubfrequency ON (publication.PubFreQuencyId = pubfrequency.Id)
 				INNER JOIN pubplace ON (publication.PubPlaceId = pubplace.Id)
-				WHERE publication.Id = '$publicationId'";
+				WHERE publication.Id = '$publicationId' AND publication.State = '1'";
 
 			$query = $this->db->query($str);
 
@@ -73,7 +73,7 @@
 				FROM subbrand
 				INNER JOIN brand ON (subbrand.BrandId = brand.Id)
 				INNER JOIN company ON (subbrand.CompanyId = company.Id)
-				WHERE subbrand.Id = '$subBrandId'";
+				WHERE subbrand.Id = '$subBrandId' AND subbrand.State = '1'";
 
 			$query = $this->db->query($str);
 
@@ -92,7 +92,29 @@
 			$str = "SELECT product_cat.Name AS ProductName, product.Name AS ProductCategoryName
 				FROM product_cat
 				INNER JOIN product ON (product_cat.ProductId = product.Id)
-				WHERE product_cat.Id = '$productId'";
+				WHERE product_cat.Id = '$productId' AND product_cat.State = '1'";
+
+			$query = $this->db->query($str);
+
+			if ($query->num_rows() > 0)
+			{
+				return $query->row();
+			}
+			else
+			{
+				return false;
+			}
+		}
+
+		public function GetPriceInfo($mediaId,$publicationId,$col,$inch,$hueId,$pageId)
+		{
+			$str = "SELECT pricedetails.Price, hue.Name AS HueName, page.Name AS PageName
+			FROM price
+			LEFT JOIN pricedetails on (price.Id = pricedetails.PriceId)
+			LEFT JOIN hue ON (pricedetails.Hue = hue.Id)
+			LEFT JOIN page ON (pricedetails.PageNoId = page.Id)
+			WHERE price.MediaId='$mediaId' and price.PublicationId='$publicationId' and pricedetails.Col='$col' and pricedetails.Inch='$inch' and pricedetails.Hue='$hueId' and pricedetails.PageNoId='$pageId' and pricedetails.State='1'
+			";
 
 			$query = $this->db->query($str);
 
