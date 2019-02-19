@@ -13,6 +13,8 @@
 			$this->load->model('PlacingModel');
 			$this->load->model('PageModel');
 			$this->load->model('NewsEntryModel');
+			$this->load->model('NewsTypeModel');
+			$this->load->model('KeywordModel');
 		}
 
 		public function GetAdminAllInfo()
@@ -83,13 +85,6 @@
 
 			$publicationInfo = $this->NewsEntryModel->GetPublicationInfo($publicationId);
 
-			echo "<br><br>Media Name = ".$publicationInfo->MediaName;
-			echo "<br>Publication Name = ".$publicationInfo->PublicationName;
-			echo "<br>Publication Language = ".$publicationInfo->PublicationLanguage;
-			echo "<br>Publication Type = ".$publicationInfo->TypeName;
-			echo "<br>Publication Frequency = ".$publicationInfo->FrequencyName;
-			echo "<br>Publication Place = ".$publicationInfo->PlaceName;
-
 			for ($i=1; $i <= $totalRow; $i++)
 			{ 
 				$captionNameAttr = "caption-".$i;
@@ -106,6 +101,8 @@
 				$keywordNameAttr = "keyword-id-".$i;
 				$imageNameAttr = "image-".$i;
 
+				// ----------- Start Data Entry Details -----------
+				$productId = $this->input->post($productIdNameAttr);
 				$caption = $this->input->post($captionNameAttr);
 				$newsTypeId = $this->input->post($newsTypeIdNameAttr);
 				$newsCategoryId = $this->input->post($newsCategoryIdNameAttr);
@@ -113,7 +110,6 @@
 				$pageNo = $this->input->post($pageNoNameAttr);
 				$position = $this->input->post($positionNameAttr);
 				$hueId = $this->input->post($hueIdNameAttr);
-				$productId = $this->input->post($productIdNameAttr);
 				$col = $this->input->post($colNameAttr);
 				$inch = $this->input->post($inchNameAttr);
 				$subBrandId = $this->input->post($subBrandIdNameAttr);
@@ -139,24 +135,37 @@
 
 					copy($_FILES[$imageNameAttr]['tmp_name'],$copyImageName);
 				}
+				// ----------- End Data Entry Details -----------
 
+				// ----------- Start Data Entry Report -----------
 				$subBrandInfo = $this->NewsEntryModel->GetSubBrandInfo($subBrandId);
-
-				echo "<br><br>Company Name = ".$subBrandInfo->CompanyName;
-				echo "<br>Brand Name = ".$subBrandInfo->BrandName;
-				echo "<br>Sub Brand Name = ".$subBrandInfo->SubBrandName;
-
 				$productInfo = $this->NewsEntryModel->GetProductInfo($productId);
-
-				echo "<br><br>Product Name = ".$productInfo->ProductName;
-				echo "<br>Product Category Name = ".$productInfo->ProductCategoryName;
-
 				$priceInfo = $this->NewsEntryModel->GetPriceInfo($mediaId,$publicationId,$col,$inch,$hueId,$pageId);
+				$newsTypeInfo = $this->NewsTypeModel->GetNewsTypeById($newsTypeId);
+				$keywordInfo = $this->KeywordModel->GetKeywordById($keywordId);
 
-				echo "<br><br>Price = ".$priceInfo->Price;
-				echo "<br><br>Hue = ".$priceInfo->HueName;
-				echo "<br><br>Page Name = ".$priceInfo->PageName;
-				echo "<br><br>----------------------------------------------------------";
+				$mediaName = $publicationInfo->MediaName;
+				$publicationName = $publicationInfo->PublicationName;
+				$publicationLanguage = $publicationInfo->PublicationLanguage;
+				$publicationTypeName = $publicationInfo->TypeName;
+				$publicationFrequencyName = $publicationInfo->FrequencyName;
+				$publicationPlaceName = $publicationInfo->PlaceName;
+
+				$productName = $productInfo->ProductName;
+				$productCategoryName = $productInfo->ProductCategoryName;
+
+				$brandName = $subBrandInfo->BrandName;
+				$subBrandName = $subBrandInfo->SubBrandName;				
+				$companyName = $subBrandInfo->CompanyName;
+
+				$hueName = $priceInfo->HueName;
+				$pageName = $priceInfo->PageName;
+				$price = $priceInfo->Price;
+				$newsTypeName = $newsTypeInfo->Name;
+				$keywordName = $keywordInfo->Name;
+
+				$dataEntryReportResult = $this->NewsEntryModel->CreateDataEntryReport(0,$batchId,$mediaName,$publicationName,$publicationLanguage,$publicationTypeName,$publicationFrequencyName,$publicationPlaceName,$productName,$productCategoryName,$brandName,$subBrandName,$companyName,$caption,$dbDate,$hueName,$position,$pageName,$col,$inch,$price,$pageNo,$newsTypeName,$dbImageName,$keywordName);
+				// ----------- End Data Entry Report -----------
 			}
 		}
 	}

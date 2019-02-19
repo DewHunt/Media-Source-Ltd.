@@ -45,6 +45,11 @@
 			}
 		}
 
+		public function CreateDataEntryReport($dataEntryId,$batchId,$mediaName,$publicationName,$publicationLanguage,$publicationTypeName,$publicationFrequencyName,$publicationPlaceName,$productName,$productCategoryName,$brandName,$subBrandName,$companyName,$caption,$dbDate,$hueName,$position,$pageName,$col,$inch,$price,$pageNo,$newsTypeName,$dbImageName,$keywordName)
+		{
+			echo "Keyword Name = ".$keywordName;
+		}
+
 		public function GetPublicationInfo($publicationId)
 		{
 			$str = "SELECT publication.Name AS PublicationName, publication.PublicationLan AS PublicationLanguage, media.Name AS MediaName, pubtype.Name AS TypeName, pubfrequency.Name AS FrequencyName, pubplace.Name AS PlaceName
