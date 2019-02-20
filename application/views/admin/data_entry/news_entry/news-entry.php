@@ -35,7 +35,7 @@
 									<a href="<?= base_url('index.php/NewsEntry/NewsEntry'); ?>" type="submit" class="btn btn-primary" target="_blank">Create News</a> 
 								</div>  <!-- /widget-header -->
 								<div class="widget-content">
-									<table id="news-entry-data" class="table">
+									<table id="news-entry-data" class="table table-striped table-bordered">
 										<thead>
 											<tr>
 												<th>Sl</th>
@@ -46,44 +46,6 @@
 												<th>Action</th>
 											</tr>
 										</thead>
-
-										<tbody>
-											<tr>
-												<td>1</td>
-												<td>2</td>
-												<td>2019-01-06</td>
-												<td>Prothom Alo</td>
-												<td>দুই মাস মশার ঔষুধ ছিটা্নোই হয়নি</td>
-												<td></td>
-											</tr>
-											
-											<tr>
-												<td>2</td>
-												<td>3</td>
-												<td>2019-01-06</td>
-												<td>Prothom Alo</td>
-												<td>চট্টগ্রাম থেকে মোড়কজাত লবণ</td>
-												<td></td>
-											</tr>
-											
-											<tr>
-												<td>3</td>
-												<td>10</td>
-												<td>2018-12-01</td>
-												<td>Prothom Alo</td>
-												<td>ছবি এঁকে পুরষ্কার পলে খুদে আঁকিয়েরা</td>
-												<td></td>
-											</tr>
-
-											<tr>
-												<td>4</td>
-												<td>10</td>
-												<td>2018-12-03</td>
-												<td>Prothom Alo</td>
-												<td>দলমত-নির্বিশেষে ব্যবসায়ীদের জন্য দরজা খোলাঃ প্রধানমন্ত্রী</td>
-												<td></td>
-											</tr>
-										</tbody>
 
 										<tfoot>
 											<tr>
@@ -112,6 +74,24 @@
 				$('.has-sub').click(function(){
 					$(this).toggleClass('tap');
 				});
+
+				var dataTable = $('#news-entry-data').DataTable({
+					'processing':true,
+					'serverSide':true,
+					'order':[],
+					'ajax':{
+						url:'<?php echo base_url("index.php/NewsEntry/GetNewsEntryAllInfo"); ?>',
+						type:'POST'
+					},
+					'dataType':'json',
+					'columnDefs':[
+						{
+							'targets':[0, 1, 2, 3, 4, 5],
+							'orderable':false
+						},
+					],
+				});
+			});
 		</script>
 	</body>
 </html>

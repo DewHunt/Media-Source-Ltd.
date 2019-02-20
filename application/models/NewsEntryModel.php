@@ -32,9 +32,9 @@
 
 			$sql = "INSERT INTO dataentry (BatchId, MediaId, PublicationId, Date, EntryBy, EntryDateTime) VALUES ('$batchId','$mediaId','$publicationId','$dbDate','$entryId','$entryDateTime')";
 
-			$priceQuery = $this->db->query($sql);
+			$dataEntryQuery = $this->db->query($sql);
 
-			if ($priceQuery)
+			if ($dataEntryQuery)
 			{
 				$insertId = $this->db->insert_id();
 				return $insertId;
@@ -45,9 +45,59 @@
 			}
 		}
 
-		public function CreateDataEntryReport($dataEntryId,$batchId,$mediaName,$publicationName,$publicationLanguage,$publicationTypeName,$publicationFrequencyName,$publicationPlaceName,$productName,$productCategoryName,$brandName,$subBrandName,$companyName,$caption,$dbDate,$hueName,$position,$pageName,$col,$inch,$price,$pageNo,$newsTypeName,$dbImageName,$keywordName)
+		public function CreateDataEntryDetails($dataEntryId,$productId,$caption,$hueId,$keywordId,$subBrandId,$positionName,$pageId,$col,$inch,$pageNo,$newsTypeId,$dbImageName,$entryId,$newsCategoryId)
 		{
-			echo "Keyword Name = ".$keywordName;
+			$entryDateTime = date('Y-m-d H:i:s');
+
+			$sql = "INSERT INTO dataentrydetails (DataentryId, ProductId, Caption, HueId, KeywordId, subBrandId, PositionName, PageId, Cols, Inchs, PageNo, NewsTypeId, Image, EntryBy, EntryDateTime, outlook) VALUES ('$dataEntryId','$productId','$caption','$hueId','$keywordId','$subBrandId','$positionName','$pageId','$col','$inch','$pageNo','$newsTypeId','$dbImageName','$entryId','$entryDateTime','$newsCategoryId')";
+
+			$dataEntryDetailsQuery = $this->db->query($sql);
+
+			if ($dataEntryDetailsQuery)
+			{
+				$insertId = $this->db->insert_id();
+				return $insertId;
+			}
+			else
+			{
+				return false;
+			}
+
+		}
+
+		public function CreateDataEntryReport($dataEntryId,$batchId,$mediaName,$publicationName,$publicationLanguage,$publicationTypeName,$publicationFrequencyName,$publicationPlaceName,$productName,$productCategoryName,$brandName,$subBrandName,$companyName,$caption,$dbDate,$hueName,$positionName,$pageName,$col,$inch,$price,$pageNo,$newsTypeName,$dbImageName,$keywordName,$entryId,$newsCategoryName)
+		{
+			$entryDateTime = date('Y-m-d H:i:s');
+
+			$sql = "INSERT INTO dataentryreport (DataEntryId, BatchId, MediaId, PublicationName, PublicationLan, PublicationType, PublicationFreq, PublicationPlace, ProductName, ProductCatName, BrandName, subBrand, Company, Caption, Date, HueName, PositionName, PageId, Cols, Inchs, Price, PageNo, NewstypeName, Image, Keyword, EntryBy, EntryDateTime, outlook) VALUES ('$dataEntryId','$batchId','$mediaName','$publicationName','$publicationLanguage','$publicationTypeName','$publicationFrequencyName','$publicationPlaceName','$productName','$productCategoryName','$brandName','$subBrandName','$companyName','$caption','$dbDate','$hueName','$positionName','$pageName','$col','$inch','$price','$pageNo','$newsTypeName','$dbImageName','$keywordName','$entryId','$entryDateTime','$newsCategoryName')";
+
+			$dataEntryDetailsQuery = $this->db->query($sql);
+
+			if ($dataEntryDetailsQuery)
+			{
+				$insertId = $this->db->insert_id();
+				return $insertId;
+			}
+			else
+			{
+				return false;
+			}
+		}
+
+		public function GetDataEntryById($dataEntryId)
+		{
+			$sql = "SELECT * FROM dataentry WHERE Id = '$dataEntryId'";
+
+			$query = $this->db->query($sql);
+
+			if ($query->num_rows() > 0)
+			{
+				return $query->row();
+			}
+			else
+			{
+				return false;
+			}
 		}
 
 		public function GetPublicationInfo($publicationId)

@@ -12,9 +12,12 @@
 			$this->load->model('HueModel');
 			$this->load->model('PlacingModel');
 			$this->load->model('PageModel');
-			$this->load->model('NewsEntryModel');
 			$this->load->model('NewsTypeModel');
+			$this->load->model('NewsCategoryModel');
 			$this->load->model('KeywordModel');
+			$this->load->model('DataTableModel');
+			$this->load->model('MediaNameModel');
+			$this->load->model('NewsEntryModel');
 		}
 
 		public function GetAdminAllInfo()
@@ -81,7 +84,7 @@
 
 			$totalRow = $this->input->post('sl');
 
-			// $dataEntryId = $this->NewsEntryModel->CreateDataEntry($dbDate,$batchId,$mediaId,$publicationId,$entryId);
+			$dataEntryId = $this->NewsEntryModel->CreateDataEntry($dbDate,$batchId,$mediaId,$publicationId,$entryId);
 
 			$publicationInfo = $this->NewsEntryModel->GetPublicationInfo($publicationId);
 
@@ -104,16 +107,16 @@
 				// ----------- Start Data Entry Details -----------
 				$productId = $this->input->post($productIdNameAttr);
 				$caption = $this->input->post($captionNameAttr);
-				$newsTypeId = $this->input->post($newsTypeIdNameAttr);
-				$newsCategoryId = $this->input->post($newsCategoryIdNameAttr);
-				$pageId = $this->input->post($pageIdNameAttr);
-				$pageNo = $this->input->post($pageNoNameAttr);
-				$position = $this->input->post($positionNameAttr);
 				$hueId = $this->input->post($hueIdNameAttr);
+				$keywordId = $this->input->post($keywordNameAttr);
+				$subBrandId = $this->input->post($subBrandIdNameAttr);
+				$positionName = $this->input->post($positionNameAttr);
+				$pageId = $this->input->post($pageIdNameAttr);
 				$col = $this->input->post($colNameAttr);
 				$inch = $this->input->post($inchNameAttr);
-				$subBrandId = $this->input->post($subBrandIdNameAttr);
-				$keywordId = $this->input->post($keywordNameAttr);
+				$pageNo = $this->input->post($pageNoNameAttr);
+				$newsTypeId = $this->input->post($newsTypeIdNameAttr);
+				$newsCategoryId = $this->input->post($newsCategoryIdNameAttr);
 
 				// Copy Image and Get Image New Name
 				$config['upload_path'] = "images/";
@@ -130,11 +133,13 @@
 				{
 					$extension = pathinfo($dataEntryImage, PATHINFO_EXTENSION);
 
-					echo "<br>".$dbImageName = $mediaId.'_PN_'.$pageId.'_PNO_'.$pageNo.'_POS_'. $position.'_SZ_'. $col * $inch.'_DT_'.date('d-m-Y_').time().'.'.$extension;
+					$dbImageName = $mediaId.'_PN_'.$pageId.'_PNO_'.$pageNo.'_POS_'. $positionName.'_SZ_'. $col * $inch.'_DT_'.date('d-m-Y_').time().'.'.$extension;
 					$copyImageName = $config['upload_path'].$dbImageName;
 
 					copy($_FILES[$imageNameAttr]['tmp_name'],$copyImageName);
 				}
+
+				$dataEntryDetailsResult = $this->NewsEntryModel->CreateDataEntryDetails($dataEntryId,$productId,$caption,$hueId,$keywordId,$subBrandId,$positionName,$pageId,$col,$inch,$pageNo,$newsTypeId,$dbImageName,$entryId,$newsCategoryId);
 				// ----------- End Data Entry Details -----------
 
 				// ----------- Start Data Entry Report -----------
@@ -142,6 +147,7 @@
 				$productInfo = $this->NewsEntryModel->GetProductInfo($productId);
 				$priceInfo = $this->NewsEntryModel->GetPriceInfo($mediaId,$publicationId,$col,$inch,$hueId,$pageId);
 				$newsTypeInfo = $this->NewsTypeModel->GetNewsTypeById($newsTypeId);
+				$newsCategoryInfo = $this->NewsCategoryModel->GetNewsCategoryById($newsCategoryId);
 				$keywordInfo = $this->KeywordModel->GetKeywordById($keywordId);
 
 				$mediaName = $publicationInfo->MediaName;
@@ -163,9 +169,61 @@
 				$price = $priceInfo->Price;
 				$newsTypeName = $newsTypeInfo->Name;
 				$keywordName = $keywordInfo->Name;
+				$newsCategoryName = $newsCategoryInfo->Name;
 
-				$dataEntryReportResult = $this->NewsEntryModel->CreateDataEntryReport(0,$batchId,$mediaName,$publicationName,$publicationLanguage,$publicationTypeName,$publicationFrequencyName,$publicationPlaceName,$productName,$productCategoryName,$brandName,$subBrandName,$companyName,$caption,$dbDate,$hueName,$position,$pageName,$col,$inch,$price,$pageNo,$newsTypeName,$dbImageName,$keywordName);
+				$dataEntryReportResult = $this->NewsEntryModel->CreateDataEntryReport($dataEntryId,$batchId,$mediaName,$publicationName,$publicationLanguage,$publicationTypeName,$publicationFrequencyName,$publicationPlaceName,$productName,$productCategoryName,$brandName,$subBrandName,$companyName,$caption,$dbDate,$hueName,$positionName,$pageName,$col,$inch,$price,$pageNo,$newsTypeName,$dbImageName,$keywordName,$entryId,$newsCategoryName);
 				// ----------- End Data Entry Report -----------
+			}
+
+			if ($dataEntryReportResult)
+			{
+				return redirect('NewsEntry/NewsEntry/1');
+			}
+			else
+			{
+				return redirect('NewsEntry/NewsEntry/2');
+			}
+		}
+
+		public function GetNewsEntryAllInfo()
+		{
+			if ($this->session->userdata('adminUserName') == "" || $this->session->userdata('adminPassword') == "")
+			{
+				return redirect('Admin/Index');
+			}
+			else
+			{
+				$option = "dt-news-entry";
+				$table = "dataentrydetails";
+				$selectColumn = array("Id","DataentryId","Caption");
+				$orderColumn = array("Id","DataentryId","Caption",null);
+
+				$priceInfo = $this->DataTableModel->MakeDataTables($option,$table,$selectColumn,$orderColumn);
+				$sl = 1;
+				$data = array();
+
+				foreach ($priceInfo as $value)
+				{
+					$dataEntryInfo = $this->NewsEntryModel->GetDataEntryById($value->DataentryId);
+					$price = array();
+					$price[] = $sl;
+					$price[] = $dataEntryInfo->BatchId;
+					$price[] = $dataEntryInfo->Date;
+					$price[] = $this->MediaNameModel->GetMediaNameById($dataEntryInfo->MediaId)->Name;
+					$price[] = $value->Caption;
+					$price[] = '<a href="'.base_url('index.php/Price/Update/_/'.$value->DataentryId).'"><button class="btn btn-warning btn-xs">Update</button></a> <button type="button" name="delete" id="'.$value->DataentryId.'" class="btn btn-danger btn-xs delete">Delete</button>';
+					$sl++;
+					$data[] = $price;
+				}
+
+				$output = array(
+					'draw' => intval($_POST['draw']),
+					'recordsTotal' => $this->DataTableModel->GetAllData($table),
+					'recordsFiltered' => $this->DataTableModel->GetFilteredData($option,$table,$selectColumn,$orderColumn),
+					'data' => $data
+				);
+
+				echo json_encode($output);
 			}
 		}
 	}

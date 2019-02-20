@@ -96,44 +96,6 @@
 					],
 				});
 
-				GetDataForSelectMenu("MediaNameModel","GetAllMediaName","#media-select-menu","media-name-id","Select Media");
-				// GetDataForDependantSelectMenu("PublicationModel","GetPublicationByForignKey","MediaId",mediaId,"#publication-select-menu","publication-id","Select Publication");
-				GetDataForSelectMenu("PageModel","GetAllPage","#page-select-menu","page-id","Select Page Name");
-				GetDataForSelectMenu("HueModel","GetAllHue","#hue-select-menu","hue-id","Select Hue");
-
-				// Get All Data For Select Menu Script Start
-				$(document).on('change', '#media-name-id', function(){
-					var id = $('#media-name-id').val();
-					GetDataForDependantSelectMenu("PublicationModel","GetPublicationByForignKey","MediaId",id,"#publication-select-menu","publication-id","Select Publication",0);
-				});
-
-				function GetDataForSelectMenu(modelName,methodName,divId,idNameAttr,selectHeader)
-				{
-					$.ajax({
-						type:'ajax',
-						url:'<?php echo base_url('index.php/SelectMenu/GetDataForSelectMenu'); ?>',
-						method:'POST',
-						data:{modelName:modelName,methodName:methodName,idNameAttr:idNameAttr,selectHeader:selectHeader},
-						success:function(data){
-							$(divId).html(data);
-						}
-					});
-				} 
-
-				function GetDataForDependantSelectMenu(modelName,methodName,fieldName,id,divId,idNameAttr,selectHeader,selectId)
-				{
-					$.ajax({
-						type:'ajax',
-						url:'<?php echo base_url('index.php/SelectMenu/GetDataForDependantSelectMenu'); ?>',
-						method:'POST',
-						data:{modelName:modelName,methodName:methodName,fieldName:fieldName,id:id,idNameAttr:idNameAttr,selectHeader:selectHeader,selectId:selectId},
-						success:function(data){
-							$(divId).html(data);
-						}
-					});
-				} 
-				// Get All Data For Select Menu Script End
-
 				$(document).on('click', '.delete', function(){
 					var priceId = $(this).attr('id');
 
