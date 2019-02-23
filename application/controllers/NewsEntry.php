@@ -195,25 +195,74 @@
 			{
 				$option = "dt-news-entry";
 				$table = "dataentrydetails";
-				$selectColumn = array("Id","DataentryId","Caption");
-				$orderColumn = array("Id","DataentryId","Caption",null);
+				$selectColumn = array("Id","DataentryId","Caption","Image");
+				$orderColumn = array("Id","DataentryId","Caption","Image",null);
 
 				$priceInfo = $this->DataTableModel->MakeDataTables($option,$table,$selectColumn,$orderColumn);
 				$sl = 1;
 				$data = array();
+				$previousDataEntryId = 0;
 
 				foreach ($priceInfo as $value)
 				{
-					$dataEntryInfo = $this->NewsEntryModel->GetDataEntryById($value->DataentryId);
-					$price = array();
-					$price[] = $sl;
-					$price[] = $dataEntryInfo->BatchId;
-					$price[] = $dataEntryInfo->Date;
-					$price[] = $this->MediaNameModel->GetMediaNameById($dataEntryInfo->MediaId)->Name;
-					$price[] = $value->Caption;
-					$price[] = '<a href="'.base_url('index.php/Price/Update/_/'.$value->DataentryId).'"><button class="btn btn-warning btn-xs">Update</button></a> <button type="button" name="delete" id="'.$value->DataentryId.'" class="btn btn-danger btn-xs delete">Delete</button>';
+					if ($previousDataEntryId != $value->DataentryId)
+					{
+						$dataEntryInfo = $this->NewsEntryModel->GetDataEntryById($value->DataentryId);
+						$previousDataEntryId = $value->DataentryId;
+					}
+
+					$newsEntry = array();
+					$newsEntry[] = $sl;
+					if ($dataEntryInfo->BatchId == "")
+					{
+						$newsEntry[] = 'Data Not Found';
+					}
+					else
+					{
+						$newsEntry[] = $dataEntryInfo->BatchId;
+					}
+
+					if ($dataEntryInfo->Date == "" )
+					{
+						$newsEntry[] = 'Data Not Found';
+					}
+					else
+					{
+						$newsEntry[] = $dataEntryInfo->Date;
+					}
+
+					$mediaName = $this->MediaNameModel->GetMediaNameById($dataEntryInfo->MediaId)->Name;
+
+					if ($mediaName == "" )
+					{
+						$newsEntry[] = 'Data Not Found';
+					}
+					else
+					{
+						$newsEntry[] = $mediaName;
+					}
+
+					if ($value->Caption == "" )
+					{
+						$newsEntry[] = 'Data Not Found';
+					}
+					else
+					{
+						$newsEntry[] = $value->Caption;
+					}
+
+					if ($value->Image == "")
+					{
+						$newsEntry[] = 'Image Not Found';
+					}
+					else
+					{
+						$newsEntry[] = '<img src="'.base_url("images/").$value->Image.'" width="50px" height="50px">';
+					}
+
+					$newsEntry[] = '<a href="'.base_url('index.php/NewsEntry/Update/_/'.$value->DataentryId).'"><button class="btn btn-warning btn-xs">Update</button></a> <button type="button" name="delete" id="'.$value->DataentryId.'" class="btn btn-danger btn-xs delete">Delete</button>';
 					$sl++;
-					$data[] = $price;
+					$data[] = $newsEntry;
 				}
 
 				$output = array(
@@ -224,6 +273,28 @@
 				);
 
 				echo json_encode($output);
+			}
+		}
+
+		public function Update($msg = null,$id = null)
+		{
+			if ($this->session->userdata('adminUserName') == "" || $this->session->userdata('adminPassword') == "")
+			{
+				return redirect('Admin/Index');
+			}
+			else
+			{
+				$dataEntryId = $id;
+
+				$data = array(
+					'title' => 'Update News Entry - Media Source Ltd.',
+					'adminInfo' => $this->GetAdminAllInfo(),
+					'message' => $msg,
+					'dataEntryInfo' => $this->NewsEntryModel->GetDataEntryById($dataEntryId),
+					'dataEntryDetailsInfo' => $this->NewsEntryModel->GetDataEntryDetailsById($dataEntryId)
+				);
+
+				$this->load->view('admin/data_entry/news_entry/update-news-entry',$data);				
 			}
 		}
 	}

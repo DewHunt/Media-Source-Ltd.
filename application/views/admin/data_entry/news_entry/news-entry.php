@@ -43,6 +43,7 @@
 												<th>Date</th>
 												<th>Media Name</th>
 												<th>Caption</th>
+												<th>Image</th>
 												<th>Action</th>
 											</tr>
 										</thead>
@@ -54,6 +55,7 @@
 												<th>Date</th>
 												<th>Media Name</th>
 												<th>Caption</th>
+												<th>Image</th>
 												<th>Action</th>
 											</tr>
 										</tfoot>
@@ -86,7 +88,7 @@
 					'dataType':'json',
 					'columnDefs':[
 						{
-							'targets':[0, 1, 2, 3, 4, 5],
+							'targets':[0, 1, 2, 3, 4, 5, 6],
 							'orderable':false
 						},
 					],

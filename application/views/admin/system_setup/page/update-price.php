@@ -30,7 +30,7 @@
 								<div class="widget">
 									<div class="widget-header">
 										<i class="icon-tag"></i>
-										<h3>Page Setup<i class="icon-long-arrow-right"></i>&nbsp;&nbsp;Price<i class="icon-long-arrow-right"></i>&nbsp;&nbsp;Create Price</h3>
+										<h3>Page Setup<i class="icon-long-arrow-right"></i>&nbsp;&nbsp;Price<i class="icon-long-arrow-right"></i>&nbsp;&nbsp;Update Price</h3>
 									</div>
 									<!-- /widget-header -->
 									
@@ -188,7 +188,7 @@
 																	</td>
 																</tr>
 															<?php
-																$sl++;
+																	$sl++;
 																}
 															?>
 														</tbody>

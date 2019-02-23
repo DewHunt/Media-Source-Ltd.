@@ -50,137 +50,137 @@
 								<div class="widget-header">
 									<i class="icon-tag"></i>
 									<h3>Data Entry<i class="icon-long-arrow-right"></i>&nbsp;&nbsp;News Entry<i class="icon-long-arrow-right"></i>&nbsp;&nbsp;Create News</h3>
-								</div>
-								<!-- /widget-header -->
+								</div>	<!-- /widget-header -->
 							</div> <!-- /widget -->
 						</div>	<!-- /span12 -->
-					<form id="news-entry-form" method="POST" action="<?= base_url('index.php/NewsEntry/CreateNews'); ?>" enctype="multipart/form-data">
-						<table class="table table-striped table-bordered">
-							<caption><h1>Data Entry</h1></caption>
 
-							<thead>
-								<th>Date</th>
-								<th>Batch ID</th>
-								<th>Media</th>
-								<th>Publication</th>
-							</thead>
+						<form id="news-entry-form" method="POST" action="<?= base_url('index.php/NewsEntry/CreateNews'); ?>" enctype="multipart/form-data">
+							<table class="table table-striped table-bordered">
+								<caption><h1>Data Entry</h1></caption>
 
-							<tbody>
-								<tr>
-									<td>
-										<input class="date-picker" type="text" id="date" name="date">
-									</td>
+								<thead>
+									<th>Date&nbsp;<span class="mendatory">*</span></th>
+									<th>Batch ID</th>
+									<th>Media&nbsp;<span class="mendatory">*</span></th>
+									<th>Publication&nbsp;<span class="mendatory">*</span></th>
+								</thead>
 
-									<td>
-										<input type="text" id="batch-id" name="batch-id" value="<?= $batchId; ?>" readonly>
-									</td>
+								<tbody>
+									<tr>
+										<td>
+											<input class="date-picker" type="text" id="date" name="date" placeholder="Select Date (M/D/Y)">
+										</td>
 
-									<td>
-										<div id="media-select-menu"></div>
-									</td>
+										<td>
+											<input type="text" id="batch-id" name="batch-id" value="<?= $batchId; ?>" readonly>
+										</td>
 
-									<td>
-										<div id="publication-select-menu">
-											<select class="dropdown" name="publication-id" id="publication-id" style="width: 99%;">
-												<option value="">Select Publication</option>
-											</select>
-										</div>
-									</td>
-								</tr>
-							</tbody>
-						</table>
+										<td>
+											<div id="media-select-menu"></div>
+										</td>
 
-						<table class="table-striped table-bordered" width="100%">
-							<caption><h1>Data Entry Details</h1></caption>
-							<thead>
-								<th>Sl</th>
-								<th>Caption</th>
-								<th>News Type</th>
-								<th>News Category</th>
-								<th>Page Name</th>
-								<th>Page No.</th>
-								<th>Position</th>
-								<th>Hue</th>
-								<th>Product</th>
-								<th colspan="3">Column X Inch</th>
-								<th>Sub Brand</th>
-								<th>Keyword</th>
-								<th>Image</th>
-							</thead>
+										<td>
+											<div id="publication-select-menu">
+												<select class="dropdown" name="publication-id" id="publication-id" style="width: 99%;">
+													<option value="">Select Publication</option>
+												</select>
+											</div>
+										</td>
+									</tr>
+								</tbody>
+							</table>
 
-							<tbody>
-								<tr>
-									<td>1</td>
+							<table class="table-striped table-bordered" width="100%">
+								<caption><h1>Data Entry Details</h1></caption>
+								<thead>
+									<th>Sl</th>
+									<th>Caption&nbsp;<span class="mendatory">*</span></th>
+									<th>News Type&nbsp;<span class="mendatory">*</span></th>
+									<th>News Category&nbsp;<span class="mendatory">*</span></th>
+									<th>Page Name&nbsp;<span class="mendatory">*</span></th>
+									<th>Page No.&nbsp;<span class="mendatory">*</span></th>
+									<th>Position&nbsp;<span class="mendatory">*</span></th>
+									<th>Hue&nbsp;<span class="mendatory">*</span></th>
+									<th>Product&nbsp;<span class="mendatory">*</span></th>
+									<th colspan="3">Column X Inch&nbsp;<span class="mendatory">*</span></th>
+									<th>Sub Brand&nbsp;<span class="mendatory">*</span></th>
+									<th>Keyword&nbsp;<span class="mendatory">*</span></th>
+									<th>Image</th>
+								</thead>
 
-									<td>
-										<input type="text" class="ded-input" id="caption-1" name="caption-1" value="">
-									</td>
+								<tbody>
+									<tr>
+										<td>1</td>
 
-									<td>
-										<div id="news-type-select-menu-1"></div>
-									</td>
+										<td>
+											<input type="text" class="ded-input" id="caption-1" name="caption-1" value="">
+										</td>
 
-									<td>
-										<div id="news-category-select-menu-1"></div>
-									</td>
+										<td>
+											<div id="news-type-select-menu-1"></div>
+										</td>
 
-									<td>
-										<div id="page-select-menu-1"></div>
-									</td>
+										<td>
+											<div id="news-category-select-menu-1"></div>
+										</td>
 
-									<td>
-										<input type="text" class="ded-pos-input" id="page-no-1" name="page-no-1" value="">
-									</td>
+										<td>
+											<div id="page-select-menu-1"></div>
+										</td>
 
-									<td>										
-										<input type="text" class="ded-pos-input" id="position-1" name="position-1" value="">
-									</td>
+										<td>
+											<input type="text" class="ded-pos-input" id="page-no-1" name="page-no-1" value="">
+										</td>
 
-									<td>
-										<div id="hue-select-menu-1"></div>									
-									</td>
+										<td>										
+											<input type="text" class="ded-pos-input" id="position-1" name="position-1" value="">
+										</td>
 
-									<td>
-										<div id="product-select-menu-1"></div>
-									</td>
+										<td>
+											<div id="hue-select-menu-1"></div>									
+										</td>
 
-									<td>
-										<input type="text" class="ded-col-input" id="col-1" name="col-1" value="">
-									</td>
+										<td>
+											<div id="product-select-menu-1"></div>
+										</td>
 
-									<td>X</td>
+										<td>
+											<input type="text" class="ded-col-input" id="col-1" name="col-1" value="">
+										</td>
 
-									<td>
-										<input type="text" class="ded-inch-input" id="inch-1" name="inch-1" value="">
-									</td>
+										<td>X</td>
 
-									<td>
-										<div id="sub-brand-select-menu-1"></div>
-									</td>
+										<td>
+											<input type="text" class="ded-inch-input" id="inch-1" name="inch-1" value="">
+										</td>
 
-									<td>
-										<div id="keyword-select-menu-1"></div>
-									</td>
+										<td>
+											<div id="sub-brand-select-menu-1"></div>
+										</td>
 
-									<td>
-										<input type="file" class="ded-file-input" id="image-1" name="image-1">
-									</td>
-								</tr>
-							</tbody>
+										<td>
+											<div id="keyword-select-menu-1"></div>
+										</td>
 
-							<tfoot>
-								<tr>
-									<td colspan="15">
-										<button onclick="return addRow();" class="btn btn-primary">Add More</button>
-										<button onclick="return remove();" class="btn btn-danger">Remove</button>
+										<td>
+											<input type="file" class="ded-file-input" id="image-1" name="image-1">
+										</td>
+									</tr>
+								</tbody>
 
-										<button type="submit" id="button-price" name="button-price" class="btn btn-primary" onclick="return Validation()">Create Keyword</button>
-										<input type="text" name="sl" id="sl" value="1">
-									</td>
-								</tr>
-							</tfoot>
-						</table>
-					</form>
+								<tfoot>
+									<tr>
+										<td colspan="15">
+											<button onclick="return addRow();" class="btn btn-primary">Add More</button>
+											<button onclick="return remove();" class="btn btn-danger">Remove</button>
+
+											<button type="submit" id="button-news-entry" name="button-news-entry" class="btn btn-primary" onclick="return Validation()">Create News Entry</button>
+											<input type="hidden" name="sl" id="sl" value="1">
+										</td>
+									</tr>
+								</tfoot>
+							</table>
+						</form>
 					</div>	<!-- /row --> 
 					<!-- <input type="number" name="sl" id="sl" value="1" hidden>  -->
 				</div>	<!-- /container --> 
@@ -330,73 +330,128 @@
 			} 
 			// Get All Data For Select Menu Script End
 
-			// function Validation()
-			// {
-			// 	var priceMediaName = $('#price-media-name').val();
-			// 	var mediaId = $('#media-name-id').val();
-			// 	var publicationId = $('#publication-id').val();
-			// 	var day = $('#day').val();
+			function Validation()
+			{
+				var date = $('#date').val();
+				var mediaId = $('#media-name-id').val();
+				var publicationId = $('#publication-id').val();
 
-			// 	var totalRow = $('#sl').val();
+				var totalRow = $('#sl').val();
 
-			// 	if (mediaId == 0)
-			// 	{
-			// 		alert("Media Name Can't Be Empty");
-			// 		return false;
-			// 	}
+				if (date == 0)
+				{
+					alert("Date Can't Be Empty");
+					$('#date').focus();
+					return false;
+				}
 
-			// 	if (publicationId == 0)
-			// 	{
-			// 		alert("Publication Can't Be Empty");
-			// 		return false;
-			// 	}
+				if (mediaId == 0)
+				{
+					alert("Media Name Can't Be Empty");
+					$('#media-name-id').focus();
+					return false;
+				}
 
-			// 	for (var i = 1; i <= totalRow; i++)
-			// 	{
-			// 		var priceTitleIdAttr = "#price-title-"+i;
-			// 		var pageIdAttr = "#page-id-"+i;
-			// 		var hueIdAttr = "#hue-id-"+i;
-			// 		var colIdAttr = "#col-"+i;
-			// 		var inchIdAttr = "#inch-"+i;
-			// 		var priceIdAttr = "#price-"+i;
+				if (publicationId == 0)
+				{
+					alert("Publication Can't Be Empty");
+					$('#publication-id').focus();
+					return false;
+				}
 
-			// 		if ($(priceTitleIdAttr).val() == "")
-			// 		{
-			// 			alert("In Row "+i+", Price Title Can't be Empty");
-			// 			return false;
-			// 		}
+				for (var i = 1; i <= totalRow; i++)
+				{
+					var captionIdAttr = "#caption-"+i;
+					var newsTypeIdAttr = "#news-type-id-"+i;
+					var newsCategoryIdAttr = "#news-category-id-"+i;
+					var pageNameIdAttr = "#page-id-"+i;
+					var pageNoIdAttr = "#page-no-"+i;
+					var positionIdAttr = "#position-"+i;
+					var hueIdAttr = "#hue-id-"+i;
+					var productIdAttr = "#product-id-"+i;
+					var colIdAttr = "#col-"+i;
+					var inchIdAttr = "#inch-"+i;
+					var subBrandIdAttr = "#sub-brand-id-"+i;
+					var keywordIdAttr = "#keyword-id-"+i;
 
-			// 		if ($(pageIdAttr).val() == "")
-			// 		{
-			// 			alert("In Row "+i+", Page Name Can't Be Empty.");
-			// 			return false;
-			// 		}
+					if ($(captionIdAttr).val() == "")
+					{
+						alert("In Row "+i+", Caption Can't be Empty");
+						$(captionIdAttr).focus();
+						return false;
+					}
 
-			// 		if ($(hueIdAttr).val() == "")
-			// 		{
-			// 			alert("In Row "+i+", Hue Can't Be Empty");
-			// 			return false;
-			// 		}
+					if ($(newsTypeIdAttr).val() == "")
+					{
+						alert("In Row "+i+", News Type Can't Be Empty.");
+						$(newsTypeIdAttr).focus();
+						return false;
+					}
 
-			// 		if ($(colIdAttr).val() == "")
-			// 		{
-			// 			alert("In Row "+i+", Column Can't be Empty");
-			// 			return false;
-			// 		}
+					if ($(newsCategoryIdAttr).val() == "")
+					{
+						alert("In Row "+i+", News Category Can't Be Empty");
+						$(newsCategoryIdAttr).focus();
+						return false;
+					}
 
-			// 		if ($(inchIdAttr).val() == "")
-			// 		{
-			// 			alert("In Row "+i+", Inch Can't be Empty");
-			// 			return false;
-			// 		}
+					if ($(pageNameIdAttr).val() == "")
+					{
+						alert("In Row "+i+", Page Name Can't be Empty");
+						$(pageNameIdAttr).focus();
+						return false;
+					}
 
-			// 		if ($(priceIdAttr).val() == "")
-			// 		{
-			// 			alert("In Row "+i+", Price Can't be Enpty");
-			// 			return false;
-			// 		}
-			// 	}
-			// }
+					if ($(positionIdAttr).val() == "")
+					{
+						alert("In Row "+i+", Position Can't be Empty");
+						$(positionIdAttr).focus();
+						return false;
+					}
+
+					if ($(hueIdAttr).val() == "")
+					{
+						alert("In Row "+i+", Hue Can't be Enpty");
+						$(hueIdAttr).focus();
+						return false;
+					}
+
+					if ($(productIdAttr).val() == "")
+					{
+						alert("In Row "+i+", Product Can't be Enpty");
+						$(productIdAttr).focus();
+						return false;
+					}
+
+					if ($(colIdAttr).val() == "")
+					{
+						alert("In Row "+i+",  Column be Enpty");
+						$(colIdAttr).focus();
+						return false;
+					}
+
+					if ($(inchIdAttr).val() == "")
+					{
+						alert("In Row "+i+", Inch Can't be Enpty");
+						$(inchIdAttr).focus();
+						return false;
+					}
+
+					if ($(subBrandIdAttr).val() == "")
+					{
+						alert("In Row "+i+", Sub Brand Can't be Enpty");
+						$(subBrandIdAttr).focus();
+						return false;
+					}
+
+					if ($(keywordIdAttr).val() == "")
+					{
+						alert("In Row "+i+", Keyword Can't be Enpty");
+						$(keywordIdAttr).focus();
+						return false;
+					}
+				}
+			}
 		</script>
 	</body>
 </html>

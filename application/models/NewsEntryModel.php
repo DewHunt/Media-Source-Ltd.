@@ -49,7 +49,7 @@
 		{
 			$entryDateTime = date('Y-m-d H:i:s');
 
-			$sql = "INSERT INTO dataentrydetails (DataentryId, ProductId, Caption, HueId, KeywordId, subBrandId, PositionName, PageId, Cols, Inchs, PageNo, NewsTypeId, Image, EntryBy, EntryDateTime, outlook) VALUES ('$dataEntryId','$productId','$caption','$hueId','$keywordId','$subBrandId','$positionName','$pageId','$col','$inch','$pageNo','$newsTypeId','$dbImageName','$entryId','$entryDateTime','$newsCategoryId')";
+			$sql = "INSERT INTO dataentrydetails (DataentryId, ProductId, Caption, HueId, KeywordId, subBrandId, PositionName, PageId, Cols, Inchs, PageNo, NewstypeId, Image, EntryBy, EntryDateTime, outlook) VALUES ('$dataEntryId','$productId','$caption','$hueId','$keywordId','$subBrandId','$positionName','$pageId','$col','$inch','$pageNo','$newsTypeId','$dbImageName','$entryId','$entryDateTime','$newsCategoryId')";
 
 			$dataEntryDetailsQuery = $this->db->query($sql);
 
@@ -86,7 +86,7 @@
 
 		public function GetDataEntryById($dataEntryId)
 		{
-			$sql = "SELECT * FROM dataentry WHERE Id = '$dataEntryId'";
+			$sql = "SELECT * FROM dataentry WHERE Id = '$dataEntryId' AND State = '1'";
 
 			$query = $this->db->query($sql);
 
@@ -98,6 +98,22 @@
 			{
 				return false;
 			}
+		}
+
+		public function GetDataEntryDetailsById($dataEntryId)
+		{
+			$sql = "SELECT * FROM dataentrydetails WHERE DataentryId = '$dataEntryId' AND State = '1'";
+
+			$query = $this->db->query($sql);
+
+			if ($query->num_rows() > 0)
+			{
+				return $query->result();
+			}
+			else
+			{
+				return false;
+			}			
 		}
 
 		public function GetPublicationInfo($publicationId)
