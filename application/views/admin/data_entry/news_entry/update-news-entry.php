@@ -263,29 +263,94 @@
 
 													echo $output;
 												?>
-												<div id="product-select-menu-1"></div>
 											</td>
 
 											<td>
-												<input type="text" class="ded-col-input" id="col-1" name="col-1" value="">
+												<input type="text" class="ded-col-input" id="col-<?= $sl; ?>" name="col-<?= $sl; ?>" value="<?= $value->Cols; ?>">
 											</td>
 
 											<td>X</td>
 
 											<td>
-												<input type="text" class="ded-inch-input" id="inch-1" name="inch-1" value="">
+												<input type="text" class="ded-inch-input" id="inch-<?= $sl; ?>" name="inch-<?= $sl; ?>" value="<?= $value->Inchs; ?>">
 											</td>
 
 											<td>
-												<div id="sub-brand-select-menu-1"></div>
+												<?php
+													$subBrandInfo = $this->SubBrandModel->GetAllSubBrand();
+													$output = '';
+
+													$output .= '<select class="dropdown" name="sub-brand-id-'.$sl.'" id="sub-brand-id-'.$sl.'" style="width: 99%;">';
+													$output .= '<option value="">Select</option>';
+													if ($subBrandInfo)
+													{
+														foreach ($subBrandInfo as $data)
+														{
+															if ($value->subBrandId == $data->Id)
+															{
+																$output .= '<option value="'.$data->Id.'" selected>'.$data->Name.'</option>';
+															}
+															else
+															{
+																$output .= '<option value="'.$data->Id.'">'.$data->Name.'</option>';
+															}
+														}
+													}
+													else
+													{
+														$output .= '<option value="">Data Option Not Found</option>';		
+													}
+													$output .= '</select>';		
+
+													echo $output;
+												?>
 											</td>
 
 											<td>
-												<div id="keyword-select-menu-1"></div>
+												<?php
+													$keywordInfo = $this->KeywordModel->GetAllKeyword();
+													$output = '';
+
+													$output .= '<select class="dropdown" name="keyword-id-'.$sl.'" id="keyword-id-'.$sl.'" style="width: 99%;">';
+													$output .= '<option value="">Select</option>';
+													if ($keywordInfo)
+													{
+														foreach ($keywordInfo as $data)
+														{
+															if ($value->KeywordId == $data->Id)
+															{
+																$output .= '<option value="'.$data->Id.'" selected>'.$data->Name.'</option>';
+															}
+															else
+															{
+																$output .= '<option value="'.$data->Id.'">'.$data->Name.'</option>';
+															}
+														}
+													}
+													else
+													{
+														$output .= '<option value="">Data Option Not Found</option>';		
+													}
+													$output .= '</select>';		
+
+													echo $output;
+												?>
 											</td>
 
 											<td>
-												<input type="file" class="ded-file-input" id="image-1" name="image-1">
+												<input type="file" class="ded-file-input" id="image-<?= $sl; ?>" name="image-<?= $sl; ?>">
+												<?php
+													$output = '';
+													if ($value->Image == "")
+													{
+														$output .= '<input type="hidden" name="previous-image" id="previous-image" value="">';
+													}
+													else
+													{
+														$output .= '<img src="'.base_url("images/").$value->Image.'" class="img-thumbnail" width="50px" height="50px"> <input type="hidden" name="previous-image" id="previous-image" value="'.$value->Image.'">';
+													}
+													echo $output;
+												?>
 											</td>
 										</tr>											
 									<?php
@@ -325,18 +390,33 @@
 				var sl = document.getElementById('sl').value;
 				sl++;
 
+				var newsTypeSelectMenu = "#news-type-select-menu-"+sl;
+				var newsCategorySelectMenu = "#news-category-select-menu-"+sl;
 				var pageSelectMenu = "#page-select-menu-"+sl;
 				var hueSelectMenu = "#hue-select-menu-"+sl;
+				var productSelectMenu = "#product-select-menu-"+sl;
+				var subBrandSelectMenu = "#sub-brand-select-menu-"+sl;
+				var keywordSelectMenu = "#keyword-select-menu-"+sl;
 
+				var newsTypeIdNameAttr = "news-type-id-"+sl;
+				var newsCategoryIdNameAttr = "news-category-id-"+sl;
 				var pageIdNameAttr = "page-id-"+sl;
 				var hueIdNameAttr = "hue-id-"+sl;
+				var productIdNameAttr = "product-id-"+sl;
+				var subBrandIdNameAttr = "sub-brand-id-"+sl;
+				var keywordIdNameAttr = "keyword-id-"+sl;
 
-				GetDataForSelectMenu("PageModel","GetAllPage",pageSelectMenu,pageIdNameAttr,"Select Page Name",0);
-				GetDataForSelectMenu("HueModel","GetAllHue",hueSelectMenu,hueIdNameAttr,"Select Hue",0);
+				GetDataForSelectMenu("NewsTypeModel","GetAllNewsType",newsTypeSelectMenu,newsTypeIdNameAttr,"Select",0);
+				GetDataForSelectMenu("NewsCategoryModel","GetAllNewsCategory",newsCategorySelectMenu,newsCategoryIdNameAttr,"Select",0);
+				GetDataForSelectMenu("PageModel","GetAllPage",pageSelectMenu,pageIdNameAttr,"Select",0);
+				GetDataForSelectMenu("HueModel","GetAllHue",hueSelectMenu,hueIdNameAttr,"Select",0);
+				GetDataForSelectMenu("ProductModel","GetAllProduct",productSelectMenu,productIdNameAttr,"Select",0);
+				GetDataForSelectMenu("SubBrandModel","GetAllSubBrand",subBrandSelectMenu,subBrandIdNameAttr,"Select",0);
+				GetDataForSelectMenu("KeywordModel","GetAllKeyword",keywordSelectMenu,keywordIdNameAttr,"Select",0);
 
 				document.getElementById("sl").value = sl;
 
-				var table = document.getElementsByTagName('table')[0];
+				var table = document.getElementsByTagName('table')[1];
 
 				var newRow = table.insertRow(sl);
 
@@ -349,16 +429,28 @@
 				var cell7 = newRow.insertCell(6);
 				var cell8 = newRow.insertCell(7);
 				var cell9 = newRow.insertCell(8);
+				var cell10 = newRow.insertCell(9);
+				var cell11 = newRow.insertCell(10);
+				var cell12 = newRow.insertCell(11);
+				var cell13 = newRow.insertCell(12);
+				var cell14 = newRow.insertCell(13);
+				var cell15 = newRow.insertCell(14);
 
 				cell1.innerHTML = sl;
-				cell2.innerHTML = '<input type="text" class="span2" id="price-title-'+sl+'" name="price-title-'+sl+'" value="">';
-				cell3.innerHTML = '<div id="page-select-menu-'+sl+'"></div>';
-				cell4.innerHTML = '<div id="hue-select-menu-'+sl+'"></div>';
-				cell5.innerHTML = '<input type="text" class="span1" id="col-'+sl+'" name="col-'+sl+'" value="1">';
-				cell6.innerHTML = '×';
-				cell7.innerHTML = '<input type="text" class="span1" id="inch-'+sl+'" name="inch-'+sl+'" value="1">';
-				cell8.innerHTML = '<input type="text" class="span1" id="price-'+sl+'" name="price-'+sl+'" value="">';
-				cell9.innerHTML = '<input type="text" class="span1" id="price-description-'+sl+'" name="price-description-'+sl+'" value="">';
+				cell2.innerHTML = '<input type="text" class="ded-input" id="caption-'+sl+'" name="caption-'+sl+'" value="">';
+				cell3.innerHTML = '<div id="news-type-select-menu-'+sl+'"></div>';
+				cell4.innerHTML = '<div id="news-category-select-menu-'+sl+'"></div>';
+				cell5.innerHTML = '<div id="page-select-menu-'+sl+'"></div>';
+				cell6.innerHTML = '<input type="text" class="ded-pos-input" id="page-no-'+sl+'" name="page-no-'+sl+'" value="">';
+				cell7.innerHTML = '<input type="text" class="ded-pos-input" id="position-'+sl+'" name="position-'+sl+'" value="">';
+				cell8.innerHTML = '<div id="hue-select-menu-'+sl+'"></div>';
+				cell9.innerHTML = '<div id="product-select-menu-'+sl+'"></div>';
+				cell10.innerHTML = '<input type="text" class="ded-col-input" id="col-'+sl+'" name="col-'+sl+'" value="">';
+				cell11.innerHTML = 'X';
+				cell12.innerHTML = '<input type="text" class="ded-inch-input" id="inch-'+sl+'" name="inch-'+sl+'" value="">';
+				cell13.innerHTML = '<div id="sub-brand-select-menu-'+sl+'"></div>';
+				cell14.innerHTML = '<div id="keyword-select-menu-'+sl+'"></div>';
+				cell15.innerHTML = '<input type="file" class="ded-input" id="image-'+sl+'" name="image-'+sl+'">';
 
 				return false;
 			}
@@ -367,13 +459,11 @@
 				var index, table, sl;
 				sl = document.getElementById('sl').value;
 
-				if (sl == 1)
-				{
+				if (sl == 1) {
 					window.alert("You Can't Delete Last Row Of The Table");
 				}
-				else
-				{
-					table = document.getElementsByTagName('table')[0];
+				else {
+					table = document.getElementsByTagName('table')[1];
 					table.deleteRow(sl);
 					sl--;
 					document.getElementById("sl").value = sl;

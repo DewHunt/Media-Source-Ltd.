@@ -11,7 +11,7 @@
 
 		public function CheckProductExists($productName,$productCategoryId,$productId)
 		{
-			if ($productId)
+			if ($productId == "")
 			{
 				$sql = "SELECT * FROM product_cat WHERE Name = '$productName' AND ProductId = '$productCategoryId' AND State = '1'";
 			}

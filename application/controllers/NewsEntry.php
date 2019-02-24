@@ -11,6 +11,8 @@
 			$this->load->model('AdminModel');
 			$this->load->model('HueModel');
 			$this->load->model('PlacingModel');
+			$this->load->model('ProductModel');
+			$this->load->model('SubBrandModel');
 			$this->load->model('PageModel');
 			$this->load->model('NewsTypeModel');
 			$this->load->model('NewsCategoryModel');
@@ -275,7 +277,7 @@
 				echo json_encode($output);
 			}
 		}
-
+		
 		public function Update($msg = null,$id = null)
 		{
 			if ($this->session->userdata('adminUserName') == "" || $this->session->userdata('adminPassword') == "")
