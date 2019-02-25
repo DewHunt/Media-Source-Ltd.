@@ -116,6 +116,24 @@
 			}			
 		}
 
+		public function UpdateDataEntry($dataEntryId,$batchId,$mediaId,$publicationId,$dbDate,$updateId)
+		{
+			$updateDateTime = date('Y-m-d H:i:s');
+
+			$sql = "UPDATE dataentry SET BatchId = '".$batchId."', MediaId = '".$mediaId."', PublicationId = '".$publicationId."', Date = '".$dbDate."', UpdateBy = '".$updateId."', UpdateDateTime = '".$updateDateTime."' WHERE Id = '".$dataEntryId."'";
+
+			$updateQuery = $this->db->query($sql);
+
+			if ($updateQuery)
+			{
+				return true;
+			}
+			else
+			{
+				return false;
+			}
+		}
+
 		public function GetPublicationInfo($publicationId)
 		{
 			$str = "SELECT publication.Name AS PublicationName, publication.PublicationLan AS PublicationLanguage, media.Name AS MediaName, pubtype.Name AS TypeName, pubfrequency.Name AS FrequencyName, pubplace.Name AS PlaceName

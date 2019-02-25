@@ -343,11 +343,11 @@
 													$output = '';
 													if ($value->Image == "")
 													{
-														$output .= '<input type="hidden" name="previous-image" id="previous-image" value="">';
+														$output .= '<input type="text" name="previous-image-'.$sl.'" id="previous-image-'.$sl.'" value="">';
 													}
 													else
 													{
-														$output .= '<img src="'.base_url("images/").$value->Image.'" class="img-thumbnail" width="50px" height="50px"> <input type="hidden" name="previous-image" id="previous-image" value="'.$value->Image.'">';
+														$output .= '<img src="'.base_url("images/").$value->Image.'" class="img-thumbnail" width="50px" height="50px"> <input type="text" name="previous-image-'.$sl.'" id="previous-image-'.$sl.'" value="'.$value->Image.'">';
 													}
 													echo $output;
 												?>
@@ -365,7 +365,7 @@
 											<button onclick="return addRow();" class="btn btn-primary">Add More</button>
 											<button onclick="return remove();" class="btn btn-danger">Remove</button>
 
-											<button type="submit" id="button-news-entry" name="button-news-entry" class="btn btn-primary" onclick="return Validation()">Create News Entry</button>
+											<button type="submit" id="button-news-entry" name="button-news-entry" class="btn btn-primary" onclick="return Validation()">Update News Entry</button>
 											<input type="text" name="sl" id="sl" value="<?= $sl-1; ?>">
 											<input type="text" name="date-entry-id" id="date-entry-id" value="<?= $dataEntryInfo->Id; ?>">
 										</td>
