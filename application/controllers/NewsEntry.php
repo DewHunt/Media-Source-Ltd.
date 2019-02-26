@@ -322,8 +322,11 @@
 
 				$updateDataEntry = $this->NewsEntryModel->UpdateDataEntry($dataEntryId,$batchId,$mediaId,$publicationId,$dbDate,$updateId);
 
+				$deleteDataEntryDetails = $this->NewsEntryModel->DeleteDataEntryDetails($dataEntryId);
+				$deleteDataEntryReports = $this->NewsEntryModel->DeleteDataEntryReports($dataEntryId);
+
 				$publicationInfo = $this->NewsEntryModel->GetPublicationInfo($publicationId);
-0
+
 				for ($i=1; $i <= $totalRow; $i++)
 				{ 
 					$captionNameAttr = "caption-".$i;
@@ -338,7 +341,6 @@
 					$inchNameAttr = "inch-".$i;
 					$subBrandIdNameAttr = "sub-brand-id-".$i;
 					$keywordNameAttr = "keyword-id-".$i;
-					$previousimageNameAttr = "previous-image-".$i;
 					$imageNameAttr = "image-".$i;
 
 					// ----------- Start Data Entry Details -----------
@@ -354,7 +356,6 @@
 					$pageNo = $this->input->post($pageNoNameAttr);
 					$newsTypeId = $this->input->post($newsTypeIdNameAttr);
 					$newsCategoryId = $this->input->post($newsCategoryIdNameAttr);
-					$previousImage = $this->input->post($previousimageNameAttr);
 
 					// Copy Image and Get Image New Name
 					$config['upload_path'] = "images/";
@@ -365,7 +366,8 @@
 
 					if ($dataEntryImage == "")
 					{
-						$dbImageName = "";
+						$previousimageNameAttr = "previous-image-".$i;
+						$dbImageName = $this->input->post($previousimageNameAttr);
 					}
 					else
 					{
@@ -377,7 +379,7 @@
 						copy($_FILES[$imageNameAttr]['tmp_name'],$copyImageName);
 					}
 
-					$dataEntryDetailsResult = $this->NewsEntryModel->CreateDataEntryDetails($dataEntryId,$productId,$caption,$hueId,$keywordId,$subBrandId,$positionName,$pageId,$col,$inch,$pageNo,$newsTypeId,$dbImageName,$entryId,$newsCategoryId);
+					$dataEntryDetailsResult = $this->NewsEntryModel->UpdateDataEntryDetails($dataEntryId,$productId,$caption,$hueId,$keywordId,$subBrandId,$positionName,$pageId,$col,$inch,$pageNo,$newsTypeId,$dbImageName,$updateId,$newsCategoryId);
 					// ----------- End Data Entry Details -----------
 
 					// ----------- Start Data Entry Report -----------
@@ -409,19 +411,44 @@
 					$keywordName = $keywordInfo->Name;
 					$newsCategoryName = $newsCategoryInfo->Name;
 
-					$dataEntryReportResult = $this->NewsEntryModel->CreateDataEntryReport($dataEntryId,$batchId,$mediaName,$publicationName,$publicationLanguage,$publicationTypeName,$publicationFrequencyName,$publicationPlaceName,$productName,$productCategoryName,$brandName,$subBrandName,$companyName,$caption,$dbDate,$hueName,$positionName,$pageName,$col,$inch,$price,$pageNo,$newsTypeName,$dbImageName,$keywordName,$entryId,$newsCategoryName);
+					$dataEntryReportResult = $this->NewsEntryModel->UpdateDataEntryReport($dataEntryId,$batchId,$mediaName,$publicationName,$publicationLanguage,$publicationTypeName,$publicationFrequencyName,$publicationPlaceName,$productName,$productCategoryName,$brandName,$subBrandName,$companyName,$caption,$dbDate,$hueName,$positionName,$pageName,$col,$inch,$price,$pageNo,$newsTypeName,$dbImageName,$keywordName,$updateId,$newsCategoryName);
 					// ----------- End Data Entry Report -----------
 				}
 
 				if ($dataEntryReportResult)
 				{
-					return redirect('NewsEntry/NewsEntry/1');
+					return redirect('NewsEntry/Index/1');
 				}
 				else
 				{
-					return redirect('NewsEntry/NewsEntry/2');
+					return redirect('NewsEntry/Update/2/'.$dataEntryId);
 				}				
 			}			
+		}
+
+		public function DeleteNewsEntry()
+		{
+			if ($this->session->userdata('adminUserName') == "" || $this->session->userdata('adminPassword') == "")
+			{
+				return redirect('Admin/Index');
+			}
+			else
+			{
+				$dataEntryId = $this->input->post('dataEntryId');
+
+				$deleteNewsEntry = $this->NewsEntryModel->DeleteDataEntry($dataEntryId);
+				$deleteNewsEntryDetails = $this->NewsEntryModel->DeleteDataEntryDetails($dataEntryId);
+				$deleteNewsEntryReport = $this->NewsEntryModel->DeleteDataEntryReports($dataEntryId);
+
+				if ($deleteNewsEntryReport)
+				{
+					echo "News Entry Deleted From Database!";
+				}
+				else
+				{
+					echo "Oops, Something Wrong With Deleting News Entry";
+				}
+			}
 		}
 	}
 ?>

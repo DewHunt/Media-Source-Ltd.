@@ -195,11 +195,12 @@
 				$publicationId = $this->input->post('publication-id');
 				$day = $this->input->post('day');
 				$updateId = $this->GetAdminAllInfo()->Id;
+
 				$totalRow = $this->input->post('sl');
 
-				$updatePrice = $this->PriceModel->UpdatePrice($priceId,$priceMediaName,$mediaId,$publicationId,$day,$updateId);
+				// $updatePrice = $this->PriceModel->UpdatePrice($priceId,$priceMediaName,$mediaId,$publicationId,$day,$updateId);
 
-				$deletePriceDetails = $this->PriceModel->DeletePriceDetails($priceId);
+				// $deletePriceDetails = $this->PriceModel->DeletePriceDetails($priceId);
 
 				for ($i=1; $i <= $totalRow; $i++)
 				{ 
@@ -219,7 +220,7 @@
 					$price = $this->input->post($priceNameAttr);
 					$priceDescription = $this->input->post($priceDescriptionNameAttr);
 
-					$result = $this->PriceModel->UpdatePriceDetails($priceId,$priceTitle,$hueId,$pageId,$price,$col,$inch,$priceDescription,$updateId);
+					// $result = $this->PriceModel->UpdatePriceDetails($priceId,$priceTitle,$hueId,$pageId,$price,$col,$inch,$priceDescription,$updateId);
 				}
 
 				if ($result)
@@ -228,7 +229,7 @@
 				}
 				else
 				{
-					return redirect('Price/Update/2/$priceId');
+					return redirect('Price/Update/2/'.$priceId);
 				}
 			}
 		}

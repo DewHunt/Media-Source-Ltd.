@@ -114,7 +114,7 @@
 
 		public function DeletePrice($priceId)
 		{
-			$sql = "DELETE FROM price WHERE Id = '$priceId' AND State = '1'";
+			$sql = "DELETE FROM price WHERE Id = '$priceId'";
 
 			$deleteQuery = $this->db->query($sql);
 
@@ -130,7 +130,7 @@
 
 		public function DeletePriceDetails($priceId)
 		{
-			$sql = "DELETE FROM pricedetails WHERE PriceId = '$priceId' AND State = '1'";
+			$sql = "DELETE FROM pricedetails WHERE PriceId = '$priceId'";
 
 			$deleteQuery = $this->db->query($sql);
 

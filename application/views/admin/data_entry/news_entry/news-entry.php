@@ -93,6 +93,27 @@
 						},
 					],
 				});
+
+				$(document).on('click', '.delete', function(){
+					var dataEntryId = $(this).attr('id');
+
+					if (confirm("Wait!, Are Your 100% Sure, You Really Want to Delete This?"))
+					{
+						$.ajax({
+							url:'<?php echo base_url('index.php/NewsEntry/DeleteNewsEntry'); ?>',
+							method:'POST',
+							data:{dataEntryId:dataEntryId},
+							success:function(data){
+								alert(data);
+								dataTable.ajax.reload();
+							}
+						});
+					}
+					else
+					{
+						return false;
+					}
+				});
 			});
 		</script>
 	</body>

@@ -47,7 +47,11 @@
 								<tbody>
 									<tr>
 										<td>
-											<input class="date-picker" type="text" id="date" name="date" placeholder="Select Date (M/D/Y)">
+											<?php
+												$date = explode('-', $dataEntryInfo->Date);
+												$dataEntryDate = $date[1]."/".$date[2]."/".$date[0];
+											?>
+											<input class="date-picker" type="text" id="date" name="date" placeholder="Select Date (M/D/Y)" value="<?= $dataEntryDate; ?>">
 										</td>
 
 										<td>
@@ -97,7 +101,7 @@
 											<td><?= $sl; ?></td>
 
 											<td>
-												<input type="text" class="ded-input" id="caption-1" name="caption-1" value="<?= $value->Caption; ?>">
+												<input type="text" class="ded-input" id="caption-<?= $sl; ?>" name="caption-<?= $sl; ?>" value="<?= $value->Caption; ?>">
 											</td>
 
 											<td>
