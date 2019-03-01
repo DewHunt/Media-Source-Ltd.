@@ -7,7 +7,7 @@
 	<body>
 		<?php include APPPATH.'views/admin/master/navbar.php'; ?>
 
-		<?php include APPPATH.'views/admin/master/system-sub-navbar.php'; ?>
+		<?php include APPPATH.'views/admin/master/data-entry-sub-navbar.php'; ?>
 		
 		<div class="main">
 			<div class="main-inner">
@@ -347,11 +347,11 @@
 													$output = '';
 													if ($value->Image == "")
 													{
-														$output .= '<input type="text" name="previous-image-'.$sl.'" id="previous-image-'.$sl.'" value="">';
+														$output .= '<input type="hidden" name="previous-image-'.$sl.'" id="previous-image-'.$sl.'" value="">';
 													}
 													else
 													{
-														$output .= '<img src="'.base_url("images/").$value->Image.'" class="img-thumbnail" width="50px" height="50px"> <input type="text" name="previous-image-'.$sl.'" id="previous-image-'.$sl.'" value="'.$value->Image.'">';
+														$output .= '<img src="'.base_url("images/").$value->Image.'" class="img-thumbnail" width="50px" height="50px"> <input type="hidden" name="previous-image-'.$sl.'" id="previous-image-'.$sl.'" value="'.$value->Image.'">';
 													}
 													echo $output;
 												?>
@@ -370,8 +370,8 @@
 											<button onclick="return remove();" class="btn btn-danger">Remove</button>
 
 											<button type="submit" id="button-news-entry" name="button-news-entry" class="btn btn-primary" onclick="return Validation()">Update News Entry</button>
-											<input type="text" name="sl" id="sl" value="<?= $sl-1; ?>">
-											<input type="text" name="date-entry-id" id="date-entry-id" value="<?= $dataEntryInfo->Id; ?>">
+											<input type="hidden" name="sl" id="sl" value="<?= $sl-1; ?>">
+											<input type="hidden" name="date-entry-id" id="date-entry-id" value="<?= $dataEntryInfo->Id; ?>">
 										</td>
 									</tr>
 								</tfoot>
@@ -523,79 +523,128 @@
 			} 
 			// Get All Data For Select Menu Script End
 
-			// function Validation()
-			// {
-			// 	var priceMediaName = $('#price-media-name').val();
-			// 	var mediaId = $('#media-name-id').val();
-			// 	var publicationId = $('#publication-id').val();
-			// 	var day = $('#day').val();
+			function Validation()
+			{
+				var date = $('#date').val();
+				var mediaId = $('#media-name-id').val();
+				var publicationId = $('#publication-id').val();
 
-			// 	var totalRow = $('#sl').val();
+				var totalRow = $('#sl').val();
 
-			// 	if (mediaId == "")
-			// 	{
-			// 		alert("Media Name Can't Be Empty");
-			// 		return false;
-			// 	}
+				if (date == 0)
+				{
+					alert("Date Can't Be Empty");
+					$('#date').focus();
+					return false;
+				}
 
-			// 	if (publicationId == "")
-			// 	{
-			// 		alert("Publication Can't Be Empty");
-			// 		return false;
-			// 	}
+				if (mediaId == 0)
+				{
+					alert("Media Name Can't Be Empty");
+					$('#media-name-id').focus();
+					return false;
+				}
 
-			// 	if (day == "")
-			// 	{
-			// 		alert("Day Can't Be Empty");
-			// 		return false;
-			// 	}
+				if (publicationId == 0)
+				{
+					alert("Publication Can't Be Empty");
+					$('#publication-id').focus();
+					return false;
+				}
 
-			// 	for (var i = 1; i <= totalRow; i++)
-			// 	{
-			// 		var priceTitleIdAttr = "#price-title-"+i;
-			// 		var pageIdAttr = "#page-id-"+i;
-			// 		var hueIdAttr = "#hue-id-"+i;
-			// 		var colIdAttr = "#col-"+i;
-			// 		var inchIdAttr = "#inch-"+i;
-			// 		var priceIdAttr = "#price-"+i;
+				for (var i = 1; i <= totalRow; i++)
+				{
+					var captionIdAttr = "#caption-"+i;
+					var newsTypeIdAttr = "#news-type-id-"+i;
+					var newsCategoryIdAttr = "#news-category-id-"+i;
+					var pageNameIdAttr = "#page-id-"+i;
+					var pageNoIdAttr = "#page-no-"+i;
+					var positionIdAttr = "#position-"+i;
+					var hueIdAttr = "#hue-id-"+i;
+					var productIdAttr = "#product-id-"+i;
+					var colIdAttr = "#col-"+i;
+					var inchIdAttr = "#inch-"+i;
+					var subBrandIdAttr = "#sub-brand-id-"+i;
+					var keywordIdAttr = "#keyword-id-"+i;
 
-			// 		if ($(priceTitleIdAttr).val() == "")
-			// 		{
-			// 			alert("In Row "+i+", Price Title Can't be Empty");
-			// 			return false;
-			// 		}
+					if ($(captionIdAttr).val() == "")
+					{
+						alert("In Row "+i+", Caption Can't be Empty");
+						$(captionIdAttr).focus();
+						return false;
+					}
 
-			// 		if ($(pageIdAttr).val() == "")
-			// 		{
-			// 			alert("In Row "+i+", Page Name Can't Be Empty.");
-			// 			return false;
-			// 		}
+					if ($(newsTypeIdAttr).val() == "")
+					{
+						alert("In Row "+i+", News Type Can't Be Empty.");
+						$(newsTypeIdAttr).focus();
+						return false;
+					}
 
-			// 		if ($(hueIdAttr).val() == "")
-			// 		{
-			// 			alert("In Row "+i+", Hue Can't Be Empty");
-			// 			return false;
-			// 		}
+					if ($(newsCategoryIdAttr).val() == "")
+					{
+						alert("In Row "+i+", News Category Can't Be Empty");
+						$(newsCategoryIdAttr).focus();
+						return false;
+					}
 
-			// 		if ($(colIdAttr).val() == "")
-			// 		{
-			// 			alert("In Row "+i+", Column Can't be Empty");
-			// 			return false;
-			// 		}
+					if ($(pageNameIdAttr).val() == "")
+					{
+						alert("In Row "+i+", Page Name Can't be Empty");
+						$(pageNameIdAttr).focus();
+						return false;
+					}
 
-			// 		if ($(inchIdAttr).val() == "")
-			// 		{
-			// 			alert("In Row "+i+", Inch Can't be Empty");
-			// 			return false;
-			// 		}
+					if ($(positionIdAttr).val() == "")
+					{
+						alert("In Row "+i+", Position Can't be Empty");
+						$(positionIdAttr).focus();
+						return false;
+					}
 
-			// 		if ($(priceIdAttr).val() == "")
-			// 		{
-			// 			alert("In Row "+i+", Price Can't be Enpty");
-			// 			return false;
-			// 		}
-			// 	}
-			// }
+					if ($(hueIdAttr).val() == "")
+					{
+						alert("In Row "+i+", Hue Can't be Enpty");
+						$(hueIdAttr).focus();
+						return false;
+					}
+
+					if ($(productIdAttr).val() == "")
+					{
+						alert("In Row "+i+", Product Can't be Enpty");
+						$(productIdAttr).focus();
+						return false;
+					}
+
+					if ($(colIdAttr).val() == "")
+					{
+						alert("In Row "+i+",  Column be Enpty");
+						$(colIdAttr).focus();
+						return false;
+					}
+
+					if ($(inchIdAttr).val() == "")
+					{
+						alert("In Row "+i+", Inch Can't be Enpty");
+						$(inchIdAttr).focus();
+						return false;
+					}
+
+					if ($(subBrandIdAttr).val() == "")
+					{
+						alert("In Row "+i+", Sub Brand Can't be Enpty");
+						$(subBrandIdAttr).focus();
+						return false;
+					}
+
+					if ($(keywordIdAttr).val() == "")
+					{
+						alert("In Row "+i+", Keyword Can't be Enpty");
+						$(keywordIdAttr).focus();
+						return false;
+					}
+				}
+			}
 		</script>
 	</body>
 </html>
