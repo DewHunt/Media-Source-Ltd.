@@ -11,6 +11,7 @@
 											<li><a href="<?= base_url('index.php/Account/Index'); ?>">All Accounts</a></li>
 											<li><a href="<?= base_url('index.php/SystemSetup/Index'); ?>">System Setup</a></li>
 											<li><a href="<?= base_url('index.php/DataEntry/Index'); ?>">Data Entry</a></li>
+											<li><a href="<?= base_url('index.php/NewsReports/Index'); ?>">News Reports</a></li>
 										</ul>
 									</div>  <!-- /main-nav -->
 								</div>  <!-- /widget-content -->

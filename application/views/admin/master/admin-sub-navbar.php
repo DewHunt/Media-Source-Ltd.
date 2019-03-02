@@ -7,6 +7,7 @@
 						<li><a href="<?= base_url('index.php/Account/Index'); ?>"><i class="icon-user"></i><span>All Accounts</span> </a> </li>
 						<li><a href="<?= base_url('index.php/SystemSetup/Index'); ?>"><i class="icon-gear"></i><span>System Setup</span> </a> </li>
 						<li><a href="<?= base_url('index.php/DataEntry/Index'); ?>"><i class="icon-tag"></i><span>Data Entry</span> </a> </li>
+						<li><a href="<?= base_url('index.php/NewsReports/Index'); ?>"><i class="icon-tag"></i><span>News Reports</span> </a> </li>
 					</ul>
 				</div>  <!-- /container --> 
 			</div> <!-- /subnavbar-inner --> 
