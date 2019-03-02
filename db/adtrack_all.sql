@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 14, 2019 at 01:53 PM
+-- Generation Time: Mar 02, 2019 at 12:24 PM
 -- Server version: 5.5.36
 -- PHP Version: 5.4.25
 
@@ -329,7 +329,7 @@ INSERT INTO `company` (`Id`, `Name`, `Description`, `EntryBy`, `EntryDateTime`, 
 
 CREATE TABLE IF NOT EXISTS `dataentry` (
   `Id` int(11) NOT NULL AUTO_INCREMENT,
-  `BatchId` varchar(30) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `BatchId` int(11) DEFAULT NULL,
   `MediaId` int(11) DEFAULT NULL,
   `PublicationId` int(3) DEFAULT NULL,
   `Date` date DEFAULT NULL,
@@ -342,34 +342,36 @@ CREATE TABLE IF NOT EXISTS `dataentry` (
   `Name` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
   `State` tinyint(3) DEFAULT '1',
   PRIMARY KEY (`Id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=51 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=73 ;
 
 --
 -- Dumping data for table `dataentry`
 --
 
 INSERT INTO `dataentry` (`Id`, `BatchId`, `MediaId`, `PublicationId`, `Date`, `EntryBy`, `EntrydateTime`, `UpdateBy`, `UpdateDateTime`, `DeleteBy`, `DeleteDateTime`, `Name`, `State`) VALUES
-(26, '2', 48, 40, '2019-01-06', 1, '2019-01-08 11:13:11', NULL, NULL, NULL, NULL, '', 1),
-(27, '3', 48, 40, '2019-01-06', 1, '2019-01-08 11:13:35', NULL, NULL, NULL, NULL, '', 1),
-(28, '10', 48, 40, '2018-12-01', 1, '2019-01-08 11:14:27', NULL, NULL, NULL, NULL, '', 1),
-(29, '10', 48, 40, '2018-12-03', 1, '2019-01-08 11:15:03', NULL, NULL, NULL, NULL, '', 1),
-(30, '10', 48, 40, '2018-12-19', 1, '2019-01-08 11:15:29', NULL, NULL, NULL, NULL, '', 1),
-(31, '10', 48, 40, '2019-01-12', 1, '2019-01-08 11:16:03', NULL, NULL, NULL, NULL, '', 1),
-(32, '10', 48, 40, '2018-12-12', 1, '2019-01-08 11:16:31', NULL, NULL, NULL, NULL, '', 1),
-(33, '10', 48, 40, '2019-01-05', 1, '2019-01-08 11:16:55', NULL, NULL, NULL, NULL, '', 1),
-(34, '10', 48, 40, '2018-12-21', 1, '2019-01-08 11:17:21', NULL, NULL, NULL, NULL, '', 1),
-(35, '10', 51, 56, '2019-01-05', 1, '2019-01-08 11:22:32', NULL, NULL, NULL, NULL, '', 1),
-(36, '1', 51, 56, '2019-01-06', 1, '2019-01-08 11:22:59', NULL, NULL, NULL, NULL, '', 1),
-(37, '4', 50, 54, '2018-12-07', 1, '2019-01-08 11:24:38', NULL, NULL, NULL, NULL, '', 1),
-(38, '5', 50, 54, '2018-12-01', 1, '2019-01-08 11:24:58', NULL, NULL, NULL, NULL, '', 1),
-(41, '8', 50, 54, '2018-12-15', 1, '2019-01-08 11:26:31', NULL, NULL, NULL, NULL, '', 1),
-(42, '9', 50, 54, '2018-12-11', 1, '2019-01-08 11:26:55', NULL, NULL, NULL, NULL, '', 1),
-(43, '10', 50, 54, '2018-12-21', 1, '2019-01-08 11:27:29', NULL, NULL, NULL, NULL, '', 1),
-(44, '10', 49, 47, '2018-12-09', 1, '2019-01-08 11:27:54', NULL, NULL, NULL, NULL, '', 1),
-(45, '10', 49, 47, '2018-12-19', 1, '2019-01-08 11:28:08', NULL, NULL, NULL, NULL, '', 1),
-(46, '10', 49, 47, '2018-12-21', 1, '2019-01-08 11:28:22', NULL, NULL, NULL, NULL, '', 1),
-(49, '6', 50, 54, '2019-01-02', 1, '2019-01-08 11:53:25', NULL, NULL, NULL, NULL, '', 1),
-(50, '7', 49, 47, '2019-01-04', 1, '2019-01-08 11:54:58', NULL, NULL, NULL, NULL, '', 1);
+(26, 2, 48, 40, '2019-01-06', 1, '2019-01-08 11:13:11', NULL, NULL, NULL, NULL, '', 1),
+(27, 3, 48, 40, '2019-01-06', 1, '2019-01-08 11:13:35', NULL, NULL, NULL, NULL, '', 1),
+(28, 10, 48, 40, '2018-12-01', 1, '2019-01-08 11:14:27', NULL, NULL, NULL, NULL, '', 1),
+(29, 10, 48, 40, '2018-12-03', 1, '2019-01-08 11:15:03', NULL, NULL, NULL, NULL, '', 1),
+(30, 10, 48, 40, '2018-12-19', 1, '2019-01-08 11:15:29', NULL, NULL, NULL, NULL, '', 1),
+(31, 10, 48, 40, '2019-01-12', 1, '2019-01-08 11:16:03', NULL, NULL, NULL, NULL, '', 1),
+(32, 10, 48, 40, '2018-12-12', 1, '2019-01-08 11:16:31', NULL, NULL, NULL, NULL, '', 1),
+(33, 10, 48, 40, '2019-01-05', 1, '2019-01-08 11:16:55', NULL, NULL, NULL, NULL, '', 1),
+(34, 10, 48, 40, '2018-12-21', 1, '2019-01-08 11:17:21', NULL, NULL, NULL, NULL, '', 1),
+(35, 10, 51, 56, '2019-01-05', 1, '2019-01-08 11:22:32', NULL, NULL, NULL, NULL, '', 1),
+(36, 1, 51, 56, '2019-01-06', 1, '2019-01-08 11:22:59', NULL, NULL, NULL, NULL, '', 1),
+(37, 4, 50, 54, '2018-12-07', 1, '2019-01-08 11:24:38', NULL, NULL, NULL, NULL, '', 1),
+(38, 5, 50, 54, '2018-12-01', 1, '2019-01-08 11:24:58', NULL, NULL, NULL, NULL, '', 1),
+(41, 8, 50, 54, '2018-12-15', 1, '2019-01-08 11:26:31', NULL, NULL, NULL, NULL, '', 1),
+(42, 9, 50, 54, '2018-12-11', 1, '2019-01-08 11:26:55', NULL, NULL, NULL, NULL, '', 1),
+(43, 10, 50, 54, '2018-12-21', 1, '2019-01-08 11:27:29', NULL, NULL, NULL, NULL, '', 1),
+(44, 10, 49, 47, '2018-12-09', 1, '2019-01-08 11:27:54', NULL, NULL, NULL, NULL, '', 1),
+(45, 10, 49, 47, '2018-12-19', 1, '2019-01-08 11:28:08', NULL, NULL, NULL, NULL, '', 1),
+(46, 10, 49, 47, '2018-12-21', 1, '2019-01-08 11:28:22', NULL, NULL, NULL, NULL, '', 1),
+(49, 6, 50, 54, '2019-01-02', 1, '2019-01-08 11:53:25', NULL, NULL, NULL, NULL, '', 1),
+(50, 7, 49, 47, '2019-01-04', 1, '2019-01-08 11:54:58', NULL, NULL, NULL, NULL, '', 1),
+(71, 11, 51, 56, '2019-02-20', 1, '2019-02-20 11:48:03', 1, '2019-02-27 11:53:55', NULL, NULL, '', 1),
+(72, 12, 50, 54, '2019-02-27', 1, '2019-02-27 11:56:04', NULL, NULL, NULL, NULL, '', 1);
 
 -- --------------------------------------------------------
 
@@ -412,7 +414,7 @@ CREATE TABLE IF NOT EXISTS `dataentrydetails` (
   `State` tinyint(3) DEFAULT '1',
   `outlook` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`Id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=51 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=68 ;
 
 --
 -- Dumping data for table `dataentrydetails`
@@ -439,7 +441,11 @@ INSERT INTO `dataentrydetails` (`Id`, `DataentryId`, `ProductId`, `ProductCatId`
 (45, 45, 2, 0, 0, 'Full List of CIP', '0', 1, 0, NULL, 34, NULL, '1-5', '24', 5, 12, 17, 1, '', '0', '0', 1, '2019-01-08 11:28:09', '', '', '', '', NULL, NULL, NULL, NULL, 1, '2'),
 (46, 46, 2, 0, 0, 'Square Group Chairman', '0', 1, 0, NULL, 34, NULL, '5-8', '24', 4, 4, 17, 1, '', '0', '0', 1, '2019-01-08 11:28:23', '', '', '', '', NULL, NULL, NULL, NULL, 1, '2'),
 (49, 49, 2, 0, 0, 'Pradip Kar CHowdhury', '0', 1, 0, NULL, 32, NULL, '6-8', '24', 3, 3, 18, 1, '', '14', '0', 1, '2019-01-08 11:53:25', '', '', '', '', NULL, NULL, NULL, NULL, 1, '2'),
-(50, 50, 2, 0, 0, 'An Agreement Signing', '0', 1, 0, NULL, 32, NULL, '5-8', '24', 4, 5, 16, 1, '', '14', '0', 1, '2019-01-08 11:54:58', '', '', '', '', NULL, NULL, NULL, NULL, 1, '2');
+(50, 50, 2, 0, 0, 'An Agreement Signing', '0', 1, 0, NULL, 32, NULL, '5-8', '24', 4, 5, 16, 1, '', '14', '0', 1, '2019-01-08 11:54:58', '', '', '', '', NULL, NULL, NULL, NULL, 1, '2'),
+(64, 71, 2, NULL, NULL, 'abc', NULL, 1, 14, NULL, 7, NULL, '5', '15', 1, 1, 3, 3, '51_PN_15_PNO_3_POS_5_SZ_1_DT_27-02-2019_1551246531.png', NULL, NULL, NULL, NULL, '', '', '', '', 1, '2019-02-27 11:53:55', NULL, NULL, 1, '5'),
+(65, 71, 2, NULL, NULL, 'def', NULL, 2, 7, NULL, 32, NULL, '4', '42', 1, 1, 2, 1, '51_PN_42_PNO_2_POS_4_SZ_1_DT_27-02-2019_1551246531.jpg', NULL, NULL, NULL, NULL, '', '', '', '', 1, '2019-02-27 11:53:55', NULL, NULL, 1, '4'),
+(66, 72, 2, NULL, NULL, 'ASD', NULL, 1, 14, NULL, 5, NULL, '1', '15', 1, 1, 1, 3, '50_PN_15_PNO_1_POS_1_SZ_1_DT_27-02-2019_1551264964.jpg', NULL, NULL, 1, '2019-02-27 11:56:04', '', '', '', '', NULL, NULL, NULL, NULL, 1, '5'),
+(67, 72, 2, NULL, NULL, 'WER', NULL, 2, 7, NULL, 32, NULL, '1', '42', 1, 1, 1, 2, '50_PN_42_PNO_1_POS_1_SZ_1_DT_27-02-2019_1551264964.jpg', NULL, NULL, 1, '2019-02-27 11:56:04', '', '', '', '', NULL, NULL, NULL, NULL, 1, '4');
 
 -- --------------------------------------------------------
 
@@ -486,7 +492,7 @@ CREATE TABLE IF NOT EXISTS `dataentryreport` (
   `State` tinyint(3) DEFAULT '1',
   `outlook` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`Id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=51 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=64 ;
 
 --
 -- Dumping data for table `dataentryreport`
@@ -513,7 +519,11 @@ INSERT INTO `dataentryreport` (`Id`, `DataEntryId`, `BatchId`, `MediaId`, `Publi
 (45, 45, '10', 'Financial Express', 'General', 'English', 'Newspaper ', 'Daily', 'Dhaka', 'Business & Economy', 'Corporate', 'Square', 'Square', 'Square Toiletries Lt', 'Full List of CIP', '2018-12-19', '1', 'Color', NULL, '1-5', 'Inner', 5, 12, '3500.00', 17, 'News', '', '1', '0', 1, '2019-01-08 11:28:09', NULL, NULL, NULL, NULL, 1, 'Positive'),
 (46, 46, '10', 'Financial Express', 'General', 'English', 'Newspaper ', 'Daily', 'Dhaka', 'Business & Economy', 'Corporate', 'Square', 'Square', 'Square Toiletries Lt', 'Square Group Chairman', '2018-12-21', '1', 'Color', NULL, '5-8', 'Inner', 4, 4, '3500.00', 17, 'News', '', '1', '0', 1, '2019-01-08 11:28:23', NULL, NULL, NULL, NULL, 1, 'Positive'),
 (49, 49, '6', 'Daily Star', 'General', 'English', 'Newspaper ', 'Daily', 'Dhaka', 'Business & Economy', 'Corporate', 'ACI', 'ACI', 'ACI Ltd.', 'Pradip Kar CHowdhury', '2019-01-02', '1', 'Color', NULL, '6-8', 'Inner', 3, 3, '4000.00', 18, 'News', '', 'ACI', '0', 1, '2019-01-08 11:53:25', NULL, NULL, NULL, NULL, 1, 'Positive'),
-(50, 50, '7', 'Financial Express', 'General', 'English', 'Newspaper ', 'Daily', 'Dhaka', 'Business & Economy', 'Corporate', 'ACI', 'ACI', 'ACI Ltd.', 'An Agreement Signing', '2019-01-04', '1', 'Color', NULL, '5-8', 'Inner', 4, 5, '3500.00', 16, 'News', '', 'ACI', '0', 1, '2019-01-08 11:54:58', NULL, NULL, NULL, NULL, 1, 'Positive');
+(50, 50, '7', 'Financial Express', 'General', 'English', 'Newspaper ', 'Daily', 'Dhaka', 'Business & Economy', 'Corporate', 'ACI', 'ACI', 'ACI Ltd.', 'An Agreement Signing', '2019-01-04', '1', 'Color', NULL, '5-8', 'Inner', 4, 5, '3500.00', 16, 'News', '', 'ACI', '0', 1, '2019-01-08 11:54:58', NULL, NULL, NULL, NULL, 1, 'Positive'),
+(60, 71, '11', 'Bangladesh Pratidin', 'General', 'Bangla', 'Newspaper ', 'Daily', 'Dhaka', 'Corporate', 'Business & Economy', 'ACI Foods', 'AC I Stick Noodles', 'ACI Ltd.', 'abc', '2019-02-20', NULL, 'Color', NULL, '5', 'First Page ', 1, 1, '17000.00', 3, 'Editorial', '51_PN_15_PNO_3_POS_5_SZ_1_DT_27-02-2019_1551246531.png', 'ACI', NULL, NULL, NULL, 1, '2019-02-27 11:53:55', NULL, NULL, 1, 'Negetive'),
+(61, 71, '11', 'Bangladesh Pratidin', 'General', 'Bangla', 'Newspaper ', 'Daily', 'Dhaka', 'Corporate', 'Business & Economy', 'ACI', 'ACI', 'ACI Ltd.', 'def', '2019-02-20', NULL, 'Black & White', NULL, '4', 'News Second Page (B/W)', 1, 1, '9500.00', 2, 'News', '51_PN_42_PNO_2_POS_4_SZ_1_DT_27-02-2019_1551246531.jpg', 'Anwar Group', NULL, NULL, NULL, 1, '2019-02-27 11:53:55', NULL, NULL, 1, 'Normal'),
+(62, 72, '12', 'Daily Star', 'General', 'English', 'Newspaper ', 'Daily', 'Dhaka', 'Corporate', 'Business & Economy', 'ACI Foods', 'ACI Chinigura Chal', 'ACI Ltd.', 'ASD', '2019-02-27', NULL, 'Color', NULL, '1', 'First Page ', 1, 1, '13500.00', 1, 'Editorial', '50_PN_15_PNO_1_POS_1_SZ_1_DT_27-02-2019_1551264964.jpg', 'ACI', NULL, 1, '2019-02-27 11:56:04', NULL, NULL, NULL, NULL, 1, 'Negetive'),
+(63, 72, '12', 'Daily Star', 'General', 'English', 'Newspaper ', 'Daily', 'Dhaka', 'Corporate', 'Business & Economy', 'ACI', 'ACI', 'ACI Ltd.', 'WER', '2019-02-27', NULL, 'Black & White', NULL, '1', 'News Second Page (B/W)', 1, 1, '7500.00', 1, 'Features', '50_PN_42_PNO_1_POS_1_SZ_1_DT_27-02-2019_1551264964.jpg', 'Anwar Group', NULL, 1, '2019-02-27 11:56:04', NULL, NULL, NULL, NULL, 1, 'Normal');
 
 -- --------------------------------------------------------
 
@@ -639,16 +649,19 @@ CREATE TABLE IF NOT EXISTS `newscategory` (
   `State` tinyint(3) DEFAULT '1',
   PRIMARY KEY (`Id`),
   UNIQUE KEY `NewIndex1` (`Name`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=7 ;
 
 --
 -- Dumping data for table `newscategory`
 --
 
 INSERT INTO `newscategory` (`Id`, `Name`, `Description`, `EntryBy`, `EntryDateTime`, `UpdateBy`, `UpdateTime`, `DeleteBy`, `DeleteDateTime`, `State`) VALUES
-(1, 'News Category 1', 'News Category 1', 1, '2019-01-03 10:01:20', NULL, NULL, NULL, NULL, 1),
-(2, 'News Category 2', 'News Category 2', 1, '2019-01-03 10:01:31', NULL, NULL, NULL, NULL, 1),
-(3, 'News Category 3', 'News Category 3', 1, '2019-01-03 10:01:43', NULL, NULL, NULL, NULL, 1);
+(1, 'News Category 1', 'News Category 1', 1, '2019-01-03 10:01:20', NULL, NULL, 1, '2019-02-20 10:00:30', 0),
+(2, 'News Category 2', 'News Category 2', 1, '2019-01-03 10:01:31', NULL, NULL, 1, '2019-02-20 10:00:24', 0),
+(3, 'News Category 3', 'News Category 3', 1, '2019-01-03 10:01:43', NULL, NULL, 1, '2019-02-20 10:00:17', 0),
+(4, 'Normal', 'Normal', 1, '2019-02-20 09:59:34', NULL, NULL, NULL, NULL, 1),
+(5, 'Negetive', 'Negetive', 1, '2019-02-20 09:59:47', NULL, NULL, NULL, NULL, 1),
+(6, 'Positive', 'Positive', 1, '2019-02-20 10:00:02', NULL, NULL, NULL, NULL, 1);
 
 -- --------------------------------------------------------
 
