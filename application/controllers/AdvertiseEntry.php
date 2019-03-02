@@ -9,6 +9,9 @@
 		{
 			parent::__construct();
 			$this->load->model('AdminModel');
+			$this->load->model('MediaNameModel');
+			$this->load->model('DataTableModel');
+			$this->load->model('AdvertiseEntryModel');
 		}
 
 		public function GetAdminAllInfo()
