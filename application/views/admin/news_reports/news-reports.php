@@ -99,9 +99,46 @@
 												</tr>
 											</tbody>
 										</table>
-									</form>									
+									</form>
+
+																		
 								</div>	<!-- /widget-content -->
 							</div> <!-- /widget -->
+
+							<table class="table table-striped table-bordered">
+								<thead>
+									<tr>
+										<th colspan="25" style="text-align: center;"><h1>News Reports</h1></th>
+									</tr>
+									<tr>
+										<th>SL</th>
+										<th>Date</th>
+										<th>Media Name</th>
+										<th>Publication Name</th>
+										<th>Publication Type</th>
+										<th>Publication Place</th>
+										<th>Publication Language</th>
+										<th>Publication Frequency</th>
+										<th>Company</th>
+										<th>Brand</th>
+										<th>Sub Brand</th>
+										<th>Title</th>
+										<th>Product Name</th>
+										<th>Product Category</th>
+										<th>Page Name</th>
+										<th>Page Number</th>
+										<th>Placing Name</th>
+										<th>Placing Type</th>
+										<th>Hue</th>
+										<th>Cols</th>
+										<th>Inchs</th>
+										<th>Cols×Inchs</th>
+										<th>Cost</th>
+										<th>Ad Type</th>
+										<th>Ad Theme</th>
+									</tr>
+								</thead>
+							</table>
 						</div>	<!-- /span12 -->
 					</div>	<!-- /row --> 
 					<!-- <input type="number" name="sl" id="sl" value="1" hidden>  -->

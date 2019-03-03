@@ -9,6 +9,8 @@
 		{
 			parent::__construct();
 			$this->load->model('AdminModel');
+			$this->load->model('MediaNameModel');
+			$this->load->model('PublicationModel');
 			$this->load->model('NewsReportsModel');
 		}
 
@@ -46,7 +48,16 @@
 			}
 			else
 			{
-				echo "This Is Search News Reports Function";
+				$fromDate = explode('/', $this->input->post('fromDate'));
+				$toDate = explode('/', $this->input->post('toDate'));
+				$searchFromDate = $fromDate[2]."-".$fromDate[0]."-".$fromDate[1];
+				$searchToDate = $toDate[2]."-".$toDate[0]."-".$toDate[1];
+
+				$mediaId = $this->input->post('media-name-id');
+				$publicationId = $this->input->post('publication-id');
+
+				$mediaName = $this->MediaNameModel->GetMediaNameById($mediaId)->Name;
+				$publicationName = $this->PublicationModel->GetPublicationById($publicationId)->Name;
 			}			
 		}
 	}
