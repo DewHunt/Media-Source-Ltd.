@@ -2,6 +2,44 @@
 <html lang="en">
 	<head>
 		<?php include APPPATH.'views/admin/master/header.php'; ?>
+		<style>
+			#tab {
+				font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+				border-collapse: collapse;
+				width: 100%;
+			}
+
+			#tab td, #tab th {
+				border: 1px solid #ddd;
+				padding: 8px;
+			}
+
+			#tab tr:nth-child(even){background-color: #f2f2f2;}
+
+			#tab tr:hover {background-color: #ddd;}
+
+			#tab th {
+				padding-top: 12px;
+				padding-bottom: 12px;
+				text-align: left;
+				background-color: #4CAF50;
+				color: white;
+			}
+
+			#tab-scroll{
+				display: block;
+				height: 500px;
+				overflow: auto;
+			}
+
+			.xls-btn{
+				width: 100%;
+				height: 50px;
+				color: black;
+				font-size: 30px;
+				font-weight: bold;
+			}
+		</style>
 	</head>
 	
 	<body>
@@ -59,6 +97,8 @@
 												<tr>
 													<td colspan="2">
 														<button type="submit" id="button-news-reports" name="button-news-reports" class="btn btn-primary" onclick="return Validation()">Search News</button>
+														<a type="button" class="btn btn-danger" href="<?= base_url('index.php/NewsReports/Index'); ?>">Refresh</a>
+
 													</td>
 												</tr>
 											</tfoot>
@@ -101,44 +141,105 @@
 										</table>
 									</form>
 
-																		
+									<?php
+										if ($show == 1)
+										{
+									?>
+										<form id="create-xls-form" method="POST" action="<?= base_url('index.php/NewsReports/CreateExcel'); ?>">
+											<button type="submit" id="button-create-xls" name="button-create-xls" class="btn btn-primary btn-lg xls-btn">Create Excel</button>
+										</form>
+
+										<div id="tab-scroll">
+											<table id="tab">
+												<thead>
+													<tr>
+														<th colspan="25" style="text-align: center;"><h1>News Reports</h1></th>
+													</tr>
+													<tr>
+														<th>SL</th>
+														<th>Date</th>
+														<th>Media Name</th>
+														<th>Publication Name</th>
+														<th>Publication Type</th>
+														<th>Publication Place</th>
+														<th>Publication Language</th>
+														<th>Publication Frequency</th>
+														<th>Company</th>
+														<th>Brand</th>
+														<th>Sub Brand</th>
+														<th>Title</th>
+														<th>Product Name</th>
+														<th>Product Category</th>
+														<th>Page Name</th>
+														<th>Page Number</th>
+														<th>Placing Name</th>
+														<th>Placing Type</th>
+														<th>Hue</th>
+														<th>Cols</th>
+														<th>Inchs</th>
+														<th>Cols×Inchs</th>
+														<th>Cost</th>
+														<th>Ad Type</th>
+														<th>Ad Theme</th>
+													</tr>
+												</thead>
+
+												<tbody>
+													<tr>
+														<td>Text Data</td>
+														<td>Text Data</td>
+														<td>Text Data</td>
+														<td>Text Data</td>
+														<td>Text Data</td>
+														<td>Text Data</td>
+														<td>Text Data</td>
+														<td>Text Data</td>
+														<td>Text Data</td>
+														<td>Text Data</td>
+														<td>Text Data</td>
+														<td>Text Data</td>
+														<td>Text Data</td>
+														<td>Text Data</td>
+														<td>Text Data</td>
+														<td>Text Data</td>
+														<td>Text Data</td>
+														<td>Text Data</td>
+														<td>Text Data</td>
+														<td>Text Data</td>
+														<td>Text Data</td>
+														<td>Text Data</td>
+														<td>Text Data</td>
+														<td>Text Data</td>
+														<td>Text Data</td>
+													</tr>
+												</tbody>
+											</table>
+										</div>
+									<?php
+										}
+										elseif ($show == 2)
+										{
+									?>
+										<table id="tab">
+											<thead>
+												<tr>
+													<th style="text-align: center;"><h1>News Reports</h1></th>
+												</tr>
+											</thead>
+
+											<tbody>
+												<tr>
+													<td style="color: red; text-align: center; font-weight: bold;">
+														<h3>Oops! Sorry, Data Not Found</h3>
+													</td>
+												</tr>
+											</tbody>
+										</table>
+									<?php
+										}
+									?>																		
 								</div>	<!-- /widget-content -->
 							</div> <!-- /widget -->
-
-							<table class="table table-striped table-bordered">
-								<thead>
-									<tr>
-										<th colspan="25" style="text-align: center;"><h1>News Reports</h1></th>
-									</tr>
-									<tr>
-										<th>SL</th>
-										<th>Date</th>
-										<th>Media Name</th>
-										<th>Publication Name</th>
-										<th>Publication Type</th>
-										<th>Publication Place</th>
-										<th>Publication Language</th>
-										<th>Publication Frequency</th>
-										<th>Company</th>
-										<th>Brand</th>
-										<th>Sub Brand</th>
-										<th>Title</th>
-										<th>Product Name</th>
-										<th>Product Category</th>
-										<th>Page Name</th>
-										<th>Page Number</th>
-										<th>Placing Name</th>
-										<th>Placing Type</th>
-										<th>Hue</th>
-										<th>Cols</th>
-										<th>Inchs</th>
-										<th>Cols×Inchs</th>
-										<th>Cost</th>
-										<th>Ad Type</th>
-										<th>Ad Theme</th>
-									</tr>
-								</thead>
-							</table>
 						</div>	<!-- /span12 -->
 					</div>	<!-- /row --> 
 					<!-- <input type="number" name="sl" id="sl" value="1" hidden>  -->

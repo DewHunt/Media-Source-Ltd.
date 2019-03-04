@@ -22,7 +22,7 @@
 			return $this->AdminModel->GetAdminAllInfo($adminUserName,$adminPassword);
 		}
 
-		public function Index($msg = null)
+		public function Index($msg = null, $show = null)
 		{
 			if ($this->session->userdata('adminUserName') == "" || $this->session->userdata('adminPassword') == "")
 			{
@@ -33,7 +33,8 @@
 				$data = array(
 					'title' => 'News Reports - Media Source Ltd.',
 					'adminInfo' => $this->GetAdminAllInfo(),
-					'message' => $msg
+					'message' => $msg,
+					'show' => '1'
 				);
 
 				$this->load->view('admin/news_reports/news-reports',$data);
@@ -59,6 +60,11 @@
 				$mediaName = $this->MediaNameModel->GetMediaNameById($mediaId)->Name;
 				$publicationName = $this->PublicationModel->GetPublicationById($publicationId)->Name;
 			}			
+		}
+
+		public function CreateExcel()
+		{
+			echo "This Is Create Excel Function";
 		}
 	}
 ?>
