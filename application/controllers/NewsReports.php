@@ -22,7 +22,7 @@
 			return $this->AdminModel->GetAdminAllInfo($adminUserName,$adminPassword);
 		}
 
-		public function Index($msg = null, $show = null)
+		public function Index($msg = null)
 		{
 			if ($this->session->userdata('adminUserName') == "" || $this->session->userdata('adminPassword') == "")
 			{
@@ -34,7 +34,7 @@
 					'title' => 'News Reports - Media Source Ltd.',
 					'adminInfo' => $this->GetAdminAllInfo(),
 					'message' => $msg,
-					'show' => '1'
+					'show' => '0'
 				);
 
 				$this->load->view('admin/news_reports/news-reports',$data);
@@ -49,16 +49,67 @@
 			}
 			else
 			{
-				$fromDate = explode('/', $this->input->post('fromDate'));
-				$toDate = explode('/', $this->input->post('toDate'));
-				$searchFromDate = $fromDate[2]."-".$fromDate[0]."-".$fromDate[1];
-				$searchToDate = $toDate[2]."-".$toDate[0]."-".$toDate[1];
+				if (empty($_POST['from-date']))
+				{
+					$fromDate = "";
+				}
+				else
+				{
+					$fromDate =  $this->input->post('from-date');
+				}
 
-				$mediaId = $this->input->post('media-name-id');
-				$publicationId = $this->input->post('publication-id');
+				if (empty($_POST['to-date']))
+				{
+					$toDate = "";
+				}
+				else
+				{
+					$toDate = $this->input->post('to-date');
+				}
 
-				$mediaName = $this->MediaNameModel->GetMediaNameById($mediaId)->Name;
-				$publicationName = $this->PublicationModel->GetPublicationById($publicationId)->Name;
+				if (empty($_POST['media-name-id']))
+				{
+					$mediaName = "";
+				}
+				else
+				{
+					$mediaId = $this->input->post('media-name-id');
+					$mediaName = $this->MediaNameModel->GetMediaNameById($mediaId)->Name;
+				}
+
+				if (empty($_POST['publication-id']))
+				{
+					$publicationName = "";
+				}
+				else
+				{
+					$publicationId = $this->input->post('publication-id');
+					$publicationName = $this->PublicationModel->GetPublicationById($publicationId)->Name;
+				}
+
+				$result = $this->NewsReportsModel->SearchNewsReports($fromDate, $toDate, $mediaName, $publicationName);
+
+				if ($result)
+				{
+					$data = array(
+						'title' => 'News Reports - Media Source Ltd.',
+						'adminInfo' => $this->GetAdminAllInfo(),
+						'show' => '1',
+						'result' => $result
+					);
+
+					$this->load->view('admin/news_reports/news-reports',$data);
+				}
+				else
+				{
+					$data = array(
+						'title' => 'News Reports - Media Source Ltd.',
+						'adminInfo' => $this->GetAdminAllInfo(),
+						'show' => '2',
+					);
+
+					$this->load->view('admin/news_reports/news-reports',$data);					
+				}
 			}			
 		}
 
