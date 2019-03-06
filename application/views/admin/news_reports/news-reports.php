@@ -14,16 +14,21 @@
 				padding: 8px;
 			}
 
-			#tab tr:nth-child(even){background-color: #f2f2f2;}
+			#tab tr:nth-child(even){
+				background-color: #f2f2f2;
+			}
 
-			#tab tr:hover {background-color: #ddd;}
+			#tab td:hover {
+				background-color: #ddd;
+				border: 2px solid #000;
+			}
 
 			#tab th {
 				padding-top: 12px;
 				padding-bottom: 12px;
 				text-align: left;
 				background-color: #4CAF50;
-				color: white;
+				color: black;
 			}
 
 			#tab-scroll{
@@ -61,9 +66,20 @@
 								<div class="widget-content">
 									<form id="news-reports-form" method="POST" action="<?= base_url('index.php/NewsReports/SearchNewsReports'); ?>">
 										<table class="table table-striped table-bordered">
+											<thead>
+												<tr>
+													<th>Date</th>
+													<th>Media</th>
+													<th>Publication</th>
+													<th>Brand</th>
+													<th>Product</th>
+													<th>Keyword</th>
+												</tr>
+											</thead>
+
 											<tfoot>
 												<tr>
-													<td colspan="2">
+													<td colspan="6">
 														<button type="submit" id="button-news-reports" name="button-news-reports" class="btn btn-primary" onclick="return Validation()">Search News</button>
 														<a type="button" class="btn btn-danger" href="<?= base_url('index.php/NewsReports/Index'); ?>">Refresh</a>
 
@@ -73,29 +89,13 @@
 
 											<tbody>
 												<tr>
-													<th>
-														<span class="mendatory">*</span>&nbsp;Date
-													</th>
 													<td>
-														<input class="date-picker" type="text" id="from-date" name="from-date" placeholder="Select Date From" data-date-format="yyyy-mm-dd">
+														<input class="date-picker" type="text" id="from-date" name="from-date" placeholder="Select Date From" data-date-format="yyyy-mm-dd" style="width: 42%;">
 														To
-														<input class="date-picker" type="text" id="to-date" name="to-date" placeholder="Select Date To" data-date-format="yyyy-mm-dd">
+														<input class="date-picker" type="text" id="to-date" name="to-date" placeholder="Select Date To" data-date-format="yyyy-mm-dd" style="width: 42%;">
 													</td>
-												</tr>
 
-												<tr>
-													<th>
-														<span class="mendatory">*</span>&nbsp;Media
-													</th>
-													<td>
-														<div id="media-select-menu"></div>
-													</td>										
-												</tr>
-
-												<tr>
-													<th>
-														<span class="mendatory">*</span>&nbsp;Publication
-													</th>
+													<td><div id="media-select-menu"></div></td>
 
 													<td>
 														<div id="publication-select-menu">
@@ -104,6 +104,10 @@
 															</select>
 														</div>
 													</td>
+
+													<td><div id="brand-select-menu"></div></td>
+													<td><div id="product-select-menu"></div></td>
+													<td><div id="keyword-select-menu"></div></td>
 												</tr>
 											</tbody>
 										</table>
@@ -249,6 +253,10 @@
 				GetDataForDependantSelectMenu("PublicationModel","GetPublicationByForignKey","MediaId",id,"#publication-select-menu","publication-id","Select Publication",0);
 			});
 
+			GetDataForSelectMenu("BrandModel","GetAllBrand","#brand-select-menu","brand-id","Select Brand",0);
+			GetDataForSelectMenu("ProductModel","GetAllProduct","#product-select-menu","product-id","Select Product",0);
+			GetDataForSelectMenu("KeywordModel","GetAllKeyword","#keyword-select-menu","keyword-id","Select Keyword",0);
+
 			// Get All Data For Select Menu Script Start
 			function GetDataForSelectMenu(modelName,methodName,divId,idNameAttr,selectHeader)
 			{
@@ -283,8 +291,11 @@
 				var toDate = $('#to-date').val();
 				var mediaId = $('#media-name-id').val();
 				var publicationId = $('#publication-id').val();
+				var brandId = $('#brand-id').val();
+				var productId = $('#product-id').val();
+				var keywordId = $('#keyword-id').val();
 
-				if (fromDate == "" && toDate == "" && mediaId == 0 && publicationId == 0)
+				if (fromDate == "" && toDate == "" && mediaId == 0 && publicationId == 0 && brandId == 0 && productId == 0 && keywordId == 0)
 				{
 					alert("Please Select At Least One Search Option");
 					return false;

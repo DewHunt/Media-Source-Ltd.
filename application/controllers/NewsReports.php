@@ -11,6 +11,9 @@
 			$this->load->model('AdminModel');
 			$this->load->model('MediaNameModel');
 			$this->load->model('PublicationModel');
+			$this->load->model('BrandModel');
+			$this->load->model('ProductModel');
+			$this->load->model('KeywordModel');
 			$this->load->model('NewsReportsModel');
 		}
 
@@ -87,7 +90,37 @@
 					$publicationName = $this->PublicationModel->GetPublicationById($publicationId)->Name;
 				}
 
-				$result = $this->NewsReportsModel->SearchNewsReports($fromDate, $toDate, $mediaName, $publicationName);
+				if (empty($_POST['brand-id']))
+				{
+					$brandName = "";
+				}
+				else
+				{
+					$brandId = $this->input->post('brand-id');
+					$brandName = $this->BrandModel->GetBrandById($brandId)->Name;
+				}
+
+				if (empty($_POST['product-id']))
+				{
+					$productName = "";
+				}
+				else
+				{
+					$productId = $this->input->post('product-id');
+					$productName = $this->ProductModel->GetProductById($productId)->Name;
+				}
+
+				if (empty($_POST['keyword-id']))
+				{
+					$keywordName = "";
+				}
+				else
+				{
+					$keywordId = $this->input->post('keyword-id');
+					$keywordName = $this->KeywordModel->GetKeywordById($keywordId)->Name;
+				}
+
+				$result = $this->NewsReportsModel->SearchNewsReports($fromDate, $toDate, $mediaName, $publicationName, $brandName, $productName, $keywordName);
 
 				if ($result)
 				{
