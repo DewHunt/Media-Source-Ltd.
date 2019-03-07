@@ -118,6 +118,46 @@
 										{
 									?>
 										<form id="create-xls-form" method="POST" action="<?= base_url('index.php/NewsReports/CreateExcel'); ?>">
+											<table>
+												<thead>
+													<tr>
+														<th>From Date</th>
+														<th>To Date</th>
+														<th>Media Name</th>
+														<th>Publication Name</th>
+														<th>Brand Name</th>
+														<th>Product Name</th>
+														<th>Keyword name</th>
+													</tr>
+												</thead>
+
+												<tbody>
+													<tr>
+														<td>
+															<input type="test" readonly="readonly" name="from-date" value="<?= $fromDate; ?>" style="width: 90%;">
+														</td>
+														<td>
+															<input type="test" readonly="readonly" name="to-date" value="<?= $toDate; ?>" style="width: 90%;">
+														</td>
+														<td>
+															<input type="test" readonly="readonly" name="media-name" value="<?= $mediaName; ?>" style="width: 90%;">
+														</td>
+														<td>
+															<input type="test" readonly="readonly" name="publication-name" value="<?= $publicationName; ?>" style="width: 90%;">
+														</td>
+														<td>
+															<input type="test" readonly="readonly" name="brand-name" value="<?= $brandName; ?>" style="width: 90%;">
+														</td>
+														<td>
+															<input type="test" readonly="readonly" name="product-name" value="<?= $productName; ?>" style="width: 90%;">
+														</td>
+														<td>
+															<input type="test" readonly="readonly" name="keyword-name" value="<?= $keywordName; ?>" style="width: 90%;">
+														</td>
+													</tr>
+												</tbody>
+											</table>
+
 											<button type="submit" id="button-create-xls" name="button-create-xls" class="btn btn-primary btn-lg xls-btn">Create Excel</button>
 										</form>
 
