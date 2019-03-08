@@ -40,7 +40,7 @@
 					'show' => '0'
 				);
 
-				$this->load->view('admin/news_reports/news-reports',$data);
+				$this->load->view('admin/reports/news_reports/news-reports',$data);
 			}
 		}
 
@@ -138,7 +138,7 @@
 						'result' => $result
 					);
 
-					$this->load->view('admin/news_reports/news-reports',$data);
+					$this->load->view('admin/reports/news_reports/news-reports',$data);
 				}
 				else
 				{
@@ -148,7 +148,7 @@
 						'show' => '2',
 					);
 
-					$this->load->view('admin/news_reports/news-reports',$data);					
+					$this->load->view('admin/reports/news_reports/news-reports',$data);					
 				}
 			}			
 		}

@@ -28,12 +28,12 @@
 					<?php
 						if ($message == 1)
 						{
-							?>
+					?>
 							<div class="alert alert-info error-message">
 								<a type="button" class="btn btn-danger close" data-dismiss="alert" href="<?= base_url('index.php/Admin/Index'); ?>">&times;</a>
 								<strong>Oops!</strong> User Name or Password Inccorect
 							</div>
-							<?php
+					<?php
 						}
 					?>
 					<!-- <h1>Admin Login</h1> -->
