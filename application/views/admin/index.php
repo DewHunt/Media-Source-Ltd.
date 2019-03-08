@@ -24,7 +24,20 @@
 		<div class="account-container">			
 			<div class="content clearfix">
 				<form method="POST" action="<?= base_url('index.php/Admin/Login'); ?>" accept_charset="utf-8">
-					<h1>Admin Login</h1>
+
+					<?php
+						if ($message == 1)
+						{
+							?>
+							<div class="alert alert-info error-message">
+								<a type="button" class="btn btn-danger close" data-dismiss="alert" href="<?= base_url('index.php/Admin/Index'); ?>">&times;</a>
+								<strong>Oops!</strong> User Name or Password Inccorect
+							</div>
+							<?php
+						}
+					?>
+					<!-- <h1>Admin Login</h1> -->
+					<h1 style="text-align: center;">Login</h1>
 
 					<div class="login-fields">						
 						<p>Please provide your details</p>

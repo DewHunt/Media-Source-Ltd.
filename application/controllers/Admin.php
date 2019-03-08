@@ -10,12 +10,13 @@
 			$this->load->model('AdminModel','am');
 		}
 
-		public function Index()
+		public function Index($msg = NULL)
 		{
 			if ($this->session->userdata('adminUserName') == "" || $this->session->userdata('adminPassword') == "")
 			{
 				$data = array(
-					'title' => 'Login - Media Source Ltd'
+					'title' => 'Login - Media Source Ltd',
+					'message' => $msg
 				);
 				
 				$this->load->view('admin/index',$data);
@@ -46,7 +47,7 @@
 			}
 			else
 			{
-				return redirect('Admin/Index');
+				return redirect('Admin/Index/1');
 			}
 		}
 
