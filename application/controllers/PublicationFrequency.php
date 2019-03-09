@@ -112,8 +112,25 @@
 				{
 					$publicationFrequency = array();
 					$publicationFrequency[] = $sl;
-					$publicationFrequency[] = $value->Name;
-					$publicationFrequency[] = $value->Description;
+
+					if ($value->Name == "")
+					{
+						$publicationFrequency[] = "Data Not Found";
+					}
+					else
+					{
+						$publicationFrequency[] = $value->Name;
+					}
+
+					if ($value->Description == "")
+					{
+						$publicationFrequency[] = "Data Not Found";
+					}
+					else
+					{
+						$publicationFrequency[] = $value->Description;
+					}
+					
 					$publicationFrequency[] = '<button type="button" name="update" id="'.$value->Id.'" class="btn btn-warning btn-xs update">Update</button> <button type="button" name="delete" id="'.$value->Id.'" class="btn btn-danger delete">Delete</button>';
 					$sl++;
 					$data[] = $publicationFrequency;

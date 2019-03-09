@@ -115,10 +115,42 @@
 				{
 					$brand = array();
 					$brand[] = $sl;
-					$brand[] = $value->Name;
-					$brand[] = $this->CompanyModel->GetCompanyById($value->CompanyId)->Name;
-					// $product[] = $value->ProductCategoryId;
-					$brand[] = $value->Description;
+
+					if ($value->Name == "")
+					{
+						$brand[] = "Data Not Found";
+					}
+					else
+					{
+						$brand[] = $value->Name;
+					}
+
+					if ($value->CompanyId == "" || $value->CompanyId == 0)
+					{
+						$brand[] = "Data Not Found";
+					}
+					else
+					{
+						$companyName = $this->CompanyModel->GetCompanyById($value->CompanyId);
+						if ($companyName)
+						{
+							$brand[] = $companyName->Name;
+						}
+						else
+						{
+							$brand[] = "Data Not Found";
+						}
+					}
+
+					if ($value->Description == "")
+					{
+						$brand[] = "Data Not Found";
+					}
+					else
+					{
+						$brand[] = $value->Description;
+					}
+
 					$brand[] = '<button type="button" name="update" id="'.$value->Id.'" class="btn btn-warning btn-xs update">Update</button> <button type="button" name="delete" id="'.$value->Id.'" class="btn btn-danger btn-xs delete">Delete</button>';
 					$sl++;
 					$data[] = $brand;

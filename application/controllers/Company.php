@@ -113,8 +113,25 @@
 				{
 					$company = array();
 					$company[] = $sl;
-					$company[] = $value->Name;
-					$company[] = $value->Description;
+
+					if ($value->Name == "")
+					{
+						$company[] = "Data Not Found";
+					}
+					else
+					{
+						$company[] = $value->Name;
+					}
+
+					if ($value->Description == "")
+					{
+						$company[] = "Data Not Found";
+					}
+					else
+					{
+						$company[] = $value->Description;
+					}
+					
 					$company[] = '<button type="button" name="update" id="'.$value->Id.'" class="btn btn-warning btn-xs update">Update</button> <button type="button" name="delete" id="'.$value->Id.'" class="btn btn-danger delete">Delete</button>';
 					$sl++;
 					$data[] = $company;

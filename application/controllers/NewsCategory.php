@@ -113,8 +113,25 @@
 				{
 					$newsCategory = array();
 					$newsCategory[] = $sl;
-					$newsCategory[] = $value->Name;
-					$newsCategory[] = $value->Description;
+
+					if ($value->Name == "")
+					{
+						$newsCategory[] = "Data Not Found";
+					}
+					else
+					{
+						$newsCategory[] = $value->Name;
+					}
+
+					if ($value->Description == "")
+					{
+						$newsCategory[] = "Data Not Found";
+					}
+					else
+					{
+						$newsCategory[] = $value->Description;
+					}
+					
 					$newsCategory[] = '<button type="button" name="update" id="'.$value->Id.'" class="btn btn-warning btn-xs update">Update</button> <button type="button" name="delete" id="'.$value->Id.'" class="btn btn-danger delete">Delete</button>';
 					$sl++;
 					$data[] = $newsCategory;

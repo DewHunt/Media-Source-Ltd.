@@ -113,8 +113,25 @@
 				{
 					$publicationType = array();
 					$publicationType[] = $sl;
-					$publicationType[] = $value->Name;
-					$publicationType[] = $value->Description;
+
+					if ($value->Name == "")
+					{
+						$publicationType[] = "Data Not Found";
+					}
+					else
+					{
+						$publicationType[] = $value->Name;
+					}
+
+					if ($value->Description == "")
+					{
+						$publicationType[] = "Data Not Found";
+					}
+					else
+					{
+						$publicationType[] = $value->Description;
+					}
+
 					$publicationType[] = '<button type="button" name="update" id="'.$value->Id.'" class="btn btn-warning btn-xs update">Update</button> <button type="button" name="delete" id="'.$value->Id.'" class="btn btn-danger delete">Delete</button>';
 					$sl++;
 					$data[] = $publicationType;

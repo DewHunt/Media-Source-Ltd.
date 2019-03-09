@@ -113,8 +113,25 @@
 				{
 					$productCategory = array();
 					$productCategory[] = $sl;
-					$productCategory[] = $value->Name;
-					$productCategory[] = $value->Description;
+
+					if ($value->Name == "")
+					{
+						$productCategory[] = "Data Not Found";
+					}
+					else
+					{
+						$productCategory[] = $value->Name;
+					}
+
+					if ($value->Description == "")
+					{
+						$productCategory[] = "Data Not Found";
+					}
+					else
+					{
+						$productCategory[] = $value->Description;
+					}
+
 					$productCategory[] = '<button type="button" name="update" id="'.$value->Id.'" class="btn btn-warning btn-xs update">Update</button> <button type="button" name="delete" id="'.$value->Id.'" class="btn btn-danger delete">Delete</button>';
 					$sl++;
 					$data[] = $productCategory;

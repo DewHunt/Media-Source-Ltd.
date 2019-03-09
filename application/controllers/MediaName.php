@@ -139,11 +139,52 @@
 				{
 					$media = array();
 					$media[] = $sl;
-					$media[] = $value->Name;
-					$media[] = $value->Owner;
-					$media[] = $value->Phone;
-					$media[] = $value->Email;
-					$media[] = '<img src="'.base_url("images/").$value->Image.'" width="80px" height="80px">';
+
+					if ($value->Name == "")
+					{
+						$media[] = "Data Not Found";
+					}
+					else
+					{
+						$media[] = $value->Name;
+					}
+
+					if ($value->Owner == "")
+					{
+						$media[] = "Data Not Found";
+					}
+					else
+					{
+						$media[] = $value->Owner;
+					}
+
+					if ($value->Phone == "")
+					{
+						$media[] = "Data Not Found";
+					}
+					else
+					{
+						$media[] = $value->Phone;
+					}
+
+					if ($value->Email == "")
+					{
+						$media[] = "Data Not Found";
+					}
+					else
+					{
+						$media[] = $value->Email;
+					}
+
+					if ($value->Image == "")
+					{
+						$media[] = "Data Not Found";
+					}
+					else
+					{
+						$media[] = '<img src="'.base_url("images/").$value->Image.'" width="80px" height="80px">';
+					}
+					
 					$media[] = '<button type="button" name="update" id="'.$value->Id.'" class="btn btn-warning btn-xs update">Update</button> <button type="button" name="delete" id="'.$value->Id.'" class="btn btn-danger btn-xs delete">Delete</button>';
 					$sl++;
 					$data[] = $media;

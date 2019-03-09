@@ -145,14 +145,118 @@
 				{
 					$info = array();
 					$info[] = $sl;
-					$info[] = $value->Title;
-					$info[] = $this->CompanyModel->GetCompanyById($value->CompanyId)->Name;
-					$info[] = $this->BrandModel->GetBrandById($value->BrandId)->Name;
-					$info[] = $this->SubBrandModel->GetSubBrandById($value->SubBrandId)->Name;
-					$info[] = $this->ProductModel->GetProductById($value->ProductId)->Name;
-					$info[] = $this->AdvertiseCategoryModel->GetAdvertiseCategoryById($value->AtypeId)->Name;
-					$info[] = $value->Notes;
-					$info[] = '<img src="'.base_url("images/").$value->Image.'" width="50px" height="50px">';
+
+					if ($value->Title == "")
+					{
+						$info[] = "Data Not Found";
+					}
+					else
+					{
+						$info[] = $value->Title;
+					}
+
+					if ($value->CompanyId == "" || $value->CompanyId == 0)
+					{
+						$info[] = "Data Not Found";
+					}
+					else
+					{
+						$companyName = $this->CompanyModel->GetCompanyById($value->CompanyId);
+						if ($companyName)
+						{
+							$info[] = $companyName->Name;						}
+						else
+						{
+							$info[] = "Data Not Found";
+						}
+					}
+
+					if ($value->BrandId == "" || $value->BrandId == 0)
+					{
+						$info[] = "Data Not Found";
+					}
+					else
+					{
+						$brandName = $this->BrandModel->GetBrandById($value->BrandId);
+						if ($brandName)
+						{
+							$info[] = $brandName->Name;
+						}
+						else
+						{
+							$info[] = "Data Not Found";
+						}
+					}
+
+					if ($value->SubBrandId == "" || $value->SubBrandId == 0)
+					{
+						$info[] = "Data Not Found";
+					}
+					else
+					{
+						$subBrandName = $this->SubBrandModel->GetSubBrandById($value->SubBrandId);
+						if ($subBrandName)
+						{
+							$info[] = $subBrandName->Name;
+						}
+						else
+						{
+							$info[] = "Data Not Found";
+						}
+					}
+
+					if ($value->ProductId == "" || $value->ProductId == 0)
+					{
+						$info[] = "Data Not Found";
+					}
+					else
+					{
+						$productName = $this->ProductModel->GetProductById($value->ProductId);
+						if ($productName)
+						{
+							$info[] = $productName->Name;
+						}
+						else
+						{
+							$info[] = "Data Not Found";
+						}
+					}
+
+					if ($value->AtypeId == "" || $value->AtypeId == 0)
+					{
+						$info[] = "Data Not Found";
+					}
+					else
+					{
+						$adTypeName = $this->AdvertiseCategoryModel->GetAdvertiseCategoryById($value->AtypeId);
+						if ($adTypeName)
+						{
+							$info[] = $adTypeName->Name;
+						}
+						else
+						{
+							$info[] = "Data Not Found";
+						}
+					}
+
+					if ($value->Notes == "")
+					{
+						$info[] = "Data Not Found";
+					}
+					else
+					{
+						$info[] = $value->Notes;
+					}
+
+					if ($value->Image == "")
+					{
+						$info[] = "Image Not Found";
+					}
+					else
+					{
+						$info[] = '<img src="'.base_url("images/").$value->Image.'" width="50px" height="50px">';
+					}
+
 					$info[] = '<button type="button" name="update" id="'.$value->Id.'" class="btn btn-warning btn-xs update">Update</button> <button type="button" name="delete" id="'.$value->Id.'" class="btn btn-danger btn-xs delete">Delete</button>';
 					$sl++;
 					$data[] = $info;

@@ -215,6 +215,7 @@
 
 					$newsEntry = array();
 					$newsEntry[] = $sl;
+
 					if ($dataEntryInfo->BatchId == "")
 					{
 						$newsEntry[] = 'Data Not Found';
@@ -233,15 +234,22 @@
 						$newsEntry[] = $dataEntryInfo->Date;
 					}
 
-					$mediaName = $this->MediaNameModel->GetMediaNameById($dataEntryInfo->MediaId)->Name;
-
-					if ($mediaName == "" )
+					if ($dataEntryInfo->MediaId == "" || $dataEntryInfo->MediaId == 0)
 					{
 						$newsEntry[] = 'Data Not Found';
 					}
 					else
 					{
-						$newsEntry[] = $mediaName;
+						$mediaName = $this->MediaNameModel->GetMediaNameById($dataEntryInfo->MediaId);
+
+						if ($mediaName)
+						{
+							$newsEntry[] = $mediaName->Name;
+						}
+						else
+						{
+							$newsEntry[] = 'Data Not Found';
+						}
 					}
 
 					if ($value->Caption == "" )

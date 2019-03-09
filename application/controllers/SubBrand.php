@@ -118,10 +118,58 @@
 				{
 					$subBrand = array();
 					$subBrand[] = $sl;
-					$subBrand[] = $value->Name;
-					$subBrand[] = $this->CompanyModel->GetCompanyById($value->CompanyId)->Name;
-					$subBrand[] = $this->BrandModel->GetBrandById($value->BrandId)->Name;
-					$subBrand[] = $value->Description;
+
+					if ($value->Name == "")
+					{
+						$subBrand[] = "Data Not Found";
+					}
+					else
+					{
+						$subBrand[] = $value->Name;
+					}
+
+					if ($value->CompanyId == "" || $value->CompanyId == 0)
+					{
+						$subBrand[] = "Data Not Found";
+					}
+					else
+					{
+						$companyName = $this->CompanyModel->GetCompanyById($value->CompanyId);
+						if ($companyName)
+						{
+							$subBrand[] = $companyName->Name;
+						}
+						else
+						{
+							$subBrand[] = "Data Not Found";
+						}
+					}
+
+					if ($value->BrandId == "" || $value->BrandId == 0)
+					{
+						$subBrand[] = "Data Not Found";
+					}
+					else
+					{
+						$brandName = $this->BrandModel->GetBrandById($value->BrandId);
+						if ($brandName)
+						{
+							$subBrand[] = $brandName->Name;
+						}
+						else
+						{
+							$subBrand[] = "Data Not Found";
+						}
+					}
+
+					if ($value->Description == "")
+					{
+						$subBrand[] = "Data Not Found";
+					}
+					else
+					{
+						$subBrand[] = $value->Description;
+					}
 					$subBrand[] = '<button type="button" name="update" id="'.$value->Id.'" class="btn btn-warning btn-xs update">Update</button> <button type="button" name="delete" id="'.$value->Id.'" class="btn btn-danger btn-xs delete">Delete</button>';
 					$sl++;
 					$data[] = $subBrand;

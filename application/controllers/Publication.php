@@ -142,12 +142,85 @@
 				{
 					$publication = array();
 					$publication[] = $sl;
-					$publication[] = $value->Name;
-					$publication[] = $this->MediaNameModel->GetMediaNameById($value->MediaId)->Name;
-					$publication[] = $this->PublicationTypeModel->GetPublicationTypeById($value->PublicationType)->Name;
-					$publication[] = $this->PublicationFrequencyModel->GetPublicationFrequencyById($value->PubFreQuencyId)->Name;
-					$publication[] = $value->Description;
-					$publication[] = '<img src="'.base_url("images/").$value->Logo.'" width="80px" height="80px">';
+
+					if ($value->Name == "")
+					{
+						$publication[] = "Data Not Found";
+					}
+					else
+					{
+						$publication[] = $value->Name;
+					}
+
+					if ($value->MediaId == "" || $value->MediaId == 0)
+					{
+						$publication[] = "Data Not Found";
+					}
+					else
+					{
+						$mediaName = $this->MediaNameModel->GetMediaNameById($value->MediaId);
+						if ($mediaName)
+						{
+							$publication[] = $mediaName->Name;
+						}
+						else
+						{
+							$publication[] = "Data Not Found";
+						}
+					}
+
+					if ($value->PublicationType == "" || $value->PublicationType == 0)
+					{
+						$publication[] = "Data Not Found";
+					}
+					else
+					{
+						$publicationTypeName = $this->PublicationTypeModel->GetPublicationTypeById($value->PublicationType);
+						if ($publicationTypeName)
+						{
+							$publication[] = $publicationTypeName->Name;
+						}
+						else
+						{
+							$publication[] = "Data Not Found";
+						}
+					}
+
+					if ($value->PubFreQuencyId == "" || $value->PubFreQuencyId == 0)
+					{
+						$publication[] = "Data Not Found";
+					}
+					else
+					{
+						$publicationName = $this->PublicationFrequencyModel->GetPublicationFrequencyById($value->PubFreQuencyId);
+						if ($publicationName)
+						{
+							$publication[] = $publicationName->Name;
+						}
+						else
+						{
+							$publication[] = "Data Not Found";
+						}
+					}
+
+					if ($value->Description == "")
+					{
+						$publication[] = "Data Not Found";
+					}
+					else
+					{
+						$publication[] = $value->Description;
+					}
+
+					if ($value->Logo == "")
+					{
+						$publication[] = "Image Not Found";
+					}
+					else
+					{
+						$publication[] = '<img src="'.base_url("images/").$value->Logo.'" width="80px" height="80px">';
+					}
+
 					$publication[] = '<button type="button" name="update" id="'.$value->Id.'" class="btn btn-warning btn-xs update">Update</button> <button type="button" name="delete" id="'.$value->Id.'" class="btn btn-danger btn-xs delete">Delete</button>';
 					$sl++;
 					$data[] = $publication;

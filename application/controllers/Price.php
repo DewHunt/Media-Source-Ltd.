@@ -131,17 +131,95 @@
 				{
 					$price = array();
 					$price[] = $sl;
-					$price[] = $value->Name;
+
+					if ($value->Name == "")
+					{
+						$price = "Data Not Found";
+					}
+					else
+					{
+						$price[] = $value->Name;
+					}
 
 					$priceInfo = $this->PriceModel->GetPriceById($value->PriceId);
 
-					$price[] = $this->MediaNameModel->GetMediaNameById($priceInfo->MediaId)->Name;
-					$price[] = $this->PublicationModel->GetPublicationById($priceInfo->PublicationId)->Name;
-					// $price[] = $priceInfo->PublicationId;
+					if ($priceInfo->MediaId == "" || $priceInfo->MediaId == 0)
+					{
+						$price = "Data Not Found";
+					}
+					else
+					{
+						$mediaName = $this->MediaNameModel->GetMediaNameById($priceInfo->MediaId);
+						if ($mediaName)
+						{
+							$price[] = $mediaName->Name;
+						}
+						else
+						{
+							$price = "Data Not Found";
+						}
+					}
 
-					$price[] = $this->PageModel->GetPageById($value->PageNoId)->Name;
-					$price[] = $this->HueModel->GetHueById($value->Hue)->Name;
-					$price[] = $value->Price;
+					if ($priceInfo->PublicationId == "" || $priceInfo->PublicationId == 0)
+					{
+						$price = "Data Not Found";
+					}
+					else
+					{
+						$publicationName = $this->PublicationModel->GetPublicationById($priceInfo->PublicationId);
+						if ($publicationName)
+						{
+							$price[] = $publicationName->Name;
+						}
+						else
+						{
+							$price = "Data Not Found";
+						}
+					}
+
+					if ($value->PageNoId == "" || $value->PageNoId == 0)
+					{
+						$price = "Data Not Found";
+					}
+					else
+					{
+						$pageName = $this->PageModel->GetPageById($value->PageNoId);
+						if ($pageName)
+						{
+							$price[] = $pageName->Name;
+						}
+						else
+						{
+							$price[] = "Data Not Found";
+						}
+					}
+
+					if ($value->Hue == "" || $value->Hue == 0)
+					{
+						$price = "Data Not Found";
+					}
+					else
+					{
+						$hueName = $this->HueModel->GetHueById($value->Hue);
+						if ($hueName)
+						{
+							$price[] = $hueName->Name;
+						}
+						else
+						{
+							$price = "Data Not Found";
+						}
+					}
+
+					if ($value->Price == "")
+					{
+						$price = "Data Not Found";
+					}
+					else
+					{
+						$price[] = $value->Price;
+					}
+
 					$price[] = '<a href="'.base_url('index.php/Price/Update/_/'.$value->PriceId).'"><button class="btn btn-warning btn-xs">Update</button></a> <button type="button" name="delete" id="'.$value->PriceId.'" class="btn btn-danger btn-xs delete">Delete</button>';
 					$sl++;
 					$data[] = $price;

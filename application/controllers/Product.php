@@ -115,10 +115,34 @@
 				{
 					$product = array();
 					$product[] = $sl;
-					$product[] = $value->Name;
-					$product[] = $this->ProductCategoryModel->GetProductCategoryById($value->ProductId)->Name;
-					// $product[] = $value->ProductCategoryId;
-					$product[] = $value->Description;
+
+					if ($value->Name == "")
+					{
+						$product[] = "Data Not Found";
+					}
+					else
+					{
+						$product[] = $value->Name;
+					}
+
+					if ($value->ProductId == "" || $value->ProductId == 0)
+					{
+						$product[] = "Data Not Found";
+					}
+					else
+					{
+						$product[] = $this->ProductCategoryModel->GetProductCategoryById($value->ProductId)->Name;
+					}
+
+					if ($value->Description == "")
+					{
+						$product[] = "Data Not Found";
+					}
+					else
+					{
+						$productCategory[] = $value->Description;
+					}
+
 					$product[] = '<button type="button" name="update" id="'.$value->Id.'" class="btn btn-warning btn-xs update">Update</button> <button type="button" name="delete" id="'.$value->Id.'" class="btn btn-danger btn-xs delete">Delete</button>';
 					$sl++;
 					$data[] = $product;
