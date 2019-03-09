@@ -13,6 +13,20 @@
 			<div class="main-inner">
 				<div class="container">
 					<div class="row">
+						<div class="span12">
+
+							<?php
+								if ($message == 1)
+								{
+							?>
+									<div class="alert alert-success success-message">
+										<a type="button" class="btn btn-danger close" data-dismiss="alert" href="<?=  base_url('index.php/DataEntry/Index');?>">&times;</a>
+										<strong>Be patient!</strong> Advertise Entry Is In Pregress...
+									</div>
+							<?php
+								}
+							?>
+						</div>
 						<?php include APPPATH.'views/admin/master/data-entry-left-menu.php'; ?>
 						
 						<div class="span9">
@@ -26,7 +40,7 @@
 										<!-- /widget-header -->
 										<div class="widget-content">
 											<div class="shortcuts">
-												<a href="<?= base_url('index.php/AdvertiseEntry/Index'); ?>" class="shortcut">
+												<a href="<?= base_url('index.php/DataEntry/Index/1'); ?>" class="shortcut">
 													<i class="shortcut-icon icon-file"></i> 
 													<span class="shortcut-label">Advertise Entry</span>
 												</a>

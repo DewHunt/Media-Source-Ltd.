@@ -11,7 +11,7 @@
 								<b class="caret"></b>
 							</a>
 							<ul class="dropdown-menu">
-								<li><a href="<?= base_url('index.php/AdvertiseEntry/Index'); ?>">Advertise Entry</a></li>
+								<li><a href="<?= base_url('index.php/DataEntry/Index/1'); ?>">Advertise Entry</a></li>
 								<li><a href="<?= base_url('index.php/NewsEntry/Index'); ?>">News Entry</a></li>
 							</ul>
 						</li>
