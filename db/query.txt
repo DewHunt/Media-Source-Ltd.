@@ -1,0 +1,6 @@
+INSERT INTO `users` (`Id`, `UserId`, `Password`, `Name`, `DesignationId`, `UserGroupId`, `Location`, `Phone`, `Email`, `Picture`, `Signature`, `PasswordChangeStatus`, `AdminStatus`, `CreateBy`, `State`) VALUES
+(1, 'a', 'a', 'Admin', NULL, 1, NULL, '01712108921', NULL, NULL, NULL, 0, 0, NULL, 1),
+(2, 'dew', 'dew@1553', 'Dew Hunt', 0, 1, NULL, '013 17 243 494', 'dew.fog1553@gmail.com', NULL, NULL, 0, 0, NULL, 1),
+(3, 'rinko', 'aha', 'Khadiatun Nasa Rinko', NULL, 1, NULL, '018 40 499 159', NULL, NULL, NULL, 0, 0, NULL, 1),
+(4, 'shams', '431376', 'Md. Shamim Reza', NULL, 1, NULL, '017 13 632 856', 'shamimcse00@gmail.com', NULL, NULL, 0, 0, NULL, 1),
+(5, 'sabina', 'sms23', 'Sabina Yesmin', NULL, 1, NULL, '016 33 060 243', NULL, NULL, NULL, 0, 0, NULL, 1);
