@@ -113,7 +113,7 @@
 										<td>1</td>
 
 										<td>
-											<input type="text" class="ded-input" id="caption-1" name="caption-1" value="">
+											<input type="text" class="ded-input" id="caption-1" name="caption-1" value="" style="width: 200px;">
 										</td>
 
 										<td>
@@ -163,7 +163,7 @@
 										</td>
 
 										<td>
-											<input type="file" class="ded-file-input" id="image-1" name="image-1">
+											<input type="file" class="ded-file-input" id="image-1" name="image-1" style="width: 150px;">
 										</td>
 									</tr>
 								</tbody>
@@ -242,7 +242,7 @@
 				var cell15 = newRow.insertCell(14);
 
 				cell1.innerHTML = sl;
-				cell2.innerHTML = '<input type="text" class="ded-input" id="caption-'+sl+'" name="caption-'+sl+'" value="">';
+				cell2.innerHTML = '<input type="text" class="ded-input" id="caption-'+sl+'" name="caption-'+sl+'" value="" style="width: 200px;">';
 				cell3.innerHTML = '<div id="news-type-select-menu-'+sl+'"></div>';
 				cell4.innerHTML = '<div id="news-category-select-menu-'+sl+'"></div>';
 				cell5.innerHTML = '<div id="page-select-menu-'+sl+'"></div>';
@@ -255,7 +255,7 @@
 				cell12.innerHTML = '<input type="text" class="ded-inch-input" id="inch-'+sl+'" name="inch-'+sl+'" value="">';
 				cell13.innerHTML = '<div id="sub-brand-select-menu-'+sl+'"></div>';
 				cell14.innerHTML = '<div id="keyword-select-menu-'+sl+'"></div>';
-				cell15.innerHTML = '<input type="file" class="ded-input" id="image-'+sl+'" name="image-'+sl+'">';
+				cell15.innerHTML = '<input type="file" class="ded-input" id="image-'+sl+'" name="image-'+sl+'" style="width: 150px;">';
 
 				return false;
 			}
