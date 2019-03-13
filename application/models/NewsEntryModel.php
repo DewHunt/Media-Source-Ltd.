@@ -282,13 +282,14 @@
 
 		public function GetPriceInfo($mediaId,$publicationId,$col,$inch,$hueId,$pageId)
 		{
-			$str = "SELECT pricedetails.Price, hue.Name AS HueName, page.Name AS PageName
+			echo $str = "SELECT pricedetails.Price, hue.Name AS HueName, page.Name AS PageName
 			FROM price
 			LEFT JOIN pricedetails on (price.Id = pricedetails.PriceId)
 			LEFT JOIN hue ON (pricedetails.Hue = hue.Id)
 			LEFT JOIN page ON (pricedetails.PageNoId = page.Id)
 			WHERE price.MediaId='$mediaId' and price.PublicationId='$publicationId' and pricedetails.Col='$col' and pricedetails.Inch='$inch' and pricedetails.Hue='$hueId' and pricedetails.PageNoId='$pageId' and pricedetails.State='1'
 			";
+			exit();
 
 			$query = $this->db->query($str);
 
