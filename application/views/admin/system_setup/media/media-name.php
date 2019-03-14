@@ -29,6 +29,7 @@
 											<tr>
 												<th>Sl</th>
 												<th>Name</th>
+												<th>Id</th>
 												<th>Owner</th>
 												<th>Phone</th>
 												<th>Email</th>

@@ -143,5 +143,21 @@
 				return false;
 			}
 		}
+
+		public function GetPriceId($fieldName1,$value1,$fieldName2,$value2)
+		{
+			$str = "SELECT * FROM price WHERE $fieldName1 = '$value1' AND $fieldName2 = '$value2'";
+
+			$query = $this->db->query($str);
+
+			if ($query->num_rows() > 0)
+			{
+				return $query->result();
+			}
+			else
+			{
+				return false;
+			}
+		}
 	}
 ?>

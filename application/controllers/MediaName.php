@@ -149,6 +149,15 @@
 						$media[] = $value->Name;
 					}
 
+					if ($value->Id == "")
+					{
+						$media[] = "Data Not Found";
+					}
+					else
+					{
+						$media[] = $value->Id;
+					}
+
 					if ($value->Owner == "")
 					{
 						$media[] = "Data Not Found";
