@@ -40,6 +40,7 @@
 											<tr>
 												<td>Media</td>
 												<td>Publication</td>
+												<td>Price Id</td>
 											</tr>
 										</thead>
 										<tbody>
@@ -64,6 +65,7 @@
 											</tr>
 										</tbody>
 									</table>
+
 									<table id="price-data" class="table table-striped table-bordered">
 										<thead>
 											<tr>
@@ -108,8 +110,6 @@
 					$(this).toggleClass('tap');
 				});
 
-				var priceId = "";
-
 				GetDataForSelectMenu("MediaNameModel","GetAllMediaName","#media-select-menu","media-name-id","Select Media",0);
 
 				// Get All Data For Select Menu Script Start
@@ -126,6 +126,14 @@
 
 				$(document).on('change', '#price-id', function(){
 					var priceId = $('#price-id').val();
+					if (priceId == 0)
+					{
+						$('input[type="search"]').val('').keyup();						
+					}
+					else
+					{
+						$('input[type="search"]').val(priceId).keyup();
+					}
 				});
 
 				function GetDataForSelectMenu(modelName,methodName,divId,idNameAttr,selectHeader)
@@ -184,9 +192,6 @@
 							'orderable':false
 						},
 					],
-					'search':{
-						"search":priceId
-					}
 				});
 
 				$(document).on('click', '.delete', function(){
