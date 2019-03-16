@@ -127,6 +127,8 @@
 					var productCategoryName = $('#product-category-name').val();
 					var productCategoryDescription = $('#product-category-description').val();
 
+					$('#product-category-name').css({'border':'1px solid #cccccc'});
+
 					if (productCategoryName == "")
 					{
 						alert("Oops! Product Category Name Must Be Filled");

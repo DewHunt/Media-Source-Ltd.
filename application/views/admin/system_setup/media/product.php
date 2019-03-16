@@ -151,14 +151,19 @@
 					var productCategoryId = $('#product-category-id').val();
 					var productName = $('#product-name').val();
 
-					if (productCategoryId == "")
+					$('#product-category-id').css({'border':'1px solid #cccccc'});
+					$('#product-name').css({'border':'1px solid #cccccc'});
+
+					if (productCategoryId == 0)
 					{
 						alert("Oops! Product Category Can't Be Empty. Please Select Product Category");
+						$('#product-category-id').css({'border':'1px solid red'});
 						return false;
 					}
 					else if (productName == "")
 					{
 						alert("Oops! Product Name Can't Be Empty. Please Enter Product Name");
+						$('#product-name').css({'border':'1px solid red'});
 						return false;
 					}
 					else

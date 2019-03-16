@@ -101,15 +101,13 @@
 			{
 				var publicationPlaceName = $('#publication-place-name').val();
 
+				$('#publication-place-name').css({'border':'1px solid #cccccc'});
+
 				if (publicationPlaceName == "")
 				{
 					Message("Oops! Publication Place Name Can't Be Empty. Please Enter Publication Place Name.");
 					$('#publication-place-name').css({'border':'1px solid red'});
 					return false;
-				}
-				else
-				{
-					$('#publication-place-name').css({'border':'1px solid gray'});
 				}
 			}
 		</script>		

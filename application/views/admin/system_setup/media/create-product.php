@@ -125,30 +125,21 @@
 				var productCategoryId = $('#product-category-id').val();
 				var productName = $('#product-name').val();
 
-				if (productCategoryId == "")
+				$('#product-category-id').css({'border':'1px solid #cccccc'});
+				$('#product-name').css({'border':'1px solid #cccccc'});
+
+				if (productCategoryId == 0)
 				{
 					Message("Oops! Product Category Can't Be Empty. Please Select Product Category");
 					$('#product-category-id').css({'border':'1px solid red'});
-					
-					$('#product-name').css({'border':'1px solid gray'});
 					return false;
-				}
-				else
-				{
-					$('#product-category-id').css({'border':'1px solid gray'});
 				}
 
 				if (productName == "")
 				{
 					Message("Oops! Product Name Can't Be Empty. Please Enter Product Name");
 					$('#product-name').css({'border':'1px solid red'});
-
-					$('#product-category-id').css({'border':'1px solid gray'});
 					return false;
-				}
-				else
-				{
-					$('#product-name').css({'border':'1px solid gray'});
 				}
 			}
 		</script>

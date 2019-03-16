@@ -241,46 +241,54 @@
 					var productId = $('#product-id').val();
 					var advertiseTypeId = $('#advertise-type-id').val();
 
+					$('#adinfo-ad-id').css({'border':'1px solid #cccccc'});
+					$('#adinfo-title').css({'border':'1px solid #cccccc'});
+					$('#company-id').css({'border':'1px solid #cccccc'});
+					$('#brand-id').css({'border':'1px solid #cccccc'});
+					$('#sub-brand-id').css({'border':'1px solid #cccccc'});
+					$('#product-id').css({'border':'1px solid #cccccc'});
+					$('#adinfo-type-id').css({'border':'1px solid #cccccc'});
+
 					if (adinfoAdvertiseId == "")
 					{
 						alert("Oops! Advertise ID Can't Be Empty. Please Select Advertise ID");
-						$('#adinfo-ad-id').focus();
+						$('#adinfo-ad-id').css({'border':'1px solid red'});
 						return false;
 					}
 					else if (adinfoTitle == "")
 					{
 						alert("Oops! Title Can't Be Empty. Please Select Title");
-						$('#adinfo-title').focus();
+						$('#adinfo-title').css({'border':'1px solid red'});
 						return false;
 					}
 					else if (companyId == 0)
 					{
 						alert("Oops! Company Can't Be Empty. Please Select Company");
-						$('#company-id').focus();
+						$('#company-id').css({'border':'1px solid red'});
 						return false;
 					}
 					else if (brandId == 0)
 					{
 						alert("Oops! Brand Can't Be Empty. Please Select Brand");
-						$('#brand-id').focus();
+						$('#brand-id').css({'border':'1px solid red'});
 						return false;
 					}
 					else if (subBrandId == 0)
 					{
 						alert("Oops! Sub Brand Can't Be Empty. Please Select Sub Brand");
-						$('#sub-brand-id').focus();
+						$('#sub-brand-id').css({'border':'1px solid red'});
 						return false;
 					}
 					else if (productId == 0)
 					{
 						alert("Oops! Product Can't Be Empty. Please Select Product");
-						$('#product-id').focus();
+						$('#product-id').css({'border':'1px solid red'});
 						return false;
 					}
 					else if (advertiseTypeId == 0)
 					{
 						alert("Oops! Advertise Type Can't Be Empty. Please Select Advertise Type");
-						$('#advertise-type-id').focus();
+						$('#advertise-type-id').css({'border':'1px solid red'});
 						return false;
 					}
 					else

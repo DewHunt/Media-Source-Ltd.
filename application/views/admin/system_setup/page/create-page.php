@@ -101,6 +101,8 @@
 			function Validation(){
 				var pageName = $('#page-name').val();
 
+				$('#page-name').css({'border':'1px solid #cccccc'});
+
 				if (pageName == "")
 				{
 					Message("Oops! Page Name Can't Be Empty. Please Enter Page Name.");

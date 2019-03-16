@@ -128,6 +128,8 @@
 					var publicationPlaceName = $('#publication-place-name').val();
 					var publicationPlaceDescription = $('#publication-place-description').val();
 
+					$('#publication-place-name').css({'border':'1px solid #cccccc'});
+
 					if (publicationPlaceName == "")
 					{
 						alert("Oops! Publication Place Name Must Be Filled");

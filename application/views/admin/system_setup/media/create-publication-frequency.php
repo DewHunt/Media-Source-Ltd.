@@ -101,15 +101,13 @@
 			{
 				var publicationFrequencyName = $('#publication-frequency-name').val();
 
+				$('#publication-frequency-name').css({'border':'1px solid #cccccc'});
+
 				if (publicationFrequencyName == "")
 				{
 					Message("Oops! Publication Frequency Name Can't Be Empty. Please Enter Publication Frequency Name.");
 					$('#publication-frequency-name').css({'border':'1px solid red'});
 					return false;
-				}
-				else
-				{
-					$('#publication-frequency-name').css({'border':'1px solid gray'});
 				}
 			}
 		</script>		

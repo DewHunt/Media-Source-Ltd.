@@ -130,6 +130,8 @@
 					var publicationTypeName = $('#publication-type-name').val();
 					var publicationTypeDescription = $('#publication-type-description').val();
 
+					$('#publication-type-name').css({'border':'1px solid #cccccc'});
+
 					if (publicationTypeName == "")
 					{
 						alert("Oops! Publication Type Name Must Be Filled");

@@ -130,6 +130,8 @@
 					var pageName = $('#page-name').val();
 					var pageDescription = $('#page-description').val();
 
+					$('#page-name').css({'border':'1px solid #cccccc'});
+
 					if (pageName == "")
 					{
 						alert("Oops! Page Name Must Be Filled");

@@ -338,6 +338,8 @@
 				if (fromDate == "" && toDate == "" && mediaId == 0 && publicationId == 0 && brandId == 0 && productId == 0 && keywordId == 0)
 				{
 					alert("Please Select At Least One Search Option");
+					$('#from-date').focus();
+					$('#from-date').css({'border':'1px solid red'});
 					return false;
 				}
 				else
@@ -347,6 +349,7 @@
 						if (toDate == "")
 						{
 							alert("Please Select Date To");
+							$('#to-date').css({'border':'1px solid red'});
 							$('#to-date').focus();
 							return false;
 						}
@@ -357,6 +360,7 @@
 						if (fromDate == "")
 						{
 							alert("Please Select Date From");
+							$('#from-date').css({'border':'1px solid red'});
 							$('#from-date').focus();
 							return false;
 						}

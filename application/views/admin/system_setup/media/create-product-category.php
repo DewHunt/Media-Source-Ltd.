@@ -101,6 +101,8 @@
 			{
 				var productCategoryName = $('#product-category-name').val();
 
+				$('#product-category-name').css({'border':'1px solid #cccccc'});
+
 				if (productCategoryName == "")
 				{
 					Message("Oops! Product Category Name Can't Be Empty. Please Enter Product Category Name.");

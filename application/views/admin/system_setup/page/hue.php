@@ -129,6 +129,8 @@
 
 					var hueName = $('#hue-name').val();
 
+					$('#hue-name').css({'border':'1px solid #cccccc'});
+
 					if (hueName == "")
 					{
 						alert("Oops! hue Name Must Be Filled");

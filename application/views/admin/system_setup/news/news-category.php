@@ -128,6 +128,8 @@
 					var newsCategoryName = $('#news-category-name').val();
 					var newsCategoryDescription = $('#news-category-description').val();
 
+					$('#news-category-name').css({'border':'1px solid #cccccc'});
+
 					if (newsCategoryName == "")
 					{
 						alert("Oops! News Category Name Must Be Filled");

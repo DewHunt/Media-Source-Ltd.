@@ -124,30 +124,21 @@
 				var companyId = $('#company-id').val();
 				var brandName = $('#brand-name').val();
 
-				if (companyId == "")
+				$('#company-id').css({'border':'1px solid #cccccc'});
+				$('#brand-name').css({'border':'1px solid #cccccc'});
+
+				if (companyId == 0)
 				{
 					Message("Oops! Company Can't Be Empty. Please Select Company");
-					$('#company-id').css({'border':'1px solid red'});
-					
-					$('#brand-name').css({'border':'1px solid gray'});
+					$('#company-id').css({'border':'1px solid red'});					
 					return false;
-				}
-				else
-				{
-					$('#company-id').css({'border':'1px solid gray'});
 				}
 
 				if (brandName == "")
 				{
 					Message("Oops! Brand Name Can't Be Empty. Please Enter Brand Name");
 					$('#brand-name').css({'border':'1px solid red'});
-
-					$('#company-id').css({'border':'1px solid gray'});
 					return false;
-				}
-				else
-				{
-					$('#brand-name').css({'border':'1px solid gray'});
 				}
 			}
 		</script>

@@ -164,6 +164,8 @@
 						}
 					}
 
+					$('#media-name').css({'border':'1px solid #cccccc'});
+
 					if (mediaName == "")
 					{
 						alert('Oops! Media Name Must Be Filled');

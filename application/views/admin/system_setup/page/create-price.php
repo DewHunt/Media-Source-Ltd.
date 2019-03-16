@@ -85,7 +85,7 @@
 												<label class="control-label" for="day"><span class="mendatory">*</span>&nbsp;Day</label>
 												<div class="controls">
 													<select class="dropdown" name="day", id="day" style="width: 99%;">
-														<option value="">Select Day</option>
+														<option value="0">Select Day</option>
 														<option value="All Days">All Days</option>
 														<option value="Saturday">Saturday</option>
 														<option value="Sunday">Sunday</option>
@@ -131,11 +131,11 @@
 																	<div id="hue-select-menu-1"></div>
 																</td>
 																<td>
-																	<input type="text" class="span1" id="col-1" name="col-1" value="1">
+																	<input type="text" class="span1" readonly="readonly" id="col-1" name="col-1" value="1">
 																</td>
 																<td>×</td>
 																<td>
-																	<input type="text" class="span1" id="inch-1" name="inch-1" value="1">
+																	<input type="text" class="span1" readonly="readonly" id="inch-1" name="inch-1" value="1">
 																</td>
 																<td>
 																	<input type="text" class="span1" id="price-1" name="price-1" value="">
@@ -208,9 +208,9 @@
 				cell2.innerHTML = '<input type="text" class="span2" id="price-title-'+sl+'" name="price-title-'+sl+'" value="">';
 				cell3.innerHTML = '<div id="page-select-menu-'+sl+'"></div>';
 				cell4.innerHTML = '<div id="hue-select-menu-'+sl+'"></div>';
-				cell5.innerHTML = '<input type="text" class="span1" id="col-'+sl+'" name="col-'+sl+'" value="1">';
+				cell5.innerHTML = '<input type="text" class="span1" readonly="readonly" id="col-'+sl+'" name="col-'+sl+'" value="1">';
 				cell6.innerHTML = '×';
-				cell7.innerHTML = '<input type="text" class="span1" id="inch-'+sl+'" name="inch-'+sl+'" value="1">';
+				cell7.innerHTML = '<input type="text" class="span1" readonly="readonly" id="inch-'+sl+'" name="inch-'+sl+'" value="1">';
 				cell8.innerHTML = '<input type="text" class="span1" id="price-'+sl+'" name="price-'+sl+'" value="">';
 				cell9.innerHTML = '<input type="text" class="span1" id="price-description-'+sl+'" name="price-description-'+sl+'" value="">';
 
@@ -280,23 +280,38 @@
 				var publicationId = $('#publication-id').val();
 				var day = $('#day').val();
 
+				$('#price-media-name').css({'border':'1px solid #cccccc'});
+				$('#media-name-id').css({'border':'1px solid #cccccc'});
+				$('#publication-id').css({'border':'1px solid #cccccc'});
+				$('#day').css({'border':'1px solid #cccccc'});
+
 				var totalRow = $('#sl').val();
 
-				if (mediaId == "")
+				if (priceMediaName == "")
+				{
+					alert("Name Can't Be Empty");
+					$('#price-media-name').css({'border':'1px solid red'});
+					return false;
+				}
+
+				if (mediaId == 0)
 				{
 					alert("Media Name Can't Be Empty");
+					$('#media-name-id').css({'border':'1px solid red'});
 					return false;
 				}
 
-				if (publicationId == "")
+				if (publicationId == 0)
 				{
 					alert("Publication Can't Be Empty");
+					$('#publication-id').css({'border':'1px solid red'});
 					return false;
 				}
 
-				if (day == "")
+				if (day == 0)
 				{
 					alert("Day Can't Be Empty");
+					$('#day').css({'border':'1px solid red'});
 					return false;
 				}
 
@@ -309,39 +324,52 @@
 					var inchIdAttr = "#inch-"+i;
 					var priceIdAttr = "#price-"+i;
 
+					$(priceTitleIdAttr).css({'border':'1px solid #cccccc'});
+					$(pageIdAttr).css({'border':'1px solid #cccccc'});
+					$(hueIdAttr).css({'border':'1px solid #cccccc'});
+					$(colIdAttr).css({'border':'1px solid #cccccc'});
+					$(inchIdAttr).css({'border':'1px solid #cccccc'});
+					$(priceIdAttr).css({'border':'1px solid #cccccc'});
+
 					if ($(priceTitleIdAttr).val() == "")
 					{
 						alert("In Row "+i+", Price Title Can't be Empty");
+						$(priceTitleIdAttr).css({'border':'1px solid red'});
 						return false;
 					}
 
-					if ($(pageIdAttr).val() == "")
+					if ($(pageIdAttr).val() == 0)
 					{
 						alert("In Row "+i+", Page Name Can't Be Empty.");
+						$(pageIdAttr).css({'border':'1px solid red'});
 						return false;
 					}
 
-					if ($(hueIdAttr).val() == "")
+					if ($(hueIdAttr).val() == 0)
 					{
 						alert("In Row "+i+", Hue Can't Be Empty");
+						$(hueIdAttr).css({'border':'1px solid red'});
 						return false;
 					}
 
 					if ($(colIdAttr).val() == "")
 					{
 						alert("In Row "+i+", Column Can't be Empty");
+						$(colIdAttr).css({'border':'1px solid red'});
 						return false;
 					}
 
 					if ($(inchIdAttr).val() == "")
 					{
 						alert("In Row "+i+", Inch Can't be Empty");
+						$(inchIdAttr).css({'border':'1px solid red'});
 						return false;
 					}
 
 					if ($(priceIdAttr).val() == "")
 					{
 						alert("In Row "+i+", Price Can't be Enpty");
+						$(priceIdAttr).css({'border':'1px solid red'});
 						return false;
 					}
 				}

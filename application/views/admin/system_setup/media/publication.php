@@ -201,35 +201,48 @@
 							return false;
 						}
 					}
+
+					$('#publication-name').css({'border':'1px solid #cccccc'});
+					$('#media-name-id').css({'border':'1px solid #cccccc'});
+					$('#publication-type-id').css({'border':'1px solid #cccccc'});
+					$('#publication-place-id').css({'border':'1px solid #cccccc'});
+					$('#publication-frequency-id').css({'border':'1px solid #cccccc'});
+					$('#language-label').css({'color':'black'});
 					
 					if (publicationName == "")
 					{
 						alert("Oops! Publication Name Can't Be Empty. Please Enter Publication Name");
+						$('#publication-name').css({'border':'1px solid red'});
 						return false;
 					}
-					else if (mediaNameId == "")
+					else if (mediaNameId == 0)
 					{
 						alert("Oops! Media Name Can't Be Empty. Please Select Media Name");
+						$('#media-name-id').css({'border':'1px solid red'});
 						return false;
 					}
-					else if (publicationTypeId == "")
+					else if (publicationTypeId == 0)
 					{
 						alert("Oops! Publication Type Can't Be Empty. Please Select Publication Type");
+						$('#publication-type-id').css({'border':'1px solid red'});
 						return false;						
 					}
-					else if (publicationPlaceId == "")
+					else if (publicationPlaceId == 0)
 					{
 						alert("Oops! Publication Place Can't Be Empty. Please Select Publication Place");
+						$('#publication-place-id').css({'border':'1px solid red'});
 						return false;
 					}
-					else if (publicationFrequencyId == "")
+					else if (publicationFrequencyId == 0)
 					{
 						alert("Oops! Publication Frequency Can't Be Empty. Please Select Publication Frequency");
+						$('#publication-frequency-id').css({'border':'1px solid red'});
 						return false;
 					}
 					else if (publicationLanguage == null)
 					{
 						alert("Oops! Publication Language Can't Be Empty. Please Select Publication Language");
+						$('#language-label').css({'color':'red'});
 						return false;
 					}
 					else

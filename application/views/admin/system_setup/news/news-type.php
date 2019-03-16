@@ -129,6 +129,8 @@
 					var newsTypeName = $('#news-type-name').val();
 					var newsTypeDescription = $('#news-type-description').val();
 
+					$('#news-type-name').css({'border':'1px solid #cccccc'});
+
 					if (newsTypeName == "")
 					{
 						alert("Oops! News Type Name Must Be Filled");

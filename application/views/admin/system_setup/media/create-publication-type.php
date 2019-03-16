@@ -101,15 +101,13 @@
 			function Validation(){
 				var publicationTypeName = $('#publication-type-name').val();
 
+				$('#publication-type-name').css({'border':'1px solid #cccccc'});
+
 				if (publicationTypeName == "")
 				{
 					Message("Oops! Publication Type Name Can't Be Empty. Please Enter Publication Type Name.");
 					$('#publication-type-name').css({'border':'1px solid red'});
 					return false;
-				}
-				else
-				{
-					$('#publication-type-description').css({'border':'1px solid gray'});
 				}
 			}
 		</script>

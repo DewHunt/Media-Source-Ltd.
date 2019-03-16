@@ -128,6 +128,8 @@
 					var publicationFrequencyName = $('#publication-frequency-name').val();
 					var publicationFrequencyDescription = $('#publication-frequency-description').val();
 
+					$('#publication-frequency-name').css({'border':'1px solid #cccccc'});
+
 					if (publicationFrequencyName == "")
 					{
 						alert("Oops! Publication Frequency Name Must Be Filled");

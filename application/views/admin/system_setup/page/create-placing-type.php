@@ -57,7 +57,7 @@
 									<div class="widget-content">
 										<fieldset>
 											<div class="control-group">									
-												<label class="control-label" for="name">Name</label>
+												<label class="control-label" for="name"><span class="mendatory">*</span>&nbsp;Name</label>
 												<div class="controls">
 													<input type="text" class="span10" id="placing-type-name" name="placing-type-name" value="">
 												</div> <!-- /controls -->				
@@ -100,6 +100,8 @@
 		<script type="text/javascript">
 			function Validation(){
 				var placingTypeName = $('#placing-type-name').val();
+
+				$('#placing-type-name').css({'border':'1px solid #cccccc'});
 
 				if (placingTypeName == "")
 				{

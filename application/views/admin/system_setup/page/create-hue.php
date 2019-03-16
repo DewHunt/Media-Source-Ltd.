@@ -101,15 +101,13 @@
 			function Validation(){
 				var hueName = $('#hue-name').val();
 
+				$('#hue-name').css({'border':'1px solid #cccccc'});
+
 				if (hueName == "")
 				{
 					Message("Oops! Hue Name Can't Be Empty. Please Enter Hue Name.");
 					$('#hue-name').css({'border':'1px solid red'});
 					return false;
-				}
-				else
-				{
-					$('#hue-description').css({'border':'1px solid gray'});
 				}
 			}
 		</script>

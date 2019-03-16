@@ -128,6 +128,8 @@
 
 					var keywordName = $('#keyword-name').val();
 					var keywordDescription = $('#keyword-description').val();
+					
+					$('#keyword-name').css({'border':'1px solid #cccccc'});
 
 					if (keywordName == "")
 					{

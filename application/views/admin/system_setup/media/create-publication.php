@@ -174,106 +174,53 @@
 				var publicationFrequencyId = $('#publication-frequency-id').val();
 				var publicationLanguage = $('input[name=publication-language]:checked').val();
 
+				$('#publication-name').css({'border':'1px solid #cccccc'});
+				$('#media-name-id').css({'border':'1px solid #cccccc'});
+				$('#publication-type-id').css({'border':'1px solid #cccccc'});
+				$('#publication-place-id').css({'border':'1px solid #cccccc'});
+				$('#publication-frequency-id').css({'border':'1px solid #cccccc'});
+				$('#language-label').css({'color':'black'});
+
 				if (publicationName == "")
 				{
 					Message("Oops! Publication Name Can't Be Empty. Please Enter Publication Name");
 					$('#publication-name').css({'border':'1px solid red'});
-
-					$('#media-name-id').css({'border':'1px solid gray'});
-					$('#publication-type-id').css({'border':'1px solid gray'});
-					$('#publication-place-id').css({'border':'1px solid gray'});
-					$('#publication-frequency-id').css({'border':'1px solid gray'});
-					$('#language-label').css({'color':'black'});
 					return false;
 				}
-				else
-				{
-					$('#publication-name').css({'border':'1px solid gray'});
-				}
 
-				if (mediaNameId == "")
+				if (mediaNameId == 0)
 				{
 					Message("Oops! Media Name Can't Be Empty. Please Select Media Name");
 					$('#media-name-id').css({'border':'1px solid red'});
-					
-					$('#publication-name').css({'border':'1px solid gray'});
-					$('#publication-type-id').css({'border':'1px solid gray'});
-					$('#publication-place-id').css({'border':'1px solid gray'});
-					$('#publication-frequency-id').css({'border':'1px solid gray'});
-					$('#language-label').css({'color':'black'});
 					return false;
 				}
-				else
-				{
-					$('#media-name-id').css({'border':'1px solid gray'});
-				}
 
-				if (publicationTypeId == "")
+				if (publicationTypeId == 0)
 				{
 					Message("Oops! Publication Type Can't Be Empty. Please Select Publication Type");
 					$('#publication-type-id').css({'border':'1px solid red'});
-					
-					$('#publication-name').css({'border':'1px solid gray'});
-					$('#media-name-id').css({'border':'1px solid gray'});
-					$('#publication-place-id').css({'border':'1px solid gray'});
-					$('#publication-frequency-id').css({'border':'1px solid gray'});
-					$('#language-label').css({'color':'black'});
 					return false;
 				}
-				else
-				{
-					$('#publication-type-id').css({'border':'1px solid gray'});
-				}
 
-				if (publicationPlaceId == "")
+				if (publicationPlaceId == 0)
 				{
 					Message("Oops! Publication Place Can't Be Empty. Please Select Publication Place");
 					$('#publication-place-id').css({'border':'1px solid red'});
-					
-					$('#publication-name').css({'border':'1px solid gray'});
-					$('#media-name-id').css({'border':'1px solid gray'});
-					$('#publication-type-id').css({'border':'1px solid gray'});
-					$('#publication-frequency-id').css({'border':'1px solid gray'});
-					$('#language-label').css({'color':'black'});
 					return false;
 				}
-				else
-				{
-					$('#publication-place-id').css({'border':'1px solid gray'});
-				}
 
-				if (publicationFrequencyId == "")
+				if (publicationFrequencyId == 0)
 				{
 					Message("Oops! Publication Frequency Can't Be Empty. Please Select Publication Frequency");
 					$('#publication-frequency-id').css({'border':'1px solid red'});
-					
-					$('#publication-name').css({'border':'1px solid gray'});
-					$('#media-name-id').css({'border':'1px solid gray'});
-					$('#publication-type-id').css({'border':'1px solid gray'});
-					$('#publication-place-id').css({'border':'1px solid gray'});
-					$('#language-label').css({'color':'black'});
 					return false;
-				}
-				else
-				{
-					$('#publication-frequency-id').css({'border':'1px solid gray'});
 				}
 
 				if (publicationLanguage == null)
 				{
 					Message("Oops! Publication Language Can't Be Empty. Please Select Publication Language");
 					$('#language-label').css({'color':'red'});
-					
-					$('#publication-name').css({'border':'1px solid gray'});
-					$('#media-name-id').css({'border':'1px solid gray'});
-					$('#publication-type-id').css({'border':'1px solid gray'});
-					$('#publication-place-id').css({'border':'1px solid gray'});
-					$('#publication-frequency-id').css({'border':'1px solid gray'});
 					return false;
-				}
-				else
-				{
-					$('#language-label').css({'color':'black'});
 				}
 			}
 		</script>

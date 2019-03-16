@@ -134,7 +134,7 @@
 
 					if ($value->Name == "")
 					{
-						$price = "Data Not Found";
+						$price[] = "Data Not Found";
 					}
 					else
 					{
@@ -145,7 +145,7 @@
 
 					if ($priceInfo->MediaId == "" || $priceInfo->MediaId == 0)
 					{
-						$price = "Data Not Found";
+						$price[] = "Data Not Found";
 					}
 					else
 					{
@@ -156,13 +156,13 @@
 						}
 						else
 						{
-							$price = "Data Not Found";
+							$price[] = "Data Not Found";
 						}
 					}
 
 					if ($priceInfo->PublicationId == "" || $priceInfo->PublicationId == 0)
 					{
-						$price = "Data Not Found";
+						$price[] = "Data Not Found";
 					}
 					else
 					{
@@ -173,13 +173,13 @@
 						}
 						else
 						{
-							$price = "Data Not Found";
+							$price[] = "Data Not Found";
 						}
 					}
 
 					if ($value->PageNoId == "" || $value->PageNoId == 0)
 					{
-						$price = "Data Not Found";
+						$price[] = "Data Not Found";
 					}
 					else
 					{
@@ -196,7 +196,7 @@
 
 					if ($value->Hue == "" || $value->Hue == 0)
 					{
-						$price = "Data Not Found";
+						$price[] = "Data Not Found";
 					}
 					else
 					{
@@ -207,13 +207,13 @@
 						}
 						else
 						{
-							$price = "Data Not Found";
+							$price[] = "Data Not Found";
 						}
 					}
 
 					if ($value->Price == "")
 					{
-						$price = "Data Not Found";
+						$price[] = "Data Not Found";
 					}
 					else
 					{

@@ -336,11 +336,16 @@
 				var mediaId = $('#media-name-id').val();
 				var publicationId = $('#publication-id').val();
 
+				$('#date').css({'border':'1px solid #cccccc'});
+				$('#media-name-id').css({'border':'1px solid #cccccc'});
+				$('#publication-id').css({'border':'1px solid #cccccc'});
+
 				var totalRow = $('#sl').val();
 
 				if (date == 0)
 				{
 					alert("Date Can't Be Empty");
+					$('#date').css({'border':'1px solid red'});
 					$('#date').focus();
 					return false;
 				}
@@ -348,14 +353,14 @@
 				if (mediaId == 0)
 				{
 					alert("Media Name Can't Be Empty");
-					$('#media-name-id').focus();
+					$('#media-name-id').css({'border':'1px solid red'});
 					return false;
 				}
 
 				if (publicationId == 0)
 				{
 					alert("Publication Can't Be Empty");
-					$('#publication-id').focus();
+					$('#publication-id').css({'border':'1px solid red'});
 					return false;
 				}
 
@@ -374,80 +379,100 @@
 					var subBrandIdAttr = "#sub-brand-id-"+i;
 					var keywordIdAttr = "#keyword-id-"+i;
 
+					$(captionIdAttr).css({'border':'1px solid #cccccc'});
+					$(newsTypeIdAttr).css({'border':'1px solid #cccccc'});
+					$(newsCategoryIdAttr).css({'border':'1px solid #cccccc'});
+					$(pageNameIdAttr).css({'border':'1px solid #cccccc'});
+					$(pageNoIdAttr).css({'border':'1px solid #cccccc'});
+					$(positionIdAttr).css({'border':'1px solid #cccccc'});
+					$(hueIdAttr).css({'border':'1px solid #cccccc'});
+					$(productIdAttr).css({'border':'1px solid #cccccc'});
+					$(colIdAttr).css({'border':'1px solid #cccccc'});
+					$(inchIdAttr).css({'border':'1px solid #cccccc'});
+					$(subBrandIdAttr).css({'border':'1px solid #cccccc'});
+					$(keywordIdAttr).css({'border':'1px solid #cccccc'});
+
 					if ($(captionIdAttr).val() == "")
 					{
 						alert("In Row "+i+", Caption Can't be Empty");
-						$(captionIdAttr).focus();
+						$(captionIdAttr).css({'border':'1px solid red'});
 						return false;
 					}
 
-					if ($(newsTypeIdAttr).val() == "")
+					if ($(newsTypeIdAttr).val() == 0)
 					{
 						alert("In Row "+i+", News Type Can't Be Empty.");
-						$(newsTypeIdAttr).focus();
+						$(newsTypeIdAttr).css({'border':'1px solid red'});
 						return false;
 					}
 
-					if ($(newsCategoryIdAttr).val() == "")
+					if ($(newsCategoryIdAttr).val() == 0)
 					{
 						alert("In Row "+i+", News Category Can't Be Empty");
-						$(newsCategoryIdAttr).focus();
+						$(newsCategoryIdAttr).css({'border':'1px solid red'});
 						return false;
 					}
 
-					if ($(pageNameIdAttr).val() == "")
+					if ($(pageNameIdAttr).val() == 0)
 					{
 						alert("In Row "+i+", Page Name Can't be Empty");
-						$(pageNameIdAttr).focus();
+						$(pageNameIdAttr).css({'border':'1px solid red'});
+						return false;
+					}
+
+					if ($(pageNoIdAttr).val() == 0)
+					{
+						alert("In Row "+i+", Page Number Can't be Empty");
+						$(pageNoIdAttr).css({'border':'1px solid red'});
 						return false;
 					}
 
 					if ($(positionIdAttr).val() == "")
 					{
 						alert("In Row "+i+", Position Can't be Empty");
-						$(positionIdAttr).focus();
+						$(positionIdAttr).css({'border':'1px solid red'});
 						return false;
 					}
 
-					if ($(hueIdAttr).val() == "")
+					if ($(hueIdAttr).val() == 0)
 					{
 						alert("In Row "+i+", Hue Can't be Enpty");
-						$(hueIdAttr).focus();
+						$(hueIdAttr).css({'border':'1px solid red'});
 						return false;
 					}
 
-					if ($(productIdAttr).val() == "")
+					if ($(productIdAttr).val() == 0)
 					{
 						alert("In Row "+i+", Product Can't be Enpty");
-						$(productIdAttr).focus();
+						$(productIdAttr).css({'border':'1px solid red'});
 						return false;
 					}
 
 					if ($(colIdAttr).val() == "")
 					{
 						alert("In Row "+i+",  Column be Enpty");
-						$(colIdAttr).focus();
+						$(colIdAttr).css({'border':'1px solid red'});
 						return false;
 					}
 
 					if ($(inchIdAttr).val() == "")
 					{
 						alert("In Row "+i+", Inch Can't be Enpty");
-						$(inchIdAttr).focus();
+						$(inchIdAttr).css({'border':'1px solid red'});
 						return false;
 					}
 
-					if ($(subBrandIdAttr).val() == "")
+					if ($(subBrandIdAttr).val() == 0)
 					{
 						alert("In Row "+i+", Sub Brand Can't be Enpty");
-						$(subBrandIdAttr).focus();
+						$(subBrandIdAttr).css({'border':'1px solid red'});
 						return false;
 					}
 
-					if ($(keywordIdAttr).val() == "")
+					if ($(keywordIdAttr).val() == 0)
 					{
 						alert("In Row "+i+", Keyword Can't be Enpty");
-						$(keywordIdAttr).focus();
+						$(keywordIdAttr).css({'border':'1px solid red'});
 						return false;
 					}
 				}

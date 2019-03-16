@@ -129,6 +129,8 @@
 					var companyName = $('#company-name').val();
 					var companyDescription = $('#company-description').val();
 
+					$('#company-name').css({'border':'1px solid #cccccc'});
+
 					if (companyName == "")
 					{
 						alert("Oops! Company Name Must Be Filled");

@@ -130,6 +130,8 @@
 					var placingTypeName = $('#placing-type-name').val();
 					var placingTypeDescription = $('#placing-type-description').val();
 
+					$('#placing-type-name').css({'border':'1px solid #cccccc'});
+
 					if (placingTypeName == "")
 					{
 						alert("Oops! Placing Type Name Must Be Filled");

@@ -130,6 +130,8 @@
 					var placingName = $('#placing-name').val();
 					var placingDescription = $('#placing-description').val();
 
+					$('#placing-name').css({'border':'1px solid #cccccc'});
+
 					if (placingName == "")
 					{
 						alert("Oops! Placing Name Must Be Filled");

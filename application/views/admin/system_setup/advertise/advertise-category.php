@@ -129,6 +129,8 @@
 					var advertiseCategoryName = $('#advertise-category-name').val();
 					var advertiseCategoryDescription = $('#advertise-category-description').val();
 
+					$('#advertise-category-name').css({'border':'1px solid #cccccc'});
+
 					if (advertiseCategoryName == "")
 					{
 						alert("Oops! Advertise Category Name Must Be Filled");

@@ -183,20 +183,27 @@
 					var subBrandName = $('#sub-brand-name').val();
 					var companyId = $('#company-id').val();
 					var brandId = $('#brand-id').val();
+
+					$('#company-id').css({'border':'1px solid #cccccc'});	
+					$('#brand-id').css({'border':'1px solid #cccccc'});					
+					$('#sub-brand-name').css({'border':'1px solid #cccccc'});
 					
 					if (subBrandName == "")
 					{
 						alert("Oops! Sub Brand Name Can't Be Empty. Please Enter Sub Brand Name");
+						$('#sub-brand-name').css({'border':'1px solid red'});
 						return false;
 					}
-					else if (companyId == "")
+					else if (companyId == 0)
 					{
 						alert("Oops! Company Can't Be Empty. Please Select Company");
+						$('#company-id').css({'border':'1px solid red'});
 						return false;
 					}
-					else if (brandId == "")
+					else if (brandId == 0)
 					{
-						alert("Oops! Brnad Can't Be Empty. Please Select Brand");
+						alert("Oops! Brnad Can't Be Empty. Please Select Brand");	
+						$('#brand-id').css({'border':'1px solid red'});
 						return false;						
 					}
 					else

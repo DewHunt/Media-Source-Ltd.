@@ -331,23 +331,38 @@
 				var publicationId = $('#publication-id').val();
 				var day = $('#day').val();
 
+				$('#price-media-name').css({'border':'1px solid #cccccc'});
+				$('#media-name-id').css({'border':'1px solid #cccccc'});
+				$('#publication-id').css({'border':'1px solid #cccccc'});
+				$('#day').css({'border':'1px solid #cccccc'});
+
 				var totalRow = $('#sl').val();
 
-				if (mediaId == "")
+				if (priceMediaName == "")
 				{
-					alert("Media Name Can't Be Empty");
+					alert("Name Can't Be Empty");
+					$('#price-media-name').css({'border':'1px solid red'});
 					return false;
 				}
 
-				if (publicationId == "")
+				if (mediaId == 0)
+				{
+					alert("Media Name Can't Be Empty");
+					$('#media-name-id').css({'border':'1px solid red'});
+					return false;
+				}
+
+				if (publicationId == 0)
 				{
 					alert("Publication Can't Be Empty");
+					$('#publication-id').css({'border':'1px solid red'});
 					return false;
 				}
 
 				if (day == "")
 				{
 					alert("Day Can't Be Empty");
+					$('#day').css({'border':'1px solid red'});
 					return false;
 				}
 
@@ -360,39 +375,52 @@
 					var inchIdAttr = "#inch-"+i;
 					var priceIdAttr = "#price-"+i;
 
+					$(priceTitleIdAttr).css({'border':'1px solid #cccccc'});
+					$(pageIdAttr).css({'border':'1px solid #cccccc'});
+					$(hueIdAttr).css({'border':'1px solid #cccccc'});
+					$(colIdAttr).css({'border':'1px solid #cccccc'});
+					$(inchIdAttr).css({'border':'1px solid #cccccc'});
+					$(priceIdAttr).css({'border':'1px solid #cccccc'});
+
 					if ($(priceTitleIdAttr).val() == "")
 					{
 						alert("In Row "+i+", Price Title Can't be Empty");
+						$(priceTitleIdAttr).css({'border':'1px solid red'});
 						return false;
 					}
 
-					if ($(pageIdAttr).val() == "")
+					if ($(pageIdAttr).val() == 0)
 					{
 						alert("In Row "+i+", Page Name Can't Be Empty.");
+						$(pageIdAttr).css({'border':'1px solid red'});
 						return false;
 					}
 
-					if ($(hueIdAttr).val() == "")
+					if ($(hueIdAttr).val() == 0)
 					{
 						alert("In Row "+i+", Hue Can't Be Empty");
+						$(hueIdAttr).css({'border':'1px solid red'});
 						return false;
 					}
 
 					if ($(colIdAttr).val() == "")
 					{
 						alert("In Row "+i+", Column Can't be Empty");
+						$(colIdAttr).css({'border':'1px solid red'});
 						return false;
 					}
 
 					if ($(inchIdAttr).val() == "")
 					{
 						alert("In Row "+i+", Inch Can't be Empty");
+						$(inchIdAttr).css({'border':'1px solid red'});
 						return false;
 					}
 
 					if ($(priceIdAttr).val() == "")
 					{
 						alert("In Row "+i+", Price Can't be Enpty");
+						$(priceIdAttr).css({'border':'1px solid red'});
 						return false;
 					}
 				}

@@ -128,15 +128,12 @@
 			function Validation(){
 				var mediaName = $('#media-name').val();
 
+				$('#media-name').css({'border':'1px solid #cccccc'});	
 				if (mediaName == "")
 				{
 					Message("Oops! Media Name Can't Be Empty. Please Enter Media Name.");
 					$('#media-name').css({'border':'1px solid red'});
 					return false;
-				}
-				else
-				{
-					$('#media-name').css({'border':'1px solid gray'});						
 				}
 			}
 		</script>

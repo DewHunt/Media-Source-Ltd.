@@ -57,7 +57,7 @@
 									<div class="widget-content">
 										<fieldset>
 											<div class="control-group">											
-												<label class="control-label" for="name">Name</label>
+												<label class="control-label" for="name"><spna class="mendatory">*</spna>&nbsp;Name</label>
 												<div class="controls">
 													<input type="text" class="span10" id="advertise-category-name" name="advertise-category-name" value="">
 												</div> <!-- /controls -->				
@@ -100,6 +100,8 @@
 			function Validation()
 			{
 				var advertiseCategoryName = $('#advertise-category-name').val();
+
+				$('#advertise-category-name').css({'border':'1px solid #cccccc'});
 
 				if (advertiseCategoryName == "")
 				{
