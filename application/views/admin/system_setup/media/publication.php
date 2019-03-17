@@ -24,6 +24,19 @@
 								</div>  <!-- /widget-header -->
 
 								<div class="widget-content">
+									<table class="table table-striped table-bordered table-responsive">
+										<thead>
+											<tr>
+												<td>Media</td>
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<td><div id="media-select-menu"></div></td>
+											</tr>
+										</tbody>
+									</table>
+
 									<table id="publication-data" class="table table-striped table-bordered">
 										<thead>
 											<tr>
@@ -138,9 +151,18 @@
 				});
 
 				GetDataForSelectMenu("MediaNameModel","GetAllMediaName","#media-select-menu","media-name-id","Select Media",0);
-				GetDataForSelectMenu("PublicationTypeModel","GetAllPublicationType","#publication-type-select-menu","publication-type-id","Select Publication Type",0);
-				GetDataForSelectMenu("PublicationPlaceModel","GetAllPublicationPlace","#publication-place-select-menu","publication-place-id","Select Publication Place",0);
-				GetDataForSelectMenu("PublicationFrequencyModel","GetAllPublicationFrequency","#publication-frequency-select-menu","publication-frequency-id","Select Publication Frequency",0);
+
+				$(document).on('change', '#media-name-id', function(){
+					var mediaId = $('#media-name-id').val();
+					if (mediaId == 0)
+					{
+						$('input[type="search"]').val('').keyup();						
+					}
+					else
+					{
+						$('input[type="search"]').val(mediaId).keyup();
+					}
+				});
 
 				// Get Media Name Data Script Start
 				function GetDataForSelectMenu(modelName,methodName,divId,idNameAttr,selectHeader)

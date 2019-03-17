@@ -116,12 +116,14 @@
 				$(document).on('change', '#media-name-id', function(){
 					var id = $('#media-name-id').val();
 					GetDataForDependantSelectMenu("PublicationModel","GetPublicationByForignKey","MediaId",id,"#publication-select-menu","publication-id","Select Publication",0);
+					$('input[type="search"]').val('').keyup();
 				});
 
 				$(document).on('change', '#publication-id', function(){
 					var mediaId = $('#media-name-id').val();
 					var publicationId = $('#publication-id').val();
 					GetDataForDoubleDependantSelectMenu("PriceModel","GetPriceId","MediaId","PublicationId",mediaId,publicationId,"#price-id-select-menu","price-id","Select Price Id",0);
+					$('input[type="search"]').val('').keyup();
 				});
 
 				$(document).on('change', '#price-id', function(){
