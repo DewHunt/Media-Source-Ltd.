@@ -50,7 +50,7 @@
 	<body>
 		<?php include APPPATH.'views/admin/master/navbar.php'; ?>
 
-		<?php include APPPATH.'views/admin/master/admin-sub-navbar.php'; ?>
+		<?php include APPPATH.'views/admin/master/report-sub-navbar.php'; ?>
 		
 		<div class="main">
 			<div class="main-inner">

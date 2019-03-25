@@ -115,6 +115,22 @@
 			}			
 		}
 
+		public function GetDataEntryReportById($dataEntryId)
+		{
+			$sql = "SELECT * FROM dataentryreport WHERE DataEntryId = '$dataEntryId' AND State = '1'";
+
+			$query = $this->db->query($sql);
+
+			if ($query->num_rows() > 0)
+			{
+				return $query->result();
+			}
+			else
+			{
+				return false;
+			}			
+		}
+
 		public function UpdateDataEntry($dataEntryId,$batchId,$mediaId,$publicationId,$dbDate,$updateId)
 		{
 			$updateDateTime = date('Y-m-d H:i:s');
@@ -282,14 +298,13 @@
 
 		public function GetPriceInfo($mediaId,$publicationId,$col,$inch,$hueId,$pageId)
 		{
-			echo $str = "SELECT pricedetails.Price, hue.Name AS HueName, page.Name AS PageName
+			$str = "SELECT pricedetails.Price, hue.Name AS HueName, page.Name AS PageName
 			FROM price
 			LEFT JOIN pricedetails on (price.Id = pricedetails.PriceId)
 			LEFT JOIN hue ON (pricedetails.Hue = hue.Id)
 			LEFT JOIN page ON (pricedetails.PageNoId = page.Id)
-			WHERE price.MediaId='$mediaId' and price.PublicationId='$publicationId' and pricedetails.Col='$col' and pricedetails.Inch='$inch' and pricedetails.Hue='$hueId' and pricedetails.PageNoId='$pageId' and pricedetails.State='1'
+			WHERE price.MediaId='$mediaId' and price.PublicationId='$publicationId' and pricedetails.Hue='$hueId' and pricedetails.PageNoId='$pageId' and pricedetails.State='1'
 			";
-			exit();
 
 			$query = $this->db->query($str);
 
