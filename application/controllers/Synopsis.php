@@ -2,7 +2,7 @@
 	/**
 	 * 
 	 */
-	class Report extends CI_Controller
+	class Synopsis extends CI_Controller
 	{
 		
 		public function __construct()
@@ -28,12 +28,24 @@
 			else
 			{
 				$data = array(
-					'title' => 'Report - Media Source',
+					'title' => 'Synopsis - Media Source',
 					'adminInfo' => $this->GetAdminAllInfo(),
 					'message' => $msg
 				);
 
-				$this->load->view('admin/reports/report',$data);
+				$this->load->view('admin/synopsis/synopsis',$data);
+			}
+		}
+
+		public function CreateSynopsis()
+		{
+			if ($this->session->userdata('adminUserName') == "" || $this->session->userdata('adminPassword') == "")
+			{
+				return redirect('Admin/Index');
+			}
+			else
+			{
+				echo "This is Create Synopsis Function";
 			}
 		}
 	}

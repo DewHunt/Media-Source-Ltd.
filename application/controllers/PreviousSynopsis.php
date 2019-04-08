@@ -2,7 +2,7 @@
 	/**
 	 * 
 	 */
-	class Report extends CI_Controller
+	class PreviousSynopsis extends CI_Controller
 	{
 		
 		public function __construct()
@@ -28,12 +28,12 @@
 			else
 			{
 				$data = array(
-					'title' => 'Report - Media Source',
+					'title' => 'Synopsis - Media Source',
 					'adminInfo' => $this->GetAdminAllInfo(),
 					'message' => $msg
 				);
 
-				$this->load->view('admin/reports/report',$data);
+				$this->load->view('admin/previous_synopsis/previous-synopsis',$data);
 			}
 		}
 	}

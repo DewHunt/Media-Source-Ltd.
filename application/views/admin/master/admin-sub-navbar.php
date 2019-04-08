@@ -8,6 +8,8 @@
 						<li><a href="<?= base_url('index.php/SystemSetup/Index'); ?>"><i class="icon-gear"></i><span>System Setup</span> </a> </li>
 						<li><a href="<?= base_url('index.php/DataEntry/Index'); ?>"><i class="icon-tag"></i><span>Data Entry</span> </a> </li>
 						<li><a href="<?= base_url('index.php/Report/Index'); ?>"><i class="icon-tag"></i><span>Reports</span> </a> </li>
+						<li><a href="<?= base_url('index.php/Synopsis/Index'); ?>"><i class="icon-tag"></i><span>Synopsis</span> </a> </li>
+						<li><a href="<?= base_url('index.php/PreviousSynopsis/Index'); ?>"><i class="icon-tag"></i><span>Previous Synopsis</span> </a> </li>
 					</ul>
 				</div>  <!-- /container --> 
 			</div> <!-- /subnavbar-inner --> 

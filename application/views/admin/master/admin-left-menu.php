@@ -12,6 +12,8 @@
 											<li><a href="<?= base_url('index.php/SystemSetup/Index'); ?>">System Setup</a></li>
 											<li><a href="<?= base_url('index.php/DataEntry/Index'); ?>">Data Entry</a></li>
 											<li><a href="<?= base_url('index.php/Report/Index'); ?>">Reports</a></li>
+											<li><a href="<?= base_url('index.php/Synopsis/Index'); ?>">Synopsis</a></li>
+											<li><a href="<?= base_url('index.php/PreviousSynopsis/Index'); ?>">Previous Synopsis</a></li>
 										</ul>
 									</div>  <!-- /main-nav -->
 								</div>  <!-- /widget-content -->
