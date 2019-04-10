@@ -59,7 +59,7 @@
 			return redirect('Admin/Index');
 		}
 
-		public function Dashboard()
+		public function Dashboard($msg = null, $active = null)
 		{
 			$adminUserName = $this->session->userdata('adminUserName');
 			$adminPassword = $this->session->userdata('adminPassword');
@@ -73,6 +73,7 @@
 				$data = array(
 					'title' => 'Admin Dashboard - Media Source Ltd.',
 					'adminInfo' => $this->am->GetAdminAllInfo($adminUserName,$adminPassword),
+					'active' => $active
 				);
 				$this->load->view('admin/dashboard',$data);
 			}

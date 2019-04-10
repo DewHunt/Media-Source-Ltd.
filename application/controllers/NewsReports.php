@@ -25,7 +25,7 @@
 			return $this->AdminModel->GetAdminAllInfo($adminUserName,$adminPassword);
 		}
 
-		public function Index($msg = null)
+		public function Index($msg = null, $active = null)
 		{
 			if ($this->session->userdata('adminUserName') == "" || $this->session->userdata('adminPassword') == "")
 			{
@@ -37,6 +37,7 @@
 					'title' => 'News Reports - Media Source Ltd.',
 					'adminInfo' => $this->GetAdminAllInfo(),
 					'message' => $msg,
+					'active' => $active,
 					'show' => '0'
 				);
 

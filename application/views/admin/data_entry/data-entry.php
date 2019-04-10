@@ -40,11 +40,11 @@
 										<!-- /widget-header -->
 										<div class="widget-content">
 											<div class="shortcuts">
-												<a href="<?= base_url('index.php/DataEntry/Index/1'); ?>" class="shortcut">
+												<a href="<?= base_url('index.php/DataEntry/Index/1/1'); ?>" class="shortcut">
 													<i class="shortcut-icon icon-file"></i> 
 													<span class="shortcut-label">Advertise Entry</span>
 												</a>
-												<a href="<?= base_url('index.php/NewsEntry/Index'); ?>" class="shortcut">
+												<a href="<?= base_url('index.php/NewsEntry/Index/_/2'); ?>" class="shortcut">
 													<i class="shortcut-icon icon-file"></i> 
 													<span class="shortcut-label">News Entry</span> 
 												</a> 

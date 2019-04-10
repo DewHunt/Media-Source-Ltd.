@@ -19,7 +19,7 @@
 			return $this->AdminModel->GetAdminAllInfo($adminUserName,$adminPassword);
 		}
 
-		public function Index($msg = NULL)
+		public function Index($msg = NULL, $active = NULL)
 		{
 			if ($this->session->userdata('adminUserName') == "" || $this->session->userdata('adminPassword') == "")
 			{
@@ -30,8 +30,11 @@
 				$data = array(
 					'title' => 'Data Entry - Media Source',
 					'adminInfo' => $this->GetAdminAllInfo(),
-					'message' => $msg
+					'message' => $msg,
+					'active' => $active
 				);
+
+				// print_r($data); exit();
 
 				$this->load->view('admin/data_entry/data-entry',$data);
 			}
