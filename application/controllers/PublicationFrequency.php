@@ -32,6 +32,7 @@
 				$data = array(
 					'title' => 'Publication Frequency - Media Source Ltd.',
 					'adminInfo' => $this->GetAdminAllInfo(),
+					'active' => 1
 				);
 
 				$this->load->view('admin/system_setup/media/publication-frequency',$data);
@@ -49,7 +50,8 @@
 				$data = array(
 					'title' => 'Create Publication Frequency - Media Source Ltd.',
 					'adminInfo' => $this->GetAdminAllInfo(),
-					'message' => $msg
+					'message' => $msg,
+					'active' => 1
 				);
 
 				$this->load->view('admin/system_setup/media/create-publication-frequency',$data);				

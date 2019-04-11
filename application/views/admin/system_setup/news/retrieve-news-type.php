@@ -20,16 +20,7 @@
 								<div class="widget-header">
 									<i class="icon-th-list"></i>
 									<h3>All News Type Information</h3>
-									<a href="<?= base_url('index.php/NewsType/NewsType'); ?>" type="submit" class="btn btn-primary" target="_blank">Create News Type</a>
-
-									<?php
-										if ($adminInfo->AdminStatus == 101 && $adminInfo->State == 1)
-										{
-									?>
-										<a href="<?= base_url('index.php/NewsType/RetrieveNewsType'); ?>" type="submit" class="btn btn-danger">Retrieve News Type</a>
-									<?php
-										}
-									?>
+									<a href="<?= base_url('index.php/NewsType/Index'); ?>" type="submit" class="btn btn-primary">News Type</a>
 								</div>
 								<!-- /widget-header -->
 								<div class="widget-content">
@@ -39,6 +30,8 @@
 												<th>Sl</th>
 												<th>Name</th>
 												<th>Description</th>
+												<th>Delete By</th>
+												<th>Delete Date</th>
 												<th>Action</th>
 											</tr>
 										</thead>
@@ -48,6 +41,8 @@
 												<th>Sl</th>
 												<th>Name</th>
 												<th>Description</th>
+												<th>Delete By</th>
+												<th>Delete Date</th>
 												<th>Action</th>
 											</tr>
 										</tfoot>
@@ -103,74 +98,25 @@
 					'serverSide':true,
 					'order':[],
 					'ajax':{
-						url:'<?php echo base_url('index.php/NewsType/GetNewsTypeAllInfo'); ?>',
+						url:'<?php echo base_url('index.php/NewsType/GetDeletedNewsTypeAllInfo'); ?>',
 						type:'POST'
 					},
 					'dataType':'json',
 					'columnDefs':[
 						{
-							'targets':[0, 1, 2, 3],
+							'targets':[0, 1, 2, 3, 4, 5],
 							'orderable':false
 						},
 					],
 				});
 
-				$(document).on('click', '.update', function(){
+				$(document).on('click', '.retrieve', function(){
 					var newsTypeId = $(this).attr('id');
 
-					$.ajax({
-						url:'<?php echo base_url("index.php/NewsType/GetNewsTypeById"); ?>',
-						method:'POST',
-						data:{newsTypeId:newsTypeId},
-						dataType:'json',
-						success:function(data){
-							$('#news-type-modal').modal('show');
-							$('#news-type-name').val(data.newsTypeName);
-							$('#news-type-description').val(data.newsTypeDescription);
-							$('#news-type-id').val(data.newsTypeId);
-						}
-					});
-				});
-
-				$(document).on('submit', '#news-type-form', function(event){
-					event.preventDefault();
-
-					var newsTypeName = $('#news-type-name').val();
-					var newsTypeDescription = $('#news-type-description').val();
-
-					$('#news-type-name').css({'border':'1px solid #cccccc'});
-
-					if (newsTypeName == "")
-					{
-						alert("Oops! News Type Name Must Be Filled");
-						$('#news-type-name').css({'border':'1px solid red'});
-						return false;
-					}
-					else
+					if (confirm("Wait!, Are Your 100% Sure, You Really Want to Retrieve This?"))
 					{
 						$.ajax({
-							url:'<?php echo base_url("index.php/NewsType/UpdateNewsType"); ?>',
-							method:'POST',
-							data:new FormData(this),
-							contentType:false,
-							processData:false,
-							success:function(data){
-								alert(data);
-								$('#news-type-form')[0].reset();
-								$('#news-type-modal').modal('hide');
-								dataTable.ajax.reload();
-							}
-						});
-					}
-				});
-
-				$(document).on('click', '.delete', function(){
-					var newsTypeId = $(this).attr('id');
-
-					if (confirm("Wait!, Are Your 100% Sure, You Really Want to Delete This?"))
-					{
-						$.ajax({
-							url:'<?php echo base_url('index.php/NewsType/DeleteNewsType'); ?>',
+							url:'<?php echo base_url('index.php/NewsType/RetrieveNewsTypeData'); ?>',
 							method:'POST',
 							data:{newsTypeId:newsTypeId},
 							success:function(data){

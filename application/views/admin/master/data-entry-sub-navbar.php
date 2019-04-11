@@ -24,8 +24,8 @@
 				<div class="container">
 					<ul class="mainnav">
 						<li class="<?= $link_0; ?>"><a href="<?= base_url('index.php/Admin/Dashboard'); ?>"><i class="icon-dashboard"></i><span>Dashboard</span> </a> </li>
-						<li class="<?= $link_1; ?>"><a href="<?= base_url('index.php/DataEntry/Index/1/1'); ?>"><i class="icon-tag"></i><span>Advertise Entry</span></a></li>
-						<li class="<?= $link_2; ?>"><a href="<?= base_url('index.php/NewsEntry/Index/_/2'); ?>"><i class="icon-tag"></i><span>News Entry</span></a></li>
+						<li class="<?= $link_1; ?>"><a href="<?= base_url('index.php/DataEntry/Index/1'); ?>"><i class="icon-tag"></i><span>Advertise Entry</span></a></li>
+						<li class="<?= $link_2; ?>"><a href="<?= base_url('index.php/NewsEntry/Index'); ?>"><i class="icon-tag"></i><span>News Entry</span></a></li>
 					</ul>
 				</div>
 				<!-- /container --> 

@@ -25,7 +25,7 @@
 			return $this->AdminModel->GetAdminAllInfo($adminUserName,$adminPassword);
 		}
 
-		public function Index($msg = null, $active = null)
+		public function Index($msg = null)
 		{
 			if ($this->session->userdata('adminUserName') == "" || $this->session->userdata('adminPassword') == "")
 			{
@@ -37,7 +37,7 @@
 					'title' => 'News Reports - Media Source Ltd.',
 					'adminInfo' => $this->GetAdminAllInfo(),
 					'message' => $msg,
-					'active' => $active,
+					'active' => 2,
 					'show' => '0'
 				);
 
@@ -136,7 +136,8 @@
 						'brandName' => $brandName,
 						'productName' => $productName,
 						'keywordName' => $keywordName,
-						'result' => $result
+						'result' => $result,
+						'active' => 2
 					);
 
 					$this->load->view('admin/reports/news_reports/news-reports',$data);
@@ -147,6 +148,7 @@
 						'title' => 'News Reports - Media Source Ltd.',
 						'adminInfo' => $this->GetAdminAllInfo(),
 						'show' => '2',
+						'active' => 2
 					);
 
 					$this->load->view('admin/reports/news_reports/news-reports',$data);					

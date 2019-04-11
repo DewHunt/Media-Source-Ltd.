@@ -29,7 +29,8 @@
 			{
 				$data = array(
 					'title' => 'System Setup - Media Source Ltd.',
-					'adminInfo' => $this->GetAdminAllInfo()
+					'adminInfo' => $this->GetAdminAllInfo(),
+					'active' => 0
 				);
 
 				$this->load->view('admin/system_setup/system-setup',$data);

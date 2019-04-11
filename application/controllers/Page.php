@@ -31,7 +31,8 @@
 			{
 				$data = array(
 					'title' => 'Page - Media Source Ltd.',
-					'adminInfo' => $this->GetAdminAllInfo()
+					'adminInfo' => $this->GetAdminAllInfo(),
+					'active' => 2
 				);
 
 				$this->load->view('admin/system_setup/page/page',$data);
@@ -49,7 +50,8 @@
 				$data = array(
 					'title' => 'Create Page - Media Source Ltd.',
 					'adminInfo' => $this->GetAdminAllInfo(),
-					'message' => $msg
+					'message' => $msg,
+					'active' => 2
 				);
 
 				$this->load->view('admin/system_setup/page/create-page',$data);

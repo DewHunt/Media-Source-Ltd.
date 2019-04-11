@@ -20,7 +20,7 @@
 			return $this->AdminModel->GetAdminAllInfo($adminUserName,$adminPassword);
 		}
 
-		public function Index($msg = null, $active = null)
+		public function Index($msg = null)
 		{
 			if ($this->session->userdata('adminUserName') == "" || $this->session->userdata('adminPassword') == "")
 			{
@@ -32,7 +32,7 @@
 					'title' => 'All Account - Media Source Ltd.',
 					'adminInfo' => $this->GetAdminAllInfo(),
 					'message' => $msg,
-					'active' => $active
+					'active' => 2
 				);
 
 				$this->load->view('admin/account',$data);
@@ -49,7 +49,8 @@
 			{
 				$data = array(
 					'title' => 'Create Account - Media Source Ltd.',
-					'adminInfo' => $this->GetAdminAllInfo()
+					'adminInfo' => $this->GetAdminAllInfo(),
+					'active' => 2
 				);
 				$this->load->view('admin/create-account',$data);
 			}

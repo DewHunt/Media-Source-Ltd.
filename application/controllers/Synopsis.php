@@ -19,7 +19,7 @@
 			return $this->AdminModel->GetAdminAllInfo($adminUserName,$adminPassword);
 		}
 
-		public function Index($msg = NULL, $active = null)
+		public function Index($msg = NULL)
 		{
 			if ($this->session->userdata('adminUserName') == "" || $this->session->userdata('adminPassword') == "")
 			{
@@ -31,7 +31,7 @@
 					'title' => 'Synopsis - Media Source',
 					'adminInfo' => $this->GetAdminAllInfo(),
 					'message' => $msg,
-					'active' => $active
+					'active' => 6
 				);
 
 				$this->load->view('admin/synopsis/synopsis',$data);

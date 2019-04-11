@@ -19,7 +19,16 @@
 								<div class="widget-header">
 									<i class="icon-th-list"></i>
 									<h3>All News Category Information</h3>
-									<a href="<?= base_url('index.php/NewsCategory/NewsCategory'); ?>" type="submit" class="btn btn-primary" target="_blank">Create News Category</a> 
+									<a href="<?= base_url('index.php/NewsCategory/NewsCategory'); ?>" type="submit" class="btn btn-primary" target="_blank">Create News Category</a>
+
+									<?php
+										if ($adminInfo->AdminStatus == 101 && $adminInfo->State == 1)
+										{
+									?>
+										<a href="<?= base_url('index.php/NewsCategory/RetrieveNewsCategory'); ?>" type="submit" class="btn btn-danger">Retrieve News Category</a>
+									<?php
+										}
+									?>
 								</div>
 								<!-- /widget-header -->
 								<div class="widget-content">

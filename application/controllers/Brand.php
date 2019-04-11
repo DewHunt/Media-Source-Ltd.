@@ -32,7 +32,8 @@
 			{
 				$data = array(
 					'title' => 'Brand - Media Source Ltd.',
-					'adminInfo' => $this->GetAdminAllInfo()
+					'adminInfo' => $this->GetAdminAllInfo(),
+					'active' => 4
 				);
 
 				$this->load->view('admin/system_setup/advertise/brand',$data);
@@ -50,7 +51,8 @@
 				$data = array(
 					'title' => 'Create Brand - Media Source Ltd.',
 					'adminInfo' => $this->GetAdminAllInfo(),
-					'message' => $msg
+					'message' => $msg,
+					'active' => 4
 				);
 
 				$this->load->view('admin/system_setup/advertise/create-brand',$data);				

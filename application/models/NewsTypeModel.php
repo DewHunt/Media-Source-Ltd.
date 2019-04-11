@@ -100,6 +100,22 @@
 			}
 		}
 
+		public function RetrieveNewsTypeData($newsTypeId)
+		{
+			$sql = "UPDATE newstype SET State = '1' WHERE Id = '".$newsTypeId."'";
+
+			$query = $this->db->query($sql);
+
+			if ($query)
+			{
+				return true;
+			}
+			else
+			{
+				return false;
+			}
+		}
+
 		public function GetAllNewsType()
 		{
 			$sql = "SELECT * FROM newstype WHERE State = '1' ORDER BY Name ASC";

@@ -31,7 +31,8 @@
 			{
 				$data = array(
 					'title' => 'Hue - Media Source Ltd.',
-					'adminInfo' => $this->GetAdminAllInfo()
+					'adminInfo' => $this->GetAdminAllInfo(),
+					'active' => 2
 				);
 
 				$this->load->view('admin/system_setup/page/hue',$data);
@@ -49,7 +50,8 @@
 				$data = array(
 					'title' => 'Create Hue - Media Source Ltd.',
 					'adminInfo' => $this->GetAdminAllInfo(),
-					'message' => $msg
+					'message' => $msg,
+					'active' => 2
 				);
 
 				$this->load->view('admin/system_setup/page/create-hue',$data);

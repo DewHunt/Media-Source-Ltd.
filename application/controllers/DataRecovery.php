@@ -2,7 +2,7 @@
 	/**
 	 * 
 	 */
-	class PreviousSynopsis extends CI_Controller
+	class DataRecovery extends CI_Controller
 	{
 		
 		public function __construct()
@@ -19,22 +19,21 @@
 			return $this->AdminModel->GetAdminAllInfo($adminUserName,$adminPassword);
 		}
 
-		public function Index($msg = NULL)
+		public function Index()
 		{
-			if ($this->session->userdata('adminUserName') == "" || $this->session->userdata('adminPassword') == "")
+			if ($this->GetAdminAllInfo()->AdminStatus == 101 && $this->GetAdminAllInfo()->State == 1)
 			{
-				return redirect('Admin/Index');
+				$data = array(
+					'title' => 'Data Recovery System - Media Source Ltd.',
+					'adminInfo' => $this->GetAdminAllInfo(),
+					'active' => 0
+				);
+
+				$this->load->view('admin/system_setup/system-setup',$data);
 			}
 			else
 			{
-				$data = array(
-					'title' => 'Synopsis - Media Source',
-					'adminInfo' => $this->GetAdminAllInfo(),
-					'message' => $msg,
-					'active' => 7
-				);
-
-				$this->load->view('admin/previous_synopsis/previous-synopsis',$data);
+				return redirect('Admin/Index');
 			}
 		}
 	}

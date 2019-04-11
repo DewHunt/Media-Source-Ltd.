@@ -139,6 +139,8 @@
 											<td>
 												<?php
 													$newsCategoryInfo = $this->NewsCategoryModel->GetAllNewsCategory();
+
+													// print_r($newsCategoryInfo); exit();
 													$output = '';
 
 													$output .= '<select class="dropdown" name="news-category-id-'.$sl.'" id="news-category-id-'.$sl.'" style="width: 99%;">';

@@ -31,7 +31,8 @@
 			{
 				$data = array(
 					'title' => 'Placing Type - Media Source Ltd.',
-					'adminInfo' => $this->GetAdminAllInfo()
+					'adminInfo' => $this->GetAdminAllInfo(),
+					'active' => 2
 				);
 
 				$this->load->view('admin/system_setup/page/placing-type',$data);
@@ -49,7 +50,8 @@
 				$data = array(
 					'title' => 'Create Placing Type - Media Source Ltd.',
 					'adminInfo' => $this->GetAdminAllInfo(),
-					'message' => $msg
+					'message' => $msg,
+					'active' => 2
 				);
 
 				$this->load->view('admin/system_setup/page/create-placing-type',$data);				
@@ -226,6 +228,121 @@
 				{
 					echo "Oops, Something Wrong With Deleting Placing Type";
 				}
+			}
+		}
+
+		public function RetrievePlacingTypeData()
+		{
+			if ($this->GetAdminAllInfo()->AdminStatus == 101 || $this->GetAdminAllInfo()->Status == 1)
+			{
+				$placingTypeId = $this->input->post('placingTypeId');
+
+				$result = $this->PlacingTypeModel->RetrievePlacingTypeData($placingTypeId);
+
+				if ($result)
+				{
+					echo "Placing Type Retrieve Successfully!";
+				}
+				else
+				{
+					echo "Oops, Something Wrong With Retrieving Placing Type";
+				}
+			}
+			else
+			{
+				return redirect('Admin/Index');
+			}
+		}
+
+		public function RetrievePlacingType()
+		{
+			if ($this->GetAdminAllInfo()->AdminStatus == 101 || $this->GetAdminAllInfo()->Status == 1)
+			{
+				$data = array(
+					'title' => 'Retrieve Placing Type - Media Source Ltd.',
+					'adminInfo' => $this->GetAdminAllInfo(),
+					'active' => 2
+				);
+
+				$this->load->view('admin/system_setup/page/retrieve-placing-type',$data);
+			}
+			else
+			{
+				return redirect('Admin/Index');
+			}
+		}
+
+		public function GetDeletedPlacingTypeAllInfo()
+		{
+			if ($this->GetAdminAllInfo()->AdminStatus == 101 || $this->GetAdminAllInfo()->Status == 1)
+			{
+				$option = "dt-dr-common";
+				$table = "placingtype";
+				$selectColumn = array("Id","Name","Description","DeleteBy","DeleteDateTime");
+				$orderColumn = array("Id","Name",null,null);
+
+				$placingTypeInfo = $this->DataTableModel->MakeDataTables($option,$table,$selectColumn,$orderColumn);
+				$sl = 1;
+				$data = array();
+
+				foreach ($placingTypeInfo as $value)
+				{
+					$placingType = array();
+					$placingType[] = $sl;
+
+					if ($value->Name == "")
+					{
+						$placingType[] = "Data Not Found";
+					}
+					else
+					{
+						$placingType[] = $value->Name;
+					}
+
+					if ($value->Description == "")
+					{
+						$placingType[] = "Data Not Found";
+					}
+					else
+					{
+						$placingType[] = $value->Description;
+					}
+
+					if ($value->DeleteBy == "")
+					{
+						$placingType[] = "Data Not Found";
+					}
+					else
+					{
+						$placingType[] = $this->AdminModel->GetAdminById($value->DeleteBy)->Name;
+					}
+
+					if ($value->DeleteDateTime == "")
+					{
+						$placingType[] = "Data Not Found";
+					}
+					else
+					{
+						$placingType[] = $value->DeleteDateTime;
+					}
+
+					$placingType[] = '<button type="button" name="retrieve" id="'.$value->Id.'" class="btn btn-primary retrieve">Retrieve</button>';
+					$sl++;
+					$data[] = $placingType;
+				}
+
+				$output = array(
+					'draw' => intval($_POST['draw']),
+					'recordsTotal' => $this->DataTableModel->GetAllData($table),
+					'recordsFiltered' => $this->DataTableModel->GetFilteredData($option,$table,$selectColumn,$orderColumn),
+					'data' => $data
+				);
+
+				echo json_encode($output);
+			}
+			else
+			{
+				return redirect('Admin/Index');
 			}
 		}
 	}

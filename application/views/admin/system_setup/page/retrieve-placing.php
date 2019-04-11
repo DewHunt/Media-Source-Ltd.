@@ -20,16 +20,7 @@
 								<div class="widget-header">
 									<i class="icon-th-list"></i>
 									<h3>All Placing Information</h3>
-									<a href="<?= base_url('index.php/Placing/Placing'); ?>" type="submit" class="btn btn-primary" target="_blank">Create Placing</a>
-
-									<?php
-										if ($adminInfo->AdminStatus == 101 && $adminInfo->State == 1)
-										{
-									?>
-										<a href="<?= base_url('index.php/Placing/RetrievePlacing'); ?>" type="submit" class="btn btn-danger">Retrieve Placing</a>
-									<?php
-										}
-									?>
+									<a href="<?= base_url('index.php/Placing/Index'); ?>" type="submit" class="btn btn-primary">Placing</a> 
 								</div>
 								<!-- /widget-header -->
 								<div class="widget-content">
@@ -39,6 +30,8 @@
 												<th>Sl</th>
 												<th>Name</th>
 												<th>Description</th>
+												<th>Deleted By</th>
+												<th>Deleted Date</th>
 												<th>Action</th>
 											</tr>
 										</thead>
@@ -48,6 +41,8 @@
 												<th>Sl</th>
 												<th>Name</th>
 												<th>Description</th>
+												<th>Deleted By</th>
+												<th>Deleted Date</th>
 												<th>Action</th>
 											</tr>
 										</tfoot>
@@ -103,75 +98,25 @@
 					'serverSide':true,
 					'order':[],
 					'ajax':{
-						url:'<?php echo base_url('index.php/Placing/GetPlacingAllInfo'); ?>',
+						url:'<?php echo base_url('index.php/Placing/GetDeletedPlacingAllInfo'); ?>',
 						type:'POST'
 					},
 					'dataType':'json',
 					'columnDefs':[
 						{
-							'targets':[0, 1, 2, 3],
+							'targets':[0, 1, 2, 3, 4, 5],
 							'orderable':false
 						},
 					],
 				});
 
-
-				$(document).on('click', '.update', function(){
+				$(document).on('click', '.retrieve', function(){
 					var placingId = $(this).attr('id');
 
-					$.ajax({
-						url:'<?php echo base_url("index.php/Placing/GetPlacingById"); ?>',
-						method:'POST',
-						data:{placingId:placingId},
-						dataType:'json',
-						success:function(data){
-							$('#placing-modal').modal('show');
-							$('#placing-name').val(data.placingName);
-							$('#placing-description').val(data.placingDescription);
-							$('#placing-id').val(data.placingId);
-						}
-					});
-				});
-
-				$(document).on('submit', '#placing-form', function(event){
-					event.preventDefault();
-
-					var placingName = $('#placing-name').val();
-					var placingDescription = $('#placing-description').val();
-
-					$('#placing-name').css({'border':'1px solid #cccccc'});
-
-					if (placingName == "")
-					{
-						alert("Oops! Placing Name Must Be Filled");
-						$('#placing-name').css({'border':'1px solid red'});
-						return false;
-					}
-					else
+					if (confirm("Wait!, Are Your 100% Sure, You Really Want to Retrieve This?"))
 					{
 						$.ajax({
-							url:'<?php echo base_url("index.php/Placing/updatePlacing"); ?>',
-							method:'POST',
-							data:new FormData(this),
-							contentType:false,
-							processData:false,
-							success:function(data){
-								alert(data);
-								$('#placing-form')[0].reset();
-								$('#placing-modal').modal('hide');
-								dataTable.ajax.reload();
-							}
-						});
-					}
-				});
-
-				$(document).on('click', '.delete', function(){
-					var placingId = $(this).attr('id');
-
-					if (confirm("Wait!, Are Your 100% Sure, You Really Want to Delete This?"))
-					{
-						$.ajax({
-							url:'<?php echo base_url('index.php/Placing/DeletePlacing'); ?>',
+							url:'<?php echo base_url('index.php/Placing/RetrievePlacingData'); ?>',
 							method:'POST',
 							data:{placingId:placingId},
 							success:function(data){

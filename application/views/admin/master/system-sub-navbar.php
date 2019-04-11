@@ -1,10 +1,42 @@
+
+		<?php
+			$link_0 = "";
+			$link_1 = "";
+			$link_2 = "";
+			$link_3 = "";
+			$link_4 = "";
+			if ($active == 0)
+			{
+				$link_0 = "active";
+			}
+
+			if ($active == 1)
+			{
+				$link_1 = "active";
+			}
+
+			if ($active == 2)
+			{
+				$link_2 = "active";
+			}
+
+			if ($active == 3)
+			{
+				$link_3 = "active";
+			}
+
+			if ($active == 4)
+			{
+				$link_4 = "active";
+			}
+		?>
 		<div class="subnavbar">
 			<div class="subnavbar-inner">
 				<div class="container">
 					<ul class="mainnav">
-						<li class="active"><a href="<?= base_url('index.php/Admin/Dashboard'); ?>"><i class="icon-dashboard"></i><span>Dashboard</span> </a> </li>
+						<li class="<?= $link_0; ?>"><a href="<?= base_url('index.php/Admin/Dashboard'); ?>"><i class="icon-dashboard"></i><span>Dashboard</span> </a> </li>
 						
-						<li class="dropdown">
+						<li class="dropdown <?= $link_1; ?>">
 							<a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown">
 								<i class="icon-long-arrow-down"></i>
 								<span>Media Setup</span>
@@ -21,7 +53,7 @@
 							</ul>
 						</li>
 						
-						<li class="dropdown">
+						<li class="dropdown <?= $link_2; ?>">
 							<a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown">
 								<i class="icon-long-arrow-down"></i>
 								<span>Page Setup</span>
@@ -36,7 +68,7 @@
 							</ul>
 						</li>
 						
-						<li class="dropdown">
+						<li class="dropdown <?= $link_3; ?>">
 							<a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown">
 								<i class="icon-long-arrow-down"></i>
 								<span>News Setup</span>
@@ -48,7 +80,7 @@
 							</ul>
 						</li>
 						
-						<li class="dropdown">
+						<li class="dropdown <?= $link_4; ?>">
 							<a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown">
 								<i class="icon-long-arrow-down"></i>
 								<span>Advertise Setup</span>

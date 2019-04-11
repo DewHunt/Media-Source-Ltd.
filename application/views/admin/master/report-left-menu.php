@@ -10,8 +10,8 @@
 											<li class="has-sub">
 												<a href="#">Reports<span class="sub-arrow"></span></a>
 												<ul>
-													<li><a href="<?= base_url('index.php/Report/Index/1/1'); ?>">Advertise Reports</a></li>
-													<li><a href="<?= base_url('index.php/NewsReports/Index/_/2'); ?>">News Reports</a></li>
+													<li><a href="<?= base_url('index.php/Report/Index/1'); ?>">Advertise Reports</a></li>
+													<li><a href="<?= base_url('index.php/NewsReports/Index'); ?>">News Reports</a></li>
 												</ul>
 											</li>
 										</ul>

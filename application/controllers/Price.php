@@ -36,7 +36,8 @@
 				$data = array(
 					'title' => 'Price - Media Source Ltd.',
 					'adminInfo' => $this->GetAdminAllInfo(),
-					'message' => $msg
+					'message' => $msg,
+					'active' => 2
 				);
 
 				$this->load->view('admin/system_setup/page/price',$data);
@@ -54,7 +55,8 @@
 				$data = array(
 					'title' => 'Create Price - Media Source Ltd.',
 					'adminInfo' => $this->GetAdminAllInfo(),
-					'message' => $msg
+					'message' => $msg,
+					'active' => 2
 				);
 
 				$this->load->view('admin/system_setup/page/create-price',$data);				

@@ -100,6 +100,22 @@
 			}
 		}
 
+		public function RetrieveNewsCategoryData($newsCategoryId)
+		{
+			$sql = "UPDATE newscategory SET State = '1' WHERE Id = '".$newsCategoryId."'";
+
+			$query = $this->db->query($sql);
+
+			if ($query)
+			{
+				return true;
+			}
+			else
+			{
+				return false;
+			}
+		}
+
 		public function GetAllNewsCategory()
 		{
 			$sql = "SELECT * FROM newscategory WHERE State = '1' ORDER BY Name ASC";

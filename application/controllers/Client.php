@@ -20,7 +20,7 @@
 			return $this->AdminModel->GetAdminAllInfo($adminUserName,$adminPassword);
 		}
 
-		public function Index($msg = null, $active = null)
+		public function Index($msg = null)
 		{
 			if ($this->session->userdata('adminUserName') == "" || $this->session->userdata('adminPassword') == "")
 			{
@@ -32,7 +32,7 @@
 					'title' => 'All Client - Media Source Ltd.',
 					'adminInfo' => $this->GetAdminAllInfo(),
 					'message' => $msg,
-					'active' => $active
+					'active' => 1
 				);
 				$this->load->view('admin/client',$data);
 			}
@@ -48,7 +48,8 @@
 			{
 				$data = array(
 					'title' => 'Create Client - Media Source Ltd.',
-					'adminInfo' => $this->GetAdminAllInfo()
+					'adminInfo' => $this->GetAdminAllInfo(),
+					'active' => 1
 				);
 				$this->load->view('admin/create-client.php',$data);
 			}

@@ -100,6 +100,22 @@
 			}
 		}
 
+		public function RetrievePlacingData($placingId)
+		{
+			$sql = "UPDATE placing SET State = '1' WHERE Id = '".$placingId."'";
+
+			$query = $this->db->query($sql);
+
+			if ($query)
+			{
+				return true;
+			}
+			else
+			{
+				return false;
+			}
+		}
+
 		public function GetAllPlacing()
 		{
 			$sql = "SELECT * FROM placing WHERE State = '1' ORDER BY Name ASC";

@@ -33,7 +33,8 @@
 					'title' => 'Media Name - Media Source Ltd.',
 					'adminInfo' => $this->GetAdminAllInfo(),
 					// 'mediaInfo' => $this->MediaNameModel->GetMediaNameAllInfo()
-					'mediaInfo' => ''
+					'mediaInfo' => '',
+					'active' => 1
 				);
 
 				$this->load->view('admin/system_setup/media/media-name',$data);
@@ -51,7 +52,8 @@
 				$data = array(
 					'title' => 'Media Name - Media Source Ltd.',
 					'adminInfo' => $this->GetAdminAllInfo(),
-					'message' => $msg
+					'message' => $msg,
+					'active' => 1
 				);
 
 				$this->load->view('admin/system_setup/media/create-media-name',$data);				

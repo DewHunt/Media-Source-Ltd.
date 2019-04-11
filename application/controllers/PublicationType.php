@@ -31,7 +31,8 @@
 			{
 				$data = array(
 					'title' => 'Publication Type - Media Source Ltd.',
-					'adminInfo' => $this->GetAdminAllInfo()
+					'adminInfo' => $this->GetAdminAllInfo(),
+					'active' => 1
 				);
 
 				$this->load->view('admin/system_setup/media/publication-type',$data);
@@ -49,7 +50,8 @@
 				$data = array(
 					'title' => 'Create Publication Type - Media Source Ltd.',
 					'adminInfo' => $this->GetAdminAllInfo(),
-					'message' => $msg
+					'message' => $msg,
+					'active' => 1
 				);
 
 				$this->load->view('admin/system_setup/media/create-publication-type',$data);

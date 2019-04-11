@@ -33,6 +33,27 @@
 				}
 			}
 
+			if ($option == "dt-dr-common")
+			{
+				$this->db->select($selectColumn);
+				$this->db->from($table);
+
+				if (isset($_POST["search"]["value"]))
+				{
+					$this->db->like("Name",$_POST["search"]["value"])->where("State","0");
+					$this->db->or_where("Id",$_POST["search"]["value"])->where("State","0");
+				}
+
+				if (isset($_POST["order"]))
+				{
+					$this->db->order_by($this->orderColumn[$_POST["order"]["0"]["column"]], $_POST["order"]["0"]["dir"]);
+				}
+				else
+				{
+					$this->db->order_by("Id","DESC");
+				}
+			}
+
 			if ($option == "dt-publication")
 			{
 				$this->db->select($selectColumn);

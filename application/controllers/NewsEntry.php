@@ -30,7 +30,7 @@
 			return $this->AdminModel->GetAdminAllInfo($adminUserName,$adminPassword);
 		}
 
-		public function Index($msg = null, $active = null)
+		public function Index($msg = null)
 		{
 			if ($this->session->userdata('adminUserName') == "" || $this->session->userdata('adminPassword') == "")
 			{
@@ -68,7 +68,8 @@
 					'title' => 'Create News - Media Source Ltd.',
 					'adminInfo' => $this->GetAdminAllInfo(),
 					'message' => $msg,
-					'batchId' => $batchId
+					'batchId' => $batchId,
+					'active' => 2
 				);
 
 				$this->load->view('admin/data_entry/news_entry/create-news-entry',$data);				
@@ -302,7 +303,8 @@
 					'adminInfo' => $this->GetAdminAllInfo(),
 					'message' => $msg,
 					'dataEntryInfo' => $this->NewsEntryModel->GetDataEntryById($dataEntryId),
-					'dataEntryDetailsInfo' => $this->NewsEntryModel->GetDataEntryDetailsById($dataEntryId)
+					'dataEntryDetailsInfo' => $this->NewsEntryModel->GetDataEntryDetailsById($dataEntryId),
+					'active' => 2
 				);
 
 				$this->load->view('admin/data_entry/news_entry/update-news-entry',$data);				

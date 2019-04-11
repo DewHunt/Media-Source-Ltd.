@@ -100,6 +100,22 @@
 			}
 		}
 
+		public function RetrievePlacingTypeData($placingTypeId)
+		{
+			$sql = "UPDATE placingtype SET State = '1' WHERE Id = '".$placingTypeId."'";
+
+			$query = $this->db->query($sql);
+
+			if ($query)
+			{
+				return true;
+			}
+			else
+			{
+				return false;
+			}
+		}
+
 		public function GetAllPlacingType()
 		{
 			$sql = "SELECT * FROM placingtype WHERE State = '1' ORDER BY Name ASC";

@@ -33,7 +33,8 @@
 			{
 				$data = array(
 					'title' => 'Sub-Brand - Media Source Ltd.',
-					'adminInfo' => $this->GetAdminAllInfo()
+					'adminInfo' => $this->GetAdminAllInfo(),
+					'active' => 4
 				);
 
 				$this->load->view('admin/system_setup/advertise/sub-brand',$data);
@@ -51,7 +52,8 @@
 				$data = array(
 					'title' => 'Create Sub-Brand - Media Source Ltd.',
 					'adminInfo' => $this->GetAdminAllInfo(),
-					'message' => $msg
+					'message' => $msg,
+					'active' => 4
 				);
 
 				$this->load->view('admin/system_setup/advertise/create-sub-brand',$data);				

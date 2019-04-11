@@ -40,15 +40,31 @@
 			}
 		}
 
-		public function GetAdminId($userName, $password)
+		// public function GetAdminId($userName, $password)
+		// {
+		// 	$sql = "SELECT * FROM admins WHERE UserId = '".$userName."' AND Password = '".$password."'";
+
+		// 	$admin_check = $this->db->query($sql);
+
+		// 	if ($admin_check->num_rows() > 0)
+		// 	{
+		// 		$admin_check->row();
+		// 	}
+		// 	else
+		// 	{
+		// 		return false;
+		// 	}
+		// }
+
+		public function GetAdminById($id)
 		{
-			$sql = "SELECT * FROM admins WHERE UserId = '".$userName."' AND Password = '".$password."'";
+			$sql = "SELECT * FROM users WHERE Id = '".$id."'";
 
-			$admin_check = $this->db->query($sql);
+			$adminInfo = $this->db->query($sql);
 
-			if ($admin_check->num_rows() > 0)
+			if ($adminInfo->num_rows() > 0)
 			{
-				$admin_check->row();
+				return $adminInfo->row();
 			}
 			else
 			{

@@ -33,7 +33,8 @@
 				$data = array(
 					'title' => 'Data Entry - Media Source Ltd.',
 					'adminInfo' => $this->GetAdminAllInfo(),
-					'message' => $msg
+					'message' => $msg,
+					'active' => 1
 				);
 
 				$this->load->view('admin/data_entry/advertise_entry/advertise-entry',$data);

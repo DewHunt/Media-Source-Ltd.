@@ -31,7 +31,8 @@
 			{
 				$data = array(
 					'title' => 'News Category - Media Source Ltd.',
-					'adminInfo' => $this->GetAdminAllInfo()
+					'adminInfo' => $this->GetAdminAllInfo(),
+					'active' => 3
 				);
 
 				$this->load->view('admin/system_setup/news/news-category',$data);
@@ -49,7 +50,8 @@
 				$data = array(
 					'title' => 'Create News Category - Media Source Ltd.',
 					'adminInfo' => $this->GetAdminAllInfo(),
-					'message' => $msg
+					'message' => $msg,
+					'active' => 3
 				);
 
 				$this->load->view('admin/system_setup/news/create-news-category',$data);				
@@ -226,6 +228,121 @@
 				{
 					echo "Oops, Something Wrong With Deleting News Category";
 				}
+			}
+		}
+
+		public function RetrieveNewsCategory()
+		{
+			if ($this->GetAdminAllInfo()->AdminStatus == 101 || $this->GetAdminAllInfo()->Status == 1)
+			{
+				$data = array(
+					'title' => 'Retrieve News Category - Media Source Ltd.',
+					'adminInfo' => $this->GetAdminAllInfo(),
+					'active' => 3
+				);
+
+				$this->load->view('admin/system_setup/news/retrieve-news-category',$data);
+			}
+			else
+			{
+				return redirect('Admin/Index');
+			}
+		}
+
+		public function GetDeletedNewsCategoryAllInfo()
+		{
+			if ($this->GetAdminAllInfo()->AdminStatus == 101 || $this->GetAdminAllInfo()->Status == 1)
+			{
+				$option = "dt-dr-common";			
+				$table = "newscategory";
+				$selectColumn = array("Id","Name","Description","DeleteBy","DeleteDateTime");
+				$orderColumn = array("Id","Name",null,null);
+
+				$newsCategoryInfo = $this->DataTableModel->MakeDataTables($option,$table,$selectColumn,$orderColumn);
+				$sl = 1;
+				$data = array();
+
+				foreach ($newsCategoryInfo as $value)
+				{
+					$newsCategory = array();
+					$newsCategory[] = $sl;
+
+					if ($value->Name == "")
+					{
+						$newsCategory[] = "Data Not Found";
+					}
+					else
+					{
+						$newsCategory[] = $value->Name;
+					}
+
+					if ($value->Description == "")
+					{
+						$newsCategory[] = "Data Not Found";
+					}
+					else
+					{
+						$newsCategory[] = $value->Description;
+					}
+
+					if ($value->DeleteBy == "")
+					{
+						$newsCategory[] = "Data Not Found";
+					}
+					else
+					{
+						$newsCategory[] = $this->AdminModel->GetAdminById($value->DeleteBy)->Name;
+					}
+
+					if ($value->DeleteDateTime == "")
+					{
+						$newsCategory[] = "Data Not Found";
+					}
+					else
+					{
+						$newsCategory[] = $value->DeleteDateTime;
+					}
+					
+					$newsCategory[] = '<button type="button" name="retrieve" id="'.$value->Id.'" class="btn btn-primary retrieve">Retrieve</button>';
+					$sl++;
+					$data[] = $newsCategory;
+				}
+
+				$output = array(
+					'draw' => intval($_POST['draw']),
+					'recordsTotal' => $this->DataTableModel->GetAllData($table),
+					'recordsFiltered' => $this->DataTableModel->GetFilteredData($option,$table,$selectColumn,$orderColumn),
+					'data' => $data
+				);
+
+				echo json_encode($output);
+			}
+			else
+			{
+				return redirect('Admin/Index');
+			}			
+		}
+
+		public function RetrieveNewsCategoryData()
+		{
+			if ($this->GetAdminAllInfo()->AdminStatus == 101 || $this->GetAdminAllInfo()->Status == 1)
+			{
+				$newsCategoryId = $this->input->post('newsCategoryId');
+
+				$result = $this->NewsCategoryModel->RetrieveNewsCategoryData($newsCategoryId);
+
+				if ($result)
+				{
+					echo "News Category Retrieved Successfully!";
+				}
+				else
+				{
+					echo "Oops, Something Wrong With Retrieving News Category";
+				}
+			}
+			else
+			{
+				return redirect('Admin/Index');
 			}
 		}
 	}

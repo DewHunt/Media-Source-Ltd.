@@ -36,7 +36,8 @@
 			{
 				$data = array(
 					'title' => 'Advertise Info - Media Source Ltd.',
-					'adminInfo' => $this->GetAdminAllInfo()
+					'adminInfo' => $this->GetAdminAllInfo(),
+					'active' => 4
 				);
 
 				$this->load->view('admin/system_setup/advertise/advertise-info',$data);
@@ -54,7 +55,8 @@
 				$data = array(
 					'title' => 'Create Advertise Info - Media Source Ltd.',
 					'adminInfo' => $this->GetAdminAllInfo(),
-					'message' => $msg
+					'message' => $msg,
+					'active' => 4
 				);
 
 				$this->load->view('admin/system_setup/advertise/create-advertise-info',$data);				
