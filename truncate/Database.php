@@ -42,17 +42,17 @@
 			}
 		}
 
-		public function search($query)
+		public function delete($query)
 		{
-			$result = $this->link->query($query) or die ($this->link->error.__LINE__);
+			$delete_row = $this->link->query($query) or die ($this->link->error.__LINE__);
 
-			if ($result->num_rows > 0)
+			if ($delete_row)
 			{
-				return $result;
+				return true;
 			}
 			else
 			{
-				return false;
+				die("Error :(".$this->link->errno.")".$this->link->error);
 			}
 		}
 	}

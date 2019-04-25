@@ -4,6 +4,9 @@
 
 	$db = new Database();
 	$read = "";
+	$show_data = 0;
+	$delete_count = 0;
+	$delete_status = 0;
 	$sl = 0;
 	$data_entry_id = array();
 
@@ -11,6 +14,7 @@
 	{
 		$date_from = $_POST['from-date'];
 		$date_to = $_POST['to-date'];
+		$show_data = 1;
 
 		if ($date_from != "" || $date_to != "")
 		{
@@ -25,8 +29,18 @@
 
 		for ($i=1; $i <= $loop; $i++)
 		{ 
-			echo $_POST['data-entry-id-'.$i]."<br>";
+			$id = $_POST['data-entry-id-'.$i];
+
+			$delete_query = "DELETE dataentry, dataentrydetails, dataentryreport FROM dataentry INNER JOIN dataentrydetails, dataentryreport WHERE dataentry.Id = dataentrydetails.DataentryId AND dataentry.Id = dataentryreport.DataEntryId AND dataentry.Id = '$id'";
+			$delete_data = $db->delete($delete_query);
+
+			if ($delete_data)
+			{
+				$delete_count++;
+			}
 		}
+
+		$delete_status = 1;
 	}
 ?>
 
@@ -81,66 +95,80 @@
 							</tbody>
 						</table>
 
-						<table class="table table-bordered table-sm">
-							<thead>
-								<tr>
-									<th>Sl</th>
-									<th>Id</th>
-									<th>Data Entry Id</th>
-									<th>Batch Id</th>
-									<th>Media</th>
-									<th>Publication</th>
-									<th>Date</th>
-									<th>Caption</th>
-								</tr>
-							</thead>
-
-							<tbody>
-								<?php
-									if ($read)
-									{
-										while($row = $read->fetch_assoc())
-										{
-											$sl++;
-								?>
-											<tr>
-												<td><?php echo $sl; ?></td>
-												<td><?php echo $row['Id']; ?></td>
-												<td><?php echo $row['DataEntryId']; ?></td>
-												<td><?php echo $row['BatchId']; ?></td>
-												<td><?php echo $row['MediaId']; ?></td>
-												<td><?php echo $row['PublicationName']; ?></td>
-												<td><?php echo $row['Date']; ?></td>
-												<td><?php echo $row['Caption']; ?></td>
-											</tr>
-											<input type="hidden" name="data-entry-id-<?php echo $sl; ?>" value="<?php echo $row['DataEntryId']; ?>">
-								<?php										
-										}										
-									}
-									else
-									{
-								?>
+						<?php
+							if ($show_data == 1)
+							{
+						?>
+							<table class="table table-bordered table-sm">
+								<thead>
 									<tr>
-										<td colspan="8">Data Not Found</td>
+										<th>Sl</th>
+										<th>Id</th>
+										<th>Data Entry Id</th>
+										<th>Batch Id</th>
+										<th>Media</th>
+										<th>Publication</th>
+										<th>Date</th>
+										<th>Caption</th>
 									</tr>
-								<?php
-									}
-								?>
-							</tbody>
+								</thead>
 
-							<caption>
-								<h3>Searched News Entry Data Showed <?php echo $sl; ?> Data</h3>
-								<input type="hidden" name="loop" value="<?php echo $sl; ?>">
-								<?php
-									if ($read)
-									{
-								?>
-								<input type="submit" name="delete" value="Delete All Searched News Entry Data" class="btn btn-outline-danger btn-sm">
-								<?php
-									}
-								?>
-							</caption>
-						</table>
+								<tbody>
+									<?php
+										if ($read)
+										{
+											while($row = $read->fetch_assoc())
+											{
+												$sl++;
+									?>
+												<tr>
+													<td><?php echo $sl; ?></td>
+													<td><?php echo $row['Id']; ?></td>
+													<td><?php echo $row['DataEntryId']; ?></td>
+													<td><?php echo $row['BatchId']; ?></td>
+													<td><?php echo $row['MediaId']; ?></td>
+													<td><?php echo $row['PublicationName']; ?></td>
+													<td><?php echo $row['Date']; ?></td>
+													<td><?php echo $row['Caption']; ?></td>
+												</tr>
+												<input type="hidden" name="data-entry-id-<?php echo $sl; ?>" value="<?php echo $row['DataEntryId']; ?>">
+									<?php										
+											}										
+										}
+										else
+										{
+									?>
+										<tr>
+											<td colspan="8">Data Not Found</td>
+										</tr>
+									<?php
+										}
+									?>
+								</tbody>
+
+								<caption>
+									<h3>Searched News Entry Data Showed <?php echo $sl; ?> Data</h3>
+									<input type="hidden" name="loop" value="<?php echo $sl; ?>">
+									<?php
+										if ($read)
+										{
+									?>
+										<input type="submit" name="delete" value="Delete All Searched News Entry Data" class="btn btn-outline-danger btn-sm">
+									<?php
+										}
+									?>
+								</caption>
+							</table>
+						<?php
+							}
+
+							if ($delete_status == 1)
+							{
+						?>
+								<h2>You Have Deleted <?php echo $delete_count; ?> News Entry Data</h2>
+						<?php
+							}
+						?>
 					</div>
 
 <!-- 					<div class="card-footer" style="text-align: center;">
