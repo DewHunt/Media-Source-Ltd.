@@ -31,7 +31,11 @@
 		{ 
 			$id = $_POST['data-entry-id-'.$i];
 
-			$delete_query = "DELETE dataentry, dataentrydetails, dataentryreport FROM dataentry INNER JOIN dataentrydetails, dataentryreport WHERE dataentry.Id = dataentrydetails.DataentryId AND dataentry.Id = dataentryreport.DataEntryId AND dataentry.Id = '$id'";
+			$delete_query = "DELETE dataentry, dataentrydetails, dataentryreport
+			FROM dataentry
+			INNER JOIN dataentrydetails, dataentryreport
+			WHERE dataentry.Id = dataentrydetails.DataentryId AND dataentry.Id = dataentryreport.DataEntryId AND dataentry.Id = '$id'";
+			
 			$delete_data = $db->delete($delete_query);
 
 			if ($delete_data)
