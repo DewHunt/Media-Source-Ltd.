@@ -21,6 +21,15 @@
 									<i class="icon-th-list"></i>
 									<h3>Accounts Information</h3>
 									<a href="<?= base_url('index.php/Account/Account'); ?>" type="submit" class="btn btn-primary" target="_blank">Create Account</a> 
+
+									<?php
+										if ($adminInfo->AdminStatus == 101 && $adminInfo->State == 1)
+										{
+									?>
+										<a href="<?= base_url('index.php/Account/RetrieveAccount'); ?>" type="submit" class="btn btn-danger">Retrieve Account</a>
+									<?php
+										}
+									?>
 								</div>	<!-- /widget-header -->
 
 								<div class="widget-content">
@@ -202,14 +211,14 @@
 				});
 
 				$(document).on('click', '.delete', function(){
-					var companyId = $(this).attr('id');
+					var accountId = $(this).attr('id');
 
 					if (confirm("Wait!, Are Your 100% Sure, You Really Want to Delete This?"))
 					{
 						$.ajax({
-							url:'<?php echo base_url('index.php/Company/DeleteCompany'); ?>',
+							url:'<?php echo base_url('index.php/Account/DeleteAccount'); ?>',
 							method:'POST',
-							data:{companyId:companyId},
+							data:{accountId:accountId},
 							success:function(data){
 								alert(data);
 								dataTable.ajax.reload();

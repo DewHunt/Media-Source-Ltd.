@@ -21,11 +21,12 @@
 							</li>
 							<li class="dropdown">
 								<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-									<i class="icon-user"></i>&nbsp;<b>Admin - <?= $adminInfo->Name; ?></b>
+									<i class="icon-user"></i>&nbsp;<b><?= $adminInfo->DesignationId;?> - <?= $adminInfo->Name; ?></b>
 									<b class="caret"></b>
 								</a>
 								<ul class="dropdown-menu">
-									<li><a href="javascript:;">Profile</a></li>
+									<li><a href="<?= base_url('index.php/Admin/EditProfile/'.$adminInfo->Id);?>">Edit Profile</a></li>
+									<li><a href="<?= base_url('index.php/Admin/ChangePassword/');?>">Change Password</a></li>
 									<li><a href="<?= base_url('index.php/Admin/Logout'); ?>">Logout</a></li>
 								</ul>
 							</li>

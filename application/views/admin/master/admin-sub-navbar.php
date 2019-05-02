@@ -37,19 +37,47 @@
 					<ul class="mainnav">
 						<li class="<?= $link_0; ?>"><a href="<?= base_url('index.php/Admin/Dashboard'); ?>"><i class="icon-dashboard"></i><span>Dashboard</span> </a> </li>
 
-						<li class="<?= $link_1; ?>"><a href="<?= base_url('index.php/Client/Index'); ?>"><i class="icon-user"></i><span>All Clients</span> </a> </li>
+						<?php
+							if ($adminInfo->DesignationId == "Admin")
+							{
+						?>
+							<li class="<?= $link_1; ?>"><a href="<?= base_url('index.php/Client/Index'); ?>"><i class="icon-user"></i><span>All Clients</span> </a> </li>
 
-						<li class="<?= $link_2; ?>"><a href="<?= base_url('index.php/Account/Index'); ?>"><i class="icon-user"></i><span>All Accounts</span> </a> </li>
+							<li class="<?= $link_2; ?>"><a href="<?= base_url('index.php/Account/Index'); ?>"><i class="icon-user"></i><span>All Accounts</span> </a> </li>
 
-						<li><a href="<?= base_url('index.php/SystemSetup/Index'); ?>"><i class="icon-gear"></i><span>System Setup</span> </a> </li>
+							<li><a href="<?= base_url('index.php/SystemSetup/Index'); ?>"><i class="icon-gear"></i><span>System Setup</span> </a> </li>
 
-						<li><a href="<?= base_url('index.php/DataEntry/Index'); ?>"><i class="icon-tag"></i><span>Data Entry</span> </a> </li>
+							<li><a href="<?= base_url('index.php/DataEntry/Index'); ?>"><i class="icon-tag"></i><span>Data Entry</span> </a> </li>
 
-						<li><a href="<?= base_url('index.php/Report/Index'); ?>"><i class="icon-tag"></i><span>Reports</span> </a> </li>
+							<li><a href="<?= base_url('index.php/Report/Index'); ?>"><i class="icon-tag"></i><span>Reports</span> </a> </li>
 
-						<li class="<?= $link_6; ?>"><a href="<?= base_url('index.php/Synopsis/Index'); ?>"><i class="icon-tag"></i><span>Synopsis</span> </a> </li>
+							<li class="<?= $link_6; ?>"><a href="<?= base_url('index.php/Synopsis/Index'); ?>"><i class="icon-tag"></i><span>Synopsis</span> </a> </li>
 
-						<li class="<?= $link_7; ?>"><a href="<?= base_url('index.php/PreviousSynopsis/Index'); ?>"><i class="icon-tag"></i><span>Previous Synopsis</span> </a> </li>
+							<li class="<?= $link_7; ?>"><a href="<?= base_url('index.php/PreviousSynopsis/Index'); ?>"><i class="icon-tag"></i><span>Previous Synopsis</span> </a> </li>
+						<?php
+							}
+							else
+							{
+								if ($adminInfo->DesignationId == "Operator")
+								{
+						?>
+								<li><a href="<?= base_url('index.php/SystemSetup/Index'); ?>"><i class="icon-gear"></i><span>System Setup</span> </a> </li>
+
+								<li><a href="<?= base_url('index.php/DataEntry/Index'); ?>"><i class="icon-tag"></i><span>Data Entry</span> </a> </li>
+
+								<li><a href="<?= base_url('index.php/Report/Index'); ?>"><i class="icon-tag"></i><span>Reports</span> </a> </li>
+						<?php
+								}
+								else
+								{
+						?>
+								<li class="<?= $link_6; ?>"><a href="<?= base_url('index.php/Synopsis/Index'); ?>"><i class="icon-tag"></i><span>Synopsis</span> </a> </li>
+
+								<li class="<?= $link_7; ?>"><a href="<?= base_url('index.php/PreviousSynopsis/Index'); ?>"><i class="icon-tag"></i><span>Previous Synopsis</span> </a> </li>
+						<?php
+								}
+							}
+						?>
 					</ul>
 				</div>  <!-- /container --> 
 			</div> <!-- /subnavbar-inner --> 

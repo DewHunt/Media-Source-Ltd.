@@ -7,7 +7,16 @@
 		public function __construct()
 		{
 			parent::__construct();
-			$this->load->model('AdminModel','am');
+			$this->load->model('AdminModel');
+			$this->load->model('AccountModel');
+		}
+
+		public function GetAdminAllInfo()
+		{
+			$adminUserName = $this->session->userdata('adminUserName');
+			$adminPassword = $this->session->userdata('adminPassword');
+
+			return $this->AdminModel->GetAdminAllInfo($adminUserName,$adminPassword);
 		}
 
 		public function Index($msg = NULL)
@@ -32,7 +41,7 @@
 			$userName = $this->input->post('user-name');
 			$password = $this->input->post('password');
 
-			$result = $this->am->Login($userName,$password);
+			$result = $this->AdminModel->Login($userName,$password);
 
 			if ($result)
 			{
@@ -59,7 +68,7 @@
 			return redirect('Admin/Index');
 		}
 
-		public function Dashboard($msg = null, $active = null)
+		public function Dashboard($msg = null)
 		{
 			$adminUserName = $this->session->userdata('adminUserName');
 			$adminPassword = $this->session->userdata('adminPassword');
@@ -72,10 +81,88 @@
 			{
 				$data = array(
 					'title' => 'Admin Dashboard - Media Source Ltd.',
-					'adminInfo' => $this->am->GetAdminAllInfo($adminUserName,$adminPassword),
-					'active' => $active
+					'adminInfo' => $this->AdminModel->GetAdminAllInfo($adminUserName,$adminPassword),
+					'active' => 0
 				);
 				$this->load->view('admin/dashboard',$data);
+			}
+		}
+
+		public function EditProfile($id, $msg = NULL)
+		{
+			if ($this->session->userdata('adminUserName') == "" || $this->session->userdata('adminPassword') == "")
+			{
+				return redirect('Admin/Index');
+			}
+			else
+			{
+				$accountId = $id;
+
+				$data = array(
+					'title' => 'Update Price - Media Source Ltd.',
+					'adminInfo' => $this->GetAdminAllInfo(),
+					'message' => $msg,
+					'active' => 0,
+					'accountInfo' => $this->AccountModel->GetAccountById($id)
+				);
+
+				$this->load->view('admin/edit-profile',$data);
+			}
+		}
+
+		public function EditProfileAction()
+		{
+			if ($this->session->userdata('adminUserName') == "" || $this->session->userdata('adminPassword') == "")
+			{
+				return redirect('Admin/Index');
+			}
+			else
+			{
+				$accountUserId = $this->input->post('account-user-id');
+				$accountId = $this->input->post('account-id');
+
+				$checkAccount = $this->AccountModel->CheckAccountExists($accountUserId,$accountId);
+
+				if ($checkAccount)
+				{
+					return redirect('Admin/EditProfile/'.$accountId.'/1');
+				}
+				else
+				{
+					$accountName = $this->input->post('account-name');
+					$accountPhone = $this->input->post('account-mobile');
+					$accountEmail = $this->input->post('account-email');
+
+					$result = $this->AccountModel->UpdateProfile($accountName,$accountPhone,$accountEmail,$accountUserId,$accountId);
+
+					if ($result)
+					{
+						return redirect('Admin/Dashboard');
+					}
+					else
+					{
+						return redirect('Admin/EditProfile/'.$accountId.'/2');
+					}
+				}
+			}
+		}
+
+		public function ChangePassword($msg = NULL)
+		{
+			if ($this->session->userdata('adminUserName') == "" || $this->session->userdata('adminPassword') == "")
+			{
+				return redirect('Admin/Index');
+			}
+			else
+			{
+				$data = array(
+					'title' => 'Update Price - Media Source Ltd.',
+					'adminInfo' => $this->GetAdminAllInfo(),
+					'message' => $msg,
+					'active' => 0,
+				);
+
+				$this->load->view('admin/change-password',$data);
 			}
 		}
 	}
