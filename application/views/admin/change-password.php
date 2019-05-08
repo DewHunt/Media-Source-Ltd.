@@ -21,8 +21,8 @@
 									{
 								?>
 										<div class="alert alert-info error-message">
-											<a type="button" class="btn btn-danger close" data-dismiss="alert" href="<?= base_url('index.php/Admin/EditProfile/'.$accountInfo->Id); ?>">&times;</a>
-											<strong>Oops! Sorry,</strong> Your Account Password Changed Successfully...
+											<a type="button" class="btn btn-danger close" data-dismiss="alert" href="<?= base_url('index.php/Admin/ChangePassword'); ?>">&times;</a>
+											<strong>Great!</strong> Your Account Password Changed Successfully...
 										</div>
 								<?php
 									}
@@ -31,7 +31,7 @@
 									{
 								?>
 										<div class="alert alert-info error-message">
-											<a type="button" class="btn btn-danger close" data-dismiss="alert" href="<?= base_url('index.php/Admin/EditProfile/'.$accountInfo->Id); ?>">&times;</a>
+											<a type="button" class="btn btn-danger close" data-dismiss="alert" href="<?= base_url('index.php/Admin/ChangePassword'); ?>">&times;</a>
 											<strong>Oops! Sorry,</strong> Your Account Password Can't Be Changed...
 										</div>
 								<?php
@@ -40,7 +40,7 @@
 								<div class="widget ">
 									<div class="widget-header">
 										<i class="icon-user"></i>
-										<h3>Account<i class="icon-long-arrow-right"></i>&nbsp;&nbsp;Edit Profile</h3>
+										<h3>Account<i class="icon-long-arrow-right"></i>&nbsp;&nbsp;Change Password</h3>
 									</div>
 									<!-- /widget-header -->
 									

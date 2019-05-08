@@ -21,7 +21,18 @@
 			</div> <!-- /navbar-inner -->			
 		</div> <!-- /navbar -->		
 		
-		<div class="account-container">			
+		<div class="account-container">
+			<?php
+				if ($message == 2)
+				{
+			?>
+					<div class="alert alert-info error-message">
+						<a type="button" class="btn btn-danger close" data-dismiss="alert" href="<?= base_url('index.php/Admin/Index'); ?>">&times;</a>
+						<strong>Greate!</strong><br>Your Password Changed Successfully.<br>Please Login Again
+					</div>							
+			<?php
+				}
+			?>			
 			<div class="content clearfix">
 				<form method="POST" action="<?= base_url('index.php/Admin/Login'); ?>" accept_charset="utf-8">
 

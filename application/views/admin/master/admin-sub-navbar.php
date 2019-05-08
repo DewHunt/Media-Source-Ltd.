@@ -66,6 +66,8 @@
 								<li><a href="<?= base_url('index.php/DataEntry/Index'); ?>"><i class="icon-tag"></i><span>Data Entry</span> </a> </li>
 
 								<li><a href="<?= base_url('index.php/Report/Index'); ?>"><i class="icon-tag"></i><span>Reports</span> </a> </li>
+
+								<li class="<?= $link_6; ?>"><a href="<?= base_url('index.php/Synopsis/OperatorSynopsis'); ?>"><i class="icon-tag"></i><span>Synopsis</span> </a> </li>
 						<?php
 								}
 								else

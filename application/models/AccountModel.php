@@ -128,5 +128,21 @@
 				return false;
 			}
 		}
+
+		public function ChangePasswordAction($newPassword,$accountId)
+		{
+			$sql = "UPDATE users SET Password = '".$newPassword."' WHERE Id = '".$accountId."' AND State = '1'";
+
+			$updateQuery = $this->db->query($sql);
+
+			if ($updateQuery)
+			{
+				return true;
+			}
+			else
+			{
+				return false;
+			}			
+		}
 	}
 ?>

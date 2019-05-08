@@ -38,7 +38,7 @@
 					'adminInfo' => $this->GetAdminAllInfo(),
 					'message' => $msg,
 					'active' => 2,
-					'show' => '0'
+					'show' => '0',
 				);
 
 				$this->load->view('admin/reports/news_reports/news-reports',$data);

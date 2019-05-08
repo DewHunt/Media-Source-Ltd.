@@ -99,7 +99,7 @@
 				$accountId = $id;
 
 				$data = array(
-					'title' => 'Update Price - Media Source Ltd.',
+					'title' => 'Edit Profile - Media Source Ltd.',
 					'adminInfo' => $this->GetAdminAllInfo(),
 					'message' => $msg,
 					'active' => 0,
@@ -156,7 +156,7 @@
 			else
 			{
 				$data = array(
-					'title' => 'Update Price - Media Source Ltd.',
+					'title' => 'Change Password - Media Source Ltd.',
 					'adminInfo' => $this->GetAdminAllInfo(),
 					'message' => $msg,
 					'active' => 0,
@@ -164,6 +164,33 @@
 
 				$this->load->view('admin/change-password',$data);
 			}
+		}
+
+		public function ChangePasswordAction()
+		{
+			if ($this->session->userdata('adminUserName') == "" || $this->session->userdata('adminPassword') == "")
+			{
+				return redirect('Admin/Index');
+			}
+			else
+			{
+				$newPassword = $this->input->post('new-password');
+				$accountId = $this->input->post('account-id');
+
+				$result = $this->AccountModel->ChangePasswordAction($newPassword,$accountId);
+
+				if ($result)
+				{
+					$this->session->unset_userdata('adminUserName');
+					$this->session->unset_userdata('adminPassword');
+
+					return redirect('Admin/Index/2');
+				}
+				else
+				{
+					return redirect('Admin/ChangePassword/2');
+				}
+			}			
 		}
 	}
 ?>

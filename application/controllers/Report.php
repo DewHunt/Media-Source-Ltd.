@@ -28,7 +28,7 @@
 			else
 			{
 				$data = array(
-					'title' => 'Report - Media Source',
+					'title' => 'Report - Media Source Ltd',
 					'adminInfo' => $this->GetAdminAllInfo(),
 					'message' => $msg,
 					'active' => $active
