@@ -65,6 +65,28 @@
 
 								<div class="widget-content">
 									<form id="news-reports-form" method="POST" action="<?= base_url('index.php/Synopsis/SearchNews'); ?>">
+
+										<?php
+											if ($message == 1)
+											{
+										?>
+												<div class="alert alert-success success-message">
+													<a type="button" class="btn btn-danger close" data-dismiss="alert" href="<?=  base_url('index.php/Synopsis/OperatorSynopsis');?>">&times;</a>
+													<strong>Great!</strong> All Selected News Send To Editor Successfully...
+												</div>
+										<?php
+											}
+
+											if ($message == 2)
+											{
+										?>
+												<div class="alert alert-info error-message">
+													<a type="button" class="btn btn-danger close" data-dismiss="alert" href="<?= base_url('index.php/Synopsis/OperatorSynopsis'); ?>">&times;</a>
+													<strong>Oops! Sorry,</strong> Your Selected News Can't Be Send To Editor...
+												</div>
+										<?php
+											}
+										?>
 										<table class="table table-striped table-bordered">
 											<thead>
 												<tr>
@@ -113,76 +135,82 @@
 										</table>
 									</form>
 
-									<table>
-										<thead>
-											<tr>
-												<th>From Date</th>
-												<th>To Date</th>
-												<th>Media Name</th>
-												<th>Publication Name</th>
-												<th>Brand Name</th>
-												<th>Product Name</th>
-												<th>Keyword name</th>
-											</tr>
-										</thead>
-
-										<tbody>
-											<tr>
-												<td>
-													<input type="test" readonly="readonly" name="from-date" value="<?= $fromDate; ?>" style="width: 90%;">
-												</td>
-												<td>
-													<input type="test" readonly="readonly" name="to-date" value="<?= $toDate; ?>" style="width: 90%;">
-												</td>
-												<td>
-													<input type="test" readonly="readonly" name="media-name" value="<?= $mediaName; ?>" style="width: 90%;">
-												</td>
-												<td>
-													<input type="test" readonly="readonly" name="publication-name" value="<?= $publicationName; ?>" style="width: 90%;">
-												</td>
-												<td>
-													<input type="test" readonly="readonly" name="brand-name" value="<?= $brandName; ?>" style="width: 90%;">
-												</td>
-												<td>
-													<input type="test" readonly="readonly" name="product-name" value="<?= $productName; ?>" style="width: 90%;">
-												</td>
-												<td>
-													<input type="test" readonly="readonly" name="keyword-name" value="<?= $keywordName; ?>" style="width: 90%;">
-												</td>
-											</tr>
-										</tbody>
-									</table>
-
-									<hr>
-
 									<?php
 										if ($show == 1)
 										{
 									?>
 										<form id="create-xls-form" method="POST" action="<?= base_url('index.php/Synopsis/SendSynopsis'); ?>">
 
+											<table>
+												<thead>
+													<tr>
+														<th>From Date</th>
+														<th>To Date</th>
+														<th>Media Name</th>
+														<th>Publication Name</th>
+														<th>Brand Name</th>
+														<th>Product Name</th>
+														<th>Keyword name</th>
+													</tr>
+												</thead>
+
+												<tbody>
+													<tr>
+														<td>
+															<input type="test" readonly="readonly" name="from-date" value="<?= $fromDate; ?>" style="width: 90%;">
+														</td>
+														<td>
+															<input type="test" readonly="readonly" name="to-date" value="<?= $toDate; ?>" style="width: 90%;">
+														</td>
+														<td>
+															<input type="test" readonly="readonly" name="media-name" value="<?= $mediaName; ?>" style="width: 90%;">
+														</td>
+														<td>
+															<input type="test" readonly="readonly" name="publication-name" value="<?= $publicationName; ?>" style="width: 90%;">
+														</td>
+														<td>
+															<input type="test" readonly="readonly" name="brand-name" value="<?= $brandName; ?>" style="width: 90%;">
+														</td>
+														<td>
+															<input type="test" readonly="readonly" name="product-name" value="<?= $productName; ?>" style="width: 90%;">
+														</td>
+														<td>
+															<input type="test" readonly="readonly" name="keyword-name" value="<?= $keywordName; ?>" style="width: 90%;">
+														</td>
+													</tr>
+												</tbody>
+											</table>
+
+											<hr>
+
 											<table class="table table-bordered table-striped">
 												<tbody>
 													<tr>
 														<th>Title</th>
-														<td><input type="text" class="span10" name="" placeholder="Enter Synposis Title"></td>
+														<td>
+															<input type="text" class="span10" name="synopsis-title" id="synopsis-title" placeholder="Enter Synposis Title">
+														</td>
 													</tr>
 
 													<tr>
 														<th>Content</th>
-														<td><input type="text" class="span10" name="" placeholder="Enter Synposis Content"></td>
+														<td>
+															<input type="text" class="span10" name="synopsis-content" id="synopsis-content" placeholder="Enter Synposis Content">
+														</td>
 													</tr>
 
 													<tr>
 														<th>Reference</th>
-														<td><input type="text" class="span10" name="" placeholder="Enter Synposis Reference"></td>
+														<td>
+															<input type="text" class="span10" name="synopsis-reference-id" id="synopsis-reference-id" value="<?= $referenceId; ?>" readonly="">
+														</td>
 													</tr>
 												</tbody>
 
 												<tfoot>
 													<tr>
 														<td colspan="2">
-															<button type="submit" id="button-create-xls" name="button-create-xls" class="btn btn-primary btn-lg xls-btn" onclick="return deletecheck('Please select at least one checkbox')">Send Synopsis To Editor</button>
+															<button type="submit" id="button-create-xls" name="button-create-xls" class="btn btn-primary btn-lg xls-btn" onclick="return synopsisCheck('Please select at least one checkbox')">Send Synopsis To Editor</button>
 														</td>
 													</tr>
 												</tfoot>
@@ -402,6 +430,36 @@
 							return false;
 						}
 					}
+				}
+			}
+
+			function checkall()
+			{
+				if($('#chk_all').is(':checked'))
+				{
+					$('#tab :checkbox').attr('checked',true);
+				}
+				else
+				{
+					$('#tab :checkbox').attr('checked',false);
+				}
+			}
+
+			function synopsisCheck(mss)
+			{
+				var k=0;
+				for(i=0;i<$('#allvalue').val();i++)
+				{
+					if($('#chk_'+i).is(':checked'))
+					{
+						k++;
+					}
+				}
+
+				if(k==0)
+				{
+					alert(mss);
+					return false;
 				}
 			}
 		</script>

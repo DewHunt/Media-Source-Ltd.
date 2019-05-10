@@ -9,6 +9,7 @@
 		{
 			parent::__construct();
 			$this->load->model('AdminModel');
+			$this->load->model('SynopsisModel');
 			$this->load->model('MediaNameModel');
 			$this->load->model('PublicationModel');
 			$this->load->model('BrandModel');
@@ -40,7 +41,17 @@
 					'active' => 6
 				);
 
-				$this->load->view('admin/synopsis/synopsis',$data);
+				$designation = $this->GetAdminAllInfo()->DesignationId;
+
+				if ($designation == "Operator") 
+				{
+					return redirect('Synopsis/OperatorSynopsis');
+				}
+
+				if ($designation == "Editor")
+				{
+					$this->load->view('admin/synopsis/synopsis',$data);
+				}
 			}
 		}
 
@@ -65,7 +76,7 @@
 
 		}
 
-		public function SearchNews()
+		public function SearchNews($msg = NULL)
 		{
 			if ($this->session->userdata('adminUserName') == "" || $this->session->userdata('adminPassword') == "")
 			{
@@ -143,10 +154,17 @@
 
 				$result = $this->NewsReportsModel->SearchNewsReports($fromDate, $toDate, $mediaName, $publicationName, $brandName, $productName, $keywordName);
 
+				$referenceId = $this->SynopsisModel->GetReferenceId()->maxReferenceId;
+
+				if ($referenceId == "")
+				{
+					$referenceId = 1;
+				}
+
 				if ($result)
 				{
 					$data = array(
-						'title' => 'News Reports - Media Source Ltd.',
+						'title' => 'Synopsis - Media Source Ltd.',
 						'adminInfo' => $this->GetAdminAllInfo(),
 						'show' => '1',
 						'fromDate' => $fromDate,
@@ -156,7 +174,9 @@
 						'brandName' => $brandName,
 						'productName' => $productName,
 						'keywordName' => $keywordName,
+						'referenceId' => $referenceId,
 						'result' => $result,
+						'message' => $msg,
 						'active' => 2
 					);
 
@@ -165,13 +185,14 @@
 				else
 				{
 					$data = array(
-						'title' => 'News Reports - Media Source Ltd.',
+						'title' => 'Synopsis - Media Source Ltd.',
 						'adminInfo' => $this->GetAdminAllInfo(),
 						'show' => '2',
+						'message' => $msg,
 						'active' => 2
 					);
 
-					$this->load->view('admin/reports/news_reports/news-reports',$data);					
+					$this->load->view('admin/synopsis/operator-synopsis',$data);					
 				}
 			}			
 		}
@@ -190,21 +211,28 @@
 		 			{
 		 				if(isset($_POST['chk_'.$i]))
 		 				{
-		 					echo "Loop No = ".$i.";".$_POST['chk_'.$i]."<br>";
-		 					// $this->company_model->deleteInfo($_POST['chk_'.$i]);
+		 					$dataEntryReportId = $_POST['chk_'.$i];
+		 					$synopsisTitle = $this->input->Post('synopsis-title');
+		 					$synopsisContent = $this->input->post('synopsis-content');
+		 					$synopsisReferenceId = $this->input->post('synopsis-reference-id');
+
+		 					$entryId = $this->GetAdminAllInfo()->Id;
+
+		 					// echo "Data Entry Id = ".$dataEntryReportId."<br>Title = ".$synopsisTitle."<br>Content = ".$synopsisContent."<br>Reference Id = ".$synopsisReferenceId."<br>------------------------------------------------------<br>";
+
+		 					$result = $this->SynopsisModel->SendSynopsis($dataEntryReportId,$synopsisTitle,$synopsisContent,$synopsisReferenceId,$entryId);
 		 				}
 		 			}
-		 		} 
-				// $allValue = $this->input->post('allvalue'); 
-				// for($i=0;$i<$allValue;$i++)
-				// {
-	 		// 			// echo $_POST['chk_'.$i];
-	 		// 		if(isset($_POST['chk_'.$i]))
-	 		// 		{
-	 		// 			echo $_POST['chk_'.$i]."<br>";
-	 		// 			// $this->company_model->deleteInfo($_POST['chk_'.$i]);
-	 		// 		}
-				// }
+
+		 			if ($result)
+		 			{
+		 				return redirect('Synopsis/OperatorSynopsis/1');
+		 			}
+		 			else
+		 			{
+		 				return redirect('Synopsi/OperatorSynopsis/2');
+		 			}
+		 		}
 			}			
 		}
 
