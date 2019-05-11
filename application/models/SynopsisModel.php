@@ -10,15 +10,18 @@
 			parent::__construct();
 		}
 
-		public function GetReferenceId()
+		public function SendSynopsisByOperator($synopsisTitle,$synopsisContent,$synopsisReference,$entryId)
 		{
-			$str = "SELECT max(ReferenceId)+1 AS maxReferenceId FROM synopsis";
+			$entryDateTime = date('Y-m-d H:i:s');
 
-			$query = $this->db->query($str);
+			$sql = "INSERT INTO synopsisbyoperator (Title, Content, Reference, EntryBy, EntryDateTime) VALUES ('$synopsisTitle','$synopsisContent','$synopsisReference','$entryId','$entryDateTime')";
 
-			if ($query)
+			$insertQuery = $this->db->query($sql);
+
+			if ($insertQuery)
 			{
-				return $query->row();
+				$insertId = $this->db->insert_id();
+				return $insertId;
 			}
 			else
 			{
@@ -26,17 +29,33 @@
 			}
 		}
 
-		public function SendSynopsis($dataEntryReportId,$synopsisTitle,$synopsisContent,$synopsisReferenceId,$entryId)
+		public function SendSynopsis($synopsisByOperatorId,$dataEntryReportId,$entryId)
 		{
 			$entryDateTime = date('Y-m-d H:i:s');
 
-			$sql = "INSERT INTO synopsis (DataEntryReportId, Title, Content, ReferenceId, EntryBy, EntryDateTime) VALUES ('$dataEntryReportId','$synopsisTitle','$synopsisContent','$synopsisReferenceId','$entryId','$entryDateTime') ";
+			$sql = "INSERT INTO synopsis (SynopsisByOperatorId, DataEntryReportId, EntryBy, EntryDateTime) VALUES ('$synopsisByOperatorId','$dataEntryReportId','$entryId','$entryDateTime') ";
 
 			$insertQuery = $this->db->query($sql);
 
 			if ($insertQuery)
 			{
 				return true;
+			}
+			else
+			{
+				return false;
+			}
+		}
+
+		public function ShowSynopsis()
+		{
+			$sql = "SELECT * FROM synopsisbyoperator WHERE State = '1' ORDER BY Id ASC";
+
+			$query = $this->db->query($sql);
+
+			if ($query->num_rows() > 0)
+			{
+				return $query->result();
 			}
 			else
 			{

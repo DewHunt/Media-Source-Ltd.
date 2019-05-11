@@ -202,7 +202,9 @@
 													<tr>
 														<th>Reference</th>
 														<td>
-															<input type="text" class="span10" name="synopsis-reference-id" id="synopsis-reference-id" value="<?= $referenceId; ?>" readonly="">
+															<!-- <input type="text" class="span10" name="synopsis-reference-id" id="synopsis-reference-id" value="<?= $referenceId; ?>" readonly="readonly"> -->
+
+															<input type="text" class="span10" name="synopsis-reference" id="synopsis-reference" value="" placeholder="Enter Synopsis Reference">
 														</td>
 													</tr>
 												</tbody>

@@ -50,7 +50,7 @@
 
 				if ($designation == "Editor")
 				{
-					$this->load->view('admin/synopsis/synopsis',$data);
+					return redirect('Synopsis/ShowSynopsis');
 				}
 			}
 		}
@@ -154,13 +154,6 @@
 
 				$result = $this->NewsReportsModel->SearchNewsReports($fromDate, $toDate, $mediaName, $publicationName, $brandName, $productName, $keywordName);
 
-				$referenceId = $this->SynopsisModel->GetReferenceId()->maxReferenceId;
-
-				if ($referenceId == "")
-				{
-					$referenceId = 1;
-				}
-
 				if ($result)
 				{
 					$data = array(
@@ -174,7 +167,6 @@
 						'brandName' => $brandName,
 						'productName' => $productName,
 						'keywordName' => $keywordName,
-						'referenceId' => $referenceId,
 						'result' => $result,
 						'message' => $msg,
 						'active' => 2
@@ -206,21 +198,22 @@
 			else
 			{ 
 		 		if(isset($_POST['allvalue']) )
-		 		{ 
+		 		{
+		 			$synopsisTitle = $this->input->Post('synopsis-title');
+		 			$synopsisContent = $this->input->post('synopsis-content');
+		 			$synopsisReference = $this->input->post('synopsis-reference');
+
+		 			$entryId = $this->GetAdminAllInfo()->Id;
+
+		 			$synopsisByOperatorId = $this->SynopsisModel->SendSynopsisByOperator($synopsisTitle,$synopsisContent,$synopsisReference,$entryId);
+
 		 			for($i=0;$i<$_POST['allvalue'];$i++)
 		 			{
 		 				if(isset($_POST['chk_'.$i]))
 		 				{
 		 					$dataEntryReportId = $_POST['chk_'.$i];
-		 					$synopsisTitle = $this->input->Post('synopsis-title');
-		 					$synopsisContent = $this->input->post('synopsis-content');
-		 					$synopsisReferenceId = $this->input->post('synopsis-reference-id');
 
-		 					$entryId = $this->GetAdminAllInfo()->Id;
-
-		 					// echo "Data Entry Id = ".$dataEntryReportId."<br>Title = ".$synopsisTitle."<br>Content = ".$synopsisContent."<br>Reference Id = ".$synopsisReferenceId."<br>------------------------------------------------------<br>";
-
-		 					$result = $this->SynopsisModel->SendSynopsis($dataEntryReportId,$synopsisTitle,$synopsisContent,$synopsisReferenceId,$entryId);
+		 					$result = $this->SynopsisModel->SendSynopsis($synopsisByOperatorId,$dataEntryReportId,$entryId);
 		 				}
 		 			}
 
@@ -234,6 +227,44 @@
 		 			}
 		 		}
 			}			
+		}
+
+		public function ShowSynopsis($msg = NULL)
+		{
+			if ($this->session->userdata('adminUserName') == "" || $this->session->userdata('adminPassword') == "")
+			{
+				return redirect('Admin/Index');
+			}
+			else
+			{
+				$result = $this->SynopsisModel->ShowSynopsis();
+
+				if ($result)
+				{
+					$data = array(
+						'title' => 'Synopsis - Media Source Ltd.',
+						'adminInfo' => $this->GetAdminAllInfo(),
+						'show' => '1',
+						'result' = $result,
+						'message' => $msg,
+						'active' => 6
+					);
+
+					$this->load->view('admin/synopsis/synopsis',$data);
+				}
+				else
+				{
+					$data = array(
+						'title' => 'Synopsis - Media Source Ltd.',
+						'adminInfo' => $this->GetAdminAllInfo(),
+						'show' => '2',
+						'message' => $msg,
+						'active' => 6
+					);
+
+					$this->load->view('admin/synopsis/synopsis',$data);					
+				}
+			}
 		}
 
 		public function CreateSynopsis()
