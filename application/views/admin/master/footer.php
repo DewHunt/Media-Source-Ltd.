@@ -43,8 +43,14 @@
 		<script src="<?= base_url('assets/multiple-select.js'); ?>"></script>
 
 		<!-- Toast Message JS File Include -->
-		<script type="text/javascript" src="<?= base_url('assets/js/toast-message.js'); ?>"></script>
+		<script src="<?= base_url('assets/js/toast-message.js'); ?>"></script>
 
 		<!-- Data Tables JS File Include -->
-		<script type="text/javascript" src="<?= base_url('assets/js/data_tables/jquery.dataTables.min.js'); ?>"></script>
+		<script src="<?= base_url('assets/js/data_tables/jquery.dataTables.min.js'); ?>"></script>
 		<!-- <script type="text/javascript" src="//cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script> -->
+		
+		<script src="js/base.js"></script>
+
+		<!-- Image Viewer JS File Include -->
+		<script src="<?= base_url('assets/image-viewer/js/photoviewer.js'); ?>"></script>
+		<!-- <script src="image-viewer/js/photoviewer.js"></script> -->

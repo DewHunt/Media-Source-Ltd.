@@ -50,6 +50,12 @@
 		<!-- Toast Multiple Select CSS File Include -->
 		<?= link_tag('assets/multiple-select.css'); ?>
 
+		<!-- Image Viewer CSS File Include -->
+		<?= link_tag('assets/image-viewer/css/photoviewer.css'); ?>
+		<?= link_tag('assets/image-viewer/font-awesome/font-awesome.min.css'); ?>
+		<!-- <link href="image-viewer/css/photoviewer.css" rel="stylesheet"> -->		
+		<!-- <link rel="stylesheet" href="image-viewer/font-awesome/font-awesome.min.css"> -->
+
 		<!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
 		<!--[if lt IE 9]>
 			<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>

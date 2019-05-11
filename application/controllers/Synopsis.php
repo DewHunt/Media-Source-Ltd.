@@ -245,7 +245,7 @@
 						'title' => 'Synopsis - Media Source Ltd.',
 						'adminInfo' => $this->GetAdminAllInfo(),
 						'show' => '1',
-						'result' = $result,
+						'result' => $result,
 						'message' => $msg,
 						'active' => 6
 					);
@@ -267,7 +267,7 @@
 			}
 		}
 
-		public function CreateSynopsis()
+		public function CreateSynopsis($msg = NULL, $id = NULL)
 		{
 			if ($this->session->userdata('adminUserName') == "" || $this->session->userdata('adminPassword') == "")
 			{
@@ -275,7 +275,24 @@
 			}
 			else
 			{
-				echo "This is Create Synopsis Function";
+				$synopsisByOperatorInfo = $this->SynopsisModel->SynopsisByOperatorInfoById($id);
+				$synopsisInfo = $this->SynopsisModel->SynopsisInfoByForeignId($id);
+
+				foreach ($synopsisInfo as $value)
+				{
+					$dataEntryReportInfo = $this->SynopsisModel->DataEntryReportInfoById($value->DataEntryReportId);
+				}
+
+				$data = array(
+					'title' => 'Create Synopsis - Media Source Ltd.',
+					'adminInfo' => $this->GetAdminAllInfo(),
+					'show' => '1',
+					'synopsisByOperatorInfo' => $synopsisByOperatorInfo,
+					'dataEntryReportInfo' => $dataEntryReportInfo,
+					'message' => $msg,
+					'active' => 6
+				);
+				$this->load->view('admin/synopsis/create-synopsis',$data);
 			}
 		}
 	}

@@ -62,5 +62,53 @@
 				return false;
 			}
 		}
+
+		public function SynopsisByOperatorInfoById($id)
+		{
+			$sql = "SELECT * FROM synopsisbyoperator WHERE Id = '$id' AND State = '1'";
+
+			$query = $this->db->query($sql);
+
+			if ($query->num_rows() > 0)
+			{
+				return $query->row();
+			}
+			else
+			{
+				return false;
+			}
+		}
+
+		public function SynopsisInfoByForeignId($id)
+		{
+			$sql = "SELECT * FROM synopsis WHERE SynopsisByOperatorId = '$id' AND State = '1'";
+
+			$query = $this->db->query($sql);
+
+			if ($query->num_rows() > 0)
+			{
+				return $query->result();
+			}
+			else
+			{
+				return false;
+			}
+		}
+
+		public function DataEntryReportInfoById($id)
+		{
+			$sql = "SELECT * FROM dataentryreport WHERE Id = '$id'";
+
+			$query = $this->db->query($sql);
+
+			if ($query->num_rows() > 0)
+			{
+				return $query->row();
+			}
+			else
+			{
+				return false;
+			}
+		}
 	}
 ?>
