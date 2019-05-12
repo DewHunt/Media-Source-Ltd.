@@ -13,9 +13,30 @@
 			<div class="main-inner">
 				<div class="container">
 					<div class="row">
-						<?php include APPPATH.'views/admin/master/admin-left-menu.php'; ?>
+						<?php //include APPPATH.'views/admin/master/admin-left-menu.php'; ?>
 						
-						<div class="span9">
+						<div class="span12">
+							<?php
+								if ($message == 1)
+								{
+							?>
+									<div class="alert alert-success success-message">
+										<a type="button" class="btn btn-danger close" data-dismiss="alert" href="<?=  base_url('index.php/Synopsis/ShowSynopsis');?>">&times;</a>
+										<strong>Great!</strong> Your Synopsis Saved Successfully...
+									</div>
+							<?php
+								}
+
+								if ($message == 2)
+								{
+							?>
+									<div class="alert alert-info error-message">
+										<a type="button" class="btn btn-danger close" data-dismiss="alert" href="<?= base_url('index.php/Synopsis/ShowSynopsis'); ?>">&times;</a>
+										<strong>Oops! Sorry,</strong> Your Synopsis Can't Be Saved...
+									</div>
+							<?php
+								}
+							?>
 							<div class="widget widget-table action-table">
 								<div class="widget-header">
 									<i class="icon-th-list"></i>
@@ -33,7 +54,7 @@
 														<th>SL</th>
 														<th>Date</th>
 														<th>News</th>
-														<th>Status</th>
+														<!-- <th>Status</th> -->
 													</tr>
 												</thead>
 												
@@ -54,11 +75,11 @@
 														</td>
 														<td>
 															<div class="news-item-detail">
-																<a href="<?= base_url('index.php/Synopsis/CreateSynopsis/_/'.$value->Id); ?>" class="news-item-title" target="_blank"><?= $value->Title; ?></a>
+																<a href="<?= base_url('index.php/Synopsis/CreateSynopsis/_/'.$value->Id); ?>" class="news-item-title"><?= $value->Title; ?></a>
 																<p class="news-item-preview"><?= $value->Content?></p>
 															</div>
 														</td>
-														<td>Published</td>
+														<!-- <td>Published</td> -->
 													</tr>
 									<?php
 												$sl++;
@@ -71,7 +92,19 @@
 										elseif ($show == 2)
 										{
 									?>
-											# code...
+											<table class="table table-striped table-bordered">
+												<thead>
+													<tr>
+														<th>SL</th>
+														<th>Date</th>
+														<th>News</th>
+														<!-- <th>Status</th> -->
+													</tr>
+												</thead>
+												
+												<tbody>
+													<tr><td colspan="3">Data Not Found</td></tr>
+												</tbody>
 									<?php
 										}
 									?>

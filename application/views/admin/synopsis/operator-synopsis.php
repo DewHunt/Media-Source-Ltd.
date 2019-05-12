@@ -136,7 +136,33 @@
 									</form>
 
 									<?php
-										if ($show == 1)
+										if ($show == 0)
+										{
+									?>
+										<table id="synopsis-data" class="table table-striped table-bordered">
+											<thead>
+												<tr>
+													<th>Sl</th>
+													<th>Title</th>
+													<th>Content</th>
+													<th>Reference</th>
+													<th>Action</th>
+												</tr>
+											</thead>
+
+											<tfoot>
+												<tr>
+													<th>Sl</th>
+													<th>Title</th>
+													<th>Content</th>
+													<th>Reference</th>
+													<th>Action</th>
+												</tr>
+											</tfoot>
+										</table>
+									<?php
+										}
+										elseif ($show == 1)
 										{
 									?>
 										<form id="create-xls-form" method="POST" action="<?= base_url('index.php/Synopsis/SendSynopsis'); ?>">
@@ -464,6 +490,23 @@
 					return false;
 				}
 			}
+
+			var dataTable = $('#synopsis-data').DataTable({
+				'processing':true,
+				'serverSide':true,
+				'order':[],
+				'ajax':{
+					url:'<?php echo base_url('index.php/Synopsis/GetSynopsisByOperatorAllInfo'); ?>',
+					type:'POST'
+				},
+				'dataType':'json',
+				'columnDefs':[
+					{
+						'targets':[0, 1, 2, 3, 4],
+						'orderable':false
+					},
+				],
+			});
 		</script>
 	</body>
 </html>

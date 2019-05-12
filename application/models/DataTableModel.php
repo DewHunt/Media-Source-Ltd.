@@ -225,6 +225,48 @@
 					$this->db->order_by("Id","DESC");
 				}
 			}
+
+			if ($option == "dt-synopsis-by-operator")
+			{
+				$this->db->select($selectColumn);
+				$this->db->from($table);
+
+				if (isset($_POST["search"]["value"]))
+				{
+					$this->db->like("Title",$_POST["search"]["value"])->where("State","1");
+					$this->db->or_where("Id",$_POST["search"]["value"])->where("State","1");
+				}
+
+				if (isset($_POST["order"]))
+				{
+					$this->db->order_by($this->orderColumn[$_POST["order"]["0"]["column"]], $_POST["order"]["0"]["dir"]);
+				}
+				else
+				{
+					$this->db->order_by("Id","DESC");
+				}
+			}
+
+			if ($option == "dt-synopsis-details")
+			{
+				$this->db->select($selectColumn);
+				$this->db->from($table);
+
+				if (isset($_POST["search"]["value"]))
+				{
+					$this->db->like("NewsTitle",$_POST["search"]["value"])->where("State","1");
+					$this->db->or_where("Id",$_POST["search"]["value"])->where("State","1");
+				}
+
+				if (isset($_POST["order"]))
+				{
+					$this->db->order_by($this->orderColumn[$_POST["order"]["0"]["column"]], $_POST["order"]["0"]["dir"]);
+				}
+				else
+				{
+					$this->db->order_by("Id","DESC");
+				}
+			}
 		}
 
 		public function MakeDataTables($option,$table,$selectColumn,$orderColumn)

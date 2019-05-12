@@ -16,6 +16,7 @@
 			$this->load->model('ProductModel');
 			$this->load->model('KeywordModel');
 			$this->load->model('NewsReportsModel');
+			$this->load->model('DataTableModel');
 		}
 
 		public function GetAdminAllInfo()
@@ -74,6 +75,71 @@
 				$this->load->view('admin/synopsis/operator-synopsis',$data);
 			}
 
+		}
+
+		public function GetSynopsisByOperatorAllInfo()
+		{
+			if ($this->session->userdata('adminUserName') == "" || $this->session->userdata('adminPassword') == "")
+			{
+				return redirect('Admin/Index');
+			}
+			else
+			{
+				$option = "dt-synopsis-by-operator";
+				$table = "synopsisbyoperator";
+				$selectColumn = array("Id","Title","Content","Reference");
+				$orderColumn = array("Id","Title",null,null);
+
+				$synopsisInfo = $this->DataTableModel->MakeDataTables($option,$table,$selectColumn,$orderColumn);
+				$sl = 1;
+				$data = array();
+
+				foreach ($synopsisInfo as $value)
+				{
+					$synopsisByOperator = array();
+					$synopsisByOperator[] = $sl;
+
+					if ($value->Title == "")
+					{
+						$synopsisByOperator[] = "Data Not Found";
+					}
+					else
+					{
+						$synopsisByOperator[] = $value->Title;
+					}
+
+					if ($value->Content == "")
+					{
+						$synopsisByOperator[] = "Data Not Found";
+					}
+					else
+					{
+						$synopsisByOperator[] = $value->Content;
+					}
+
+					if ($value->Reference == "")
+					{
+						$synopsisByOperator[] = "Data Not Found";
+					}
+					else
+					{
+						$synopsisByOperator[] = $value->Reference;
+					}
+					
+					$synopsisByOperator[] = '<button type="button" name="update" id="'.$value->Id.'" class="btn btn-warning btn-xs update">Update</button> <button type="button" name="delete" id="'.$value->Id.'" class="btn btn-danger delete">Delete</button>';
+					$sl++;
+					$data[] = $synopsisByOperator;
+				}
+
+				$output = array(
+					'draw' => intval($_POST['draw']),
+					'recordsTotal' => $this->DataTableModel->GetAllData($table),
+					'recordsFiltered' => $this->DataTableModel->GetFilteredData($option,$table,$selectColumn,$orderColumn),
+					'data' => $data
+				);
+
+				echo json_encode($output);
+			}			
 		}
 
 		public function SearchNews($msg = NULL)
@@ -278,22 +344,119 @@
 				$synopsisByOperatorInfo = $this->SynopsisModel->SynopsisByOperatorInfoById($id);
 				$synopsisInfo = $this->SynopsisModel->SynopsisInfoByForeignId($id);
 
-				foreach ($synopsisInfo as $value)
-				{
-					$dataEntryReportInfo = $this->SynopsisModel->DataEntryReportInfoById($value->DataEntryReportId);
-				}
-
 				$data = array(
 					'title' => 'Create Synopsis - Media Source Ltd.',
 					'adminInfo' => $this->GetAdminAllInfo(),
 					'show' => '1',
 					'synopsisByOperatorInfo' => $synopsisByOperatorInfo,
-					'dataEntryReportInfo' => $dataEntryReportInfo,
+					'synopsisInfo' => $synopsisInfo,
 					'message' => $msg,
 					'active' => 6
 				);
 				$this->load->view('admin/synopsis/create-synopsis',$data);
 			}
+		}
+
+		public function CreateSynopsisAction()
+		{
+			if ($this->session->userdata('adminUserName') == "" || $this->session->userdata('adminPassword') == "")
+			{
+				return redirect('Admin/Index');
+			}
+			else
+			{
+				$synopsisTitle = $this->input->post('editor-synopsis-title');
+				$synopsis = $this->input->post('editor-synopsis');
+				$synopsisByOperatorId = $this->input->post('synopsis-by-operator-id');
+
+				$entryId = $this->GetAdminAllInfo()->Id;
+
+				$result = $this->SynopsisModel->CreateSynopsis($synopsisTitle,$synopsis,$synopsisByOperatorId,$entryId);
+
+				if ($result)
+				{
+					return redirect('Synopsis/ShowSynopsis/1');
+				}
+				else
+				{
+					return redirect('Synopsis/ShowSynopsis/2');
+				}
+			}			
+		}
+
+		public function AllCompletedSynopsis($msg = NULL)
+		{
+			if ($this->session->userdata('adminUserName') == "" || $this->session->userdata('adminPassword') == "")
+			{
+				return redirect('Admin/Index');
+			}
+			else
+			{
+				$data = array(
+					'title' => 'Synopsis - Media Source Ltd.',
+					'adminInfo' => $this->GetAdminAllInfo(),
+					'message' => $msg,
+					'active' => 8
+				);
+
+				$this->load->view('admin/synopsis/all-completed-synopsis',$data);
+			}			
+		}
+
+		public function GetSynopsisDetailsAllInfo()
+		{
+			if ($this->session->userdata('adminUserName') == "" || $this->session->userdata('adminPassword') == "")
+			{
+				return redirect('Admin/Index');
+			}
+			else
+			{
+				$option = "dt-synopsis-details";
+				$table = "synopsisdetails";
+				$selectColumn = array("Id","NewsTitle","ContentDetails");
+				$orderColumn = array("Id","NewsTitle",null,null);
+
+				$synopsisDetailsInfo = $this->DataTableModel->MakeDataTables($option,$table,$selectColumn,$orderColumn);
+				$sl = 1;
+				$data = array();
+
+				foreach ($synopsisDetailsInfo as $value)
+				{
+					$synopsisDetails = array();
+					$synopsisDetails[] = $sl;
+
+					if ($value->NewsTitle == "")
+					{
+						$synopsisDetails[] = "Data Not Found";
+					}
+					else
+					{
+						$synopsisDetails[] = $value->NewsTitle;
+					}
+
+					if ($value->ContentDetails == "")
+					{
+						$synopsisDetails[] = "Data Not Found";
+					}
+					else
+					{
+						$synopsisDetails[] = $value->ContentDetails;
+					}
+					
+					$synopsisDetails[] = '<button type="button" name="update" id="'.$value->Id.'" class="btn btn-warning btn-xs update">Update</button> <button type="button" name="delete" id="'.$value->Id.'" class="btn btn-danger delete">Delete</button>';
+					$sl++;
+					$data[] = $synopsisDetails;
+				}
+
+				$output = array(
+					'draw' => intval($_POST['draw']),
+					'recordsTotal' => $this->DataTableModel->GetAllData($table),
+					'recordsFiltered' => $this->DataTableModel->GetFilteredData($option,$table,$selectColumn,$orderColumn),
+					'data' => $data
+				);
+
+				echo json_encode($output);
+			}			
 		}
 	}
 ?>

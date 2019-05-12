@@ -5,6 +5,7 @@
 			$link_2 = "";
 			$link_6 = "";
 			$link_7 = "";
+			$link_8 = "";
 
 			if ($active == 0)
 			{
@@ -29,6 +30,11 @@
 			if ($active == 7)
 			{
 				$link_7 = "active";
+			}
+
+			if ($active == 8)
+			{
+				$link_8 = "active";
 			}
 		?>
 		<div class="subnavbar">
@@ -76,6 +82,8 @@
 								<li class="<?= $link_6; ?>"><a href="<?= base_url('index.php/Synopsis/Index'); ?>"><i class="icon-tag"></i><span>Synopsis</span> </a> </li>
 
 								<li class="<?= $link_7; ?>"><a href="<?= base_url('index.php/PreviousSynopsis/Index'); ?>"><i class="icon-tag"></i><span>Previous Synopsis</span> </a> </li>
+
+								<li class="<?= $link_8; ?>"><a href="<?= base_url('index.php/Synopsis/AllCompletedSynopsis'); ?>"><i class="icon-tag"></i><span>All Completed Synopsis</span> </a> </li>
 						<?php
 								}
 							}

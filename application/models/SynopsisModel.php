@@ -110,5 +110,24 @@
 				return false;
 			}
 		}
+
+		public function CreateSynopsis($synopsisTitle,$synopsis,$synopsisByOperatorId,$entryId)
+		{
+			$entryDateTime = date('Y-m-d H:i:s');
+
+			$sql = "INSERT INTO synopsisdetails (SynopsisByOperatorId, NewsTitle, ContentDetails, EntryBy, EntryDateTime) VALUES ('$synopsisByOperatorId','$synopsisTitle','synopsis','$entryId','$entryDateTime') ";
+
+			$insertQuery = $this->db->query($sql);
+
+			if ($insertQuery)
+			{
+				return true;
+			}
+			else
+			{
+				return false;
+			}
+		}
+
 	}
 ?>
