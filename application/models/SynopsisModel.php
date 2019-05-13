@@ -49,7 +49,7 @@
 
 		public function ShowSynopsis()
 		{
-			$sql = "SELECT * FROM synopsisbyoperator WHERE State = '1' ORDER BY Id ASC";
+			$sql = "SELECT * FROM synopsisbyoperator WHERE State = '1' ORDER BY Id DESC";
 
 			$query = $this->db->query($sql);
 
@@ -115,7 +115,7 @@
 		{
 			$entryDateTime = date('Y-m-d H:i:s');
 
-			$sql = "INSERT INTO synopsisdetails (SynopsisByOperatorId, NewsTitle, ContentDetails, EntryBy, EntryDateTime) VALUES ('$synopsisByOperatorId','$synopsisTitle','synopsis','$entryId','$entryDateTime') ";
+			$sql = "INSERT INTO synopsisdetails (SynopsisByOperatorId, NewsTitle, ContentDetails, EntryBy, EntryDateTime) VALUES ('$synopsisByOperatorId','$synopsisTitle','$synopsis','$entryId','$entryDateTime') ";
 
 			$insertQuery = $this->db->query($sql);
 

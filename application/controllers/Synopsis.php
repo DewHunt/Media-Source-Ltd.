@@ -125,8 +125,10 @@
 					{
 						$synopsisByOperator[] = $value->Reference;
 					}
+
+					$link = base_url('index.php/Synopsis/ViewSynopsisByOperator/_/'.$value->Id);
 					
-					$synopsisByOperator[] = '<button type="button" name="update" id="'.$value->Id.'" class="btn btn-warning btn-xs update">Update</button> <button type="button" name="delete" id="'.$value->Id.'" class="btn btn-danger delete">Delete</button>';
+					$synopsisByOperator[] = '<a type="button" name="view" id="view" class="btn btn-warning btn-xs" href="'.$link.'">View</a> <button type="button" name="delete" id="'.$value->Id.'" class="btn btn-danger delete">Delete</button>';
 					$sl++;
 					$data[] = $synopsisByOperator;
 				}
@@ -140,6 +142,30 @@
 
 				echo json_encode($output);
 			}			
+		}
+
+		public function ViewSynopsisByOperator($msg = NULL, $id = NULL)
+		{
+			if ($this->session->userdata('adminUserName') == "" || $this->session->userdata('adminPassword') == "")
+			{
+				return redirect('Admin/Index');
+			}
+			else
+			{
+				$synopsisByOperatorInfo = $this->SynopsisModel->SynopsisByOperatorInfoById($id);
+				$synopsisInfo = $this->SynopsisModel->SynopsisInfoByForeignId($synopsisByOperatorInfo->Id);
+				$data = array(
+					'title' => 'Synopsis - Media Source Ltd.',
+					'adminInfo' => $this->GetAdminAllInfo(),
+					'show' => '1',
+					'synopsisByOperatorInfo' => $synopsisByOperatorInfo,
+					'synopsisInfo' => $synopsisInfo,
+					'message' => $msg,
+					'active' => 2
+				);
+
+				$this->load->view('admin/synopsis/view-synopsis-by-operator',$data);
+			}		
 		}
 
 		public function SearchNews($msg = NULL)
@@ -351,6 +377,7 @@
 					'synopsisByOperatorInfo' => $synopsisByOperatorInfo,
 					'synopsisInfo' => $synopsisInfo,
 					'message' => $msg,
+					'synopsisByOperatorId' => $id,
 					'active' => 6
 				);
 				$this->load->view('admin/synopsis/create-synopsis',$data);
@@ -375,11 +402,11 @@
 
 				if ($result)
 				{
-					return redirect('Synopsis/ShowSynopsis/1');
+					return redirect('Synopsis/AllCompletedSynopsis/1');
 				}
 				else
 				{
-					return redirect('Synopsis/ShowSynopsis/2');
+					return redirect('Synopsis/CreateSynopsis/2/',$synopsisByOperatorId);
 				}
 			}			
 		}

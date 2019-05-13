@@ -21,18 +21,8 @@
 								{
 							?>
 									<div class="alert alert-success success-message">
-										<a type="button" class="btn btn-danger close" data-dismiss="alert" href="<?=  base_url('index.php/Synopsis/ShowSynopsis');?>">&times;</a>
+										<a type="button" class="btn btn-danger close" data-dismiss="alert" href="<?=  base_url('index.php/Synopsis/AllCompletedSynopsis');?>">&times;</a>
 										<strong>Great!</strong> Your Synopsis Saved Successfully...
-									</div>
-							<?php
-								}
-
-								if ($message == 2)
-								{
-							?>
-									<div class="alert alert-info error-message">
-										<a type="button" class="btn btn-danger close" data-dismiss="alert" href="<?= base_url('index.php/Synopsis/ShowSynopsis'); ?>">&times;</a>
-										<strong>Oops! Sorry,</strong> Your Synopsis Can't Be Saved...
 									</div>
 							<?php
 								}

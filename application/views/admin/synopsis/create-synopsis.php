@@ -41,6 +41,17 @@
 
 						<form id="synopsis-details-form" class="form-horizontal" method="POST" action="<?= base_url('index.php/Synopsis/CreateSynopsisAction'); ?>">
 							<div class="span9">
+								<?php
+									if ($message == 2)
+									{
+								?>
+										<div class="alert alert-info error-message">
+											<a type="button" class="btn btn-danger close" data-dismiss="alert" href="<?= base_url('index.php/Synopsis/CreateSynopsis/_/'.$synopsisByOperatorId); ?>">&times;</a>
+											<strong>Oops! Sorry,</strong> Your Synopsis Can't Be Saved...
+										</div>
+								<?php
+									}
+								?>
 								<div class="widget">
 									<div class="widget-header">
 										<i class="icon-list"></i>

@@ -60,7 +60,7 @@
 							<div class="widget">
 								<div class="widget-header">
 									<i class="icon-tag"></i>
-									<h3>News Reports</h3>
+									<h3>News Synopsis</h3>
 								</div>	<!-- /widget-header -->
 
 								<div class="widget-content">
@@ -238,7 +238,7 @@
 												<tfoot>
 													<tr>
 														<td colspan="2">
-															<button type="submit" id="button-create-xls" name="button-create-xls" class="btn btn-primary btn-lg xls-btn" onclick="return synopsisCheck('Please select at least one checkbox')">Send Synopsis To Editor</button>
+															<button type="submit" id="button-create-xls" name="button-create-xls" class="btn btn-primary btn-lg xls-btn" onclick="return synopsisCheck()">Send Synopsis To Editor</button>
 														</td>
 													</tr>
 												</tfoot>
@@ -473,8 +473,28 @@
 				}
 			}
 
-			function synopsisCheck(mss)
+			function synopsisCheck()
 			{
+				var title = $('#synopsis-title').val();
+				var content = $('#synopsis-content').val();
+
+				$('#synopsis-title').css({'border':'1ps solid #cccccc'});
+				$('#synopsis-content').css({'border':'1ps solid #cccccc'});
+
+				if (title == "")
+				{
+					alert("Oops! Synopsis Title Can't Be Empty. Please Enter Synopsis Title.");
+					$('#synopsis-title').css({'border':'1px solid red'});
+					return false;					
+				}
+
+				if (content == "")
+				{
+					alert("Oops! Synopsis Content Can't Be Empty. Please Enter Synopsis Content.");
+					$('#synopsis-content').css({'border':'1px solid red'});
+					return false;					
+				}
+
 				var k=0;
 				for(i=0;i<$('#allvalue').val();i++)
 				{
@@ -486,7 +506,7 @@
 
 				if(k==0)
 				{
-					alert(mss);
+					alert('Please select at least one checkbox');
 					return false;
 				}
 			}
@@ -507,6 +527,27 @@
 					},
 				],
 			});
+
+			// $(document).on('click', '.delete', function(){
+			// 	var companyId = $(this).attr('id');
+
+			// 	if (confirm("Wait!, Are Your 100% Sure, You Really Want to Delete This?"))
+			// 	{
+			// 		$.ajax({
+			// 			url:'<?php echo base_url('index.php/Company/DeleteCompany'); ?>',
+			// 			method:'POST',
+			// 			data:{companyId:companyId},
+			// 			success:function(data){
+			// 				alert(data);
+			// 				dataTable.ajax.reload();
+			// 			}
+			// 		});
+			// 	}
+			// 	else
+			// 	{
+			// 		return false;
+			// 	}
+			// });
 		</script>
 	</body>
 </html>
