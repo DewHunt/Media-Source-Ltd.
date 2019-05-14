@@ -157,7 +157,6 @@
 				$data = array(
 					'title' => 'Synopsis - Media Source Ltd.',
 					'adminInfo' => $this->GetAdminAllInfo(),
-					'show' => '1',
 					'synopsisByOperatorInfo' => $synopsisByOperatorInfo,
 					'synopsisInfo' => $synopsisInfo,
 					'message' => $msg,

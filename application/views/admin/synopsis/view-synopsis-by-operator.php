@@ -64,6 +64,76 @@
 								</div>	<!-- /widget-header -->
 
 								<div class="widget-content">
+									<div id="show-synopsis">
+										<table class="table table-bordered table-striped">
+											<tbody>
+												<tr>
+													<th>Title</th>
+													<td><?= $synopsisByOperatorInfo->Title; ?></td>
+												</tr>
+
+												<tr>
+													<th>Content</th>
+													<td><?= $synopsisByOperatorInfo->Content; ?></td>
+												</tr>
+
+												<tr>
+													<th>Reference</th>
+													<td><?= $synopsisByOperatorInfo->Reference; ?></td>
+												</tr>
+											</tbody>
+
+											<tfoot>
+												<tr>
+													<td colspan="2">
+														<button class="btn btn-primary" name="edit-synopsis" id="edit-synopsis" value="Edit Synopsis">Edit Synopsis</button>
+													</td>
+												</tr>
+											</tfoot>					
+										</table>
+
+										<table class="table table-bordered table-striped">
+											<caption><h1>All Selected News</h1></caption>
+											<thead>
+												<tr>
+													<th>Date</th>
+													<th>Caption</th>
+													<th>Media Name</th>
+													<th>Publiaction Name</th>
+													<th>Company</th>
+													<th>Brand</th>
+													<th>Sub Brand</th>
+													<th>Product Name</th>
+													<th>Keyword</th>
+												</tr>
+											</thead>
+
+											<tbody>
+									<?php
+										foreach ($synopsisInfo as $value)
+										{
+											$dataEntryReportInfo = $this->SynopsisModel->DataEntryReportInfoById($value->DataEntryReportId);
+									?>
+												<tr>
+													<td><?= $dataEntryReportInfo->Date; ?></td>
+													<td><?= $dataEntryReportInfo->Caption; ?></td>
+													<td><?= $dataEntryReportInfo->MediaId; ?></td>
+													<td><?= $dataEntryReportInfo->PublicationName; ?></td>
+													<td><?= $dataEntryReportInfo->Company; ?></td>
+													<td><?= $dataEntryReportInfo->BrandName; ?></td>
+													<td><?= $dataEntryReportInfo->subBrand; ?></td>
+													<td><?= $dataEntryReportInfo->ProductName; ?></td>
+													<td><?= $dataEntryReportInfo->Keyword; ?></td>
+												</tr>
+									<?php
+										}
+									?>
+											</tbody>
+										</table>										
+									</div>
+
+									<div id="edit-synopsis">
+									</div>
 								</div>	<!-- /widget-content -->
 							</div> <!-- /widget -->
 						</div>	<!-- /span12 -->
