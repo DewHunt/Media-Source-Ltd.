@@ -264,12 +264,160 @@
 				
 				if ($result)
 				{
-					echo "Publication Dleted From Database!";
+					echo "Publication Deleted From Database!";
 				}
 				else
 				{
 					echo "Oops! Something Wrong With Deleting Publication";
 				}
+			}
+		}
+
+		public function RetrieveSubBrand()
+		{
+			if ($this->GetAdminAllInfo()->AdminStatus == 101 || $this->GetAdminAllInfo()->Status == 1)
+			{
+				$data = array(
+					'title' => 'Retrieve Sub Brand - Media Source Ltd.',
+					'adminInfo' => $this->GetAdminAllInfo(),
+					'active' => 4
+				);
+
+				$this->load->view('admin/system_setup/advertise/retrieve-sub-brand',$data);
+			}
+			else
+			{
+				return redirect('Admin/Index');
+			}
+		}
+
+		public function GetDeletedSubBrandAllInfo()
+		{
+			if ($this->GetAdminAllInfo()->AdminStatus == 101 || $this->GetAdminAllInfo()->Status == 1)
+			{
+				$option = "dt-dr-sub-brand";
+				$table = "subbrand";
+				$selectColumn = array("Id","Name","CompanyId","Description","BrandId","DeleteBy","DeleteDateTime");
+				$orderColumn = array("Id","Name",null,null,null);
+
+				$subBrandInfo = $this->DataTableModel->MakeDataTables($option,$table,$selectColumn,$orderColumn);
+				$sl = 1;
+				$data = array();
+
+				foreach ($subBrandInfo as $value)
+				{
+					$subBrand = array();
+					$subBrand[] = $sl;
+
+					if ($value->Name == "")
+					{
+						$subBrand[] = "Data Not Found";
+					}
+					else
+					{
+						$subBrand[] = $value->Name;
+					}
+
+					if ($value->CompanyId == "" || $value->CompanyId == 0)
+					{
+						$subBrand[] = "Data Not Found";
+					}
+					else
+					{
+						$companyName = $this->CompanyModel->GetCompanyById($value->CompanyId);
+						if ($companyName)
+						{
+							$subBrand[] = $companyName->Name;
+						}
+						else
+						{
+							$subBrand[] = "Data Not Found";
+						}
+					}
+
+					if ($value->BrandId == "" || $value->BrandId == 0)
+					{
+						$subBrand[] = "Data Not Found";
+					}
+					else
+					{
+						$brandName = $this->BrandModel->GetBrandById($value->BrandId);
+						if ($brandName)
+						{
+							$subBrand[] = $brandName->Name;
+						}
+						else
+						{
+							$subBrand[] = "Data Not Found";
+						}
+					}
+
+					if ($value->Description == "")
+					{
+						$subBrand[] = "Data Not Found";
+					}
+					else
+					{
+						$subBrand[] = $value->Description;
+					}
+
+					if ($value->DeleteBy == "")
+					{
+						$subBrand[] = "Data Not Found";
+					}
+					else
+					{
+						$subBrand[] = $this->AdminModel->GetAdminById($value->DeleteBy)->Name;
+					}
+
+					if ($value->DeleteDateTime == "")
+					{
+						$subBrand[] = "Data Not Found";
+					}
+					else
+					{
+						$subBrand[] = $value->DeleteDateTime;
+					}
+					$subBrand[] = '<button type="button" name="retrieve" id="'.$value->Id.'" class="btn btn-primary btn-xs retrieve">Retrieve</button>';
+					$sl++;
+					$data[] = $subBrand;
+				}
+
+				$output = array(
+					'draw' => intval($_POST['draw']),
+					'recordsTotal' => $this->DataTableModel->GetAllDeleteData($table),
+					'recordsFiltered' => $this->DataTableModel->GetFilteredData($option,$table,$selectColumn,$orderColumn),
+					'data' => $data
+				);
+
+				echo json_encode($output);
+			}
+			else
+			{
+				return redirect('Admin/Index');
+			}
+		}
+
+		public function RetrieveSubBrandData()
+		{
+			if ($this->GetAdminAllInfo()->AdminStatus == 101 || $this->GetAdminAllInfo()->Status == 1)
+			{
+				$subBrandId = $this->input->post('subBrandId');
+
+				$result = $this->SubBrandModel->RetrieveSubBrandData($subBrandId);
+				
+				if ($result)
+				{
+					echo "Publication Retrieve From Database!";
+				}
+				else
+				{
+					echo "Oops! Something Wrong With Retrieving Publication";
+				}
+			}
+			else
+			{
+				return redirect('Admin/Index');
 			}
 		}
 	}

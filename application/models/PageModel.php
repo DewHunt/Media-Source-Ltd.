@@ -101,6 +101,22 @@
 			}
 		}
 
+		public function RetrievePageData($pageId)
+		{
+			$sql = "UPDATE page SET State = '1' WHERE Id = '".$pageId."'";
+
+			$query = $this->db->query($sql);
+
+			if ($query)
+			{
+				return true;
+			}
+			else
+			{
+				return false;
+			}
+		}
+
 		public function GetAllPage()
 		{
 			$sql = "SELECT * FROM page WHERE State = '1' ORDER BY Name ASC";

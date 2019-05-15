@@ -13,9 +13,9 @@
 			<div class="main-inner">
 				<div class="container">
 					<div class="row">
-						<?php include APPPATH.'views/admin/master/admin-left-menu.php'; ?>
+						<?php //include APPPATH.'views/admin/master/admin-left-menu.php'; ?>
 
-						<div class="span9">
+						<div class="span12">
 							<form id="search-synopsis" class="form-horizontal">
 								<div class="widget">
 									<div class="widget-header">

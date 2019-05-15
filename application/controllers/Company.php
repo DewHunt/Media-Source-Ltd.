@@ -230,5 +230,120 @@
 				}
 			}
 		}
+
+		public function RetrieveCompany()
+		{
+			if ($this->GetAdminAllInfo()->AdminStatus == 101 || $this->GetAdminAllInfo()->Status == 1)
+			{
+				$data = array(
+					'title' => 'Retrieve Company - Media Source Ltd.',
+					'adminInfo' => $this->GetAdminAllInfo(),
+					'active' => 4
+				);
+
+				$this->load->view('admin/system_setup/advertise/retrieve-company',$data);
+			}
+			else
+			{
+				return redirect('Admin/Index');
+			}
+		}
+
+		public function GetDeletedCompanyAllInfo()
+		{
+			if ($this->GetAdminAllInfo()->AdminStatus == 101 || $this->GetAdminAllInfo()->Status == 1)
+			{
+				$option = "dt-dr-common";
+				$table = "company";
+				$selectColumn = array("Id","Name","Description","DeleteBy","DeleteDateTime");
+				$orderColumn = array("Id","Name",null,null);
+
+				$companyInfo = $this->DataTableModel->MakeDataTables($option,$table,$selectColumn,$orderColumn);
+				$sl = 1;
+				$data = array();
+
+				foreach ($companyInfo as $value)
+				{
+					$company = array();
+					$company[] = $sl;
+
+					if ($value->Name == "")
+					{
+						$company[] = "Data Not Found";
+					}
+					else
+					{
+						$company[] = $value->Name;
+					}
+
+					if ($value->Description == "")
+					{
+						$company[] = "Data Not Found";
+					}
+					else
+					{
+						$company[] = $value->Description;
+					}
+
+					if ($value->DeleteBy == "")
+					{
+						$company[] = "Data Not Found";
+					}
+					else
+					{
+						$company[] = $this->AdminModel->GetAdminById($value->DeleteBy)->Name;
+					}
+
+					if ($value->DeleteDateTime == "")
+					{
+						$company[] = "Data Not Found";
+					}
+					else
+					{
+						$company[] = $value->DeleteDateTime;
+					}
+					
+					$company[] = '<button type="button" name="retrieve" id="'.$value->Id.'" class="btn btn-primary btn-xs retrieve">Retrieve</button>';
+					$sl++;
+					$data[] = $company;
+				}
+
+				$output = array(
+					'draw' => intval($_POST['draw']),
+					'recordsTotal' => $this->DataTableModel->GetAllDeleteData($table),
+					'recordsFiltered' => $this->DataTableModel->GetFilteredData($option,$table,$selectColumn,$orderColumn),
+					'data' => $data
+				);
+
+				echo json_encode($output);
+			}
+			else
+			{
+				return redirect('Admin/Index');
+			}
+		}
+
+		public function RetrieveCompanyData()
+		{
+			if ($this->GetAdminAllInfo()->AdminStatus == 101 || $this->GetAdminAllInfo()->Status == 1)
+			{
+				$companyId = $this->input->post('companyId');
+
+				$result = $this->CompanyModel->RetrieveCompanyData($companyId);
+
+				if ($result)
+				{
+					echo "Company Retrieve From Database!";
+				}
+				else
+				{
+					echo "Oops, Something Wrong With Retrieving Company";
+				}
+			}
+			else
+			{
+				return redirect('Admin/Index');
+			}
+		}
 	}
 ?>

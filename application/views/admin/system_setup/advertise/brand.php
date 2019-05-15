@@ -20,7 +20,16 @@
 								<div class="widget-header">
 									<i class="icon-th-list"></i>
 									<h3>All Brand Information</h3>
-									<a href="<?= base_url('index.php/Brand/Brand'); ?>" type="submit" class="btn btn-primary" target="_blank">Create Brand</a> 
+									<a href="<?= base_url('index.php/Brand/Brand'); ?>" type="submit" class="btn btn-primary" target="_blank">Create Brand</a>
+
+									<?php
+										if ($adminInfo->AdminStatus == 101 && $adminInfo->State == 1)
+										{
+									?>
+										<a href="<?= base_url('index.php/Brand/RetrieveBrand'); ?>" type="submit" class="btn btn-danger">Retrieve Brand</a>
+									<?php
+										}
+									?>
 								</div>
 								<!-- /widget-header -->
 								<div class="widget-content">

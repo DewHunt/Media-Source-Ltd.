@@ -101,6 +101,23 @@
 			}
 		}
 
+		public function RetrieveSubBrandData($subBrandId)
+		{
+			$deleteDateTime = date('Y-m-d H:i:s');
+			$sql = "UPDATE subbrand SET State = '1' WHERE Id = '".$subBrandId."'";
+
+			$query = $this->db->query($sql);
+
+			if ($query)
+			{
+				return true;
+			}
+			else
+			{
+				return false;
+			}
+		}
+
 		public function GetAllSubBrand()
 		{
 			$sql = "SELECT * FROM subbrand WHERE State = '1' ORDER BY Name ASC";

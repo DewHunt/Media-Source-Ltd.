@@ -243,12 +243,144 @@
 				
 				if ($result)
 				{
-					echo "Brand Dleted From Database!";
+					echo "Brand Deleted From Database!";
 				}
 				else
 				{
 					echo "Oops! Something Wrong With Deleting Brand";
 				}
+			}
+		}
+
+		public function RetrieveBrand()
+		{
+			if ($this->GetAdminAllInfo()->AdminStatus == 101 || $this->GetAdminAllInfo()->Status == 1)
+			{
+				$data = array(
+					'title' => 'Retrieve Brand - Media Source Ltd.',
+					'adminInfo' => $this->GetAdminAllInfo(),
+					'active' => 4
+				);
+
+				$this->load->view('admin/system_setup/advertise/retrieve-brand',$data);
+			}
+			else
+			{
+				return redirect('Admin/Index');
+			}
+		}
+
+		public function GetDeletedBrandAllInfo()
+		{
+			if ($this->GetAdminAllInfo()->AdminStatus == 101 || $this->GetAdminAllInfo()->Status == 1)
+			{
+				$option = "dt-dr-brand";
+				$table = "brand";
+				$selectColumn = array("Id","Name","CompanyId","Description","DeleteBy","DeleteDateTime");
+				$orderColumn = array("Id","Name","CompanyId",null,null);
+
+				$brandInfo = $this->DataTableModel->MakeDataTables($option,$table,$selectColumn,$orderColumn);
+				$sl = 1;
+				$data = array();
+
+				foreach ($brandInfo as $value)
+				{
+					$brand = array();
+					$brand[] = $sl;
+
+					if ($value->Name == "")
+					{
+						$brand[] = "Data Not Found";
+					}
+					else
+					{
+						$brand[] = $value->Name;
+					}
+
+					if ($value->CompanyId == "" || $value->CompanyId == 0)
+					{
+						$brand[] = "Data Not Found";
+					}
+					else
+					{
+						$companyName = $this->CompanyModel->GetCompanyById($value->CompanyId);
+						if ($companyName)
+						{
+							$brand[] = $companyName->Name;
+						}
+						else
+						{
+							$brand[] = "Data Not Found";
+						}
+					}
+
+					if ($value->Description == "")
+					{
+						$brand[] = "Data Not Found";
+					}
+					else
+					{
+						$brand[] = $value->Description;
+					}
+
+					if ($value->DeleteBy == "")
+					{
+						$brand[] = "Data Not Found";
+					}
+					else
+					{
+						$brand[] = $this->AdminModel->GetAdminById($value->DeleteBy)->Name;
+					}
+
+					if ($value->DeleteDateTime == "")
+					{
+						$brand[] = "Data Not Found";
+					}
+					else
+					{
+						$brand[] = $value->DeleteDateTime;
+					}
+
+					$brand[] = '<button type="button" name="retrieve" id="'.$value->Id.'" class="btn btn-primary btn-xs retrieve">Retrieve</button>';
+					$sl++;
+					$data[] = $brand;
+				}
+
+				$output = array(
+					'draw' => intval($_POST['draw']),
+					'recordsTotal' => $this->DataTableModel->GetAllDeleteData($table),
+					'recordsFiltered' => $this->DataTableModel->GetFilteredData($option,$table,$selectColumn,$orderColumn),
+					'data' => $data
+				);
+
+				echo json_encode($output);
+			}
+			else
+			{
+				return redirect('Admin/Index');
+			}
+		}
+
+		public function RetrieveBrandData()
+		{
+			if ($this->GetAdminAllInfo()->AdminStatus == 101 || $this->GetAdminAllInfo()->Status == 1)
+			{
+				$brandId = $this->input->post('brandId');
+
+				$result = $this->BrandModel->RetrieveBrandData($brandId);
+				
+				if ($result)
+				{
+					echo "Brand Retrieve Successfully!";
+				}
+				else
+				{
+					echo "Oops! Something Wrong With Retireving Brand";
+				}
+			}
+			else
+			{
+				return redirect('Admin/Index');
 			}
 		}
 	}

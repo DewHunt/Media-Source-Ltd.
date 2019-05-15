@@ -390,5 +390,144 @@
 				}
 			}
 		}
+
+		public function DeleteAdvertiseInfo()
+		{
+			if ($this->session->userdata('adminUserName') == "" || $this->session->userdata('adminPassword') == "")
+			{
+				return redirect('Admin/Index');
+			}
+			else
+			{
+				$advertiseInfoId = $this->input->post('advertiseInfoId');
+				$deleteId = $this->GetAdminAllInfo()->Id;
+
+				$result = $this->AdvertiseInfoModel->DeleteAdvertiseInfo($advertiseInfoId,$deleteId);
+
+				if ($result)
+				{
+					echo "Advertise Info Deleted From Database!";
+				}
+				else
+				{
+					echo "Oops, Something Wrong With Deleting Advertise Info";
+				}
+			}
+		}
+
+		public function RetrieveAdvertiseInfo()
+		{
+			if ($this->GetAdminAllInfo()->AdminStatus == 101 || $this->GetAdminAllInfo()->Status == 1)
+			{
+				$data = array(
+					'title' => 'Retrieve Advertise Info - Media Source Ltd.',
+					'adminInfo' => $this->GetAdminAllInfo(),
+					'active' => 4
+				);
+
+				$this->load->view('admin/system_setup/advertise/retrieve-advertise-info',$data);
+			}
+			else
+			{
+				return redirect('Admin/Index');
+			}
+		}
+
+		public function GetDeletedAdvertiseInfoAllInfo()
+		{
+			if ($this->GetAdminAllInfo()->AdminStatus == 101 || $this->GetAdminAllInfo()->Status == 1)
+			{
+				$option = "dt-dr-adinfo";
+				$table = "adinfo";
+				$selectColumn = array("Id","AD_ID","Title","Notes","DeleteBy","DeleteDateTime");
+				$orderColumn = array("Id","Title",null,null,null,null,null,null,null,null,null,null);
+
+				$adInfo = $this->DataTableModel->MakeDataTables($option,$table,$selectColumn,$orderColumn);
+				$sl = 1;
+				$data = array();
+
+				foreach ($adInfo as $value)
+				{
+					$info = array();
+					$info[] = $sl;
+
+					if ($value->Title == "")
+					{
+						$info[] = "Data Not Found";
+					}
+					else
+					{
+						$info[] = $value->Title;
+					}
+
+					if ($value->Notes == "")
+					{
+						$info[] = "Data Not Found";
+					}
+					else
+					{
+						$info[] = $value->Notes;
+					}
+
+					if ($value->DeleteBy == "")
+					{
+						$info[] = "Data Not Found";
+					}
+					else
+					{
+						$info[] = $this->AdminModel->GetAdminById($value->DeleteBy)->Name;
+					}
+
+					if ($value->DeleteDateTime == "")
+					{
+						$info[] = "Data Not Found";
+					}
+					else
+					{
+						$info[] = $value->DeleteDateTime;
+					}
+
+					$info[] = '<button type="button" name="retrieve" id="'.$value->Id.'" class="btn btn-warning btn-xs retrieve">Retrieve</button>';
+					$sl++;
+					$data[] = $info;
+				}
+
+				$output = array(
+					'draw' => intval($_POST['draw']),
+					'recordsTotal' => $this->DataTableModel->GetAllDeleteData($table),
+					'recordsFiltered' => $this->DataTableModel->GetFilteredData($option,$table,$selectColumn,$orderColumn),
+					'data' => $data
+				);
+
+				echo json_encode($output);
+			}
+			else
+			{
+				return redirect('Admin/Index');
+			}
+		}
+
+		public function RetrieveAdvertiseInfoData()
+		{
+			if ($this->GetAdminAllInfo()->AdminStatus == 101 || $this->GetAdminAllInfo()->Status == 1)
+			{
+				$advertiseInfoId = $this->input->post('advertiseInfoId');
+
+				$result = $this->AdvertiseInfoModel->RetireveAdvertiseInfoData($advertiseInfoId);
+
+				if ($result)
+				{
+					echo "Advertise Info Retireve Successfully!";
+				}
+				else
+				{
+					echo "Oops, Something Wrong With Retrieving Advertise Info";
+				}
+			}
+			else
+			{
+				return redirect('Admin/Index');
+			}
+		}
 	}
 ?>

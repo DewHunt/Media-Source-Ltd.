@@ -100,6 +100,23 @@
 			}
 		}
 
+		public function RetrieveHueData($hueId)
+		{
+			$deleteDateTime = date('Y-m-d H:i:s');
+			$sql = "UPDATE hue SET State = '1' WHERE Id = '".$hueId."'";
+
+			$query = $this->db->query($sql);
+
+			if ($query)
+			{
+				return true;
+			}
+			else
+			{
+				return false;
+			}
+		}
+
 		public function GetAllHue()
 		{
 			$sql = "SELECT * FROM hue WHERE State = '1' ORDER BY Name ASC";

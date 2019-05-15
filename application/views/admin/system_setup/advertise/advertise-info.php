@@ -20,7 +20,16 @@
 								<div class="widget-header">
 									<i class="icon-th-list"></i>
 									<h3>All Advertise Info Information</h3>
-									<a href="<?= base_url('index.php/AdvertiseInfo/AdvertiseInfo'); ?>" type="submit" class="btn btn-primary" target="_blank">Create Adeverise Info</a> 
+									<a href="<?= base_url('index.php/AdvertiseInfo/AdvertiseInfo'); ?>" type="submit" class="btn btn-primary" target="_blank">Create Adeverise Info</a>
+
+									<?php
+										if ($adminInfo->AdminStatus == 101 && $adminInfo->State == 1)
+										{
+									?>
+										<a href="<?= base_url('index.php/AdvertiseInfo/RetrieveAdvertiseInfo'); ?>" type="submit" class="btn btn-danger">Retrieve Advertise Info</a>
+									<?php
+										}
+									?>
 								</div>
 								<!-- /widget-header -->
 								<div class="widget-content">
@@ -306,6 +315,27 @@
 								dataTable.ajax.reload();
 							}
 						});
+					}
+				});
+
+				$(document).on('click', '.delete', function(){
+					var advertiseInfoId = $(this).attr('id');
+
+					if (confirm("Wait!, Are Your 100% Sure, You Really Want to Delete This?"))
+					{
+						$.ajax({
+							url:'<?php echo base_url('index.php/AdvertiseInfo/DeleteAdvertiseInfo'); ?>',
+							method:'POST',
+							data:{advertiseInfoId:advertiseInfoId},
+							success:function(data){
+								alert(data);
+								dataTable.ajax.reload();
+							}
+						});
+					}
+					else
+					{
+						return false;
 					}
 				});
 			});

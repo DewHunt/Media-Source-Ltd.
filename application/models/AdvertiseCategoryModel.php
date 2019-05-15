@@ -100,6 +100,23 @@
 			}
 		}
 
+		public function RetrieveAdvertiseCategoryData($advertiseCategoryId)
+		{
+			$deleteDateTime = date('Y-m-d H:i:s');
+			$sql = "UPDATE adcategory SET State = '1' WHERE Id = '".$advertiseCategoryId."'";
+
+			$query = $this->db->query($sql);
+
+			if ($query)
+			{
+				return true;
+			}
+			else
+			{
+				return false;
+			}
+		}
+
 		public function GetAllAdvertiseCategory()
 		{
 			$sql = "SELECT * FROM adcategory WHERE State = '1' ORDER BY Name ASC";

@@ -20,7 +20,16 @@
 								<div class="widget-header">
 									<i class="icon-th-list"></i>
 									<h3>All Hue Information</h3>
-									<a href="<?= base_url('index.php/Hue/Hue'); ?>" type="submit" class="btn btn-primary" target="_blank">Create Hue</a> 
+									<a href="<?= base_url('index.php/Hue/Hue'); ?>" type="submit" class="btn btn-primary" target="_blank">Create Hue</a>
+
+									<?php
+										if ($adminInfo->AdminStatus == 101 && $adminInfo->State == 1)
+										{
+									?>
+										<a href="<?= base_url('index.php/Hue/RetrieveHue'); ?>" type="submit" class="btn btn-danger">Retrieve Hue</a>
+									<?php
+										}
+									?>
 								</div>  <!-- /widget-header -->
 
 								<div class="widget-content">

@@ -100,6 +100,23 @@
 			}
 		}
 
+		public function RetrieveCompanyData($companyId)
+		{
+			$deleteDateTime = date('Y-m-d H:i:s');
+			$sql = "UPDATE company SET State = '1' WHERE Id = '".$companyId."'";
+
+			$query = $this->db->query($sql);
+
+			if ($query)
+			{
+				return true;
+			}
+			else
+			{
+				return false;
+			}
+		}
+
 		public function GetAllCompany()
 		{
 			$sql = "SELECT * FROM company WHERE State = '1' ORDER BY Name ASC";

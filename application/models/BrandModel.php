@@ -100,6 +100,23 @@
 			}
 		}
 
+		public function RetrieveBrandData($brandId)
+		{
+			$deleteDateTime = date('Y-m-d H:i:s');
+			$sql = "UPDATE brand SET State = '1' WHERE Id = '".$brandId."'";
+
+			$query = $this->db->query($sql);
+
+			if ($query)
+			{
+				return true;
+			}
+			else
+			{
+				return false;
+			}
+		}
+
 		public function GetAllBrand()
 		{
 			$sql = "SELECT * FROM brand WHERE State = '1' ORDER BY Name ASC";

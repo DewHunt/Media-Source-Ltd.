@@ -82,5 +82,38 @@
 				return false;
 			}
 		}
+
+		public function DeleteAdvertiseInfo($advertiseInfoId,$deleteId)
+		{
+			$deleteDateTime = date('Y-m-d H:i:s');
+			$sql = "UPDATE adinfo SET DeleteBY = '".$deleteId."', DeleteDateTime = '".$deleteDateTime."', State = '0' WHERE Id = '".$advertiseInfoId."'";
+
+			$query = $this->db->query($sql);
+
+			if ($query)
+			{
+				return true;
+			}
+			else
+			{
+				return false;
+			}
+		}
+
+		public function RetireveAdvertiseInfoData($advertiseInfoId)
+		{
+			$sql = "UPDATE adinfo SET State = '1' WHERE Id = '".$advertiseInfoId."'";
+
+			$query = $this->db->query($sql);
+
+			if ($query)
+			{
+				return true;
+			}
+			else
+			{
+				return false;
+			}
+		}
 	}
 ?>

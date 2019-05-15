@@ -230,5 +230,120 @@
 				}
 			}
 		}
+
+		public function RetrievePage()
+		{
+			if ($this->GetAdminAllInfo()->AdminStatus == 101 || $this->GetAdminAllInfo()->Status == 1)
+			{
+				$data = array(
+					'title' => 'Retrieve Page - Media Source Ltd.',
+					'adminInfo' => $this->GetAdminAllInfo(),
+					'active' => 2
+				);
+
+				$this->load->view('admin/system_setup/page/retrieve-page',$data);
+			}
+			else
+			{
+				return redirect('Admin/Index');
+			}
+		}
+
+		public function GetDeletedPageAllInfo()
+		{
+			if ($this->GetAdminAllInfo()->AdminStatus == 101 || $this->GetAdminAllInfo()->Status == 1)
+			{
+				$option = "dt-dr-common";
+				$table = "page";
+				$selectColumn = array("Id","Name","Description","DeleteBy","DeleteDateTime");
+				$orderColumn = array("Id","Name",null,null);
+
+				$pageInfo = $this->DataTableModel->MakeDataTables($option,$table,$selectColumn,$orderColumn);
+				$sl = 1;
+				$data = array();
+
+				foreach ($pageInfo as $value)
+				{
+					$page = array();
+					$page[] = $sl;
+
+					if ($value->Name == "")
+					{
+						$page[] = "Data Not Found";
+					}
+					else
+					{
+						$page[] = $value->Name;
+					}
+
+					if ($value->Description == "")
+					{
+						$page[] = "Data Not Found";
+					}
+					else
+					{
+						$page[] = $value->Description;
+					}
+
+					if ($value->DeleteBy == "")
+					{
+						$page[] = "Data Not Found";
+					}
+					else
+					{
+						$page[] = $this->AdminModel->GetAdminById($value->DeleteBy)->Name;
+					}
+
+					if ($value->DeleteDateTime == "")
+					{
+						$page[] = "Data Not Found";
+					}
+					else
+					{
+						$page[] = $value->DeleteDateTime;
+					}
+
+					$page[] = '<button type="button" name="retrieve" id="'.$value->Id.'" class="btn btn-primary btn-xs retrieve">Retrieve</button>';
+					$sl++;
+					$data[] = $page;
+				}
+
+				$output = array(
+					'draw' => intval($_POST['draw']),
+					'recordsTotal' => $this->DataTableModel->GetAllDeleteData($table),
+					'recordsFiltered' => $this->DataTableModel->GetFilteredData($option,$table,$selectColumn,$orderColumn),
+					'data' => $data
+				);
+
+				echo json_encode($output);
+			}
+			else
+			{
+				return redirect('Admin/Index');
+			}
+		}
+
+		public function RetrievePageData()
+		{
+			if ($this->GetAdminAllInfo()->AdminStatus == 101 || $this->GetAdminAllInfo()->Status == 1)
+			{
+				$pageId = $this->input->post('pageId');
+
+				$result = $this->PageModel->RetrievePageData($pageId);
+
+				if ($result)
+				{
+					echo "Page Retrieve Successfully!";
+				}
+				else
+				{
+					echo "Oops, Something Wrong With Retrieving Page";
+				}
+			}
+			else
+			{
+				return redirect('Admin/Index');
+			}
+		}
 	}
 ?>

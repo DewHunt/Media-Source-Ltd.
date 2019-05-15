@@ -230,5 +230,120 @@
 				}
 			}
 		}
+
+		public function RetrieveHue()
+		{
+			if ($this->GetAdminAllInfo()->AdminStatus == 101 || $this->GetAdminAllInfo()->Status == 1)
+			{
+				$data = array(
+					'title' => 'Retrieve Hue - Media Source Ltd.',
+					'adminInfo' => $this->GetAdminAllInfo(),
+					'active' => 2
+				);
+
+				$this->load->view('admin/system_setup/page/retrieve-hue',$data);
+			}
+			else
+			{
+				return redirect('Admin/Index');
+			}
+		}
+
+		public function GetDeletedHueAllInfo()
+		{
+			if ($this->GetAdminAllInfo()->AdminStatus == 101 || $this->GetAdminAllInfo()->Status == 1)
+			{
+				$option = "dt-dr-common";
+				$table = "hue";
+				$selectColumn = array("Id","Name","Description","DeleteBy","DeleteDateTime");
+				$orderColumn = array("Id","Name",null,null);
+
+				$hueInfo = $this->DataTableModel->MakeDataTables($option,$table,$selectColumn,$orderColumn);
+				$sl = 1;
+				$data = array();
+
+				foreach ($hueInfo as $value)
+				{
+					$hue = array();
+					$hue[] = $sl;
+
+					if ($value->Name == "")
+					{
+						$hue[] = "Data Not Found";
+					}
+					else
+					{
+						$hue[] = $value->Name;
+					}
+
+					if ($value->Description == "")
+					{
+						$hue[] = "Data Not Found";
+					}
+					else
+					{
+						$hue[] = $value->Description;
+					}
+
+					if ($value->DeleteBy == "")
+					{
+						$hue[] = "Data Not Found";
+					}
+					else
+					{
+						$hue[] = $this->AdminModel->GetAdminById($value->DeleteBy)->Name;
+					}
+
+					if ($value->DeleteDateTime == "")
+					{
+						$hue[] = "Data Not Found";
+					}
+					else
+					{
+						$hue[] = $value->DeleteDateTime;
+					}
+
+					$hue[] = '<button type="button" name="retrieve" id="'.$value->Id.'" class="btn btn-primary btn-xs retrieve">Retrieve</button>';
+					$sl++;
+					$data[] = $hue;
+				}
+
+				$output = array(
+					'draw' => intval($_POST['draw']),
+					'recordsTotal' => $this->DataTableModel->GetAllDeleteData($table),
+					'recordsFiltered' => $this->DataTableModel->GetFilteredData($option,$table,$selectColumn,$orderColumn),
+					'data' => $data
+				);
+
+				echo json_encode($output);
+			}
+			else
+			{
+				return redirect('Admin/Index');
+			}
+		}
+
+		public function RetrieveHueData()
+		{
+			if ($this->GetAdminAllInfo()->AdminStatus == 101 || $this->GetAdminAllInfo()->Status == 1)
+			{
+				$hueId = $this->input->post('hueId');
+
+				$result = $this->HueModel->RetrieveHueData($hueId);
+
+				if ($result)
+				{
+					echo "Retrieve Hue Successfully!";
+				}
+				else
+				{
+					echo "Oops, Something Wrong With Retrieving Hue";
+				}
+			}
+			else
+			{
+				return redirect('Admin/Index');
+			}
+		}
 	}
 ?>

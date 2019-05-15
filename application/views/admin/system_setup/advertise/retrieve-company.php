@@ -20,16 +20,7 @@
 								<div class="widget-header">
 									<i class="icon-th-list"></i>
 									<h3>All Company Information</h3>
-									<a href="<?= base_url('index.php/Company/Company'); ?>" type="submit" class="btn btn-primary" target="_blank">Create Company</a>
-
-									<?php
-										if ($adminInfo->AdminStatus == 101 && $adminInfo->State == 1)
-										{
-									?>
-										<a href="<?= base_url('index.php/Company/RetrieveCompany'); ?>" type="submit" class="btn btn-danger">Retrieve Company</a>
-									<?php
-										}
-									?>
+									<a href="<?= base_url('index.php/Company/Index'); ?>" type="submit" class="btn btn-primary">Company</a> 
 								</div>  <!-- /widget-header -->
 								<div class="widget-content">
 									<table id="company-data" class="table table-striped table-bordered">
@@ -38,6 +29,8 @@
 												<th>Sl</th>
 												<th>Name</th>
 												<th>Description</th>
+												<th>Delete By</th>
+												<th>Delete Date</th>
 												<th>Action</th>
 											</tr>
 										</thead>
@@ -47,6 +40,8 @@
 												<th>Sl</th>
 												<th>Name</th>
 												<th>Description</th>
+												<th>Delete By</th>
+												<th>Delete Date</th>
 												<th>Action</th>
 											</tr>
 										</tfoot>
@@ -102,75 +97,25 @@
 					'serverSide':true,
 					'order':[],
 					'ajax':{
-						url:'<?php echo base_url('index.php/Company/GetCompanyAllInfo'); ?>',
+						url:'<?php echo base_url('index.php/Company/GetDeletedCompanyAllInfo'); ?>',
 						type:'POST'
 					},
 					'dataType':'json',
 					'columnDefs':[
 						{
-							'targets':[0, 1, 2, 3],
+							'targets':[0, 1, 2, 3, 4, 5],
 							'orderable':false
 						},
 					],
 				});
 
-
-				$(document).on('click', '.update', function(){
+				$(document).on('click', '.retrieve', function(){
 					var companyId = $(this).attr('id');
 
-					$.ajax({
-						url:'<?php echo base_url("index.php/Company/GetCompanyById"); ?>',
-						method:'POST',
-						data:{companyId:companyId},
-						dataType:'json',
-						success:function(data){
-							$('#company-modal').modal('show');
-							$('#company-name').val(data.companyName);
-							$('#company-description').val(data.companyDescription);
-							$('#company-id').val(data.companyId);
-						}
-					});
-				});
-
-				$(document).on('submit', '#company-form', function(event){
-					event.preventDefault();
-
-					var companyName = $('#company-name').val();
-					var companyDescription = $('#company-description').val();
-
-					$('#company-name').css({'border':'1px solid #cccccc'});
-
-					if (companyName == "")
-					{
-						alert("Oops! Company Name Must Be Filled");
-						$('#company-name').css({'border':'1px solid red'});
-						return false;
-					}
-					else
+					if (confirm("Wait!, Are Your 100% Sure, You Really Want to Retrieve This?"))
 					{
 						$.ajax({
-							url:'<?php echo base_url("index.php/Company/UpdateCompany"); ?>',
-							method:'POST',
-							data:new FormData(this),
-							contentType:false,
-							processData:false,
-							success:function(data){
-								alert(data);
-								$('#company-form')[0].reset();
-								$('#company-modal').modal('hide');
-								dataTable.ajax.reload();
-							}
-						});
-					}
-				});
-
-				$(document).on('click', '.delete', function(){
-					var companyId = $(this).attr('id');
-
-					if (confirm("Wait!, Are Your 100% Sure, You Really Want to Delete This?"))
-					{
-						$.ajax({
-							url:'<?php echo base_url('index.php/Company/DeleteCompany'); ?>',
+							url:'<?php echo base_url('index.php/Company/RetrieveCompanyData'); ?>',
 							method:'POST',
 							data:{companyId:companyId},
 							success:function(data){

@@ -230,5 +230,120 @@
 				}
 			}
 		}
+
+		public function RetrieveAdvertiseCategory()
+		{
+			if ($this->GetAdminAllInfo()->AdminStatus == 101 || $this->GetAdminAllInfo()->Status == 1)
+			{
+				$data = array(
+					'title' => 'Retrieve Advertise Category - Media Source Ltd.',
+					'adminInfo' => $this->GetAdminAllInfo(),
+					'active' => 4
+				);
+
+				$this->load->view('admin/system_setup/advertise/retrieve-advertise-category',$data);
+			}
+			else
+			{
+				return redirect('Admin/Index');
+			}
+		}
+
+		public function GetDeletedAdvertiseCategoryAllInfo()
+		{
+			if ($this->GetAdminAllInfo()->AdminStatus == 101 || $this->GetAdminAllInfo()->Status == 1)
+			{
+				$option = "dt-dr-common";			
+				$table = "adcategory";
+				$selectColumn = array("Id","Name","Description","DeleteBy","DeleteDateTime");
+				$orderColumn = array("Id","Name",null,null);
+
+				$advertiseCategoryInfo = $this->DataTableModel->MakeDataTables($option,$table,$selectColumn,$orderColumn);
+				$sl = 1;
+				$data = array();
+
+				foreach ($advertiseCategoryInfo as $value)
+				{
+					$advertiseCategory = array();
+					$advertiseCategory[] = $sl;
+
+					if ($value->Name == "")
+					{
+						$advertiseCategory[] = "Data Not Found";
+					}
+					else
+					{
+						$advertiseCategory[] = $value->Name;
+					}
+
+					if ($value->Description == "")
+					{
+						$advertiseCategory[] = "Data Not Found";
+					}
+					else
+					{
+						$advertiseCategory[] = $value->Description;
+					}
+
+					if ($value->DeleteBy == "")
+					{
+						$advertiseCategory[] = "Data Not Found";
+					}
+					else
+					{
+						$advertiseCategory[] = $this->AdminModel->GetAdminById($value->DeleteBy)->Name;
+					}
+
+					if ($value->DeleteDateTime == "")
+					{
+						$advertiseCategory[] = "Data Not Found";
+					}
+					else
+					{
+						$advertiseCategory[] = $value->DeleteDateTime;
+					}
+					
+					$advertiseCategory[] = '<button type="button" name="retrieve" id="'.$value->Id.'" class="btn btn-warning btn-xs retrieve">Retrieve</button>';
+					$sl++;
+					$data[] = $advertiseCategory;
+				}
+
+				$output = array(
+					'draw' => intval($_POST['draw']),
+					'recordsTotal' => $this->DataTableModel->GetAllDeleteData($table),
+					'recordsFiltered' => $this->DataTableModel->GetFilteredData($option,$table,$selectColumn,$orderColumn),
+					'data' => $data
+				);
+
+				echo json_encode($output);
+			}
+			else
+			{
+				return redirect('Admin/Index');
+			}			
+		}
+
+		public function RetrieveAdvertiseCategoryData()
+		{
+			if ($this->GetAdminAllInfo()->AdminStatus == 101 || $this->GetAdminAllInfo()->Status == 1)
+			{
+				$advertiseCategoryId = $this->input->post('advertiseCategoryId');
+
+				$result = $this->AdvertiseCategoryModel->RetrieveAdvertiseCategoryData($advertiseCategoryId);
+
+				if ($result)
+				{
+					echo "Advertise Category Retrieve Successfully!";
+				}
+				else
+				{
+					echo "Oops, Something Wrong With Retrieving Advertise Category";
+				}
+			}
+			else
+			{
+				return redirect('Admin/Index');
+			}
+		}
 	}
 ?>

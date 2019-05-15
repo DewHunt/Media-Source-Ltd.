@@ -142,6 +142,27 @@
 				}
 			}
 
+			if ($option == "dt-dr-brand")
+			{
+				$this->db->select($selectColumn);
+				$this->db->from($table);
+
+				if (isset($_POST["search"]["value"]))
+				{
+					$this->db->like("Name",$_POST["search"]["value"])->where("State","0");
+					$this->db->or_where("CompanyId",$_POST["search"]["value"])->where("State","0");
+				}
+
+				if (isset($_POST["order"]))
+				{
+					$this->db->order_by($this->orderColumn[$_POST["order"]["0"]["column"]], $_POST["order"]["0"]["dir"]);
+				}
+				else
+				{
+					$this->db->order_by("Id","DESC");
+				}
+			}
+
 			if ($option == "dt-sub-brand")
 			{
 				$this->db->select($selectColumn);
@@ -163,6 +184,27 @@
 				}
 			}
 
+			if ($option == "dt-dr-sub-brand")
+			{
+				$this->db->select($selectColumn);
+				$this->db->from($table);
+
+				if (isset($_POST["search"]["value"]))
+				{
+					$this->db->like("Name",$_POST["search"]["value"])->where("State","0");
+					$this->db->or_where("BrandId",$_POST["search"]["value"])->where("State","0");
+				}
+
+				if (isset($_POST["order"]))
+				{
+					$this->db->order_by($this->orderColumn[$_POST["order"]["0"]["column"]], $_POST["order"]["0"]["dir"]);
+				}
+				else
+				{
+					$this->db->order_by("Id","DESC");
+				}
+			}
+
 			if ($option == "dt-adinfo")
 			{
 				$this->db->select($selectColumn);
@@ -172,6 +214,27 @@
 				{
 					$this->db->like("Title",$_POST["search"]["value"])->where("State","1");
 					$this->db->or_where("Id",$_POST["search"]["value"])->where("State","1");
+				}
+
+				if (isset($_POST["order"]))
+				{
+					$this->db->order_by($this->orderColumn[$_POST["order"]["0"]["column"]], $_POST["order"]["0"]["dir"]);
+				}
+				else
+				{
+					$this->db->order_by("Id","DESC");
+				}
+			}
+
+			if ($option == "dt-dr-adinfo")
+			{
+				$this->db->select($selectColumn);
+				$this->db->from($table);
+
+				if (isset($_POST["search"]["value"]))
+				{
+					$this->db->like("Title",$_POST["search"]["value"])->where("State","0");
+					$this->db->or_where("Id",$_POST["search"]["value"])->where("State","0");
 				}
 
 				if (isset($_POST["order"]))
@@ -295,6 +358,14 @@
 		{
 			$this->db->select("*");
 			$this->db->from($table)->where("State","1");
+
+			return $this->db->count_all_results();
+		}
+
+		public function GetAllDeleteData($table)
+		{
+			$this->db->select("*");
+			$this->db->from($table)->where("State","0");
 
 			return $this->db->count_all_results();
 		}
