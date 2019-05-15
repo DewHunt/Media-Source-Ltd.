@@ -252,6 +252,7 @@
 					'title' => 'Update Price - Media Source Ltd.',
 					'adminInfo' => $this->GetAdminAllInfo(),
 					'message' => $msg,
+					'active' => 2,
 					'priceInfo' => $this->PriceModel->GetPriceById($priceId),
 					'priceDetailsInfo' => $this->PriceModel->GetPriceDetailsById($priceId)
 				);

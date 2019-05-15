@@ -99,7 +99,7 @@
 											</div> -->
 											
 											<div class="form-actions">
-												<input type="text" id="synopsis-by-operator-id" name="synopsis-by-operator-id" value="<?= $synopsisByOperatorInfo->Id; ?>">
+												<input type="hidden" id="synopsis-by-operator-id" name="synopsis-by-operator-id" value="<?= $synopsisByOperatorInfo->Id; ?>">
 												<button type="submit" id="save-synopsis" name="save-synopsis" class="btn btn-primary">Save Synopsis</button> 
 												<button class="btn">Cancel</button>
 											</div> <!-- /form-actions -->
